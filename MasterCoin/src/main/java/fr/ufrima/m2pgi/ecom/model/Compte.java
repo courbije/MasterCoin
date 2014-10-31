@@ -29,7 +29,7 @@ public class Compte implements Serializable
    private String password;
 
    @Column(nullable = false)
-   private URL mail;
+   private String mail;
 
    @Column(nullable = false)
    private String nom;
@@ -102,14 +102,14 @@ public class Compte implements Serializable
       this.password = password;
    }
 
-   public URL getMail()
+   public String getMail()
    {
       return mail;
    }
 
-   public void setMail(URL mail)
+   public void setMail(String string)
    {
-      this.mail = mail;
+      this.mail = string;
    }
 
    public String getNom()

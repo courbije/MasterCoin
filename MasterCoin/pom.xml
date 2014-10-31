@@ -8,6 +8,8 @@
   <packaging>war</packaging>
   <name>MasterCoin</name>
   <description>Master is website specialize in exchange of cryptocurrency</description>
+  
+  
   <properties>
     <version.jboss.bom>1.0.7.Final</version.jboss.bom>
     <version.war.plugin>2.1.1</version.war.plugin>
@@ -155,6 +157,7 @@
         </plugins>
       </build>
     </profile>
+    
     <profile>
       <id>arq-jbossas-managed</id>
       <dependencies>
@@ -166,6 +169,9 @@
       </dependencies>
     </profile>
     <profile>
+    
+    
+    	
       <id>arq-jbossas-remote</id>
       <dependencies>
         <dependency>

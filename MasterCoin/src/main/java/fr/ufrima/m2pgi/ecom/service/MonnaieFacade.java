@@ -1,5 +1,7 @@
 package fr.ufrima.m2pgi.ecom.service;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -24,4 +26,14 @@ public class MonnaieFacade
     public void remove(Monnaie monnaie) {
         em.remove(em.merge(monnaie));
     }
+    
+    public Monnaie find(Long id) {
+        return em.find(Monnaie.class, id);
+    }
+
+    @SuppressWarnings("unchecked")
+	public List<Monnaie> findAll() {
+        return em.createQuery("select object(o) from Monnaie as o").getResultList();
+    }
+    
 }
