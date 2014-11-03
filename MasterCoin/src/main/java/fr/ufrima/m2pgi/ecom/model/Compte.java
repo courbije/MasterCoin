@@ -1,7 +1,6 @@
 package fr.ufrima.m2pgi.ecom.model;
 
 import java.io.Serializable;
-import java.net.URL;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -11,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
@@ -23,22 +25,33 @@ public class Compte implements Serializable
    private Long id;
 
    @Column(nullable = false)
+   @NotNull
+   @NotEmpty
    private String login;
 
    @Column(nullable = false)
+   @NotNull
+   @NotEmpty
    private String password;
 
    @Column(nullable = false)
+   @NotNull
+   @NotEmpty
    private String mail;
 
    @Column(nullable = false)
+   @NotNull
+   @NotEmpty
    private String nom;
 
    @Column(nullable = false)
+   @NotNull
+   @NotEmpty
    private String prenom;
 
    @Column(nullable = false)
    @Temporal(TemporalType.DATE)
+   @NotNull
    private Date dateNaissance;
 
    public Long getId()

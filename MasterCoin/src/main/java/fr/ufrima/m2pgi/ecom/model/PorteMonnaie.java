@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
@@ -21,14 +24,17 @@ public class PorteMonnaie implements Serializable
    private Long id;
 
    @ManyToOne
+   @NotNull
    @JoinColumn(name = "idc", nullable = false)
    private Compte compte;
 
    @ManyToOne
+   @NotNull
    @JoinColumn(name = "idm", nullable = false)
    private Monnaie monnaie;
 
    @Column(nullable = false)
+   @NotNull
    private Integer montant;
 
    public Long getId()

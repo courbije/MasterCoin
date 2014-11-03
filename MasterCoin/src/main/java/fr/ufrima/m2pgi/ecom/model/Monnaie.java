@@ -7,11 +7,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
 @Entity
 public class Monnaie implements Serializable
 {
+	
 
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,9 +23,13 @@ public class Monnaie implements Serializable
    private Long idMonnaie;
 
    @Column(nullable = false)
-   private String Nom;
+   @NotNull
+   @NotEmpty
+   private String nom;
 
    @Column(nullable = false)
+   @NotNull
+   @NotEmpty
    private String acroyme;
 
   
@@ -37,12 +45,12 @@ public class Monnaie implements Serializable
 
    public String getNom()
    {
-      return Nom;
+      return nom;
    }
 
    public void setNom(String Nom)
    {
-      this.Nom = Nom;
+      this.nom = Nom;
    }
 
    public String getAcroyme()
@@ -92,8 +100,8 @@ public class Monnaie implements Serializable
       String result = getClass().getSimpleName() + " ";
       if (idMonnaie != null)
          result += "idMonnaie: " + idMonnaie;
-      if (Nom != null && !Nom.trim().isEmpty())
-         result += ", Nom: " + Nom;
+      if (nom != null && !nom.trim().isEmpty())
+         result += ", Nom: " + nom;
       if (acroyme != null && !acroyme.trim().isEmpty())
          result += ", acroyme: " + acroyme;
       return result;
