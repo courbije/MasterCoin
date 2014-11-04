@@ -57,16 +57,19 @@
 				<h:inputText id="montant" value="#{newPorteMonnaie.montant}" />
 				<h:message for="montant" errorClass="invalid" />
 
-				<h:outputLabel for="comtpe" value="compte:" />
-				<h:selectOneMenu value="#{newPorteMonnaie.compte}">
-					<f:selectItems value="#{comptes}" />
+				<h:outputLabel for="compte" value="compte:" />
+				<h:selectOneMenu id="compte"  value="#{newPorteMonnaie.compte}">
+					<f:selectItems value="#{comptes}" var="c" itemLabel="#{c.login}"
+						itemValue="#{c}" />
+					<f:converter converterId="fr.ufrima.m2pgi.CompteConverter" />
 				</h:selectOneMenu>
 				<h:message for="compte" errorClass="invalid" />
-				
-				
+
 				<h:outputLabel for="monnaie" value="monnaie:" />
-				<h:selectOneMenu value="#{newPorteMonnaie.monnaie}">
-					<f:selectItems value="#{monnaies}" />
+				<h:selectOneMenu id="monnaie" value="#{newPorteMonnaie.monnaie}">
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+						itemValue="#{m}" />
+					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 				</h:selectOneMenu>
 				<h:message for="monnaie" errorClass="invalid" />
 			</h:panelGrid>
@@ -74,8 +77,8 @@
 			<p>
 				<h:panelGrid columns="2">
 					<h:commandButton id="register"
-						action="#{porteMonnaieCreationController.register()}" value="Register"
-						styleClass="register" />
+						action="#{porteMonnaieCreationController.register()}"
+						value="Register" styleClass="register" />
 					<h:messages styleClass="messages" errorClass="invalid"
 						infoClass="valid" warnClass="warning" globalOnly="true" />
 				</h:panelGrid>

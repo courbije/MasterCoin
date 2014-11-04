@@ -7,7 +7,6 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
-import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
 
 
 @Stateless
