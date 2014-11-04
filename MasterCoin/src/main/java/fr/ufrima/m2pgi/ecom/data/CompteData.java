@@ -16,9 +16,7 @@
  */
 package fr.ufrima.m2pgi.ecom.data;
 
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;

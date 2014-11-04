@@ -9,8 +9,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
-import fr.ufrima.m2pgi.ecom.service.CompteFacade;
-import fr.ufrima.m2pgi.ecom.service.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieFacade;
 
 @Model
@@ -63,5 +61,4 @@ public class PorteMonnaieCreationController {
 		// This is the root cause message
 		return errorMessage;
 	}
-
 }
