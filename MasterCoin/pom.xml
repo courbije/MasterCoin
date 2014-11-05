@@ -20,6 +20,9 @@
     <maven.compiler.target>1.6</maven.compiler.target>
   </properties>
   <dependencyManagement>
+  
+  
+  
     <dependencies>
       <dependency>
         <groupId>org.jboss.bom</groupId>

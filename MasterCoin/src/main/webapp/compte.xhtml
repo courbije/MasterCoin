@@ -11,6 +11,7 @@
 		<h:form id="reg">
 			<h2>Création de compte</h2>
 			<h:panelGrid columns="3" columnClasses="titleCell">
+			
 				<h:outputLabel for="pseudo" value="pseudo:" />
 				<h:inputText id="pseudo" value="#{newCompte.login}" />
 				<h:message for="pseudo" errorClass="invalid" />
@@ -66,6 +67,7 @@
                 #{_compte.login}
             </h:column>
 		</h:dataTable>
+
 
 
 	</ui:define>

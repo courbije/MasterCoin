@@ -18,8 +18,8 @@ public class Monnaie implements Serializable
 	
 
    @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-   @Column(name = "idMonnaie", updatable = false, nullable = false)
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "id", updatable = false, nullable = false)
    private Long idMonnaie;
 
    @Column(nullable = false)
