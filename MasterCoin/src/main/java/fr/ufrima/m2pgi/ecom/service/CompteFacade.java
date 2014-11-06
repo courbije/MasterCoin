@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 
 import fr.ufrima.m2pgi.ecom.model.Compte;
 
-
 @Stateless
 public class CompteFacade
 {

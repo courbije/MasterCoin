@@ -4,11 +4,18 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 	<body>
+
 		<ui:composition>
-			<h:button value="Accueil" outcome="accueil" />
-			<h:button value="Echanger" outcome="echange" />
-			<h:button value="Compte" outcome="compte" />
-			<h:button value="Support" outcome="support" />
+			<h:button value="#{text['accueil.jsf']}" outcome="accueil" />
+			<h:button value="#{text['echanger.jsf']}" outcome="echange" />
+			<h:button value="#{text['compte.jsf']}" outcome="compte" />
+			<h:button value="#{text['support.jsf']}" outcome="support" />
+				 <h:form>
+	            <h:selectOneMenu value="#{changementLangueController.language}" onchange="submit()">
+	                <f:selectItem itemValue="fr" itemLabel="#{text['FR.jsf']}" />
+	                <f:selectItem itemValue="en" itemLabel="#{text['EN.jsf']}" />
+	            </h:selectOneMenu>
+       		</h:form>
 		</ui:composition>
 	</body>
 

@@ -24,6 +24,7 @@ public class CompteCreationController {
 	@Named
 	private Compte newCompte;
 
+	
 	@PostConstruct
 	public void initNewMember() {
 		newCompte = new Compte();
