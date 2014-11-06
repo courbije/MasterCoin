@@ -1,3 +1,4 @@
+
 package fr.ufrima.m2pgi.ecom.model;
 
 import java.io.Serializable;
