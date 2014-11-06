@@ -6,16 +6,17 @@
 	<body>
 
 		<ui:composition>
-			<h:button value="#{text['accueil.jsf']}" outcome="accueil" />
-			<h:button value="#{text['echanger.jsf']}" outcome="echange" />
-			<h:button value="#{text['compte.jsf']}" outcome="compte" />
-			<h:button value="#{text['support.jsf']}" outcome="support" />
-				 <h:form>
+		    <h:graphicImage value="ressources/images/logo.png" />
+		    				 <h:form>
 	            <h:selectOneMenu value="#{changementLangueController.language}" onchange="submit()">
 	                <f:selectItem itemValue="fr" itemLabel="#{text['FR.jsf']}" />
 	                <f:selectItem itemValue="en" itemLabel="#{text['EN.jsf']}" />
 	            </h:selectOneMenu>
        		</h:form>
+			<h:button value="#{text['accueil.jsf']}" outcome="accueil" />
+			<h:button value="#{text['echanger.jsf']}" outcome="echange" />
+			<h:button value="#{text['compte.jsf']}" outcome="compte" />
+			<h:button value="#{text['support.jsf']}" outcome="support" />
 		</ui:composition>
 	</body>
 
