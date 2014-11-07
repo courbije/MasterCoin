@@ -7,6 +7,74 @@
 
 	<ui:define name="content">
 		<h:outputText styleClass="h1" value="#{text['message_accueil.jsf']} #{text['echange.jsf']}"/>
-	</ui:define>
 
+		<h:form id="reg">
+			<h2>Création d'une offre</h2>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="monnaie_voulue" value="Monnaie souhaitée:" />
+				<h:selectOneMenu value="#{newEchangeOffre.monnaieAchat}">
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+						itemValue="#{m}" />
+					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+				</h:selectOneMenu>
+				<h:message for="monnaie_voulue" errorClass="invalid" />
+
+				<h:outputLabel for="quantite_voulue" value="Quantité désirée:" />
+				<h:inputText id="quantite_voulue" value="#{newEchangeOffre.montantAchat}" />
+				<h:message for="quantite_voulue" errorClass="invalid" />
+
+				<h:outputLabel for="monnaie_a_vendre" value="Monnaie à vendre:" />
+				<h:selectOneMenu value="#{newEchangeOffre.monnaieVendre}">
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+						itemValue="#{m}" />
+					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+				</h:selectOneMenu>
+				<h:message for="monnaie_a_vendre" errorClass="invalid" />
+
+				<h:outputLabel for="quantite_a_vendre" value="Quantite à vendre:" />
+				<h:inputText id="quantite_a_vendre" value="#{newEchangeOffre.montantVendre}" />
+				<h:message for="quantite_a_vendre" errorClass="invalid" />
+				
+			</h:panelGrid>
+
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="register"
+						action="#{echangeOffreController.register()}" value="Register"
+						styleClass="register" />
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:panelGrid>
+			</p>
+		</h:form>
+		
+				<h2>Offres</h2>
+		<h:panelGroup rendered="#{empty offres}">
+			<em>No registered Comptes.</em>
+		</h:panelGroup>
+		<h:dataTable var="_offre" value="#{offres}"
+			rendered="#{not empty offres}" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">Monnaie d'achat</f:facet>
+                #{_offre.monnaieAchat}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Quantité à acheter</f:facet>
+                #{_offre.montantAchat}
+            </h:column>
+            <h:column>
+				<f:facet name="header">Monnaie à vendre</f:facet>
+                #{_offre.monnaieVendre}
+            </h:column>
+            <h:column>
+				<f:facet name="header">Monnaie à la vente</f:facet>
+                #{_offre.montantVendre}
+            </h:column>
+			<h:column>
+				<f:facet name="header">Date</f:facet>
+                #{_offre.dateCreation}
+            </h:column>
+		</h:dataTable>
+		
+	</ui:define>
 </ui:composition>
