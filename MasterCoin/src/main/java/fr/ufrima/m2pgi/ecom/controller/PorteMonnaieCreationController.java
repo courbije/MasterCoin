@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,7 +13,8 @@ import javax.inject.Named;
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieFacade;
 
-@Model
+@ViewScoped
+@ManagedBean
 public class PorteMonnaieCreationController {
 	
 	@Inject
@@ -20,11 +23,16 @@ public class PorteMonnaieCreationController {
 	@Inject
 	private FacesContext facesContext;
 
-	@Produces
-	@Named
 	private PorteMonnaie newPorteMonnaie;
 	
-	
+	public PorteMonnaie getNewPorteMonnaie() {
+		return newPorteMonnaie;
+	}
+
+	public void setNewPorteMonnaie(PorteMonnaie newPorteMonnaie) {
+		this.newPorteMonnaie = newPorteMonnaie;
+	}
+
 	@PostConstruct
 	public void initNewMember() {
 		newPorteMonnaie = new PorteMonnaie();

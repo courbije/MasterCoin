@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -11,7 +13,8 @@ import javax.inject.Named;
 import fr.ufrima.m2pgi.ecom.model.Compte;
 import fr.ufrima.m2pgi.ecom.service.CompteFacade;
 
-@Model
+@ViewScoped
+@ManagedBean
 public class CompteCreationController {
 	
 	@Inject
@@ -20,11 +23,16 @@ public class CompteCreationController {
 	@Inject
 	private FacesContext facesContext;
 
-	@Produces
-	@Named
 	private Compte newCompte;
 
-	
+	public Compte getNewCompte() {
+		return newCompte;
+	}
+
+	public void setNewCompte(Compte newCompte) {
+		this.newCompte = newCompte;
+	}
+
 	@PostConstruct
 	public void initNewMember() {
 		newCompte = new Compte();

@@ -1,17 +1,17 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.service.MonnaieFacade;
 
-@Model
+@ViewScoped
+@ManagedBean
 public class MonnaieCreationController {
 	
 	@Inject
@@ -20,9 +20,15 @@ public class MonnaieCreationController {
 	@Inject
 	private FacesContext facesContext;
 
-	@Produces
-	@Named
 	private Monnaie newMonnaie;
+
+	public Monnaie getNewMonnaie() {
+		return newMonnaie;
+	}
+
+	public void setNewMonnaie(Monnaie newMonnaie) {
+		this.newMonnaie = newMonnaie;
+	}
 
 	@PostConstruct
 	public void initNewMember() {

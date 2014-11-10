@@ -6,6 +6,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,7 +15,8 @@ import javax.inject.Named;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.service.EchangeOffreFacade;
 
-@Model
+@ViewScoped
+@ManagedBean
 public class EchangeOffreController {
 	
 	@Inject
@@ -22,9 +25,15 @@ public class EchangeOffreController {
 	@Inject
 	private FacesContext facesContext;
 
-	@Produces
-	@Named
 	private EchangeOffre newEchangeOffre;
+
+	public EchangeOffre getNewEchangeOffre() {
+		return newEchangeOffre;
+	}
+
+	public void setNewEchangeOffre(EchangeOffre newEchangeOffre) {
+		this.newEchangeOffre = newEchangeOffre;
+	}
 
 	@PostConstruct
 	public void initNewMember() {
