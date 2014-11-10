@@ -22,12 +22,8 @@ public class Credentials {
 	@Inject
 	private CompteFacade compteFacade;
 	
-	
     @ManagedProperty(value="#{login}")
     private Login login;
-
-   
-    
     
 	public void setLogin(Login login) {
 		this.login = login;

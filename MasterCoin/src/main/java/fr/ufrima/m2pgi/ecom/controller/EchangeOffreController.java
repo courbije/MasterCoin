@@ -3,14 +3,12 @@ package fr.ufrima.m2pgi.ecom.controller;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.service.EchangeOffreFacade;
@@ -18,12 +16,19 @@ import fr.ufrima.m2pgi.ecom.service.EchangeOffreFacade;
 @ViewScoped
 @ManagedBean
 public class EchangeOffreController {
+    @ManagedProperty(value="#{login}")
+    private Login login;
+    
+	public void setLogin(Login login) {
+		this.login = login;
+	}
 	
 	@Inject
 	private EchangeOffreFacade echangeFacade;
 
 	@Inject
 	private FacesContext facesContext;
+
 
 	private EchangeOffre newEchangeOffre;
 
@@ -42,6 +47,7 @@ public class EchangeOffreController {
 
 	public void register() throws Exception {
 		try {
+			newEchangeOffre.setCompte(this.login.getCurrentUser());
 			newEchangeOffre.setDateCreation(new Date());
 			echangeFacade.create(newEchangeOffre);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
