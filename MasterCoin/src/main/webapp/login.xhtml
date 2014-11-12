@@ -2,23 +2,12 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
-	<body>
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
 
-		<ui:composition>
-			<h:graphicImage value="ressources/images/logo.png" />
-			<h:form>
-				<h:selectOneMenu value="#{changementLangueController.language}"
-					onchange="submit()">
-					<f:selectItem itemValue="fr" itemLabel="#{text['FR.jsf']}" />
-					<f:selectItem itemValue="en" itemLabel="#{text['EN.jsf']}" />
-				</h:selectOneMenu>
-			</h:form>
-			<h:button value="#{text['accueil.jsf']}" outcome="accueil" />
-			<h:button value="#{text['echanger.jsf']}" outcome="echange" />
-			<h:button value="#{text['compte.jsf']}" outcome="compte" />
-			<h:button value="#{text['support.jsf']}" outcome="support" />
-
+	<ui:define name="content">
+			<h:outputText styleClass="h1"
+				value="#{text['message_not_log.jsf']}" rendered="#{!login.loggedIn}"/>
 			<h:form>
 				<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
 					<f:validateBean>
@@ -37,12 +26,8 @@
 				<h:button value="#{text['register.jsf']}" outcome="register"
 					rendered="#{!login.loggedIn}" />
 
-				<h:outputLabel value="#{text['bienvenue.jsf']} #{login.currentUser.login}"  rendered="#{login.loggedIn}"/>
-
 				<h:commandButton value="#{text['logout.jsf']}"
 					action="#{credentials.logout}" rendered="#{login.loggedIn}" />
 			</h:form>
-		</ui:composition>
-	</body>
-
+	</ui:define>
 </ui:composition>

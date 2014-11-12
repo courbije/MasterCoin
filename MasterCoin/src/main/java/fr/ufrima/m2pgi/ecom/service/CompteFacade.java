@@ -15,8 +15,9 @@ public class CompteFacade {
 	@Inject
 	private EntityManager em;
 
-	public void create(Compte compte) {
+	public Compte create(Compte compte) {
 		em.persist(compte);
+		return compte;
 	}
 
 	public void edit(Compte compte) {

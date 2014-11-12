@@ -6,71 +6,60 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-		<h:outputText styleClass="h1" value="#{text['message_accueil.jsf']} #{text['compte.jsf']}"/>
+		<f:view>
+			<f:event type="preRenderView"
+				listener="#{login.forwardToLoginIfNotLoggedIn}" />
 
-		<h:form id="reg">
-			<h:outputText styleClass="h2" value="#{text['creation_compte.jsf']}"/>
-			<h:panelGrid columns="3" columnClasses="titleCell">
-			
-				<h:outputLabel for="pseudo" value="#{text['pseudo.jsf']} :" />
-				<h:inputText id="pseudo" value="#{compteCreationController.newCompte.login}" />
-				<h:message for="pseudo" errorClass="invalid" />
+			<h:form id="reg">
+				<h:outputText styleClass="h2" value="#{text['creation_compte.jsf']}" />
+				<h:panelGrid columns="3" columnClasses="titleCell">
 
-				<h:outputLabel for="password" value="#{text['mot_de_passe.jsf']} :" />
-				<h:inputText id="password" value="#{compteCreationController.newCompte.password}" />
-				<h:message for="password" errorClass="invalid" />
+					<h:outputLabel for="pseudo" value="#{text['pseudo.jsf']} :" />
+					<h:inputText id="pseudo"
+						value="#{compteModificationController.myCompte.login}" />
+					<h:message for="pseudo" errorClass="invalid" />
 
-				<h:outputLabel for="nom" value="#{text['nom.jsf']} :" />
-				<h:inputText id="nom" value="#{compteCreationController.newCompte.nom}" />
-				<h:message for="nom" errorClass="invalid" />
+					<h:outputLabel for="password" value="#{text['mot_de_passe.jsf']} :" />
+					<h:inputText id="password"
+						value="#{compteModificationController.myCompte.password}" />
+					<h:message for="password" errorClass="invalid" />
 
-				<h:outputLabel for="prenom" value="#{text['prenom.jsf']} :" />
-				<h:inputText id="prenom" value="#{compteCreationController.newCompte.prenom}" />
-				<h:message for="prenom" errorClass="invalid" />
+					<h:outputLabel for="nom" value="#{text['nom.jsf']} :" />
+					<h:inputText id="nom"
+						value="#{compteModificationController.myCompte.nom}" />
+					<h:message for="nom" errorClass="invalid" />
 
-				<h:outputLabel for="email" value="#{text['email.jsf']} :" />
-				<h:inputText id="email" value="#{compteCreationController.newCompte.mail}" />
-				<h:message for="email" errorClass="invalid" />
+					<h:outputLabel for="prenom" value="#{text['prenom.jsf']} :" />
+					<h:inputText id="prenom"
+						value="#{compteModificationController.myCompte.prenom}" />
+					<h:message for="prenom" errorClass="invalid" />
 
-				<h:outputLabel for="date" value="#{text['date_de_naissance.jsf']} :" />
-				<h:inputText id="date" value="#{compteCreationController.newCompte.dateNaissance}">
-					<f:convertDateTime pattern="d-M-yyyy" />
-				</h:inputText>
-				<h:message for="date" errorClass="invalid" />
+					<h:outputLabel for="email" value="#{text['email.jsf']} :" />
+					<h:inputText id="email"
+						value="#{compteModificationController.myCompte.mail}" />
+					<h:message for="email" errorClass="invalid" />
 
-			</h:panelGrid>
+					<h:outputLabel for="date"
+						value="#{text['date_de_naissance.jsf']} :" />
+					<h:inputText id="date"
+						value="#{compteModificationController.myCompte.dateNaissance}">
+						<f:convertDateTime pattern="d-M-yyyy" />
+					</h:inputText>
+					<h:message for="date" errorClass="invalid" />
 
-			<p>
-				<h:panelGrid columns="2">
-					<h:commandButton id="register"
-						action="#{compteCreationController.register()}" value="#{text['enregistrer.jsf']} :"
-						styleClass="register" />
-					<h:messages styleClass="messages" errorClass="invalid"
-						infoClass="valid" warnClass="warning" globalOnly="true" />
 				</h:panelGrid>
-			</p>
-		</h:form>
 
-
-		<h:outputText styleClass="h2" value="#{text['compte.jsf']}"/>
-		<h:panelGroup rendered="#{empty comptes}">
-			<br/>
-			<h:outputText styleClass="em" value="#{text['aucun_compte_enregistre.jsf']}"/>
-		</h:panelGroup>
-		<h:dataTable var="_compte" value="#{comptes}"
-			rendered="#{not empty comptes}" styleClass="simpletablestyle">
-			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['id.jsf']}"/></f:facet>
-                #{_compte.id}
-            </h:column>
-			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['nom.jsf']}"/></f:facet>
-                #{_compte.login}
-            </h:column>
-		</h:dataTable>
-
-
+				<p>
+					<h:panelGrid columns="2">
+						<h:commandButton id="register"
+							action="#{compteModificationController.edit()}"
+							value="#{text['enregistrer.jsf']} :" styleClass="register" />
+						<h:messages styleClass="messages" errorClass="invalid"
+							infoClass="valid" warnClass="warning" globalOnly="true" />
+					</h:panelGrid>
+				</p>
+			</h:form>
+		</f:view>
 
 	</ui:define>
-
 </ui:composition>

@@ -30,7 +30,7 @@ public class Credentials {
 	}
 
 	@NotNull
-	@Length(min = 3, max = 25)
+	@Length(min = 6, max = 20)
 	public String getUsername() {
 		return username;
 	}

@@ -11,7 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @SuppressWarnings("serial")
@@ -24,19 +26,25 @@ public class Compte implements Serializable
    @Column(name = "id", updatable = false, nullable = false)
    private Long id;
 
-   @Column(nullable = false)
+   @Column(nullable = false, unique=true)
    @NotNull
    @NotEmpty
+   @Length(min = 6, max = 20)
    private String login;
 
    @Column(nullable = false)
    @NotNull
    @NotEmpty
+   @Length(min = 6, max = 20)
    private String password;
 
-   @Column(nullable = false)
+   @Column(nullable = false, unique=true)
    @NotNull
    @NotEmpty
+   @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\."
+	        +"[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@"
+	        +"(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?",
+	             message="{invalid.email}")
    private String mail;
 
    @Column(nullable = false)
