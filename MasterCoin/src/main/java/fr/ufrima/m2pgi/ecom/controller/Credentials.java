@@ -1,5 +1,7 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
+import java.awt.Event;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -56,10 +58,10 @@ public class Credentials {
 		Compte result = compteFacade.find(this);
 		if (result != null) {
 			login.setCurrentUser(result);
-			if(login.getFromUrl() != null)
+			if(!login.getFromUrl().isEmpty())
 			{
 				String url = login.getFromUrl();
-				login.setFromUrl(null);
+				login.setFromUrl("");
 				return url+"/?faces-redirect=true";
 			}
 		} else {
@@ -67,7 +69,28 @@ public class Credentials {
 		}
 		return "";
 	}
-
+	
+	public String login(String source) {
+		
+		Compte result = compteFacade.find(this);
+		if (result != null) {
+			login.setCurrentUser(result);
+			if(!login.getFromUrl().isEmpty() && FacesContext.getCurrentInstance().getViewRoot().getViewId().matches("/login.xhtml"))
+			{
+				String url = login.getFromUrl();
+				login.setFromUrl("");
+				return url+"/?faces-redirect=true";
+			}
+			else
+			{
+				return "";
+			}
+		} else {
+			// perhaps add code here to report a failed login
+		}
+		return "";
+	}
+	
 	public void logout() {
 
 		login.setCurrentUser(null);

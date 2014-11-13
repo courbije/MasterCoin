@@ -6,6 +6,9 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
+			  <div class="sixteen columns">
+			  <h:outputText styleClass="h1 title" value="#{text['message_accueil.jsf']}" />
+		</div>
 		<f:view>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
@@ -61,5 +64,10 @@
 			</h:form>
 		</f:view>
 
+		<script>
+	 $(function() {
+		 $("#menu-compte").addClass("current_page_item");
+	});
+	</script>
 	</ui:define>
 </ui:composition>

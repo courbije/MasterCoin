@@ -6,8 +6,10 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-		<h:outputText styleClass="h1" value="#{text['message_accueil.jsf']} #{text['echange.jsf']}"/>
-
+		
+		  <div class="sixteen columns">
+			<h:outputText styleClass="h1 title" value="#{text['message_accueil.jsf']} #{text['echange.jsf']}"/>
+		</div>
 		<h:form id="reg">
 			<h:outputText styleClass="h1" value="#{text['creation_offre.jsf']}"/>
 			<h:panelGrid columns="3" columnClasses="titleCell">
@@ -83,6 +85,10 @@
                 <h:outputText value="#{_offre.dateCreation}" />
             </h:column>
 		</h:dataTable>
-		
+			<script>
+	 $(function() {
+		 $("#menu-echanger").addClass("current_page_item");
+	});
+	</script>
 	</ui:define>
 </ui:composition>

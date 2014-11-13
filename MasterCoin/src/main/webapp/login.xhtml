@@ -20,7 +20,7 @@
 					</f:validateBean>
 				</h:panelGrid>
 				<h:commandButton value="#{text['login.jsf']}"
-					action="#{credentials.login}" rendered="#{!login.loggedIn}" />
+					action="#{credentials.login()}" rendered="#{!login.loggedIn}" />
 
 				<h:button value="#{text['register.jsf']}" outcome="register"
 					rendered="#{!login.loggedIn}" />

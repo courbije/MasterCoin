@@ -14,7 +14,7 @@ import fr.ufrima.m2pgi.ecom.model.Compte;
 public class Login {
 
 	private Compte compte;
-	private String from_url = null;
+	private String from_url = "";
 
 	public void setCurrentUser(Compte compte) {
 

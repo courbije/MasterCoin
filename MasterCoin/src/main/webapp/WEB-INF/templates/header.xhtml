@@ -4,44 +4,68 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 	<body>
-
 		<ui:composition>
-			<h:graphicImage value="ressources/images/logo.png" />
-			<h:form>
-				<h:selectOneMenu value="#{changementLangueController.language}"
-					onchange="submit()">
-					<f:selectItem itemValue="fr" itemLabel="#{text['FR.jsf']}" />
-					<f:selectItem itemValue="en" itemLabel="#{text['EN.jsf']}" />
-				</h:selectOneMenu>
-			</h:form>
-			<h:button value="#{text['accueil.jsf']}" outcome="accueil" />
-			<h:button value="#{text['echanger.jsf']}" outcome="echange" />
-			<h:button value="#{text['compte.jsf']}" outcome="compte" />
-			<h:button value="#{text['support.jsf']}" outcome="support" />
+			<div id="change-lang" class="sixteen columns">
+				<h:form>
+					<h:selectOneMenu value="#{changementLangueController.language}"
+						onchange="submit()">
+						<f:selectItem itemValue="fr" itemLabel="#{text['FR.jsf']}" />
+						<f:selectItem itemValue="en" itemLabel="#{text['EN.jsf']}" />
+					</h:selectOneMenu>
+				</h:form>
+			</div>
+			<div class="ten columns">
+				<div id="logo">
+					<h1>
+						<span class="icon icon-money icon-size"></span><a href="accueil.jsf">Master<span>Coin</span></a>
+					</h1>
+					<p>Marché de crypto monnaies</p>
+				</div>
+			</div>
+			<div id="login" class="six columns">
+				<h:form>
+					<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
+						<f:validateBean>
+							<h:outputLabel for="username" value="#{text['username.jsf']}:" />
+							<h:inputText id="username" value="#{credentials.username}" />
+							<h:message for="username" errorClass="invalid" />
+							<h:outputLabel for="password" value="#{text['password.jsf']}:" />
+							<h:inputSecret id="password" value="#{credentials.password}" />
+							<h:message for="username" errorClass="invalid" />
+						</f:validateBean>
+					</h:panelGrid>
 
-			<h:form>
-				<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
-					<f:validateBean>
-						<h:outputLabel for="username" value="#{text['username.jsf']}:" />
-						<h:inputText id="username" value="#{credentials.username}" />
-						<h:message for="username" errorClass="invalid" />
-						<h:outputLabel for="password" value="#{text['password.jsf']}:" />
-						<h:inputSecret id="password" value="#{credentials.password}" />
-						<h:message for="username" errorClass="invalid" />
-					</f:validateBean>
-				</h:panelGrid>
+					<h:commandButton value="#{text['login.jsf']}"
+						action="#{credentials.login('header')}" rendered="#{!login.loggedIn}"/>
 
-				<h:commandButton id="header_login" value="#{text['login.jsf']}"
-					action="#{credentials.login}" rendered="#{!login.loggedIn}" />
+					<h:button value="#{text['register.jsf']}" outcome="register"
+						rendered="#{!login.loggedIn}" />
 
-				<h:button value="#{text['register.jsf']}" outcome="register"
-					rendered="#{!login.loggedIn}" />
+					<h:outputLabel
+						value="#{text['bienvenue.jsf']} #{login.currentUser.login}"
+						rendered="#{login.loggedIn}" />
 
-				<h:outputLabel value="#{text['bienvenue.jsf']} #{login.currentUser.login}"  rendered="#{login.loggedIn}"/>
+					<h:commandButton value="#{text['logout.jsf']}"
+						action="#{credentials.logout}" rendered="#{login.loggedIn}" />
+				</h:form>
+			</div>
 
-				<h:commandButton value="#{text['logout.jsf']}"
-					action="#{credentials.logout}" rendered="#{login.loggedIn}" />
-			</h:form>
+			<div id="menu" class="sixteen columns">
+				<div class="menu-button">Menu</div>
+				<ul class="flexnav" data-breakpoint="800">
+					<li id="menu-accueil"><h:link value="#{text['accueil.jsf']}" outcome="accueil" /></li>
+					<li id="menu-echanger"><h:link value="#{text['echanger.jsf']}" outcome="echange" /></li>
+					<li id="menu-compte"><h:link value="#{text['compte.jsf']}" outcome="compte" /></li>
+					<li id="menu-support"><h:link value="#{text['support.jsf']}" outcome="support" /></li>
+				</ul>
+				<script>
+	      $(function() {
+	      $(".flexnav").flexNav();
+	      });
+	    </script>
+			</div>
+
+
 		</ui:composition>
 	</body>
 
