@@ -6,33 +6,43 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-		<h:outputText styleClass="h1" value="#{text['message_accueil.jsf']} #{text['propoffre.jsf']}"/>
-
+		
+		  <div class="sixteen columns">
+			<h:outputText styleClass="h1 title" value="#{text['message_accueil.jsf']} #{text['echange.jsf']}"/>
+		</div>
 		<h:form id="reg">
-			<h2>Création d'une offre</h2>
+			<h:outputText styleClass="h1" value="#{text['creation_offre.jsf']}"/>
 			<h:panelGrid columns="3" columnClasses="titleCell">
-				<h:outputLabel for="monnaie_voulue" value="Monnaie souhaitée:" />
-				<h:selectOneMenu value="#{newEchangeOffre.monnaieAchat}">
+				<!--<h:outputLabel for="compte" value="#{text['compte.jsf']} :" />
+				<h:selectOneMenu value="#{newEchangeOffre.compte}">
+					<f:selectItems value="#{comptes}" var="c" itemLabel="#{c.login}"
+						itemValue="#{c}" />
+					<f:converter converterId="fr.ufrima.m2pgi.CompteConverter" />
+				</h:selectOneMenu>
+				<h:message for="compte" errorClass="invalid" />-->
+				
+				<h:outputLabel for="monnaie_voulue" value="#{text['monnaie_souhaitee.jsf']}" />
+				<h:selectOneMenu value="#{echangeOffreController.newEchangeOffre.monnaieAchat}">
 					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 						itemValue="#{m}" />
 					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 				</h:selectOneMenu>
 				<h:message for="monnaie_voulue" errorClass="invalid" />
 
-				<h:outputLabel for="quantite_voulue" value="Quantité désirée:" />
-				<h:inputText id="quantite_voulue" value="#{newEchangeOffre.montantAchat}" />
+				<h:outputLabel for="quantite_voulue" value="#{text['quantite_souhaitee.jsf']}" />
+				<h:inputText id="quantite_voulue" value="#{echangeOffreController.newEchangeOffre.montantAchat}" />
 				<h:message for="quantite_voulue" errorClass="invalid" />
 
-				<h:outputLabel for="monnaie_a_vendre" value="Monnaie à vendre:" />
-				<h:selectOneMenu value="#{newEchangeOffre.monnaieVendre}">
+				<h:outputLabel for="monnaie_a_vendre" value="#{text['monnaie_a_vendre.jsf']}" />
+				<h:selectOneMenu value="#{echangeOffreController.newEchangeOffre.monnaieVendre}">
 					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 						itemValue="#{m}" />
 					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 				</h:selectOneMenu>
 				<h:message for="monnaie_a_vendre" errorClass="invalid" />
 
-				<h:outputLabel for="quantite_a_vendre" value="Quantite à vendre:" />
-				<h:inputText id="quantite_a_vendre" value="#{newEchangeOffre.montantVendre}" />
+				<h:outputLabel for="quantite_a_vendre" value="#{text['quantite_a_vendre.jsf']}" />
+				<h:inputText id="quantite_a_vendre" value="#{echangeOffreController.newEchangeOffre.montantVendre}" />
 				<h:message for="quantite_a_vendre" errorClass="invalid" />
 				
 			</h:panelGrid>
@@ -48,33 +58,37 @@
 			</p>
 		</h:form>
 		
-				<h2>Offres</h2>
+		<h:outputText styleClass="h2" value="#{text['offres.jsf']}"/><br/>
 		<h:panelGroup rendered="#{empty offres}">
-			<em>No registered Comptes.</em>
+			<h:outputText styleClass="em" value="#{text['aucune_offre_enregistree.jsf']}"/>		
 		</h:panelGroup>
 		<h:dataTable var="_offre" value="#{offres}"
 			rendered="#{not empty offres}" styleClass="simpletablestyle">
 			<h:column>
-				<f:facet name="header">Monnaie d'achat</f:facet>
-                #{_offre.monnaieAchat}
+				<f:facet name="header"><h:outputText value="#{text['monnaie_souhaitee.jsf']}"/></f:facet>
+                <h:outputText value="#{_offre.monnaieAchat.acroyme} #{_offre.monnaieAchat.nom}" />
             </h:column>
 			<h:column>
-				<f:facet name="header">Quantité à acheter</f:facet>
-                #{_offre.montantAchat}
+				<f:facet name="header"><h:outputText value="#{text['quantite_souhaitee.jsf']}"/></f:facet>
+                <h:outputText value="#{_offre.montantAchat}" />
             </h:column>
             <h:column>
-				<f:facet name="header">Monnaie à vendre</f:facet>
-                #{_offre.monnaieVendre}
+				<f:facet name="header"><h:outputText value="#{text['monnaie_a_vendre.jsf']}"/></f:facet>
+                <h:outputText value="#{_offre.monnaieVendre.acroyme} #{_offre.monnaieVendre.nom}" />
             </h:column>
             <h:column>
-				<f:facet name="header">Monnaie à la vente</f:facet>
-                #{_offre.montantVendre}
+				<f:facet name="header"><h:outputText value="#{text['quantite_a_vendre.jsf']}"/></f:facet>
+                <h:outputText value="#{_offre.montantVendre}" />
             </h:column>
 			<h:column>
-				<f:facet name="header">Date</f:facet>
-                #{_offre.dateCreation}
+				<f:facet name="header"><h:outputText value="#{text['date_creation.jsf']}"/></f:facet>
+                <h:outputText value="#{_offre.dateCreation}" />
             </h:column>
 		</h:dataTable>
-		
+			<script>
+	 $(function() {
+		 $("#menu-echanger").addClass("current_page_item");
+	});
+	</script>
 	</ui:define>
 </ui:composition>

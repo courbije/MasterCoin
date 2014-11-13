@@ -1,22 +1,19 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import fr.ufrima.m2pgi.ecom.model.Compte;
 import fr.ufrima.m2pgi.ecom.service.CompteFacade;
 
 @ViewScoped
 @ManagedBean
-public class CompteCreationController {
+public class CompteModificationController {
 
 	@ManagedProperty(value = "#{login}")
 	private Login login;
@@ -31,34 +28,31 @@ public class CompteCreationController {
 	@Inject
 	private FacesContext facesContext;
 
-	private Compte newCompte;
+	private Compte myCompte;
 
-	public Compte getNewCompte() {
-		return newCompte;
+	public Compte getMyCompte() {
+		return myCompte;
 	}
 
-	public void setNewCompte(Compte newCompte) {
-		this.newCompte = newCompte;
+	public void setMyCompte(Compte myCompte) {
+		this.myCompte = myCompte;
 	}
 
 	@PostConstruct
 	public void initNewMember() {
-		newCompte = new Compte();
+		myCompte = login.getCurrentUser();
 	}
 
-	public String register() throws Exception {
+	public void edit() throws Exception {
 		try {
-			newCompte = compteFacade.create(newCompte);
+			compteFacade.edit(myCompte);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
 			facesContext.addMessage(null, m);
-			login.setCurrentUser(newCompte);
 			initNewMember();
-			return "accueil?faces-redirect=true";
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
 			facesContext.addMessage(null, m);
-			return null;
 		}
 	}
 

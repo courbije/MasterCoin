@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+			<h:outputText styleClass="h1"
+				value="#{text['message_not_log.jsf']}" rendered="#{!login.loggedIn}"/>
+			<h:form>
+				<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
+					<f:validateBean>
+						<h:outputLabel for="username" value="#{text['username.jsf']}:" />
+						<h:inputText id="username" value="#{credentials.username}" />
+						<h:message for="username" errorClass="invalid" />
+						<h:outputLabel for="password" value="#{text['password.jsf']}:" />
+						<h:inputSecret id="password" value="#{credentials.password}" />
+						<h:message for="username" errorClass="invalid" />
+					</f:validateBean>
+				</h:panelGrid>
+				<h:commandButton value="#{text['login.jsf']}"
+					action="#{credentials.login()}" rendered="#{!login.loggedIn}" />
+
+				<h:button value="#{text['register.jsf']}" outcome="register"
+					rendered="#{!login.loggedIn}" />
+
+				<h:commandButton value="#{text['logout.jsf']}"
+					action="#{credentials.logout}" rendered="#{login.loggedIn}" />
+			</h:form>
+	</ui:define>
+</ui:composition>

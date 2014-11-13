@@ -6,17 +6,19 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-		<h:outputText styleClass="h1" value="#{text['message_accueil.jsf']} #{text['support.jsf']}"/>
+			  <div class="sixteen columns">
+			<h:outputText styleClass="h1 title" value="#{text['message_accueil.jsf']}"/>
+		</div>
 
 		<h:form id="reg">
 			<h:outputText styleClass="h2" value="#{text['creation_monnaie.jsf']}"/>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="acroyme" value="#{text['acronyme.jsf']} :" />
-				<h:inputText id="acroyme" value="#{newMonnaie.acroyme}" />
+				<h:inputText id="acroyme" value="#{monnaieCreationController.newMonnaie.acroyme}" />
 				<h:message for="acroyme" errorClass="invalid" />
 
 				<h:outputLabel for="nom" value="#{text['nom.jsf']} :" />
-				<h:inputText id="nom" value="#{newMonnaie.nom}" />
+				<h:inputText id="nom" value="#{monnaieCreationController.newMonnaie.nom}" />
 				<h:message for="nom" errorClass="invalid" />
 			</h:panelGrid>
 
@@ -53,11 +55,11 @@
 			<h:outputText styleClass="h2" value="#{text['creation_porte_monnaie.jsf']}"/>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="montant" value="#{text['montant.jsf']} :" />
-				<h:inputText id="montant" value="#{newPorteMonnaie.montant}" />
+				<h:inputText id="montant" value="#{porteMonnaieCreationController.newPorteMonnaie.montant}" />
 				<h:message for="montant" errorClass="invalid" />
 
 				<h:outputLabel for="compte" value="#{text['compte.jsf']} :" />
-				<h:selectOneMenu value="#{newPorteMonnaie.compte}">
+				<h:selectOneMenu value="#{porteMonnaieCreationController.newPorteMonnaie.compte}">
 					<f:selectItems value="#{comptes}" var="c" itemLabel="#{c.login}"
 						itemValue="#{c}" />
 					<f:converter converterId="fr.ufrima.m2pgi.CompteConverter" />
@@ -67,7 +69,7 @@
 
 
 				<h:outputLabel for="monnaie" value="#{text['monnaie.jsf']} :" />
-				<h:selectOneMenu value="#{newPorteMonnaie.monnaie}">
+				<h:selectOneMenu value="#{porteMonnaieCreationController.newPorteMonnaie.monnaie}">
 					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 						itemValue="#{m}" />
 					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
@@ -103,7 +105,11 @@
                 #{_monnaie.montant}
             </h:column>
 		</h:dataTable>
-
+	<script>
+	 $(function() {
+		 $("#menu-support").addClass("current_page_item");
+	});
+	</script>
 	</ui:define>
 
 </ui:composition>
