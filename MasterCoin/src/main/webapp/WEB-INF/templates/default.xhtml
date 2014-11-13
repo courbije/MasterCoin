@@ -4,27 +4,36 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core">
-		<f:view locale="#{changementLangueController.locale}">
-<h:head>
-	<title>${artifactId}</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link type="text/css" rel="stylesheet" href="ressources/css/style.css" />
-</h:head>
-<h:body>
-	<div id="container">
-
-		<div id="header">
+<f:view locale="#{changementLangueController.locale}">
+	<h:head>
+		<title>${artifactId}</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1" />
+		<link rel="stylesheet" href="ressources/css/skeleton.css" />
+		<link rel="stylesheet" href="ressources/css/layout.css" />
+		<link rel="stylesheet" href="ressources/css/style.css" />
+		<link rel="stylesheet" href="ressources/css/fonts.css" />
+		<link rel="stylesheet" href="ressources/css/flexnav.css" />
+		<script src="ressources/js/jquery-1.11.1.min.js"></script>
+		<script src="ressources/js/jquery.flexnav.min.js"></script>
+	</h:head>
+	<h:body>
+		<div class="container">
 			<ui:insert name="header">
 				<ui:include src="./header.xhtml" />
 			</ui:insert>
+			<div id="wrapper" class="sixteen columns">
+				<div id="page">
+					<ui:insert name="content">
+	                    [Template content will be inserted here]
+			</ui:insert>
+				</div>
+			</div>
+					 <div id="copyright" class="sixteen columns">
+	    <p>&copy; MasterCoin. All rights reserved.</p>
+	  </div>
 		</div>
-
-		<div id="content">
-			<ui:insert name="content">
-                    [Template content will be inserted here]
-         </ui:insert>
-		</div>
-	</div>
-</h:body>
+	</h:body>
 </f:view>
 </html>

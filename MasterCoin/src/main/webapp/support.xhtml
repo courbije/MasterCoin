@@ -6,7 +6,9 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-		<h:outputText styleClass="h1" value="#{text['message_accueil.jsf']} #{text['support.jsf']}"/>
+			  <div class="sixteen columns">
+			<h:outputText styleClass="h1 title" value="#{text['message_accueil.jsf']}"/>
+		</div>
 
 		<h:form id="reg">
 			<h:outputText styleClass="h2" value="#{text['creation_monnaie.jsf']}"/>
@@ -103,7 +105,11 @@
                 #{_monnaie.montant}
             </h:column>
 		</h:dataTable>
-
+	<script>
+	 $(function() {
+		 $("#menu-support").addClass("current_page_item");
+	});
+	</script>
 	</ui:define>
 
 </ui:composition>
