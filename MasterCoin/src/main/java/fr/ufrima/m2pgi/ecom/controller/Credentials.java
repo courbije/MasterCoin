@@ -1,8 +1,12 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
+import java.awt.Event;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
@@ -48,17 +52,45 @@ public class Credentials {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	public void login() {
+		
+	public String login() {
+		
 		Compte result = compteFacade.find(username, password);
 		if (result != null) {
 			login.setCurrentUser(result);
+			if(!login.getFromUrl().isEmpty())
+			{
+				String url = login.getFromUrl();
+				login.setFromUrl("");
+				return url+"/?faces-redirect=true";
+			}
 		} else {
 			// perhaps add code here to report a failed login
 		}
+		return "";
 	}
-
+	
+	
+	public String login(String source) {
+		Compte result = compteFacade.find(username, password);
+		if (result != null) {
+			login.setCurrentUser(result);
+			if(!login.getFromUrl().isEmpty() && FacesContext.getCurrentInstance().getViewRoot().getViewId().matches("/login.xhtml"))
+			{
+				String url = login.getFromUrl();
+				login.setFromUrl("");
+				return url+"/?faces-redirect=true";
+			}
+			else
+			{
+				return "";
+			}
+		} else {
+			// perhaps add code here to report a failed login
+		}
+		return "";
+	}
+	
 	public void logout() {
 
 		login.setCurrentUser(null);

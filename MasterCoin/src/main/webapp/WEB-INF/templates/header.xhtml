@@ -26,7 +26,7 @@
 				<h:form>
 					<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
 						<f:validateBean>
-							<h:outputLabel for="usernam" value="#{text['username.jsf']}:" />
+							<h:outputLabel for="username" value="#{text['username.jsf']}:" />
 							<h:inputText id="username" value="#{credentials.username}" />
 							<h:message for="username" errorClass="invalid" />
 							<h:outputLabel for="password" value="#{text['password.jsf']}:" />
@@ -36,7 +36,7 @@
 					</h:panelGrid>
 
 					<h:commandButton value="#{text['login.jsf']}"
-						action="#{credentials.login}" rendered="#{!login.loggedIn}" />
+						action="#{credentials.login('header')}" rendered="#{!login.loggedIn}"/>
 
 					<h:button value="#{text['register.jsf']}" outcome="register"
 						rendered="#{!login.loggedIn}" />
