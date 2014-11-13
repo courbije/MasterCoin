@@ -10,8 +10,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
-import fr.ufrima.m2pgi.ecom.service.EchangeOffreFacade;
 
 @ViewScoped
 @ManagedBean

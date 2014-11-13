@@ -10,8 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
-import fr.ufrima.m2pgi.ecom.service.PorteMonnaieFacade;
 
 @ViewScoped
 @ManagedBean

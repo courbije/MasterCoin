@@ -9,8 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
-import fr.ufrima.m2pgi.ecom.service.CompteFacade;
 
 @FacesConverter("fr.ufrima.m2pgi.CompteConverter")
 public class CompteConverter implements Converter {

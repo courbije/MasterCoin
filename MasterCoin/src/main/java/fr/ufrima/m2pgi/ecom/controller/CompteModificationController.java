@@ -8,8 +8,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
-import fr.ufrima.m2pgi.ecom.service.CompteFacade;
 
 @ViewScoped
 @ManagedBean

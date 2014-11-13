@@ -11,7 +11,7 @@ import javax.persistence.PersistenceContext;
 
 public class Resources {
     @Produces
-    @PersistenceContext(unitName="MediaSeller-ejbPU")
+    @PersistenceContext
     private EntityManager em;
 
     @Produces

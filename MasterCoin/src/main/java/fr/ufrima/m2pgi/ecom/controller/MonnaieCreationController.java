@@ -7,8 +7,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
-import fr.ufrima.m2pgi.ecom.service.MonnaieFacade;
 
 @ViewScoped
 @ManagedBean

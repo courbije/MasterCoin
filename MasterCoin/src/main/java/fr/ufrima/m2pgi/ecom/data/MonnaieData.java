@@ -7,8 +7,8 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
-import fr.ufrima.m2pgi.ecom.service.MonnaieFacade;
 
 @RequestScoped
 public class MonnaieData {
@@ -16,12 +16,6 @@ public class MonnaieData {
     @Inject
     private MonnaieFacade monnaieFacade;
 
-   
-	
-    // @Named provides access the return value via the EL variable name "members" in the UI (e.g.
-    // Facelets or JSP view)
-    @Produces
-    @Named
     public List<Monnaie> getMonnaies() {
     	return monnaieFacade.findAll();
     }

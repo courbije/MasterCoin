@@ -8,8 +8,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
+import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
-import fr.ufrima.m2pgi.ecom.service.CompteFacade;
 
 @ManagedBean
 @RequestScoped
@@ -51,8 +51,7 @@ public class Credentials {
 	
 	
 	public void login() {
-		 
-		Compte result = compteFacade.find(this);
+		Compte result = compteFacade.find(username, password);
 		if (result != null) {
 			login.setCurrentUser(result);
 		} else {

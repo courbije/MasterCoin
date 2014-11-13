@@ -34,8 +34,8 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
-import fr.ufrima.m2pgi.ecom.service.CompteFacade;
 import fr.ufrima.m2pgi.ecom.util.Resources;
 
 @RunWith(Arquillian.class)
@@ -60,7 +60,7 @@ public class CompteTest {
     public void testCreation() throws Exception {
     	int debut = compteFacade.findAll().size();
         Compte newCompte = new Compte();
-        newCompte.setLogin("toto");
+        newCompte.setLogin("azerty");
         newCompte.setPassword("azerty");
         newCompte.setMail("bidule@machin.com");
         newCompte.setNom("df");
@@ -82,7 +82,7 @@ public class CompteTest {
     @Test
     public void testCreationMissingAtribue() throws Exception {
         Compte newCompte = new Compte();
-        newCompte.setLogin("toto");
+        newCompte.setLogin("azerty");
         try {
         	compteFacade.create(newCompte);
         	fail();

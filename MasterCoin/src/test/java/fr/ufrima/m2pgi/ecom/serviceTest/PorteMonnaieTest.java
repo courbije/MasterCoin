@@ -31,16 +31,17 @@ import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
+import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
+import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
-import fr.ufrima.m2pgi.ecom.service.CompteFacade;
-import fr.ufrima.m2pgi.ecom.service.EchangeOffreFacade;
-import fr.ufrima.m2pgi.ecom.service.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.util.Resources;
 
 @RunWith(Arquillian.class)
@@ -78,7 +79,7 @@ public class PorteMonnaieTest {
     @Before 
     public void initialize() {
     	 newCompte = new Compte();
-         newCompte.setLogin("toto");
+         newCompte.setLogin("azerty");
          newCompte.setPassword("azerty");
          newCompte.setMail("bidule@machin.com");
          newCompte.setNom("df");
@@ -97,6 +98,15 @@ public class PorteMonnaieTest {
          monnaieFacade.create(monnaie2);
     }
 
+    @After
+    public void end() {
+         compteFacade.remove(newCompte);
+         monnaieFacade.remove(monnaie1);
+         monnaieFacade.remove(monnaie2);
+    }
+
+    
+    
     @Test
     public void testCreation() throws Exception {
     	int debut = echangeOffreFacade.findAll().size();

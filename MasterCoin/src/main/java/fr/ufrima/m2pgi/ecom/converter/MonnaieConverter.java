@@ -9,8 +9,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
+import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
-import fr.ufrima.m2pgi.ecom.service.MonnaieFacade;
 
 @FacesConverter("fr.ufrima.m2pgi.MonnaieConverter")
 public class MonnaieConverter implements Converter {

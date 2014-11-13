@@ -1,4 +1,4 @@
-package fr.ufrima.m2pgi.ecom.service;
+package fr.ufrima.m2pgi.ecom.facade;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import fr.ufrima.m2pgi.ecom.controller.Credentials;
 import fr.ufrima.m2pgi.ecom.model.Compte;
 
 @Stateless
@@ -23,6 +22,7 @@ public class CompteFacade {
 	public void edit(Compte compte) {
 		em.merge(compte);
 	}
+	
 
 	public void remove(Compte compte) {
 		em.remove(em.merge(compte));
@@ -38,14 +38,15 @@ public class CompteFacade {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Compte find(Credentials login) {
+	public Compte find(String username, String password) {
 		List<Compte> res = em.createQuery("select object(c) from Compte as c where c.login = :username and c.password = :password")
-		.setParameter("username", login.getUsername())
-		.setParameter("password", login.getPassword())
-		.getResultList();
-		if (res.size() == 1) {
-			return res.get(0);
-		}
-		return null;
+				.setParameter("username", username)
+				.setParameter("password", password)
+				.getResultList();
+				if (res.size() == 1) {
+					return res.get(0);
+				}
+				return null;
 	}
+	
 }

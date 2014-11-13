@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<f:view>
+			<ui:insert name="menuCompte">
+				<ui:include src="/WEB-INF/templates/compte.xhtml" />
+			</ui:insert>
+			<f:event type="preRenderView"
+				listener="#{login.forwardToLoginIfNotLoggedIn}" />
+				
+			<p> TODO </p>
+
+		</f:view>
+
+	</ui:define>
+</ui:composition>

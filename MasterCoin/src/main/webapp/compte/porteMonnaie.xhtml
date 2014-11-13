@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<f:view>
+			<f:event type="preRenderView"
+				listener="#{login.forwardToLoginIfNotLoggedIn}" />
+			<ui:insert name="menuCompte">
+				<ui:include src="/WEB-INF/templates/compte.xhtml" />
+			</ui:insert>
+
+			<h:form id="reg">
+				<h:outputText styleClass="h2"
+					value="#{text['creation_monnaie.jsf']}" />
+				<h:panelGrid columns="3" columnClasses="titleCell">
+					<h:outputLabel for="acroyme" value="#{text['acronyme.jsf']} :" />
+					<h:inputText id="acroyme"
+						value="#{monnaieCreationController.newMonnaie.acroyme}" />
+					<h:message for="acroyme" errorClass="invalid" />
+
+					<h:outputLabel for="nom" value="#{text['nom.jsf']} :" />
+					<h:inputText id="nom"
+						value="#{monnaieCreationController.newMonnaie.nom}" />
+					<h:message for="nom" errorClass="invalid" />
+				</h:panelGrid>
+
+				<p>
+					<h:panelGrid columns="2">
+						<h:commandButton id="register"
+							action="#{monnaieCreationController.register()}"
+							value="#{text['enregistrer.jsf']}" styleClass="register" />
+						<h:messages styleClass="messages" errorClass="invalid"
+							infoClass="valid" warnClass="warning" globalOnly="true" />
+					</h:panelGrid>
+				</p>
+			</h:form>
+
+
+			<h:outputText styleClass="h2" value="#{text['monnaie.jsf']}" />
+			<br />
+			<h:panelGroup rendered="#{empty monnaies}">
+				<h:outputText styleClass="em"
+					value="#{text['aucune_monnaie_enregistree.jsf']}" />
+			</h:panelGroup>
+			<h:dataTable var="_monnaie" value="#{monnaies}"
+				rendered="#{not empty monnaies}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['id.jsf']}" />
+					</f:facet>
+                #{_monnaie.id}
+            </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['nom.jsf']}" />
+					</f:facet>
+                #{_monnaie.nom}
+            </h:column>
+			</h:dataTable>
+		</f:view>
+
+	</ui:define>
+</ui:composition>
