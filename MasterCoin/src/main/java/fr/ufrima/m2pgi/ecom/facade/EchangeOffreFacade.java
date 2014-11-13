@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
+import fr.ufrima.m2pgi.ecom.model.Monnaie;
 
 @Stateless
 public class EchangeOffreFacade
@@ -33,5 +34,21 @@ public class EchangeOffreFacade
     @SuppressWarnings("unchecked")
 	public List<EchangeOffre> findAll() {
         return em.createQuery("select object(o) from EchangeOffre as o").getResultList();
+    }
+    
+    @SuppressWarnings("unchecked")
+	public List<EchangeOffre> findAllWhere(Monnaie monnaieAchat, Monnaie monnaieVente){
+    	return em.createQuery("select object(o) from EchangeOffre as o"
+    						  +"idmA=" + monnaieAchat.getId()
+    						  +"idmV=" + monnaieVente.getId()
+    						  ).getResultList();
+    }
+    	
+    @SuppressWarnings("unchecked")
+	public List<EchangeOffre> findAllWhereSum(Monnaie monnaieAchat, Monnaie monnaieVente){
+       	return em.createQuery("select sum(MontantVendre) from EchangeOffre"
+       						  +"idmA=" + monnaieAchat.getId()
+       						  +"idmV=" + monnaieVente.getId()
+       						  ).getResultList();
     }
 }
