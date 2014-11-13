@@ -3,6 +3,8 @@ package fr.ufrima.m2pgi.ecom.controller;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 
@@ -48,16 +50,22 @@ public class Credentials {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	public void login() {
-		 
+		
+	public String login() {
+		
 		Compte result = compteFacade.find(this);
 		if (result != null) {
 			login.setCurrentUser(result);
+			if(login.getFromUrl() != null)
+			{
+				String url = login.getFromUrl();
+				login.setFromUrl(null);
+				return url+"/?faces-redirect=true";
+			}
 		} else {
 			// perhaps add code here to report a failed login
 		}
+		return "";
 	}
 
 	public void logout() {
