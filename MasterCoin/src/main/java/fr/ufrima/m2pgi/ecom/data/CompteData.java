@@ -16,6 +16,8 @@ public class CompteData {
     @Inject
     private CompteFacade compteFacade;
 
+    @Produces
+    @Named
     public List<Compte> getComptes() {
     	return compteFacade.findAll();
     }

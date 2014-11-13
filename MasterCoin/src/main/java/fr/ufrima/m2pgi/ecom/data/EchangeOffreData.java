@@ -16,6 +16,8 @@ public class EchangeOffreData {
     @Inject
     private EchangeOffreFacade echangeOffreFacade;
 
+    @Produces
+    @Named
     public List<EchangeOffre> getOffres() {
     	return echangeOffreFacade.findAll();
     }

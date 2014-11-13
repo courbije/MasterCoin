@@ -31,7 +31,9 @@ public class PorteMonnaieData {
 
     @Inject
     private PorteMonnaieFacade porteMonnaieFacade;
-
+    
+    @Produces
+    @Named
     public List<PorteMonnaie> getPorteMonnaies() {
         return porteMonnaieFacade.findAll();
     }

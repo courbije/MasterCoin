@@ -1,49 +1,44 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
-import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
-import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
-import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
+import fr.ufrima.m2pgi.ecom.model.Monnaie;
+import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 
 @ViewScoped
 @ManagedBean
-public class PorteMonnaieCreationController {
+public class PorteMonnaieController {
 	
 	@Inject
-	private PorteMonnaieFacade porteMonnaieFacade;
+	private PorteMonnaieService porteMonnaieService;
 
 	@Inject
 	private FacesContext facesContext;
-
-	private PorteMonnaie newPorteMonnaie;
 	
-	public PorteMonnaie getNewPorteMonnaie() {
-		return newPorteMonnaie;
-	}
+	
+	@ManagedProperty(value = "#{login}")
+	private Login login;
 
-	public void setNewPorteMonnaie(PorteMonnaie newPorteMonnaie) {
-		this.newPorteMonnaie = newPorteMonnaie;
-	}
 
-	@PostConstruct
-	public void initNewMember() {
-		newPorteMonnaie = new PorteMonnaie();
-	}
+	private Monnaie monnaie;
 
+	private Integer amount;
+
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+	
+	
 	public void register() throws Exception {
 		try {
-			porteMonnaieFacade.create(newPorteMonnaie);
+			porteMonnaieService.addToPorteMonnaie(login.getCurrentUser(), monnaie, amount);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
 			facesContext.addMessage(null, m);
-			initNewMember();
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
@@ -69,4 +64,26 @@ public class PorteMonnaieCreationController {
 		// This is the root cause message
 		return errorMessage;
 	}
+
+
+	public Monnaie getMonnaie() {
+		return monnaie;
+	}
+
+
+	public void setMonnaie(Monnaie monnaie) {
+		this.monnaie = monnaie;
+	}
+
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+	
+	
 }

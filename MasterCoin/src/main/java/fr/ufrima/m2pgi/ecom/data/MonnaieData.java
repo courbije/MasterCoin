@@ -15,7 +15,9 @@ public class MonnaieData {
 
     @Inject
     private MonnaieFacade monnaieFacade;
-
+    
+    @Produces
+    @Named
     public List<Monnaie> getMonnaies() {
     	return monnaieFacade.findAll();
     }

@@ -6,6 +6,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import fr.ufrima.m2pgi.ecom.model.Compte;
+import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
 
 
@@ -35,5 +37,15 @@ public class PorteMonnaieFacade
 	public List<PorteMonnaie> findAll() {
         return em.createQuery("select object(o) from PorteMonnaie as o").getResultList();
     }
+
+	@SuppressWarnings("unchecked")
+	public PorteMonnaie find(Compte compte, Monnaie monnaie) {
+		List<PorteMonnaie> res = em.createQuery("select object(c) from PorteMonnaie as c where c.compte = :compte and c.monnaie = :monnaie")
+				.setParameter("compte", compte)
+				.setParameter("monnaie", monnaie)
+				.getResultList();
+		if (res.size() == 0) return null;
+		else return res.get(0);
+	}
     
 }

@@ -13,55 +13,49 @@
 				<ui:include src="/WEB-INF/templates/compte.xhtml" />
 			</ui:insert>
 
-			<h:form id="reg">
-				<h:outputText styleClass="h2"
-					value="#{text['creation_monnaie.jsf']}" />
-				<h:panelGrid columns="3" columnClasses="titleCell">
-					<h:outputLabel for="acroyme" value="#{text['acronyme.jsf']} :" />
-					<h:inputText id="acroyme"
-						value="#{monnaieCreationController.newMonnaie.acroyme}" />
-					<h:message for="acroyme" errorClass="invalid" />
+			<h:form id="reg2">
+			<h:outputText styleClass="h2" value="#{text['creation_porte_monnaie.jsf']}"/>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				<h:outputLabel for="montant" value="#{text['montant.jsf']} :" />
+				<h:inputText id="montant" value="#{porteMonnaieController.amount}" />
+				<h:message for="montant" errorClass="invalid" />
 
-					<h:outputLabel for="nom" value="#{text['nom.jsf']} :" />
-					<h:inputText id="nom"
-						value="#{monnaieCreationController.newMonnaie.nom}" />
-					<h:message for="nom" errorClass="invalid" />
+				<h:outputLabel for="monnaie" value="#{text['monnaie.jsf']} :" />
+				<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+						itemValue="#{m}" />
+					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+				</h:selectOneMenu>
+				<h:message for="monnaie" errorClass="invalid" />
+			</h:panelGrid>
+
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="register"
+						action="#{porteMonnaieController.register()}"
+						value="#{text['enregistrer.jsf']}" styleClass="register" />
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
 				</h:panelGrid>
+			</p>
+		</h:form>
+		
 
-				<p>
-					<h:panelGrid columns="2">
-						<h:commandButton id="register"
-							action="#{monnaieCreationController.register()}"
-							value="#{text['enregistrer.jsf']}" styleClass="register" />
-						<h:messages styleClass="messages" errorClass="invalid"
-							infoClass="valid" warnClass="warning" globalOnly="true" />
-					</h:panelGrid>
-				</p>
-			</h:form>
-
-
-			<h:outputText styleClass="h2" value="#{text['monnaie.jsf']}" />
-			<br />
-			<h:panelGroup rendered="#{empty monnaies}">
-				<h:outputText styleClass="em"
-					value="#{text['aucune_monnaie_enregistree.jsf']}" />
-			</h:panelGroup>
-			<h:dataTable var="_monnaie" value="#{monnaies}"
-				rendered="#{not empty monnaies}" styleClass="simpletablestyle">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['id.jsf']}" />
-					</f:facet>
+		<h:outputText styleClass="h2" value="#{text['porte_monnaie.jsf']}"/><br/>
+		<h:panelGroup rendered="#{empty porteMonnaies}">
+			<h:outputText styleClass="em" value="#{text['aucun_porte_monnaie_enregistre.jsf']}"/>
+		</h:panelGroup>
+		<h:dataTable var="_monnaie" value="#{porteMonnaies}"
+			rendered="#{not empty porteMonnaies}" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header"><h:outputText value="#{text['id.jsf']}"/></f:facet>
                 #{_monnaie.id}
             </h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['nom.jsf']}" />
-					</f:facet>
-                #{_monnaie.nom}
+			<h:column>
+				<f:facet name="header"><h:outputText value="#{text['nom.jsf']}"/></f:facet>
+                #{_monnaie.montant}
             </h:column>
-			</h:dataTable>
+		</h:dataTable>
 		</f:view>
-
 	</ui:define>
 </ui:composition>

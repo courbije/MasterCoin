@@ -37,11 +37,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
-import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
+import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
-import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
+import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
 import fr.ufrima.m2pgi.ecom.util.Resources;
 
 @RunWith(Arquillian.class)
@@ -49,7 +49,7 @@ public class PorteMonnaieTest {
     @Deployment
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "test.war")
-                .addClasses(MonnaieFacade.class, Monnaie.class,Compte.class, CompteFacade.class,EchangeOffre.class, EchangeOffreFacade.class, Resources.class)
+                .addClasses(MonnaieFacade.class, Monnaie.class,Compte.class, CompteFacade.class,PorteMonnaie.class, PorteMonnaieFacade.class, Resources.class)
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml")
                 // Deploy our test datasource
@@ -58,9 +58,10 @@ public class PorteMonnaieTest {
 
     
     
-    @Inject
-    EchangeOffreFacade echangeOffreFacade;
 
+    @Inject
+    PorteMonnaieFacade porteMonnaieFacade;
+    
     @Inject
     MonnaieFacade monnaieFacade;
     
@@ -74,7 +75,6 @@ public class PorteMonnaieTest {
     
     Compte newCompte;
     Monnaie monnaie1;
-    Monnaie monnaie2;
     
     @Before 
     public void initialize() {
@@ -91,59 +91,64 @@ public class PorteMonnaieTest {
          monnaie1.setAcroyme("BitCoin");
          monnaie1.setNom("BitCoin");
          monnaieFacade.create(monnaie1);
-         
-         monnaie2 = new Monnaie();
-         monnaie2.setAcroyme("DogeCoin");
-         monnaie2.setNom("DogeCoin");
-         monnaieFacade.create(monnaie2);
     }
-
+    
     @After
     public void end() {
+
          compteFacade.remove(newCompte);
+      
          monnaieFacade.remove(monnaie1);
-         monnaieFacade.remove(monnaie2);
     }
 
-    
-    
     @Test
     public void testCreation() throws Exception {
-    	int debut = echangeOffreFacade.findAll().size();
-        EchangeOffre newEchangeOffre = new EchangeOffre();
-        newEchangeOffre.setDateCreation(new Date());
-        newEchangeOffre.setCompte(newCompte);
-        newEchangeOffre.setMonnaieAchat(monnaie1);
-        newEchangeOffre.setMonnaieVendre(monnaie2);
-        newEchangeOffre.setMontantAchat(100);
-        newEchangeOffre.setMontantVendre(300);
+    	int debut = porteMonnaieFacade.findAll().size();
+        PorteMonnaie porteMonnaie = new PorteMonnaie();
+        porteMonnaie.setCompte(newCompte);        
+        porteMonnaie.setMonnaie(monnaie1);;
+        porteMonnaie.setMontant(500);
         
-        echangeOffreFacade.create(newEchangeOffre);
-        assertNotNull(newEchangeOffre.getId());
+        porteMonnaieFacade.create(porteMonnaie);
+        assertNotNull(porteMonnaie.getId());
         
-        Integer modif = 500;
-        newEchangeOffre.setMontantVendre(modif);
-        echangeOffreFacade.edit(newEchangeOffre);
-        EchangeOffre editEchangeOffre = echangeOffreFacade.find(newEchangeOffre.getId());
-        assertEquals(modif, editEchangeOffre.getMontantVendre());
+        Integer modif = 300;
+        porteMonnaie.setMontant(modif);
+        porteMonnaieFacade.edit(porteMonnaie);
+        PorteMonnaie editPorteMonnaie = porteMonnaieFacade.find(porteMonnaie.getId());
+        assertEquals(modif, editPorteMonnaie.getMontant());
         
-        echangeOffreFacade.remove(editEchangeOffre);
-        assertEquals(debut, echangeOffreFacade.findAll().size());
+        porteMonnaieFacade.remove(editPorteMonnaie);
+        assertEquals(debut, porteMonnaieFacade.findAll().size());
 
     }
 
     @Test
     public void testCreationMissingAtribue() throws Exception {
-        EchangeOffre newEchangeOffre = new EchangeOffre();
-        newEchangeOffre.setDateCreation(new Date());
-        newEchangeOffre.setMonnaieAchat(monnaie1);
-        newEchangeOffre.setMonnaieVendre(monnaie2);
-        newEchangeOffre.setMontantAchat(100);
-        newEchangeOffre.setMontantVendre(300);
+    	 PorteMonnaie porteMonnaie = new PorteMonnaie();
+         porteMonnaie.setCompte(newCompte);        
+         porteMonnaie.setMontant(500);
         try {
-        	echangeOffreFacade.create(newEchangeOffre);
+        	porteMonnaieFacade.create(porteMonnaie);
         	fail();
         } catch (Exception e) {	
         }
     }
+    
+    
+    @Test
+    public void testFindCompteMonnaie() throws Exception {
+        PorteMonnaie porteMonnaie = new PorteMonnaie();
+        porteMonnaie.setCompte(newCompte);        
+        porteMonnaie.setMonnaie(monnaie1);;
+        porteMonnaie.setMontant(500);
+        
+        porteMonnaieFacade.create(porteMonnaie);
+        PorteMonnaie res = porteMonnaieFacade.find(newCompte, monnaie1);
+        assertEquals(porteMonnaie, res);
+        
+        porteMonnaieFacade.remove(porteMonnaie);
+
+    }
+
 }

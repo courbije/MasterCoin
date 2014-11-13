@@ -50,61 +50,6 @@
             </h:column>
 		</h:dataTable>
 
-
-		<h:form id="reg2">
-			<h:outputText styleClass="h2" value="#{text['creation_porte_monnaie.jsf']}"/>
-			<h:panelGrid columns="3" columnClasses="titleCell">
-				<h:outputLabel for="montant" value="#{text['montant.jsf']} :" />
-				<h:inputText id="montant" value="#{porteMonnaieCreationController.newPorteMonnaie.montant}" />
-				<h:message for="montant" errorClass="invalid" />
-
-				<h:outputLabel for="compte" value="#{text['compte.jsf']} :" />
-				<h:selectOneMenu value="#{porteMonnaieCreationController.newPorteMonnaie.compte}">
-					<f:selectItems value="#{comptes}" var="c" itemLabel="#{c.login}"
-						itemValue="#{c}" />
-					<f:converter converterId="fr.ufrima.m2pgi.CompteConverter" />
-
-				</h:selectOneMenu>
-				<h:message for="compte" errorClass="invalid" />
-
-
-				<h:outputLabel for="monnaie" value="#{text['monnaie.jsf']} :" />
-				<h:selectOneMenu value="#{porteMonnaieCreationController.newPorteMonnaie.monnaie}">
-					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
-						itemValue="#{m}" />
-					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
-
-				</h:selectOneMenu>
-				<h:message for="monnaie" errorClass="invalid" />
-			</h:panelGrid>
-
-			<p>
-				<h:panelGrid columns="2">
-					<h:commandButton id="register"
-						action="#{porteMonnaieCreationController.register()}"
-						value="#{text['enregistrer.jsf']}" styleClass="register" />
-					<h:messages styleClass="messages" errorClass="invalid"
-						infoClass="valid" warnClass="warning" globalOnly="true" />
-				</h:panelGrid>
-			</p>
-		</h:form>
-		
-
-		<h:outputText styleClass="h2" value="#{text['porte_monnaie.jsf']}"/><br/>
-		<h:panelGroup rendered="#{empty porteMonnaies}">
-			<h:outputText styleClass="em" value="#{text['aucun_porte_monnaie_enregistre.jsf']}"/>
-		</h:panelGroup>
-		<h:dataTable var="_monnaie" value="#{porteMonnaies}"
-			rendered="#{not empty porteMonnaies}" styleClass="simpletablestyle">
-			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['id.jsf']}"/></f:facet>
-                #{_monnaie.id}
-            </h:column>
-			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['nom.jsf']}"/></f:facet>
-                #{_monnaie.montant}
-            </h:column>
-		</h:dataTable>
 	<script>
 	 $(function() {
 		 $("#menu-support").addClass("current_page_item");
