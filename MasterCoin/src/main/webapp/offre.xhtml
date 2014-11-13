@@ -6,7 +6,7 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-		<h:outputText styleClass="h1" value="#{text['message_accueil.jsf']} #{text['echange.jsf']}"/>
+		<h:outputText styleClass="h1" value="#{text['message_accueil.jsf']} #{text['propoffre.jsf']}"/>
 
 		<h:form id="reg">
 			<h2>Création d'une offre</h2>
@@ -32,7 +32,7 @@
 				<h:message for="monnaie_a_vendre" errorClass="invalid" />
 
 				<h:outputLabel for="quantite_a_vendre" value="Quantite à vendre:" />
-				<h:outputLabel for="quantite_a_vendre" value="Quantite à vendre:" />
+				<h:inputText id="quantite_a_vendre" value="#{newEchangeOffre.montantVendre}" />
 				<h:message for="quantite_a_vendre" errorClass="invalid" />
 				
 			</h:panelGrid>
