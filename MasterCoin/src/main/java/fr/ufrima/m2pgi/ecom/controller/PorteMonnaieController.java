@@ -7,10 +7,10 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
@@ -21,6 +21,8 @@ import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 @RequestScoped
 @ManagedBean
 public class PorteMonnaieController {
+	
+	
 
 	@Inject
 	private PorteMonnaieService porteMonnaieService;
@@ -37,6 +39,7 @@ public class PorteMonnaieController {
 	private Monnaie monnaie;
 
 	@Min(0)
+	@NotNull
 	private Integer amount;
 
 	public void setLogin(Login login) {
@@ -127,5 +130,4 @@ public class PorteMonnaieController {
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-
 }
