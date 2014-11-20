@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 
 import fr.ufrima.m2pgi.ecom.model.Compte;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
@@ -43,9 +44,17 @@ public class PorteMonnaieFacade
 		List<PorteMonnaie> res = em.createQuery("select object(c) from PorteMonnaie as c where c.compte = :compte and c.monnaie = :monnaie")
 				.setParameter("compte", compte)
 				.setParameter("monnaie", monnaie)
+				.setLockMode(LockModeType.PESSIMISTIC_WRITE)
 				.getResultList();
 		if (res.size() == 0) return null;
 		else return res.get(0);
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<PorteMonnaie> findByCompte(Compte compte) {
+		return em.createQuery("select object(c) from PorteMonnaie as c where c.compte = :compte")
+				.setParameter("compte", compte)
+				.getResultList();
 	}
     
 }

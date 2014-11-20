@@ -14,7 +14,7 @@
 			</ui:insert>
 
 			<h:form id="reg2">
-			<h:outputText styleClass="h2" value="#{text['creation_porte_monnaie.jsf']}"/>
+			<h:outputText styleClass="h2" value="#{text['ajouter_porte_monnaie.jsf']}"/>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				<h:outputLabel for="montant" value="#{text['montant.jsf']} :" />
 				<h:inputText id="montant" value="#{porteMonnaieController.amount}" />
@@ -41,19 +41,19 @@
 		</h:form>
 		
 
-		<h:outputText styleClass="h2" value="#{text['porte_monnaie.jsf']}"/><br/>
-		<h:panelGroup rendered="#{empty porteMonnaies}">
+		<h:outputText styleClass="h2" value="#{text['porte_monnaie_acutel.jsf']}"/><br/>
+		<h:panelGroup rendered="#{empty porteMonnaieController.porteMonnaies}">
 			<h:outputText styleClass="em" value="#{text['aucun_porte_monnaie_enregistre.jsf']}"/>
 		</h:panelGroup>
-		<h:dataTable var="_monnaie" value="#{porteMonnaies}"
-			rendered="#{not empty porteMonnaies}" styleClass="simpletablestyle">
+		<h:dataTable var="_pm" value="#{porteMonnaieController.porteMonnaies}"
+			rendered="#{not empty porteMonnaieController.porteMonnaies}" styleClass="simpletablestyle">
 			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['id.jsf']}"/></f:facet>
-                #{_monnaie.id}
+				<f:facet name="header"><h:outputText value="#{text['monnaie.jsf']}"/></f:facet>
+                #{_pm.monnaie.nom}
             </h:column>
 			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['nom.jsf']}"/></f:facet>
-                #{_monnaie.montant}
+				<f:facet name="header"><h:outputText value="#{text['montant.jsf']}"/></f:facet>
+                #{_pm.montant}
             </h:column>
 		</h:dataTable>
 		</f:view>

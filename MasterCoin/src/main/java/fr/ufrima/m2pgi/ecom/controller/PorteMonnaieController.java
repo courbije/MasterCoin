@@ -1,5 +1,7 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
+import java.util.List;
+
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -7,23 +9,26 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
+import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 
 @ViewScoped
 @ManagedBean
 public class PorteMonnaieController {
-	
+
 	@Inject
 	private PorteMonnaieService porteMonnaieService;
 
 	@Inject
+	private PorteMonnaieFacade porteMonnaieFacade;
+	
+	@Inject
 	private FacesContext facesContext;
-	
-	
+
 	@ManagedProperty(value = "#{login}")
 	private Login login;
-
 
 	private Monnaie monnaie;
 
@@ -32,8 +37,7 @@ public class PorteMonnaieController {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
-	
-	
+
 	public void register() throws Exception {
 		try {
 			porteMonnaieService.addToPorteMonnaie(login.getCurrentUser(), monnaie, amount);
@@ -44,6 +48,10 @@ public class PorteMonnaieController {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
 			facesContext.addMessage(null, m);
 		}
+	}
+
+	public List<PorteMonnaie> getPorteMonnaies() {
+		return porteMonnaieFacade.findByCompte(login.getCurrentUser());
 	}
 
 	private String getRootErrorMessage(Exception e) {
@@ -65,25 +73,20 @@ public class PorteMonnaieController {
 		return errorMessage;
 	}
 
-
 	public Monnaie getMonnaie() {
 		return monnaie;
 	}
-
 
 	public void setMonnaie(Monnaie monnaie) {
 		this.monnaie = monnaie;
 	}
 
-
 	public Integer getAmount() {
 		return amount;
 	}
 
-
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
-	
-	
+
 }
