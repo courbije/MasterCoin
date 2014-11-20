@@ -45,10 +45,10 @@ public class Transaction implements Serializable
    private Monnaie monnaieAchat;
 
    @Column(nullable = false)
-   private Integer montantVendre;
+   private Double montantVendre;
 
    @Column(nullable = false)
-   private Integer montantAchat;
+   private Double montantAchat;
 
    @Column(nullable = false)
    @Temporal(TemporalType.DATE)
@@ -149,22 +149,22 @@ public class Transaction implements Serializable
       this.monnaieAchat = monnaieAchat;
    }
 
-   public Integer getMontantVendre()
+   public Double getMontantVendre()
    {
       return montantVendre;
    }
 
-   public void setMontantVendre(Integer montantVendre)
+   public void setMontantVendre(Double montantVendre)
    {
       this.montantVendre = montantVendre;
    }
 
-   public Integer getMontantAchat()
+   public Double getMontantAchat()
    {
       return montantAchat;
    }
 
-   public void setMontantAchat(Integer montantAchat)
+   public void setMontantAchat(Double montantAchat)
    {
       this.montantAchat = montantAchat;
    }

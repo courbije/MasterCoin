@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 @SuppressWarnings("serial")
 @Entity
-public class EchangeOffre implements Serializable
+public class EchangeOffre implements Serializable, Comparable<EchangeOffre>
 {
 
    @Id
@@ -37,10 +37,10 @@ public class EchangeOffre implements Serializable
    private Monnaie monnaieAchat;
 
    @Column(nullable = false)
-   private Integer montantVendre;
+   private Double montantVendre;
 
    @Column(nullable = false)
-   private Integer montantAchat;
+   private Double montantAchat;
 
    @Column(nullable = false)
    @Temporal(TemporalType.DATE)
@@ -117,22 +117,22 @@ public class EchangeOffre implements Serializable
       this.monnaieAchat = monnaieAchat;
    }
 
-   public Integer getMontantVendre()
+   public Double getMontantVendre()
    {
       return montantVendre;
    }
 
-   public void setMontantVendre(Integer montantVendre)
+   public void setMontantVendre(Double montantVendre)
    {
       this.montantVendre = montantVendre;
    }
 
-   public Integer getMontantAchat()
+   public Double getMontantAchat()
    {
       return montantAchat;
    }
 
-   public void setMontantAchat(Integer montantAchat)
+   public void setMontantAchat(Double montantAchat)
    {
       this.montantAchat = montantAchat;
    }
@@ -157,4 +157,21 @@ public class EchangeOffre implements Serializable
          result += ", montantAchat: " + montantAchat;
       return result;
    }
+
+@Override
+public int compareTo(EchangeOffre arg0) {
+	// TODO Auto-generated method stub
+	double myTaux = (double)this.getMontantAchat()/this.getMontantVendre();
+	double Tauxarg0= (double)arg0.getMontantAchat()/arg0.getMontantVendre();
+	if (myTaux<Tauxarg0){
+		return 1;
+	}
+	else if (myTaux>Tauxarg0){
+		return -1;
+	}
+	else {
+		return 0;
+	}
+}
+
 }

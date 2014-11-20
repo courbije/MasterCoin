@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,7 +16,13 @@ import fr.ufrima.m2pgi.ecom.service.EchangeTxService;
 
 @Model
 public class EchangeTxController {
-	
+	 @ManagedProperty(value="#{login}")
+	    private Login login;
+	    
+		public void setLogin(Login login) {
+			this.login = login;
+		}
+		
 	@Inject
 	private EchangeTxService echangeTxFacade;
 
@@ -33,6 +40,7 @@ public class EchangeTxController {
 
 	public void register() throws Exception {
 		try {
+			newTransaction.setCompteAcheteur(this.login.getCurrentUser());
 			newTransaction.setDateValidation(new Date());
 			echangeTxFacade.trouverOffres(newTransaction);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");

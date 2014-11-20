@@ -115,13 +115,13 @@ public class EchangeOffreTest {
         newEchangeOffre.setCompte(newCompte);
         newEchangeOffre.setMonnaieAchat(monnaie1);
         newEchangeOffre.setMonnaieVendre(monnaie2);
-        newEchangeOffre.setMontantAchat(100);
-        newEchangeOffre.setMontantVendre(300);
+        newEchangeOffre.setMontantAchat(100.0);
+        newEchangeOffre.setMontantVendre(300.0);
         
         echangeOffreFacade.create(newEchangeOffre);
         assertNotNull(newEchangeOffre.getId());
         
-        Integer modif = 500;
+        Double modif = 500.0;
         newEchangeOffre.setMontantVendre(modif);
         echangeOffreFacade.edit(newEchangeOffre);
         EchangeOffre editEchangeOffre = echangeOffreFacade.find(newEchangeOffre.getId());
@@ -138,8 +138,8 @@ public class EchangeOffreTest {
         newEchangeOffre.setDateCreation(new Date());
         newEchangeOffre.setMonnaieAchat(monnaie1);
         newEchangeOffre.setMonnaieVendre(monnaie2);
-        newEchangeOffre.setMontantAchat(100);
-        newEchangeOffre.setMontantVendre(300);
+        newEchangeOffre.setMontantAchat(100.0);
+        newEchangeOffre.setMontantVendre(300.0);
         try {
         	echangeOffreFacade.create(newEchangeOffre);
         	fail();

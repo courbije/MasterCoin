@@ -38,17 +38,17 @@ public class EchangeOffreFacade
     
     @SuppressWarnings("unchecked")
 	public List<EchangeOffre> findAllWhere(Monnaie monnaieAchat, Monnaie monnaieVente){
-    	return em.createQuery("select object(o) from EchangeOffre as o"
-    						  +"idmA=" + monnaieAchat.getId()
-    						  +"idmV=" + monnaieVente.getId()
-    						  ).getResultList();
+    	return em.createQuery("select object(o) from EchangeOffre as o where o.monnaieAchat=:monnaieAchat and o.monnaieVendre=:monnaieVendre")
+    			.setParameter(":monnaieAchat", monnaieAchat)
+    			.setParameter("monnaieVendre",monnaieVente)
+    			.getResultList();
     }
     	
     @SuppressWarnings("unchecked")
 	public List<EchangeOffre> findAllWhereSum(Monnaie monnaieAchat, Monnaie monnaieVente){
-       	return em.createQuery("select sum(MontantVendre) from EchangeOffre"
-       						  +"idmA=" + monnaieAchat.getId()
-       						  +"idmV=" + monnaieVente.getId()
-       						  ).getResultList();
+       	return em.createQuery("select sum(MontantVendre) from EchangeOffre as o where o.monnaieAchat=:monnaieAchat and o.monnaieVendre=:monnaieVendre")
+       			.setParameter(":monnaieAchat", monnaieAchat)
+    			.setParameter("MonnaieVendre",monnaieVente)
+       			.getResultList();
     }
 }

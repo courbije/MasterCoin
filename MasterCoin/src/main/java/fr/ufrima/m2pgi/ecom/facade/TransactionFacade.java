@@ -1,4 +1,4 @@
-package fr.ufrima.m2pgi.ecom.model;
+package fr.ufrima.m2pgi.ecom.facade;
 
 import java.util.List;
 
@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 
 @Stateless
