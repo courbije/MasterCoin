@@ -6,21 +6,27 @@
 	<body>
 		<ui:composition>
 			<div id="change-lang" class="sixteen columns">
-				<h:form>
+				<!-- <h:form>
 					<h:selectOneMenu value="#{changementLangueController.language}"
 						onchange="submit()">
 						<f:selectItem itemValue="fr" itemLabel="#{text['FR.jsf']}" />
 						<f:selectItem itemValue="en" itemLabel="#{text['EN.jsf']}" />
 					</h:selectOneMenu>
+				</h:form>  -->
+				<h:form>
+				<h:commandButton action="#{changementLangueController.setLanguage('fr')}" styleClass="lang-fr">
+				</h:commandButton>
+				<h:commandButton action="#{changementLangueController.setLanguage('en')}" styleClass="lang-en">
+				</h:commandButton>
 				</h:form>
 			</div>
 			<div class="ten columns">
 				<div id="logo">
 					<h1>
-					<h:link outcome="/accueil" >
-						<h:graphicImage library="images" name="logo.png" />
+						<h:link outcome="/accueil">
+							<h:graphicImage library="images" name="logo.png" />
 						Master<span>Coin</span>
-					</h:link>
+						</h:link>
 					</h1>
 					<p>Marché de crypto monnaies</p>
 				</div>
@@ -39,33 +45,52 @@
 					</h:panelGrid>
 
 					<h:commandButton value="#{text['login.jsf']}"
-						action="#{credentials.login('header')}" rendered="#{!login.loggedIn}"/>
+						action="#{credentials.login('header')}"
+						rendered="#{!login.loggedIn}" styleClass="button"/>
 
 					<h:button value="#{text['register.jsf']}" outcome="register"
-						rendered="#{!login.loggedIn}" />
+						rendered="#{!login.loggedIn}" styleClass="link" />
 
 					<h:outputLabel
 						value="#{text['bienvenue.jsf']} #{login.currentUser.login}"
 						rendered="#{login.loggedIn}" />
 
 					<h:commandButton value="#{text['logout.jsf']}"
-						action="#{credentials.logout}" rendered="#{login.loggedIn}" />
+						action="#{credentials.logout}" rendered="#{login.loggedIn}" styleClass="button" />
 				</h:form>
 			</div>
 
-			<div id="menu" class="sixteen columns">
-				<div class="menu-button">Menu</div>
-				<ul class="flexnav" data-breakpoint="800">
-					<li id="menu-accueil"><h:link value="#{text['accueil.jsf']}" outcome="/accueil" /></li>
-					<li id="menu-echanger"><h:link value="#{text['echanger.jsf']}" outcome="/offre" /></li>
-					<li id="menu-compte"><h:link value="#{text['compte.jsf']}" outcome="/compte/modifier" /></li>
-					<li id="menu-support"><h:link value="#{text['support.jsf']}" outcome="/support" /></li>
+			<div id="nav" role="navigation" class="sixteen columns">
+				<a href="#nav" title="Show navigation">Show navigation</a> <a
+					href="#" title="Hide navigation">Hide navigation</a>
+				<ul class="clearfix">
+					<li id="menu-accueil"><h:link value="#{text['accueil.jsf']}"
+							outcome="/accueil" /></li>
+					<li id="menu-marche"><a href="#" aria-haspopup="true"><span>#{text['marche.jsf']}</span></a>
+						<ul>
+						<li id="menu-marche-echange"><h:link
+									value="#{text['echanger.jsf']}" outcome="/offre" /></li>
+							<li id="menu-marche-propo"><h:link value="Proposer offre"
+									outcome="/offre" /></li></ul>
+							</li>
+				<li id="menu-compte"><a href="#" aria-haspopup="true"><span>#{text['compte.jsf']}</span></a>
+					<ul>
+						<li id="menu-compte-modif"><h:link
+								value="#{text['modification_compte.jsf']}"
+								outcome="/compte/modifier" /></li>
+						<li id="menu-compte-historique"><h:link
+								value="#{text['historique.jsf']}" outcome="/compte/historique" /></li>
+						<li id="menu-compte-porteMonnaie"><h:link
+								value="#{text['porteMonnaie.jsf']}"
+								outcome="/compte/porteMonnaie" /></li>
+					</ul></li>
+				<li id="menu-support"><h:link value="#{text['support.jsf']}"
+						outcome="/support" /></li>
 				</ul>
-				<script>
-	      $(function() {
-	      $(".flexnav").flexNav();
-	      });
-	    </script>
+				<h:outputScript>
+				$(function(){
+					$('#nav li:has(ul)').doubleTapToGo();
+				});</h:outputScript>
 			</div>
 
 

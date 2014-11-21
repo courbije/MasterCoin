@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
 
 @SuppressWarnings("serial")
 @Entity
@@ -33,6 +34,7 @@ public class PorteMonnaie implements Serializable
 
    @Column(nullable = false)
    @NotNull
+   @Min(0)
    private Integer montant;
 
    public Long getId()
