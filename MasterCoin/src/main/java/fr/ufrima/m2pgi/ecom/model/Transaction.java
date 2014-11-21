@@ -51,11 +51,11 @@ public class Transaction implements Serializable
    private Double montantAchat;
 
    @Column(nullable = false)
-   @Temporal(TemporalType.DATE)
+   @Temporal(TemporalType.TIMESTAMP)
    private Date dateCreation;
    
    @Column(nullable = false)
-   @Temporal(TemporalType.DATE)
+   @Temporal(TemporalType.TIMESTAMP)
    private Date dateValidation;
    
    public Long getId()

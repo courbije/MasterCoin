@@ -43,7 +43,7 @@ public class EchangeOffre implements Serializable, Comparable<EchangeOffre>
    private Double montantAchat;
 
    @Column(nullable = false)
-   @Temporal(TemporalType.DATE)
+   @Temporal(TemporalType.TIMESTAMP)
    private Date dateCreation;
    
    public Long getId()
