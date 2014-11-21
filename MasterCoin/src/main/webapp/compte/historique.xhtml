@@ -12,10 +12,40 @@
 			</ui:insert>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
-				
-			<p> TODO </p>
+			<br />
+			<h:outputText styleClass="h2"
+				value="#{text['historique_porte_monnaie_acutel.jsf']}" />
+			<br />
+			<h:dataTable var="_pm" id="table_id"
+				value="#{historiqueController.porteMonnaiesHistorique}"
+				styleClass="display">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['monnaie.jsf']}" />
+					</f:facet>
+                #{_pm.monnaie.nom}
+           		</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['montant.jsf']}" />
+					</f:facet>
+                #{_pm.montant}
+           		</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['date.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_pm.date}">
+						<f:convertDateTime dateStyle="long" type="both" />
+					</h:outputText>
+				</h:column>
+			</h:dataTable>
 
 		</f:view>
-
+		<script>
+				$(document).ready( function () {
+				    $('#table_id').DataTable();
+				} );
+			</script>
 	</ui:define>
 </ui:composition>

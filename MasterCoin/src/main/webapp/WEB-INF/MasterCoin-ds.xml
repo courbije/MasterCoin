@@ -14,7 +14,7 @@
         <connection-url>jdbc:postgresql://localhost:5432/Jboss</connection-url>
         <driver>postgresql</driver>
         <security>
-            <user-name>joe</user-name>
+            <user-name>postgres</user-name>
             <password>root</password>
         </security>
     </datasource>

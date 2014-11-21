@@ -31,8 +31,7 @@ public class Monnaie implements Serializable
    @NotNull
    @NotEmpty
    private String acroyme;
-
-  
+   
    public Long getId()
    {
       return this.idMonnaie;
