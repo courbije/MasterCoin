@@ -13,18 +13,9 @@
 		<h:form id="reg">
 			<h:outputText styleClass="h1" value="#{text['creation_offre.jsf']}"/>
 			<h:panelGrid columns="3" columnClasses="titleCell">
-				<!--<h:outputLabel for="compte" value="#{text['compte.jsf']} :" />
-				<h:selectOneMenu value="#{newEchangeOffre.compte}">
-					<f:selectItems value="#{comptes}" var="c" itemLabel="#{c.login}"
-						itemValue="#{c}" />
-					<f:converter converterId="fr.ufrima.m2pgi.CompteConverter" />
-				</h:selectOneMenu>
-				<h:message for="compte" errorClass="invalid" />-->
-				
 				<h:outputLabel for="monnaie_voulue" value="#{text['monnaie_souhaitee.jsf']}" />
 				<h:selectOneMenu value="#{echangeOffreController.newEchangeOffre.monnaieAchat}">
-					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
-						itemValue="#{m}" />
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}" itemValue="#{m}" />
 					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 				</h:selectOneMenu>
 				<h:message for="monnaie_voulue" errorClass="invalid" />
@@ -35,8 +26,7 @@
 
 				<h:outputLabel for="monnaie_a_vendre" value="#{text['monnaie_a_vendre.jsf']}" />
 				<h:selectOneMenu value="#{echangeOffreController.newEchangeOffre.monnaieVendre}">
-					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
-						itemValue="#{m}" />
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}" itemValue="#{m}" />
 					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 				</h:selectOneMenu>
 				<h:message for="monnaie_a_vendre" errorClass="invalid" />
