@@ -181,5 +181,13 @@ body {
 border-radius: 5px 5px 5px 5px;
 -moz-border-radius: 5px 5px 5px 5px;
 -webkit-boder-radius: 5px 5px 5px 5px;
-	border: 1px solid #000000;
+	border: 1px solid #999999;
+	padding: 3px;
+	
+}
+
+#login input[type="text"]:focus,
+#login input[type="password"]:focus {
+  border: solid 1px #01A9DC;
+  box-shadow: 0 0 5px 1px #969696;
 }

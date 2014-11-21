@@ -2,6 +2,7 @@ package fr.ufrima.m2pgi.ecom.controller;
 
 import java.util.Date;
 
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -11,11 +12,12 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
+import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 
 @ViewScoped
 @ManagedBean
-public class EchangeOffreController {
+public class ProposerOffreController {
     @ManagedProperty(value="#{login}")
     private Login login;
     
@@ -26,9 +28,11 @@ public class EchangeOffreController {
 	@Inject
 	private EchangeOffreFacade echangeFacade;
 
+	@Inject 
+	private MonnaieFacade monnaieFacade;
+	
 	@Inject
 	private FacesContext facesContext;
-
 
 	private EchangeOffre newEchangeOffre;
 
@@ -58,6 +62,30 @@ public class EchangeOffreController {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
 			facesContext.addMessage(null, m);
 		}
+	}
+	
+	public boolean isNullMonnaieAchat() {
+		return this.newEchangeOffre.getMonnaieAchat()==null;
+	}
+	
+	public String monnaieAchat(String id) {
+		if(id!=null) {
+			this.newEchangeOffre.setMonnaieAchat(this.monnaieFacade.find(Long.parseLong(id,10)));
+		}
+		return null;
+	}
+	
+	public boolean isNullMonnaieVente() {
+		return this.newEchangeOffre.getMonnaieVendre()==null;
+	}
+	
+	public String monnaieVente(String id) {
+		if(id!=null) {
+			if(!this.newEchangeOffre.getMonnaieAchat().equals(this.monnaieFacade.find(Long.parseLong(id,10)))){
+				this.newEchangeOffre.setMonnaieVendre(this.monnaieFacade.find(Long.parseLong(id,10)));
+			}
+		}
+		return null;
 	}
 	
 	private String getRootErrorMessage(Exception e) {

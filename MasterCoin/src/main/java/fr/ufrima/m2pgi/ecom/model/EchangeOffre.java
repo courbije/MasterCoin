@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 
 @SuppressWarnings("serial")
 @Entity
@@ -37,9 +38,11 @@ public class EchangeOffre implements Serializable, Comparable<EchangeOffre>
    private Monnaie monnaieAchat;
 
    @Column(nullable = false)
+   @Min(0)
    private Double montantVendre;
 
    @Column(nullable = false)
+   @Min(0)
    private Double montantAchat;
 
    @Column(nullable = false)
