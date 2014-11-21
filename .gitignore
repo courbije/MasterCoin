@@ -1,4 +1,4 @@
 target/
 .*
-src/main/webapp/WEB-INF/MasterCoin-ds.xml
-src/main/resources/META-INF/persistence.xml
+MasterCoin/src/main/webapp/WEB-INF/MasterCoin-ds.xml
+MasterCoin/src/main/resources/META-INF/persistence.xml
