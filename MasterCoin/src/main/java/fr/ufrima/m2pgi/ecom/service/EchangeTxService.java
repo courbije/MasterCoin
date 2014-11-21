@@ -62,12 +62,14 @@ public class EchangeTxService {
 		}
 		
 	}
+	
+	
 	private void mettreAJourCompte(Compte compteVendeur, Compte compteAcheteur, Monnaie monnaieAchat, Monnaie monnaieVendre, Double double1, Double double2) {
 		
 		
 	}
 	
-	Transaction mettreAJourTransaction(Double montantAchat, Double montantVendre, Compte compteVendeur, Transaction newTransaction){
+	private Transaction mettreAJourTransaction(Double montantAchat, Double montantVendre, Compte compteVendeur, Transaction newTransaction){
 		Transaction t = newTransaction;
 		t.setMontantAchat(montantAchat);
 		t.setMontantVendre(montantVendre);
