@@ -46,10 +46,10 @@
 				<h:outputText styleClass="em"
 					value="#{text['aucun_porte_monnaie_enregistre.jsf']}" />
 			</h:panelGroup>
-			<h:dataTable var="_pm"
+			<h:dataTable var="_pm" id="table_id"
 				value="#{porteMonnaieController.porteMonnaies}"
 				rendered="#{not empty porteMonnaieController.porteMonnaies}"
-				styleClass="simpletablestyle">
+				styleClass="display">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="#{text['monnaie.jsf']}" />
@@ -90,5 +90,13 @@
 				</h:panelGrid>
 			</h:form>
 		</f:view>
+		<script>
+				$(document).ready( function () {
+				    $('#table_id').DataTable({
+					    paging: false,
+					    searching: false,
+					    });				    
+				} );
+			</script>
 	</ui:define>
 </ui:composition>
