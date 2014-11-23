@@ -7,20 +7,20 @@
 
 	<ui:define name="content">
 			  <div class="sixteen columns">
-			<h:outputText styleClass="h1 title" value="#{text['message_accueil.jsf']}"/>
+			<h:outputText styleClass="h1 title" value="#{text['monnaie.message_accueil.jsf']}"/>
 		</div>
-
+		
 		<h:form id="reg">
-			<h:outputText styleClass="h2" value="#{text['creation_monnaie.jsf']}"/>
+			<h:outputText styleClass="h2" value="#{text['monnaie.creation_monnaie.jsf']}"/>
 						<h:outputText styleClass="h2" value="test jenkins"/>
-						
+					
 			
 			<h:panelGrid columns="3" columnClasses="titleCell">
-				<h:outputLabel for="acroyme" value="#{text['acronyme.jsf']} :" />
+				<h:outputLabel for="acroyme" value="#{text['monnaie.acronyme.jsf']} :" />
 				<h:inputText id="acroyme" value="#{monnaieCreationController.newMonnaie.acroyme}" />
 				<h:message for="acroyme" errorClass="invalid" />
 
-				<h:outputLabel for="nom" value="#{text['nom.jsf']} :" />
+				<h:outputLabel for="nom" value="#{text['monnaie.nom.jsf']} :" />
 				<h:inputText id="nom" value="#{monnaieCreationController.newMonnaie.nom}" />
 				<h:message for="nom" errorClass="invalid" />
 			</h:panelGrid>
@@ -28,7 +28,7 @@
 			<p>
 				<h:panelGrid columns="2">
 					<h:commandButton id="register"
-						action="#{monnaieCreationController.register()}" value="#{text['enregistrer.jsf']}"
+						action="#{monnaieCreationController.register()}" value="#{text['monnaie.enregistrer.jsf']}"
 						styleClass="register" />
 					<h:messages styleClass="messages" errorClass="invalid"
 						infoClass="valid" warnClass="warning" globalOnly="true" />
@@ -36,19 +36,18 @@
 			</p>
 		</h:form>
 
-
-		<h:outputText styleClass="h2" value="#{text['monnaie.jsf']}"/><br/>
+		<h:outputText styleClass="h2" value="#{text['monnaie.monnaie.jsf']}"/><br/>
 		<h:panelGroup rendered="#{empty monnaies}">
-			<h:outputText styleClass="em" value="#{text['aucune_monnaie_enregistree.jsf']}"/>
+			<h:outputText styleClass="em" value="#{text['monnaie.aucune_monnaie_enregistree.jsf']}"/>
 		</h:panelGroup>
 		<h:dataTable var="_monnaie" value="#{monnaies}"
 			rendered="#{not empty monnaies}" styleClass="simpletablestyle">
 			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['id.jsf']}"/></f:facet>
+				<f:facet name="header"><h:outputText value="#{text['monnaie.id.jsf']}"/></f:facet>
                 #{_monnaie.id}
             </h:column>
 			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['nom.jsf']}"/></f:facet>
+				<f:facet name="header"><h:outputText value="#{text['monnaie.nom.jsf']}"/></f:facet>
                 #{_monnaie.nom}
             </h:column>
 		</h:dataTable>
