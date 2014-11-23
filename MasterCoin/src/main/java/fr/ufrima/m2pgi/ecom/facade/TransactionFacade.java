@@ -6,7 +6,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 
 @Stateless

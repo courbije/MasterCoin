@@ -68,10 +68,12 @@
 							outcome="/accueil" /></li>
 					<li id="menu-marche"><a href="#" aria-haspopup="true"><span>#{text['header.marche.jsf']}</span></a>
 						<ul>
-						<li id="menu-marche-echange"><h:link
+							<li id="menu-marche-echange"><h:link
 									value="#{text['header.echanger.jsf']}" outcome="/offre" /></li>
-							<li id="menu-marche-propo"><h:link value="Proposer offre"
-									outcome="/echange" /></li></ul>
+							<li id="menu-marche-propo"><h:link value="#{text['header.proposer_offre.jsf']}"
+									outcome="/echange" /></li>
+							<li id="menu-marche-rapide"><h:link value="#{text['header.rapide_echange']}"
+									outcome="/marcher/rapide" /></li></ul>
 							</li>
 				<li id="menu-compte"><a href="#" aria-haspopup="true"><span>#{text['header.compte.jsf']}</span></a>
 					<ul>

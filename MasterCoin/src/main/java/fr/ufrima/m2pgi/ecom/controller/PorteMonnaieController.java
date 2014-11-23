@@ -15,8 +15,8 @@ import javax.validation.constraints.NotNull;
 import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
-import fr.ufrima.m2pgi.ecom.service.NotEnoughtMoneyException;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
+import fr.ufrima.m2pgi.ecom.util.Util;
 
 @RequestScoped
 @ManagedBean
@@ -52,9 +52,7 @@ public class PorteMonnaieController {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
 			facesContext.addMessage(null, m);
 		} catch (Exception e) {
-			String errorMessage = getRootErrorMessage(e);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
-			facesContext.addMessage(null, m);
+			Util.DisplayError(e,facesContext);
 		}
 		init();
 	}
@@ -68,15 +66,9 @@ public class PorteMonnaieController {
 	public void registerRemove() throws Exception {
 		try {
 			porteMonnaieService.removeToPorteMonnaie(login.getCurrentUser(), monnaie, amount);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
-			facesContext.addMessage(null, m);
-		} catch (NotEnoughtMoneyException e) {
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas assez d'argents", "Registration unsuccessful");
-			facesContext.addMessage(null, m);
-		}catch (Exception e) {
-			String errorMessage = getRootErrorMessage(e);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
-			facesContext.addMessage(null, m);
+			Util.DisplaySucces(facesContext);
+		} catch (Exception e) {
+			Util.DisplayError(e,facesContext);
 		}
 		init();
 	}
@@ -94,25 +86,6 @@ public class PorteMonnaieController {
 			}
 		}
 		return res;
-	}
-
-	private String getRootErrorMessage(Exception e) {
-		// Default to general error message that registration failed.
-		String errorMessage = "Registration failed. See server log for more information";
-		if (e == null) {
-			// This shouldn't happen, but return the default messages
-			return errorMessage;
-		}
-
-		// Start with the exception and recurse to find the root cause
-		Throwable t = e;
-		while (t != null) {
-			// Get the message from the Throwable class instance
-			errorMessage = t.getLocalizedMessage();
-			t = t.getCause();
-		}
-		// This is the root cause message
-		return errorMessage;
 	}
 
 	public Monnaie getMonnaie() {
