@@ -3,6 +3,9 @@ package fr.ufrima.m2pgi.ecom.controller;
 import java.util.Date;
 
 
+
+
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -14,6 +17,9 @@ import javax.inject.Inject;
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
+import fr.ufrima.m2pgi.ecom.service.NotEnoughtMoneyException;
+import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
+import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
 
 @ViewScoped
 @ManagedBean
@@ -24,6 +30,9 @@ public class ProposerOffreController {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
+	
+	@Inject
+	private PorteMonnaieService porteMonnaieService;
 	
 	@Inject
 	private EchangeOffreFacade echangeFacade;
@@ -53,10 +62,20 @@ public class ProposerOffreController {
 		try {
 			newEchangeOffre.setCompte(this.login.getCurrentUser());
 			newEchangeOffre.setDateCreation(new Date());
+			if(this.newEchangeOffre.getMonnaieAchat().equals(this.newEchangeOffre.getMonnaieVendre())) {
+				throw new SameMoneyException();
+			}
+			porteMonnaieService.removeToPorteMonnaie(newEchangeOffre.getCompte(), newEchangeOffre.getMonnaieVendre(), newEchangeOffre.getMontantVendre());
 			echangeFacade.create(newEchangeOffre);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
 			facesContext.addMessage(null, m);
 			initNewMember();
+		} catch (SameMoneyException e) {
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Impossible d'avoir deux fois la même monnaie", "Registration unsuccessful");
+			facesContext.addMessage(null, m);
+		} catch (NotEnoughtMoneyException e) {
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas assez d'argent", "Registration unsuccessful");
+			facesContext.addMessage(null, m);
 		} catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");

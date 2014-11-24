@@ -40,7 +40,7 @@ public class PorteMonnaieController {
 
 	@Min(0)
 	@NotNull
-	private Integer amount;
+	private Double amount;
 
 	public void setLogin(Login login) {
 		this.login = login;
@@ -71,7 +71,7 @@ public class PorteMonnaieController {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
 			facesContext.addMessage(null, m);
 		} catch (NotEnoughtMoneyException e) {
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas assez d'argents", "Registration unsuccessful");
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas assez d'argent", "Registration unsuccessful");
 			facesContext.addMessage(null, m);
 		}catch (Exception e) {
 			String errorMessage = getRootErrorMessage(e);
@@ -123,11 +123,11 @@ public class PorteMonnaieController {
 		this.monnaie = monnaie;
 	}
 
-	public Integer getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 }
