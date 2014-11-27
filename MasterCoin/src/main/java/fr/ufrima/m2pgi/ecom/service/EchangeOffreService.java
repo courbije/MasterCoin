@@ -34,6 +34,10 @@ public class EchangeOffreService {
 		}
 
 		public void addOffre(Compte compte, EchangeOffre eo) throws Exception {
+			if(eo.getMonnaieAchat().equals(eo.getMonnaieVendre())) {
+				context.setRollbackOnly();
+				throw new SameMoneyException();
+			}
 			porteMonnaieService.removeToPorteMonnaie(compte, eo.getMonnaieVendre(), eo.getMontantVendre());
 			eo.setCompte(compte);
 			eo.setDateCreation(new Date());

@@ -1,5 +1,7 @@
 package fr.ufrima.m2pgi.ecom.util;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -25,9 +27,9 @@ import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 @Startup
 @TransactionManagement(TransactionManagementType.BEAN)
 public class AutoRun {
-	
+
 	@Resource
-    private UserTransaction transaction ;
+	private UserTransaction transaction;
 
 	@Inject
 	private CompteFacade compteFacade;
@@ -48,26 +50,26 @@ public class AutoRun {
 
 	@PostConstruct
 	public void initialiser() throws Exception {
-    	if (compteFacade.find("dontedit", "dontedit") != null) {
-    		return;
-    	}
-    		generateMonnaies();
-    		generateComptes();
-    		generatePorteMonnaies();
-    		generateEchange();	
+		if (compteFacade.find("dontedit", "dontedit") != null) {
+			return;
+		}
+		generateMonnaies();
+		generateComptes();
+		generatePorteMonnaies();
+		generateEchange();
 	}
 
-	private void generateEchange()  throws Exception {
-			for (int i = 0; i < 200; i++) {
-				try {
+	private void generateEchange() throws Exception {
+		for (int i = 0; i < 200; i++) {
+			try {
 				createEchange();
-				} catch (Exception e) {
-					
-				}
-			}			
+			} catch (Exception e) {
+
+			}
+		}
 	}
 
-	private void createEchange()  throws Exception {
+	private void createEchange() throws Exception {
 		transaction.begin();
 		EchangeOffre eo = new EchangeOffre();
 		Compte compte = comptes.get(rng(0, comptes.size()));
@@ -75,8 +77,8 @@ public class AutoRun {
 		eo.setDateCreation(new Date(rng(2000, 2014), rng(0, 12), rng(0, 30)));
 		eo.setMonnaieAchat(monnaies.get(rng(0, monnaies.size())));
 		eo.setMonnaieVendre(monnaies.get(rng(0, monnaies.size())));
-		eo.setMontantAchat(new Double(rng(1, 100)));
-		eo.setMontantVendre(new Double(rng(1, 100)));
+		eo.setMontantAchat(Drng(1, 100));
+		eo.setMontantVendre(Drng(1, 100));
 		try {
 			echangeOffreService.addOffre(compte, eo);
 		} catch (Exception e) {
@@ -171,9 +173,10 @@ public class AutoRun {
 	private int rng(int min, int max) {
 		return rand.nextInt(max - min) + min;
 	}
-	
+
 	private double Drng(int min, int max) {
-		return rand.nextDouble()*(max-min)+min;
+		//Truncation in case the decimals is too long
+		return Math.floor((rand.nextDouble() * (max - min) + min)*100000)/100000;
 	}
 
 }

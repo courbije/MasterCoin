@@ -10,7 +10,7 @@
 			<h:outputText styleClass="h2" value="#{text['compte.creation_compte.jsf']}" />
 			<h:panelGrid columns="3" columnClasses="titleCell">
 
-				<h:outputLabel for="pseudo" value="#{text['login.login.jsf']} :" />
+				<h:outputLabel for="pseudo" value="#{text['login.username.jsf']} :" />
 				<h:inputText id="pseudo"
 					value="#{compteCreationController.newCompte.login}" />
 				<h:message for="pseudo" errorClass="invalid" />

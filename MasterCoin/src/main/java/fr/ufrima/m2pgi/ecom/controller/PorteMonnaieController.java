@@ -22,7 +22,6 @@ import fr.ufrima.m2pgi.ecom.util.Util;
 @RequestScoped
 @ManagedBean
 public class PorteMonnaieController {
-//CHANGER LE SERVICE PAR UN PROPRE A CE CONTROLLER POUR VERIFIER MONNAIE ACHAT VENTE !=
 
 	@Inject
 	private PorteMonnaieService porteMonnaieService;

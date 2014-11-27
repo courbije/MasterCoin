@@ -4,6 +4,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
 import fr.ufrima.m2pgi.ecom.service.NotEnoughtMoneyException;
+import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
 
 public class Util {
 	
@@ -39,7 +40,9 @@ public class Util {
 		if (e.getClass().equals(NotEnoughtMoneyException.class)){
 			return "pas assez d'argent";
 		}
-		
+		if(e.getClass().equals(SameMoneyException.class)) {
+			return "monnaie souhaitée doit être différente de la monnaie à vendre";
+		}
 		// Start with the exception and recurse to find the root cause
 		Throwable t = e;
 		while (t != null) {
