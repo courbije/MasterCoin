@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+import fr.ufrima.m2pgi.ecom.model.Compte;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
 
@@ -45,5 +46,12 @@ public class EchangeOffreFacade
     	 if (res.size()==0) return null;
     	 else return res;
     }
-    	
+    
+    
+	@SuppressWarnings("unchecked")
+	public List<EchangeOffre> findByCompte(Compte compte) {
+		return em.createQuery("select object(c) from EchangeOffre as c where c.compte = :compte")
+				.setParameter("compte", compte)
+				.getResultList();
+	}
 }

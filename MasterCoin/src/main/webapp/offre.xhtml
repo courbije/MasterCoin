@@ -12,13 +12,13 @@
 
 		
 		  <div class="sixteen columns">
-			<h:outputText styleClass="h1 title" value="#{text['message_accueil.jsf']} #{text['echange.jsf']}"/>
+			<h:outputText styleClass="h1 title" value="#{text['echange.message_accueil.jsf']}"/>
 		</div>
 		<h:form id="reg">
-			<h:outputText styleClass="h1" value="#{text['creation_offre.jsf']}"/>
+			<h:outputText styleClass="h1" value="#{text['echange.creation_offre.jsf']}"/>
 			<h:panelGrid columns="3" columnClasses="titleCell">
 				
-				<h:outputLabel for="monnaie_voulue" value="#{text['monnaie_souhaitee.jsf']}" />
+				<h:outputLabel for="monnaie_voulue" value="#{text['echange.monnaie_souhaitee.jsf']}" />
 				<h:selectOneMenu value="#{echangeTxController.newTransaction.monnaieAchat}">
 					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 						itemValue="#{m}" />
@@ -26,11 +26,11 @@
 				</h:selectOneMenu>
 				<h:message for="monnaie_voulue" errorClass="invalid" />
 
-				<h:outputLabel for="quantite_voulue" value="#{text['quantite_souhaitee.jsf']}" />
+				<h:outputLabel for="quantite_voulue" value="#{text['echange.quantite_souhaitee.jsf']}" />
 				<h:inputText id="quantite_voulue" value="#{echangeTxController.newTransaction.montantAchat}" />
 				<h:message for="quantite_voulue" errorClass="invalid" />
 
-				<h:outputLabel for="monnaie_a_vendre" value="#{text['monnaie_a_vendre.jsf']}" />
+				<h:outputLabel for="monnaie_a_vendre" value="#{text['echange.monnaie_a_vendre.jsf']}" />
 				<h:selectOneMenu value="#{echangeTxController.newTransaction.monnaieVendre}">
 					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 						itemValue="#{m}" />
@@ -38,12 +38,12 @@
 				</h:selectOneMenu>
 				<h:message for="monnaie_a_vendre" errorClass="invalid" />
 
-				<h:outputLabel for="quantite_a_vendre" value="#{text['quantite_propose.jsf']}" />
+				<h:outputLabel for="quantite_a_vendre" value="#{text['echange.quantite_propose.jsf']}" />
 				<h:outputText id="quantite_a_vendre" value="#{echangeTxController.quantitePropose}" />
 				<h:message for="quantite_a_vendre" errorClass="invalid" />
 				
 			</h:panelGrid>
-
+			
 			<p>
 				<h:panelGrid columns="2">
 					<h:commandButton id="register"
@@ -56,30 +56,30 @@
 			</p>
 		</h:form>
 		
-		<h:outputText styleClass="h2" value="#{text['offres.jsf']}"/><br/>
+		<h:outputText styleClass="h2" value="#{text['echange.offres.jsf']}"/><br/>
 		<h:panelGroup rendered="#{empty offres}">
-			<h:outputText styleClass="em" value="#{text['aucune_offre_enregistree.jsf']}"/>		
+			<h:outputText styleClass="em" value="#{text['echange.aucune_offre_enregistree.jsf']}"/>		
 		</h:panelGroup>
 		<h:dataTable var="_offre" value="#{offres}"
 			rendered="#{not empty offres}" styleClass="simpletablestyle">
 			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['monnaie_souhaitee.jsf']}"/></f:facet>
+				<f:facet name="header"><h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}"/></f:facet>
                 <h:outputText value="#{_offre.monnaieAchat.acroyme} #{_offre.monnaieAchat.nom}" />
             </h:column>
 			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['quantite_souhaitee.jsf']}"/></f:facet>
+				<f:facet name="header"><h:outputText value="#{text['echange.quantite_souhaitee.jsf']}"/></f:facet>
                 <h:outputText value="#{_offre.montantAchat}" />
             </h:column>
             <h:column>
-				<f:facet name="header"><h:outputText value="#{text['monnaie_a_vendre.jsf']}"/></f:facet>
+				<f:facet name="header"><h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}"/></f:facet>
                 <h:outputText value="#{_offre.monnaieVendre.acroyme} #{_offre.monnaieVendre.nom}" />
             </h:column>
             <h:column>
-				<f:facet name="header"><h:outputText value="#{text['quantite_souhaitee.jsf']}"/></f:facet>
+				<f:facet name="header"><h:outputText value="#{text['echange.quantite_a_vendre.jsf']}"/></f:facet>
                 <h:outputText value="#{_offre.montantVendre}" />
             </h:column>
 			<h:column>
-				<f:facet name="header"><h:outputText value="#{text['date_creation.jsf']}"/></f:facet>
+				<f:facet name="header"><h:outputText value="#{text['echange.date_creation.jsf']}"/></f:facet>
                 <h:outputText value="#{_offre.dateCreation}" />
             </h:column>
         </h:dataTable>

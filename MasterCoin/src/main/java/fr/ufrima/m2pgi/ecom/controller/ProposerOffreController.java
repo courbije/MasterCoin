@@ -2,7 +2,6 @@ package fr.ufrima.m2pgi.ecom.controller;
 
 import java.util.Date;
 
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -14,6 +13,10 @@ import javax.inject.Inject;
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
+import fr.ufrima.m2pgi.ecom.service.EchangeOffreService;
+import fr.ufrima.m2pgi.ecom.service.NotEnoughtMoneyException;
+import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
+import fr.ufrima.m2pgi.ecom.util.Util;
 
 @ViewScoped
 @ManagedBean
@@ -26,7 +29,7 @@ public class ProposerOffreController {
 	}
 	
 	@Inject
-	private EchangeOffreFacade echangeFacade;
+	private EchangeOffreService echangeOffreService;
 
 	@Inject 
 	private MonnaieFacade monnaieFacade;
@@ -51,16 +54,11 @@ public class ProposerOffreController {
 
 	public void register() throws Exception {
 		try {
-			newEchangeOffre.setCompte(this.login.getCurrentUser());
-			newEchangeOffre.setDateCreation(new Date());
-			echangeFacade.create(newEchangeOffre);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
-			facesContext.addMessage(null, m);
+			this.echangeOffreService.addOffre(this.login.getCurrentUser(), this.newEchangeOffre);
+			Util.DisplaySucces(facesContext);
 			initNewMember();
 		} catch (Exception e) {
-			String errorMessage = getRootErrorMessage(e);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
-			facesContext.addMessage(null, m);
+			Util.DisplayError(e,facesContext);
 		}
 	}
 	
@@ -87,24 +85,4 @@ public class ProposerOffreController {
 		}
 		return null;
 	}
-	
-	private String getRootErrorMessage(Exception e) {
-		// Default to general error message that registration failed.
-		String errorMessage = "Registration failed. See server log for more information";
-		if (e == null) {
-			// This shouldn't happen, but return the default messages
-			return errorMessage;
-		}
-
-		// Start with the exception and recurse to find the root cause
-		Throwable t = e;
-		while (t != null) {
-			// Get the message from the Throwable class instance
-			errorMessage = t.getLocalizedMessage();
-			t = t.getCause();
-		}
-		// This is the root cause message
-		return errorMessage;
-	}
-
 }

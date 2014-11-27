@@ -42,7 +42,7 @@ public class PorteMonnaieService {
 		createNewHistorique(compte, monnaie, amount);
 	}
 
-	private void createNewHistorique(Compte compte, Monnaie monnaie, double amount) {
+	private void createNewHistorique(Compte compte, Monnaie monnaie, Double amount) {
 		PorteMonnaieHistorique porteMonnaieHistorique = new PorteMonnaieHistorique();
 		porteMonnaieHistorique.setCompte(compte);
 		porteMonnaieHistorique.setMonnaie(monnaie);
@@ -53,16 +53,17 @@ public class PorteMonnaieService {
 
 	public void removeFromPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) throws NotEnoughtMoneyException {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
-		if (res != null) {
-			double i = res.getMontant() - amount;
-			if (i < 0) {
-				context.setRollbackOnly();
-				throw new NotEnoughtMoneyException();
-			}
-			res.setMontant(i);
-			porteMonnaieFacade.edit(res);
-			createNewHistorique(compte, monnaie, -amount);
+		if (res == null) {
+			context.setRollbackOnly();
+			throw new NotEnoughtMoneyException();
 		}
+		Double i = res.getMontant() - amount;
+		if (i < 0) {
+			context.setRollbackOnly();
+			throw new NotEnoughtMoneyException();
+		}
+		res.setMontant(i);
+		porteMonnaieFacade.edit(res);
+		createNewHistorique(compte, monnaie, -amount);
 	}
-
 }

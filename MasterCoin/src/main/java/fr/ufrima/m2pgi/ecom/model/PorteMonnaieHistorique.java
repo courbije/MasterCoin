@@ -94,8 +94,8 @@ public class PorteMonnaieHistorique implements Serializable {
 		return montant;
 	}
 
-	public void setMontant(double amount) {
-		this.montant = amount;
+	public void setMontant(double montant) {
+		this.montant = montant;
 	}
 
 	public Date getDate() {

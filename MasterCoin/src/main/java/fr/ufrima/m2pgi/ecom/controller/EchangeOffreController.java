@@ -1,9 +1,8 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
-import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
@@ -12,10 +11,13 @@ import javax.inject.Inject;
 
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
+import fr.ufrima.m2pgi.ecom.service.EchangeOffreService;
+import fr.ufrima.m2pgi.ecom.util.Util;
 
 @ViewScoped
 @ManagedBean
 public class EchangeOffreController {
+	
     @ManagedProperty(value="#{login}")
     private Login login;
     
@@ -26,6 +28,9 @@ public class EchangeOffreController {
 	@Inject
 	private EchangeOffreFacade echangeFacade;
 
+	@Inject
+	private EchangeOffreService echangeService;
+	
 	@Inject
 	private FacesContext facesContext;
 
@@ -47,36 +52,24 @@ public class EchangeOffreController {
 
 	public void register() throws Exception {
 		try {
-			newEchangeOffre.setCompte(this.login.getCurrentUser());
-			newEchangeOffre.setDateCreation(new Date());
-			echangeFacade.create(newEchangeOffre);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
-			facesContext.addMessage(null, m);
+			echangeService.addOffre(login.getCurrentUser(),newEchangeOffre);
+			Util.DisplaySucces(facesContext);
 			initNewMember();
 		} catch (Exception e) {
-			String errorMessage = getRootErrorMessage(e);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, errorMessage, "Registration unsuccessful");
-			facesContext.addMessage(null, m);
+			Util.DisplayError(e,facesContext);
 		}
 	}
 	
-	private String getRootErrorMessage(Exception e) {
-		// Default to general error message that registration failed.
-		String errorMessage = "Registration failed. See server log for more information";
-		if (e == null) {
-			// This shouldn't happen, but return the default messages
-			return errorMessage;
+	public void removeOffre(String id) throws Exception {
+		try {
+			echangeService.removeOffre(Long.parseLong(id), login.getCurrentUser());
+			Util.DisplaySucces(facesContext);
+		} catch (Exception e) {
+			Util.DisplayError(e,facesContext);
 		}
-
-		// Start with the exception and recurse to find the root cause
-		Throwable t = e;
-		while (t != null) {
-			// Get the message from the Throwable class instance
-			errorMessage = t.getLocalizedMessage();
-			t = t.getCause();
-		}
-		// This is the root cause message
-		return errorMessage;
 	}
 
+	public List<EchangeOffre> getOffres() {
+		return echangeFacade.findByCompte(login.getCurrentUser());
+	}
 }

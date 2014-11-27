@@ -107,12 +107,12 @@ public class PorteMonnaieTest {
         PorteMonnaie porteMonnaie = new PorteMonnaie();
         porteMonnaie.setCompte(newCompte);        
         porteMonnaie.setMonnaie(monnaie1);;
-        porteMonnaie.setMontant(500);
+        porteMonnaie.setMontant(500.);
         
         porteMonnaieFacade.create(porteMonnaie);
         assertNotNull(porteMonnaie.getId());
         
-        Integer modif = 300;
+        Double modif = 300.;
         porteMonnaie.setMontant(modif);
         porteMonnaieFacade.edit(porteMonnaie);
         PorteMonnaie editPorteMonnaie = porteMonnaieFacade.find(porteMonnaie.getId());
@@ -127,7 +127,7 @@ public class PorteMonnaieTest {
     public void testCreationMissingAtribue() throws Exception {
     	 PorteMonnaie porteMonnaie = new PorteMonnaie();
          porteMonnaie.setCompte(newCompte);        
-         porteMonnaie.setMontant(500);
+         porteMonnaie.setMontant(500.);
         try {
         	porteMonnaieFacade.create(porteMonnaie);
         	fail();
@@ -141,7 +141,7 @@ public class PorteMonnaieTest {
         PorteMonnaie porteMonnaie = new PorteMonnaie();
         porteMonnaie.setCompte(newCompte);        
         porteMonnaie.setMonnaie(monnaie1);;
-        porteMonnaie.setMontant(500);
+        porteMonnaie.setMontant(500.);
         
         porteMonnaieFacade.create(porteMonnaie);
         PorteMonnaie res = porteMonnaieFacade.find(newCompte, monnaie1);
