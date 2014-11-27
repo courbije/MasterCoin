@@ -19,15 +19,19 @@ body {
 }
 
 /*********************************************************************************/
-/* Logo                                                                          */
+/* HEADER                                                                        */
 /*********************************************************************************/
+
+/******************************************/
+/** Logo **/
 #logo {
 	text-transform: uppercase;
 }
 
 #logo h1 {
-	font-size: 2em;
+	font-size: 1.8em;
 	color: #292929;
+	margin-bottom: 5px;
 }
 
 #logo h1 a {
@@ -47,11 +51,60 @@ body {
 	letter-spacing: 0.10em;
 	font-size: 0.90em;
 	color: #828282;
+	margin-bottom: 10px;
 }
 
-#logo p a {
-	text-decoration: none;
-	color: #828282;
+/******************************************/
+/** Login **/
+#login input {
+	margin: 4px;
+}
+
+#login {
+	margin: auto;
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+#login label, #login input[type="text"], #login input[type="password"] {
+	display: block;
+	margin: 4px;
+}
+
+#login input[type="text"], #login input[type="password"] {
+	width: 190px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 3px;
+}
+
+#login input[type="text"]:focus, #login input[type="password"]:focus {
+	border: solid 1px #01A9DC;
+	box-shadow: 0 0 5px 1px #969696;
+}
+
+/******************************************/
+/** Change Lang **/
+#change-lang {
+	text-align: right;
+}
+
+.lang-fr {
+	width: 32px;
+	height: 32px;
+	border: none;
+	background: url("fr_32x32.png.jsf") no-repeat;
+	cursor: pointer;
+}
+
+.lang-en {
+	width: 32px;
+	height: 32px;
+	border: none;
+	background: url("uk_32x32.png.jsf") no-repeat;
+	cursor: pointer;
 }
 
 /*********************************************************************************/
@@ -84,15 +137,6 @@ body {
 	color: #01A9DC;
 }
 
-#change-lang {
-	text-align: right;
-}
-
-#login {
-	margin: 2em auto 2em auto;
-}
-
-
 #copyright {
 	padding: 6em 0em;
 	font-size: 0.70em;
@@ -107,87 +151,55 @@ body {
 	color: #747474;
 }
 
-.lang-fr {
-	width: 32px;
-	height: 32px;
+.button {
+	display: inline-block;
+	background: #00A4D9;
+	border-radius: 5px;
+	line-height: 2em;
+	padding: 0 1em;
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+	letter-spacing: 0.1em;
+	text-decoration: none;
+	text-transform: uppercase;
+	outline: 0;
+	white-space: nowrap;
+	font-weight: 900;
+	font-size: 0.9em;
+	color: #fff !important;
+	cursor: pointer;
+}
+
+.button:hover {
+	/** background: #18ACD9; **/
+	background: #27beec;
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+}
+
+.button:active {
+	background: #0091BD;
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+}
+
+.link {
+	color: #838383;
 	border: none;
-	background: url("fr_32x32.png.jsf") no-repeat;
+	background: none;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
-.lang-en {
-	width: 32px;
-	height: 32px;
-	border: none;
-	background: url("uk_32x32.png.jsf") no-repeat;
-}
-
-.button
-	{
-		display: inline-block;
-		background: #00A4D9;
-		border-radius: 5px;
-		line-height: 2em;
-		padding: 0 1em;
-		-webkit-transition: all .25s ease-in-out;
-		-moz-transition: all .25s ease-in-out;
-		-ms-transition: all .25s ease-in-out;
-		-o-transition: all .25s ease-in-out;
-		transition: all .25s ease-in-out;
-		letter-spacing: 0.25em;
-		text-decoration: none;
-		text-transform: uppercase;
-		outline: 0;
-		white-space: nowrap;
-		font-weight: 900;
-		font-size: 1em !important;
-		color: #fff !important;
-	}
-
-		.button:hover
-		{
-			background: #18ACD9;
-			-webkit-transition: all .25s ease-in-out;
-			-moz-transition: all .25s ease-in-out;
-			-ms-transition: all .25s ease-in-out;
-			-o-transition: all .25s ease-in-out;
-			transition: all .25s ease-in-out;
-		}
-		
-		.button:active
-		{
-			background: #0091BD;
-			-webkit-transition: all .25s ease-in-out;
-			-moz-transition: all .25s ease-in-out;
-			-ms-transition: all .25s ease-in-out;
-			-o-transition: all .25s ease-in-out;
-			transition: all .25s ease-in-out;
-		}
-		
-		.link {
-			color: #838383;
-			border: none;
-			background: none;
-			text-decoration: underline;
-		}
-		
-		.link:hover {
-			color: #01A9DC;
-		}
-		
-		
-#login input[type="text"],
-#login input[type="password"] {
-	width: 190px;
-border-radius: 5px 5px 5px 5px;
--moz-border-radius: 5px 5px 5px 5px;
--webkit-boder-radius: 5px 5px 5px 5px;
-	border: 1px solid #999999;
-	padding: 3px;
-	
-}
-
-#login input[type="text"]:focus,
-#login input[type="password"]:focus {
-  border: solid 1px #01A9DC;
-  box-shadow: 0 0 5px 1px #969696;
+.link:hover {
+	color: #01A9DC;
 }
