@@ -31,9 +31,10 @@
 					<p>#{text['header.titre.jsf']}</p>
 				</div>
 			</div>
-			<div id="login" class="six columns">
+			<div class="six columns">
+			<div id="login">
 				<h:form>
-					<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
+					<h:panelGroup rendered="#{!login.loggedIn}">
 						<f:validateBean>
 							<h:outputLabel for="username" value="#{text['login.username.jsf']}:" />
 							<h:inputText id="username" value="#{credentials.username}" />
@@ -42,8 +43,7 @@
 							<h:inputSecret id="password" value="#{credentials.password}" />
 							<h:message for="username" errorClass="invalid" />
 						</f:validateBean>
-					</h:panelGrid>
-
+					</h:panelGroup>
 					<h:commandButton value="#{text['login.login.jsf']}"
 						action="#{credentials.login('header')}"
 						rendered="#{!login.loggedIn}" styleClass="button"/>
@@ -58,6 +58,7 @@
 					<h:commandButton value="#{text['login.logout.jsf']}"
 						action="#{credentials.logout}" rendered="#{login.loggedIn}" styleClass="button" />
 				</h:form>
+			</div>
 			</div>
 
 			<div id="nav" role="navigation" class="sixteen columns">
