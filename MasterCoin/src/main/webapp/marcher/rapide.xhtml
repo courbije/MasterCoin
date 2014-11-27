@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<f:view>
+			<f:event type="preRenderView"
+				listener="#{login.forwardToLoginIfNotLoggedIn}" />
+			<h:outputText styleClass="h1"
+				value="#{text['echange.message_accueil.jsf']}" />
+
+			<h:form id="reg">
+				<h:outputText styleClass="h1"
+					value="#{text['echange.creation_offre.jsf']}" />
+				<h:panelGrid columns="3" columnClasses="titleCell">
+					<h:outputLabel for="monnaie_voulue"
+						value="#{text['echange.monnaie_souhaitee.jsf']}" />
+					<h:selectOneMenu
+						value="#{echangeOffreController.newEchangeOffre.monnaieAchat}">
+						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+							itemValue="#{m}" />
+						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+					</h:selectOneMenu>
+					<h:message for="monnaie_voulue" errorClass="invalid" />
+
+					<h:outputLabel for="quantite_voulue"
+						value="#{text['echange.quantite_souhaitee.jsf']}" />
+					<h:inputText id="quantite_voulue"
+						value="#{echangeOffreController.newEchangeOffre.montantAchat}" />
+					<h:message for="quantite_voulue" errorClass="invalid" />
+
+					<h:outputLabel for="monnaie_a_vendre"
+						value="#{text['echange.monnaie_a_vendre.jsf']}" />
+					<h:selectOneMenu
+						value="#{echangeOffreController.newEchangeOffre.monnaieVendre}">
+						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+							itemValue="#{m}" />
+						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+					</h:selectOneMenu>
+					<h:message for="monnaie_a_vendre" errorClass="invalid" />
+
+					<h:outputLabel for="quantite_a_vendre"
+						value="#{text['echange.quantite_a_vendre.jsf']}" />
+					<h:inputText id="quantite_a_vendre"
+						value="#{echangeOffreController.newEchangeOffre.montantVendre}" />
+					<h:message for="quantite_a_vendre" errorClass="invalid" />
+
+				</h:panelGrid>
+
+				<p>
+					<h:panelGrid columns="2">
+						<h:commandButton id="register"
+							action="#{echangeOffreController.register()}" value="Register"
+							styleClass="register" />
+						<h:messages styleClass="messages" errorClass="invalid"
+							infoClass="valid" warnClass="warning" globalOnly="true" />
+					</h:panelGrid>
+				</p>
+			</h:form>
+
+			<h:outputText styleClass="h2" value="#{text['echange.offres_compte.jsf']}" />
+			<br />
+			<h:panelGroup rendered="#{empty echangeOffreController.offres}">
+				<h:outputText styleClass="em"
+					value="#{text['echange.aucune_offre_enregistree.jsf']}" />
+			</h:panelGroup>
+			<h:dataTable var="_offre" id="table_id" value="#{echangeOffreController.offres}"
+				rendered="#{not empty echangeOffreController.offres}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
+					</f:facet>
+					<h:outputText
+						value="#{_offre.monnaieAchat.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_offre.montantAchat}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
+					</f:facet>
+					<h:outputText
+						value="#{_offre.monnaieVendre.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_offre.montantVendre}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.date_creation.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_offre.dateCreation}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.supprimer.jsf']}" />
+					</f:facet>
+					<h:form>
+					<h:commandButton action="#{echangeOffreController.removeOffre(_offre.id)}" value="#{text['echange.supprimer.jsf']}">					
+					</h:commandButton>
+					</h:form>
+				</h:column>
+			</h:dataTable>
+			
+			<script>
+				$(document).ready( function () {
+				    $('#table_id').DataTable({bInfo : false,
+				    	 language : {
+				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+				         }});
+				    
+				} );
+			</script>
+		</f:view>
+
+	</ui:define>
+</ui:composition>

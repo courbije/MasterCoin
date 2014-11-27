@@ -4,38 +4,38 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
-
+	
 	<ui:define name="content">
 		<h:form id="reg" rendered="#{!login.loggedIn}">
-			<h:outputText styleClass="h2" value="#{text['creation_compte.jsf']}" />
+			<h:outputText styleClass="h2" value="#{text['compte.creation_compte.jsf']}" />
 			<h:panelGrid columns="3" columnClasses="titleCell">
 
-				<h:outputLabel for="pseudo" value="#{text['pseudo.jsf']} :" />
+				<h:outputLabel for="pseudo" value="#{text['login.login.jsf']} :" />
 				<h:inputText id="pseudo"
 					value="#{compteCreationController.newCompte.login}" />
 				<h:message for="pseudo" errorClass="invalid" />
 
-				<h:outputLabel for="password" value="#{text['mot_de_passe.jsf']} :" />
+				<h:outputLabel for="password" value="#{text['login.password.jsf']} :" />
 				<h:inputText id="password"
 					value="#{compteCreationController.newCompte.password}" />
 				<h:message for="password" errorClass="invalid" />
 
-				<h:outputLabel for="nom" value="#{text['nom.jsf']} :" />
+				<h:outputLabel for="nom" value="#{text['compte.nom.jsf']} :" />
 				<h:inputText id="nom"
 					value="#{compteCreationController.newCompte.nom}" />
 				<h:message for="nom" errorClass="invalid" />
 
-				<h:outputLabel for="prenom" value="#{text['prenom.jsf']} :" />
+				<h:outputLabel for="prenom" value="#{text['compte.prenom.jsf']} :" />
 				<h:inputText id="prenom"
 					value="#{compteCreationController.newCompte.prenom}" />
 				<h:message for="prenom" errorClass="invalid" />
 
-				<h:outputLabel for="email" value="#{text['email.jsf']} :" />
+				<h:outputLabel for="email" value="#{text['compte.email.jsf']} :" />
 				<h:inputText id="email"
 					value="#{compteCreationController.newCompte.mail}" />
 				<h:message for="email" errorClass="invalid" />
 
-				<h:outputLabel for="date" value="#{text['date_de_naissance.jsf']} :" />
+				<h:outputLabel for="date" value="#{text['compte.date_de_naissance.jsf']} :" />
 				<h:inputText id="date"
 					value="#{compteCreationController.newCompte.dateNaissance}">
 					<f:convertDateTime pattern="d-M-yyyy" />
@@ -46,7 +46,7 @@
 			<h:panelGrid columns="2">
 				<h:commandButton id="register"
 					action="#{compteCreationController.register()}"
-					value="#{text['enregistrer.jsf']} :" styleClass="register" />
+					value="#{text['compte.enregistrer.jsf']} :" styleClass="register" />
 				<h:messages styleClass="messages" errorClass="invalid"
 					infoClass="valid" warnClass="warning" globalOnly="true" />
 			</h:panelGrid>

@@ -14,26 +14,26 @@
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
 			<br />
 			<h:outputText styleClass="h2"
-				value="#{text['historique_porte_monnaie_acutel.jsf']}" />
+				value="#{text['histo.historique_porte_monnaie_acutel.jsf']}" />
 			<br />
 			<h:dataTable var="_pm" id="table_id"
 				value="#{historiqueController.porteMonnaiesHistorique}"
 				styleClass="display">
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="#{text['monnaie.jsf']}" />
+						<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
 					</f:facet>
                 #{_pm.monnaie.nom}
            		</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="#{text['montant.jsf']}" />
+						<h:outputText value="#{text['pm.montant.jsf']}" />
 					</f:facet>
                 #{_pm.montant}
            		</h:column>
 				<h:column>
 					<f:facet name="header">
-						<h:outputText value="#{text['date.jsf']}" />
+						<h:outputText value="#{text['histo.date.jsf']}" />
 					</f:facet>
 					<h:outputText value="#{_pm.date}">
 						<f:convertDateTime dateStyle="long" type="both" />
@@ -44,7 +44,11 @@
 		</f:view>
 		<script>
 				$(document).ready( function () {
-				    $('#table_id').DataTable();
+				    $('#table_id').DataTable({bInfo : false,
+				    	 language : {
+				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+				         }});
+				    
 				} );
 			</script>
 	</ui:define>
