@@ -35,7 +35,7 @@ public class PorteMonnaie implements Serializable
    @Column(nullable = false)
    @NotNull
    @Min(0)
-   private Integer montant;
+   private Double montant;
 
    public Long getId()
    {
@@ -98,12 +98,12 @@ public class PorteMonnaie implements Serializable
       this.monnaie = monnaie;
    }
 
-   public Integer getMontant()
+   public Double getMontant()
    {
       return montant;
    }
 
-   public void setMontant(Integer montant)
+   public void setMontant(Double montant)
    {
       this.montant = montant;
    }

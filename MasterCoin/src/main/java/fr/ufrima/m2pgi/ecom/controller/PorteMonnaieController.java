@@ -15,14 +15,13 @@ import javax.validation.constraints.NotNull;
 import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
+import fr.ufrima.m2pgi.ecom.service.NotEnoughtMoneyException;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
 @RequestScoped
 @ManagedBean
 public class PorteMonnaieController {
-	
-	
 
 	@Inject
 	private PorteMonnaieService porteMonnaieService;
@@ -40,7 +39,7 @@ public class PorteMonnaieController {
 
 	@Min(0)
 	@NotNull
-	private Integer amount;
+	private Double amount;
 
 	public void setLogin(Login login) {
 		this.login = login;
@@ -52,7 +51,7 @@ public class PorteMonnaieController {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
 			facesContext.addMessage(null, m);
 		} catch (Exception e) {
-			Util.DisplayError(e,facesContext);
+				Util.DisplayError(e,facesContext);
 		}
 		init();
 	}
@@ -67,7 +66,10 @@ public class PorteMonnaieController {
 		try {
 			porteMonnaieService.removeToPorteMonnaie(login.getCurrentUser(), monnaie, amount);
 			Util.DisplaySucces(facesContext);
-		} catch (Exception e) {
+		} catch (NotEnoughtMoneyException e) {
+			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas assez d'argent", "Registration unsuccessful");
+			facesContext.addMessage(null, m);
+		}catch (Exception e) {
 			Util.DisplayError(e,facesContext);
 		}
 		init();
@@ -96,11 +98,11 @@ public class PorteMonnaieController {
 		this.monnaie = monnaie;
 	}
 
-	public Integer getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 }

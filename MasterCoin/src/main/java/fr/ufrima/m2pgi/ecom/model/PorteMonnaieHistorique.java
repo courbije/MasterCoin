@@ -35,7 +35,7 @@ public class PorteMonnaieHistorique implements Serializable {
 
 	@Column(nullable = false)
 	@NotNull
-	private Integer montant;
+	private Double montant;
 
 	@Column(nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
@@ -90,11 +90,11 @@ public class PorteMonnaieHistorique implements Serializable {
 		this.monnaie = monnaie;
 	}
 
-	public Integer getMontant() {
+	public Double getMontant() {
 		return montant;
 	}
 
-	public void setMontant(Integer montant) {
+	public void setMontant(Double montant) {
 		this.montant = montant;
 	}
 

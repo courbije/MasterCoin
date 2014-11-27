@@ -30,11 +30,15 @@ public class EchangeOffreService {
 				throw new RuntimeException();
 			}
 			echangeOffreFacade.remove(eo);
-			porteMonnaieService.addToPorteMonnaie(eo.getCompte(), eo.getMonnaieVendre(), eo.getMontantVendre().intValue());
+			porteMonnaieService.addToPorteMonnaie(eo.getCompte(), eo.getMonnaieVendre(), eo.getMontantVendre());
 		}
 
 		public void addOffre(Compte compte, EchangeOffre eo) throws Exception {
-			porteMonnaieService.removeToPorteMonnaie(compte, eo.getMonnaieVendre(), eo.getMontantVendre().intValue());
+			if(eo.getMonnaieAchat().equals(eo.getMonnaieVendre())) {
+				context.setRollbackOnly();
+				throw new SameMoneyException();
+			}
+			porteMonnaieService.removeToPorteMonnaie(compte, eo.getMonnaieVendre(), eo.getMontantVendre());
 			eo.setCompte(compte);
 			eo.setDateCreation(new Date());
 			echangeOffreFacade.create(eo);

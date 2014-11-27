@@ -16,18 +16,17 @@ import fr.ufrima.m2pgi.ecom.model.PorteMonnaieHistorique;
 
 @Stateless
 public class PorteMonnaieService {
-	
+
 	@Resource
 	private EJBContext context;
-	
+
 	@Inject
 	private PorteMonnaieFacade porteMonnaieFacade;
 
 	@Inject
 	private PorteMonnaieHistoriqueFacade porteMonnaieHistoriqueFacade;
 
-	
-	public void addToPorteMonnaie(Compte compte, Monnaie monnaie, Integer amount) {
+	public void addToPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
 		if (res == null) {
 			PorteMonnaie newP = new PorteMonnaie();
@@ -42,7 +41,7 @@ public class PorteMonnaieService {
 		createNewHistorique(compte, monnaie, amount);
 	}
 
-	private void createNewHistorique(Compte compte, Monnaie monnaie, Integer amount) {
+	private void createNewHistorique(Compte compte, Monnaie monnaie, Double amount) {
 		PorteMonnaieHistorique porteMonnaieHistorique = new PorteMonnaieHistorique();
 		porteMonnaieHistorique.setCompte(compte);
 		porteMonnaieHistorique.setMonnaie(monnaie);
@@ -51,18 +50,20 @@ public class PorteMonnaieService {
 		porteMonnaieHistoriqueFacade.create(porteMonnaieHistorique);
 	}
 
-	public void removeToPorteMonnaie(Compte compte, Monnaie monnaie, Integer amount) throws NotEnoughtMoneyException {
+	public void removeToPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) throws NotEnoughtMoneyException {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
-		if (res != null) {
-			int i = res.getMontant() - amount;
-			res.setMontant(i);
-			porteMonnaieFacade.edit(res);
-			if (i < 0) {
-				context.setRollbackOnly();
-				throw new NotEnoughtMoneyException();
-			}
-			createNewHistorique(compte, monnaie, -amount);
+		if (res == null) {
+			context.setRollbackOnly();
+			throw new NotEnoughtMoneyException();
 		}
+		Double i = res.getMontant() - amount;
+		if (i < 0) {
+			context.setRollbackOnly();
+			throw new NotEnoughtMoneyException();
+		}
+		res.setMontant(i);
+		porteMonnaieFacade.edit(res);
+		createNewHistorique(compte, monnaie, -amount);
 	}
 
 }
