@@ -37,11 +37,9 @@
 					<h:panelGroup rendered="#{!login.loggedIn}">
 						<f:validateBean>
 							<h:outputLabel for="username" value="#{text['login.username.jsf']}:" />
-							<h:inputText id="username" value="#{credentials.username}" />
-							<h:message for="username" errorClass="invalid" />
+							<h:inputText id="username" value="#{credentials.username}" validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.jsf']}" />
 							<h:outputLabel for="password" value="#{text['login.password.jsf']}:" />
-							<h:inputSecret id="password" value="#{credentials.password}" />
-							<h:message for="username" errorClass="invalid" />
+							<h:inputSecret id="password" value="#{credentials.password}" validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.jsf']}" />
 						</f:validateBean>
 					</h:panelGroup>
 					<h:commandButton value="#{text['login.login.jsf']}"
@@ -90,13 +88,7 @@
 				<li id="menu-support"><h:link value="#{text['header.support.jsf']}"
 						outcome="/support" /></li>
 				</ul>
-				<h:outputScript>
-				$(function(){
-					$('#nav li:has(ul)').doubleTapToGo();
-				});</h:outputScript>
 			</div>
-
-
 		</ui:composition>
 	</body>
 

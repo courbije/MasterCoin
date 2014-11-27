@@ -21,6 +21,10 @@
 		<base-name>com.languages.text</base-name>
 		<var>text</var>
 	   </resource-bundle>
+	   <resource-bundle>
+		<base-name>com.languages.msg</base-name>
+		<var>msg</var>
+	   </resource-bundle>
      </application>
 
 </faces-config>
