@@ -30,14 +30,24 @@
 			</ui:insert>
 			<div id="wrapper" class="sixteen columns">
 				<div id="page">
+
+					<h:messages id="error-box" />
 					<ui:insert name="content">
-			</ui:insert>
+					</ui:insert>
 				</div>
 			</div>
 			<div id="copyright" class="sixteen columns">
 				<p>&copy; MasterCoin. All rights reserved.</p>
 			</div>
 		</div>
+		<h:outputScript>
+					$(function(){
+						$('#nav li:has(ul)').doubleTapToGo();
+						if($("#error-box li").length > 0){
+							$("#error-box").slideToggle("slow");
+						}
+					});
+		</h:outputScript>
 	</h:body>
 </f:view>
 </html>
