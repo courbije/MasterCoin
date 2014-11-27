@@ -55,12 +55,12 @@ public class PorteMonnaieService {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
 		if (res != null) {
 			int i = res.getMontant() - amount;
+			res.setMontant(i);
+			porteMonnaieFacade.edit(res);
 			if (i < 0) {
 				context.setRollbackOnly();
 				throw new NotEnoughtMoneyException();
 			}
-			res.setMontant(i);
-			porteMonnaieFacade.edit(res);
 			createNewHistorique(compte, monnaie, -amount);
 		}
 	}
