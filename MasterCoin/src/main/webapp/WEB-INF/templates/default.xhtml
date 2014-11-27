@@ -30,7 +30,6 @@
 			</ui:insert>
 			<div id="wrapper" class="sixteen columns">
 				<div id="page">
-
 					<h:messages id="error-box" />
 					<ui:insert name="content">
 					</ui:insert>
@@ -43,6 +42,7 @@
 		<h:outputScript>
 					$(function(){
 						$('#nav li:has(ul)').doubleTapToGo();
+						$("#error-box").css("display","none");
 						if($("#error-box li").length > 0){
 							$("#error-box").slideToggle("slow");
 						}

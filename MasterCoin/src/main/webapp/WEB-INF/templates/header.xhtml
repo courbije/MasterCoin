@@ -33,11 +33,11 @@
 			</div>
 			<div class="six columns">
 			<div id="login">
-				<h:form id="formulaire">
+				<h:form>
 					<h:panelGroup rendered="#{!login.loggedIn}">
 						<f:validateBean>
 							<h:outputLabel for="username" value="#{text['login.username.jsf']}:" />
-							<h:inputText id="username" value="#{credentials.username}" validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.jsf']}"/>
+							<h:inputText id="username" value="#{credentials.username}" validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.jsf']}" />
 							<h:outputLabel for="password" value="#{text['login.password.jsf']}:" />
 							<h:inputSecret id="password" value="#{credentials.password}" validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.jsf']}" />
 						</f:validateBean>
