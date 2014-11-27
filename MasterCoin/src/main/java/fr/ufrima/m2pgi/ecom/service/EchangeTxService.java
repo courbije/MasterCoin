@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.TransactionFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
@@ -20,7 +21,10 @@ public class EchangeTxService {
 	@Inject
 	private TransactionFacade transactionFacade;
 	
-	public void trouverOffres(Transaction newTransaction) {
+	private PorteMonnaieService porteMonnaieService;
+	
+	
+	public void trouverOffres(Transaction newTransaction) throws NotEnoughtMoneyException {
 
 		Monnaie monnaieAchat = newTransaction.getMonnaieAchat();
 		Monnaie monnaieVendre = newTransaction.getMonnaieVendre();
@@ -32,17 +36,18 @@ public class EchangeTxService {
 		
 		double montantCourant=0; int i=0;
 		while (i<echangeOffre.size()&&montantCourant<montantVoulu){
-			montantCourant=+echangeOffre.get(i).getMontantAchat();
+			montantCourant+=echangeOffre.get(i).getMontantVendre();
 			if (montantCourant>montantVoulu){
 				double ancienMontantAchat = echangeOffre.get(i).getMontantAchat();
 				double ancienMontantVendre = echangeOffre.get(i).getMontantVendre();
+				double montantVendre = ancienMontantVendre-(montantCourant-montantVoulu);
+				double montantAchat = montantVendre*ancienMontantAchat/ancienMontantVendre;
+				echangeOffre.get(i).setMontantVendre(montantCourant-montantVoulu);
+				echangeOffre.get(i).setMontantAchat(echangeOffre.get(i).getMontantVendre()*ancienMontantAchat/ancienMontantVendre);
 				
-				echangeOffre.get(i).setMontantAchat(montantCourant-montantVoulu);
-				echangeOffre.get(i).setMontantVendre(echangeOffre.get(i).getMontantAchat()*ancienMontantVendre/ancienMontantAchat);
+				Transaction t = mettreAJourTransaction(montantAchat,montantVendre, echangeOffre.get(i).getCompte(), newTransaction);
 				
-				Transaction t = mettreAJourTransaction(ancienMontantAchat-(montantCourant-montantVoulu),ancienMontantVendre-echangeOffre.get(i).getMontantAchat()*ancienMontantVendre/ancienMontantAchat, echangeOffre.get(i).getCompte(), newTransaction);
-				
-				mettreAJourCompte(t.getCompteAcheteur(),t.getCompteVendeur(),monnaieAchat,monnaieVendre,ancienMontantAchat-echangeOffre.get(i).getMontantAchat(),ancienMontantVendre-echangeOffre.get(i).getMontantVendre());
+				mettreAJourCompte(t.getCompteAcheteur(),t.getCompteVendeur(),monnaieAchat,monnaieVendre,montantAchat,montantVendre);
 				
 				echangeOffreFacade.edit(echangeOffre.get(i));
 				transactionFacade.create(t);
@@ -63,9 +68,10 @@ public class EchangeTxService {
 		
 	}
 	
-	
-	private void mettreAJourCompte(Compte compteVendeur, Compte compteAcheteur, Monnaie monnaieAchat, Monnaie monnaieVendre, Double double1, Double double2) {
-		
+	private void mettreAJourCompte(Compte compteVendeur, Compte compteAcheteur, Monnaie monnaieAchat, Monnaie monnaieVendre, Double montantAchat, Double montantVendre) throws NotEnoughtMoneyException {
+		porteMonnaieService.addToPorteMonnaie(compteVendeur,monnaieVendre,montantAchat);
+		porteMonnaieService.removeFromPorteMonnaie(compteVendeur,monnaieAchat,montantVendre);
+		porteMonnaieService.addToPorteMonnaie(compteAcheteur,monnaieAchat,montantAchat);
 		
 	}
 	

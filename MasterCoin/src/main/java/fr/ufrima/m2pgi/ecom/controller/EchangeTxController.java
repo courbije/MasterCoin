@@ -10,6 +10,7 @@ import javax.enterprise.inject.Produces;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -21,7 +22,8 @@ import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 import fr.ufrima.m2pgi.ecom.service.EchangeTxService;
 
-@ViewScoped
+
+@RequestScoped
 @ManagedBean
 public class EchangeTxController {
 	 @ManagedProperty(value="#{login}")
@@ -76,7 +78,7 @@ public class EchangeTxController {
 		Monnaie monnaieVendre = newTransaction.getMonnaieVendre();
 		Double montantVoulu = newTransaction.getMontantAchat();
 		double montantObtenu= 0;
-		List<EchangeOffre> echangeOffre=echangeOffreFacade.findAllWhere(monnaieAchat,monnaieVendre);
+		List<EchangeOffre> echangeOffre=echangeOffreFacade.findAllWhere(monnaieVendre,monnaieAchat);
 		if (echangeOffre==null){
 			return 0.0;
 		}
@@ -84,18 +86,18 @@ public class EchangeTxController {
 		
 		double montantCourant=0; int i=0;
 		while (i<echangeOffre.size()&&montantCourant<montantVoulu){
-			montantCourant=+echangeOffre.get(i).getMontantAchat();
+			montantCourant+=echangeOffre.get(i).getMontantVendre();
 			if (montantCourant>montantVoulu){
 				double ancienMontantAchat = echangeOffre.get(i).getMontantAchat();
 				double ancienMontantVendre = echangeOffre.get(i).getMontantVendre();
 				
-				echangeOffre.get(i).setMontantAchat(montantCourant-montantVoulu);
-				echangeOffre.get(i).setMontantVendre(echangeOffre.get(i).getMontantAchat()*ancienMontantVendre/ancienMontantAchat);
-				montantObtenu =+ ancienMontantVendre -echangeOffre.get(i).getMontantAchat()*ancienMontantVendre/ancienMontantAchat;
+				echangeOffre.get(i).setMontantVendre(montantCourant-montantVoulu);
+				echangeOffre.get(i).setMontantAchat(echangeOffre.get(i).getMontantVendre()*ancienMontantAchat/ancienMontantVendre);
+				montantObtenu += ancienMontantAchat - echangeOffre.get(i).getMontantAchat();
 				montantCourant=montantVoulu;
 			}
 			else {
-				montantObtenu =+ echangeOffre.get(i).getMontantVendre();
+				montantObtenu += echangeOffre.get(i).getMontantAchat();
 			}
 			i++;
 		}
