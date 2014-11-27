@@ -3,6 +3,7 @@ package fr.ufrima.m2pgi.ecom.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -41,6 +42,10 @@ public class PorteMonnaieController {
 	@NotNull
 	private Double amount;
 
+	private List<PorteMonnaie> porteMonnaieUser;
+
+	private ArrayList<Monnaie> notEmptyMonnaie;
+
 	public void setLogin(Login login) {
 		this.login = login;
 	}
@@ -56,38 +61,38 @@ public class PorteMonnaieController {
 		init();
 	}
 	
-
+	@PostConstruct
 	private void init() {
 		amount = null;
 		monnaie = null;
+		porteMonnaieUser = porteMonnaieFacade.findByCompte(login.getCurrentUser());
+		notEmptyMonnaie = new ArrayList<Monnaie>();
+		for (PorteMonnaie p : porteMonnaieUser) {
+			if (p.getMontant() > 0) {
+				notEmptyMonnaie.add(p.getMonnaie());				
+			}
+		}
 	}
 
 	public void registerRemove() throws Exception {
 		try {
 			porteMonnaieService.removeToPorteMonnaie(login.getCurrentUser(), monnaie, amount);
 			Util.DisplaySucces(facesContext);
+			init();
 		} catch (NotEnoughtMoneyException e) {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas assez d'argent", "Registration unsuccessful");
 			facesContext.addMessage(null, m);
 		}catch (Exception e) {
 			Util.DisplayError(e,facesContext);
 		}
-		init();
 	}
 
 	public List<PorteMonnaie> getPorteMonnaies() {
-		return porteMonnaieFacade.findByCompte(login.getCurrentUser());
+		return porteMonnaieUser;
 	}
 	
 	public List<Monnaie> getNotEmptyMonnaies() {
-		List<PorteMonnaie> pm = porteMonnaieFacade.findByCompte(login.getCurrentUser());
-		List<Monnaie> res = new ArrayList<Monnaie>();
-		for (PorteMonnaie p : pm) {
-			if (p.getMontant() > 0) {
-				res.add(p.getMonnaie());				
-			}
-		}
-		return res;
+		return notEmptyMonnaie;
 	}
 
 	public Monnaie getMonnaie() {
