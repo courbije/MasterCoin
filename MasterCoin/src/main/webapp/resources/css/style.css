@@ -108,6 +108,24 @@ body {
 }
 
 /*********************************************************************************/
+/* Error box                                                                     */
+/*********************************************************************************/
+#error-box {
+	border: 1px solid #f46767;
+	background-color: #ffcccc;
+	border-radius: 5px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+#error-box li {
+	list-style: none;
+	margin: 5px;
+	text-align: center;
+	text-decoration: underline;
+}
+
+/*********************************************************************************/
 /* Page                                                                          */
 /*********************************************************************************/
 #wrapper {
@@ -131,10 +149,6 @@ body {
 	margin-top: 30px;
 	letter-spacing: 0.10em;
 	text-transform: uppercase;
-}
-
-#page a {
-	color: #01A9DC;
 }
 
 #copyright {
@@ -163,13 +177,11 @@ body {
 	-o-transition: all .25s ease-in-out;
 	transition: all .25s ease-in-out;
 	text-decoration: none;
-	text-transform: uppercase;
-	outline: 0;
-	white-space: nowrap;
-	font-weight: 600;
-	font-size: 0.8em;
+	font-weight: 700;
+	font-size: 13px;
 	color: #fff !important;
 	cursor: pointer;
+	letter-spacing: 1px;
 }
 
 .button:hover {
@@ -192,6 +204,7 @@ body {
 }
 
 .link {
+	margin: 20px;
 	color: #838383;
 	border: none;
 	background: none;
@@ -203,17 +216,38 @@ body {
 	color: #01A9DC;
 }
 
-   #error-box {
-    border:1px solid #f46767;
-    background-color: #ffcccc;
-    border-radius: 5px;
-    margin-top: 10px;
-    font-weight:bold; 
-    }
+p label {
+	display: block;
+	width: 165px;
+	float: left;
+}
 
-    #error-box li {
-list-style: none;			
-    margin: 5px;
-        text-align: center;
-        text-decoration:underline;
-    }
+p input[type="text"] {
+	width: 215px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 3px;
+}
+
+p input[type="text"]:focus {
+	border: solid 1px #01A9DC;
+	box-shadow: 0 0 5px 1px #969696;
+}
+
+.info-box {
+	margin: 5px;
+	float: right;
+	color: #838383;
+}
+
+.required {
+	color: #838383;
+	margin: 0 -0.2em;
+}
+
+
+.required-box {
+	color: #838383;
+}

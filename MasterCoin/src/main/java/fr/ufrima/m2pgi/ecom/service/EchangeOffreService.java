@@ -38,7 +38,7 @@ public class EchangeOffreService {
 				context.setRollbackOnly();
 				throw new SameMoneyException();
 			}
-			porteMonnaieService.removeToPorteMonnaie(compte, eo.getMonnaieVendre(), eo.getMontantVendre());
+			porteMonnaieService.removeFromPorteMonnaie(compte, eo.getMonnaieVendre(), eo.getMontantVendre());
 			eo.setCompte(compte);
 			eo.setDateCreation(new Date());
 			echangeOffreFacade.create(eo);
