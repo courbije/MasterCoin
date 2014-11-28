@@ -89,14 +89,13 @@
 		</f:view>
 		<script>
 				$(document).ready( function () {
-				    $('#table_id').DataTable({
-					    paging: false,
-					   	bInfo : false,
-					    searching: false,
-					    language : {
-			    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
-			         	}
-					    });				    
+					 $('#table_id').DataTable({bInfo : false,
+						 paging: false,
+						 searching: false,
+				    	 language : {
+				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+				         }});
+		    
 				} );
 			</script>
 	</ui:define>

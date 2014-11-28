@@ -1,5 +1,7 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -7,6 +9,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.service.EchangeOffreService;
@@ -26,6 +29,9 @@ public class ProposerOffreController {
 	@Inject
 	private EchangeOffreService echangeOffreService;
 
+	@Inject
+	private EchangeOffreFacade echangeOffreFacade;
+	
 	@Inject 
 	private MonnaieFacade monnaieFacade;
 	
@@ -33,6 +39,8 @@ public class ProposerOffreController {
 	private FacesContext facesContext;
 
 	private EchangeOffre newEchangeOffre;
+
+	private List<EchangeOffre> listeEchangeOffreAV;
 
 	public EchangeOffre getNewEchangeOffre() {
 		return newEchangeOffre;
@@ -72,12 +80,19 @@ public class ProposerOffreController {
 		return this.newEchangeOffre.getMonnaieVendre()==null;
 	}
 	
+	public List<EchangeOffre> getListeEchangeOffreAV() {
+		return listeEchangeOffreAV;
+	}
+
 	public String monnaieVente(String id) {
 		if(id!=null) {
 			if(!this.newEchangeOffre.getMonnaieAchat().equals(this.monnaieFacade.find(Long.parseLong(id,10)))){
 				this.newEchangeOffre.setMonnaieVendre(this.monnaieFacade.find(Long.parseLong(id,10)));
 			}
 		}
+		listeEchangeOffreAV = echangeOffreFacade.findAllWhere(newEchangeOffre.getMonnaieAchat(), newEchangeOffre.getMonnaieVendre());
 		return null;
 	}
+
+	
 }

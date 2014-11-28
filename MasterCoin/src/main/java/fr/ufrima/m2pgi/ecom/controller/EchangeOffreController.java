@@ -67,6 +67,7 @@ public class EchangeOffreController {
 		try {
 			echangeService.removeOffre(Long.parseLong(id), login.getCurrentUser());
 			Util.DisplaySucces(facesContext);
+			init();
 		} catch (Exception e) {
 			Util.DisplayError(e,facesContext);
 		}

@@ -61,20 +61,22 @@
 				</p>
 			</h:form>
 
-			<h:outputText styleClass="h2" value="#{text['echange.offres_compte.jsf']}" />
+			<h:outputText styleClass="h2"
+				value="#{text['echange.offres_compte.jsf']}" />
 			<br />
 			<h:panelGroup rendered="#{empty echangeOffreController.offres}">
 				<h:outputText styleClass="em"
 					value="#{text['echange.aucune_offre_enregistree.jsf']}" />
 			</h:panelGroup>
-			<h:dataTable var="_offre" id="table_id" value="#{echangeOffreController.offres}"
-				rendered="#{not empty echangeOffreController.offres}" styleClass="simpletablestyle">
+			<h:dataTable var="_offre" id="table_id"
+				value="#{echangeOffreController.offres}"
+				rendered="#{not empty echangeOffreController.offres}"
+				styleClass="display">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
 					</f:facet>
-					<h:outputText
-						value="#{_offre.monnaieAchat.nom}" />
+					<h:outputText value="#{_offre.monnaieAchat.nom}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
@@ -86,8 +88,7 @@
 					<f:facet name="header">
 						<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
 					</f:facet>
-					<h:outputText
-						value="#{_offre.monnaieVendre.nom}" />
+					<h:outputText value="#{_offre.monnaieVendre.nom}" />
 				</h:column>
 				<h:column>
 					<f:facet name="header">
@@ -99,29 +100,33 @@
 					<f:facet name="header">
 						<h:outputText value="#{text['echange.date_creation.jsf']}" />
 					</f:facet>
-					<h:outputText value="#{_offre.dateCreation}" />
+					<h:outputText value="#{_offre.dateCreation}">
+						<f:convertDateTime dateStyle="long" type="both" />
+					</h:outputText>
 				</h:column>
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="#{text['echange.supprimer.jsf']}" />
 					</f:facet>
 					<h:form>
-					<h:commandButton action="#{echangeOffreController.removeOffre(_offre.id)}" value="#{text['echange.supprimer.jsf']}">					
-					</h:commandButton>
+						<h:commandButton
+							action="#{echangeOffreController.removeOffre(_offre.id)}"
+							value="#{text['echange.supprimer.jsf']}">
+						</h:commandButton>
 					</h:form>
 				</h:column>
 			</h:dataTable>
-			
-			<script>
-				$(document).ready( function () {
-				    $('#table_id').DataTable({bInfo : false,
-				    	 language : {
-				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
-				         }});
-				    
-				} );
-			</script>
-		</f:view>
 
+
+		</f:view>
+		<script>
+			$(document).ready( function () {
+				 $('#table_id').DataTable({bInfo : false,
+			    	 language : {
+			    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+			         }});
+	    
+			} );
+			</script>
 	</ui:define>
 </ui:composition>
