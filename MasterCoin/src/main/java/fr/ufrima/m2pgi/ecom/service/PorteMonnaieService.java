@@ -16,16 +16,17 @@ import fr.ufrima.m2pgi.ecom.model.PorteMonnaieHistorique;
 
 @Stateless
 public class PorteMonnaieService {
-
+	
 	@Resource
 	private EJBContext context;
-
+	
 	@Inject
 	private PorteMonnaieFacade porteMonnaieFacade;
 
 	@Inject
 	private PorteMonnaieHistoriqueFacade porteMonnaieHistoriqueFacade;
 
+	
 	public void addToPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
 		if (res == null) {
@@ -50,7 +51,7 @@ public class PorteMonnaieService {
 		porteMonnaieHistoriqueFacade.create(porteMonnaieHistorique);
 	}
 
-	public void removeToPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) throws NotEnoughtMoneyException {
+	public void removeFromPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) throws NotEnoughtMoneyException {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
 		if (res == null) {
 			context.setRollbackOnly();
@@ -65,5 +66,4 @@ public class PorteMonnaieService {
 		porteMonnaieFacade.edit(res);
 		createNewHistorique(compte, monnaie, -amount);
 	}
-
 }
