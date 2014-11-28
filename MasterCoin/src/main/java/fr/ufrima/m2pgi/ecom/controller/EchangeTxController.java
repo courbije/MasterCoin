@@ -72,7 +72,7 @@ public class EchangeTxController {
 		Monnaie monnaieVendre = newTransaction.getMonnaieVendre();
 		Double montantVoulu = newTransaction.getMontantAchat();
 		double montantObtenu= 0;
-		List<EchangeOffre> echangeOffre=echangeOffreFacade.findAllWhere(monnaieVendre,monnaieAchat);
+		List<EchangeOffre> echangeOffre=echangeOffreFacade.findAllWhere(monnaieVendre,monnaieAchat,this.login.getCurrentUser());
 		if (echangeOffre==null){
 			return 0.0;
 		}

@@ -30,7 +30,7 @@ public class EchangeTxService {
 		Monnaie monnaieVendre = newTransaction.getMonnaieVendre();
 		Double montantVoulu = newTransaction.getMontantAchat();
 		
-		List<EchangeOffre> echangeOffre=echangeOffreFacade.findAllWhere(monnaieAchat,monnaieVendre);
+		List<EchangeOffre> echangeOffre=echangeOffreFacade.findAllWhere(monnaieAchat,monnaieVendre,newTransaction.getCompteAcheteur());
 		
 		Collections.sort(echangeOffre);
 		
