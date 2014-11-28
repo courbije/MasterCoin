@@ -9,9 +9,6 @@
 		<f:view>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
-			<ui:insert name="menuCompte">
-				<ui:include src="/WEB-INF/templates/compte.xhtml" />
-			</ui:insert>
 
 			<h:form id="reg2">
 				<h:outputText styleClass="h2"

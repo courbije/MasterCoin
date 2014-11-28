@@ -108,6 +108,24 @@ body {
 }
 
 /*********************************************************************************/
+/* Error box                                                                     */
+/*********************************************************************************/
+#error-box {
+	border: 1px solid #f46767;
+	background-color: #ffcccc;
+	border-radius: 5px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+#error-box li {
+	list-style: none;
+	margin: 5px;
+	text-align: center;
+	text-decoration: underline;
+}
+
+/*********************************************************************************/
 /* Page                                                                          */
 /*********************************************************************************/
 #wrapper {
@@ -119,8 +137,8 @@ body {
 }
 
 #page {
-	background: #F4F4F4;
 	color: #191919;
+	margin: 5px;
 }
 
 #page .title {
@@ -162,15 +180,12 @@ body {
 	-ms-transition: all .25s ease-in-out;
 	-o-transition: all .25s ease-in-out;
 	transition: all .25s ease-in-out;
-	letter-spacing: 0.1em;
 	text-decoration: none;
-	text-transform: uppercase;
-	outline: 0;
-	white-space: nowrap;
-	font-weight: 900;
-	font-size: 0.9em;
+	font-weight: 700;
+	font-size: 13px;
 	color: #fff !important;
 	cursor: pointer;
+	letter-spacing: 1px;
 }
 
 .button:hover {

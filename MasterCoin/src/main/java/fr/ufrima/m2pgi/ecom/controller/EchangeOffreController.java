@@ -37,6 +37,8 @@ public class EchangeOffreController {
 
 	private EchangeOffre newEchangeOffre;
 
+	private List<EchangeOffre> echangeOffreUser;
+
 	public EchangeOffre getNewEchangeOffre() {
 		return newEchangeOffre;
 	}
@@ -46,15 +48,16 @@ public class EchangeOffreController {
 	}
 
 	@PostConstruct
-	public void initNewMember() {
+	public void init() {
 		newEchangeOffre = new EchangeOffre();
+		echangeOffreUser = echangeFacade.findByCompte(login.getCurrentUser());
 	}
 
 	public void register() throws Exception {
 		try {
 			echangeService.addOffre(login.getCurrentUser(),newEchangeOffre);
 			Util.DisplaySucces(facesContext);
-			initNewMember();
+			init();
 		} catch (Exception e) {
 			Util.DisplayError(e,facesContext);
 		}
@@ -70,6 +73,6 @@ public class EchangeOffreController {
 	}
 
 	public List<EchangeOffre> getOffres() {
-		return echangeFacade.findByCompte(login.getCurrentUser());
+		return echangeOffreUser;
 	}
 }

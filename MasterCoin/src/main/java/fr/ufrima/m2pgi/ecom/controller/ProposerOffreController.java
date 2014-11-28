@@ -1,26 +1,21 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
-import java.util.Date;
-
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.service.EchangeOffreService;
-import fr.ufrima.m2pgi.ecom.service.NotEnoughtMoneyException;
-import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
 @ViewScoped
 @ManagedBean
 public class ProposerOffreController {
+	
     @ManagedProperty(value="#{login}")
     private Login login;
     
