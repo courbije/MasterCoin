@@ -91,7 +91,7 @@ public class Credentials {
 			ResourceBundle resourceBundleMsg = ResourceBundle.getBundle("com.languages.msg",locale);
 			ResourceBundle resourceBundleText = ResourceBundle.getBundle("com.languages.text",locale);
 			String bundleMessage = resourceBundleText.getString("login.login.jsf") + ": " + resourceBundleMsg.getString("login.error.err.jsf");
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(bundleMessage ));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,bundleMessage,bundleMessage ));
 			// perhaps add code here to report a failed login
 		}
 		return "";
