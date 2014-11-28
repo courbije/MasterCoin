@@ -108,6 +108,24 @@ body {
 }
 
 /*********************************************************************************/
+/* Error box                                                                     */
+/*********************************************************************************/
+#error-box {
+	border: 1px solid #f46767;
+	background-color: #ffcccc;
+	border-radius: 5px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+#error-box li {
+	list-style: none;
+	margin: 5px;
+	text-align: center;
+	text-decoration: underline;
+}
+
+/*********************************************************************************/
 /* Page                                                                          */
 /*********************************************************************************/
 #wrapper {
@@ -163,13 +181,11 @@ body {
 	-o-transition: all .25s ease-in-out;
 	transition: all .25s ease-in-out;
 	text-decoration: none;
-	text-transform: uppercase;
-	outline: 0;
-	white-space: nowrap;
-	font-weight: 600;
-	font-size: 0.8em;
+	font-weight: 700;
+	font-size: 13px;
 	color: #fff !important;
 	cursor: pointer;
+	letter-spacing: 1px;
 }
 
 .button:hover {
@@ -202,18 +218,3 @@ body {
 .link:hover {
 	color: #01A9DC;
 }
-
-   #error-box {
-    border:1px solid #f46767;
-    background-color: #ffcccc;
-    border-radius: 5px;
-    margin-top: 10px;
-    font-weight:bold; 
-    }
-
-    #error-box li {
-list-style: none;			
-    margin: 5px;
-        text-align: center;
-        text-decoration:underline;
-    }

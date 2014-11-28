@@ -6,18 +6,15 @@
 	<body>
 		<ui:composition>
 			<div id="change-lang" class="sixteen columns">
-				<!-- <h:form>
-					<h:selectOneMenu value="#{changementLangueController.language}"
-						onchange="submit()">
-						<f:selectItem itemValue="fr" itemLabel="#{text['FR.jsf']}" />
-						<f:selectItem itemValue="en" itemLabel="#{text['EN.jsf']}" />
-					</h:selectOneMenu>
-				</h:form>  -->
 				<h:form>
-				<h:commandButton action="#{changementLangueController.setLanguage('fr')}" styleClass="lang-fr">
-				</h:commandButton>
-				<h:commandButton action="#{changementLangueController.setLanguage('en')}" styleClass="lang-en">
-				</h:commandButton>
+					<h:commandButton
+						action="#{changementLangueController.setLanguage('fr')}"
+						styleClass="lang-fr">
+					</h:commandButton>
+					<h:commandButton
+						action="#{changementLangueController.setLanguage('en')}"
+						styleClass="lang-en">
+					</h:commandButton>
 				</h:form>
 			</div>
 			<div class="ten columns">
@@ -32,64 +29,69 @@
 				</div>
 			</div>
 			<div class="six columns">
-			<div id="login">
-				<h:form>
-					<h:panelGroup rendered="#{!login.loggedIn}">
-						<f:validateBean>
-							<h:outputLabel for="username" value="#{text['login.username.jsf']}:" />
-							<h:inputText id="username" value="#{credentials.username}" validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.jsf']}" />
-							<h:outputLabel for="password" value="#{text['login.password.jsf']}:" />
-							<h:inputSecret id="password" value="#{credentials.password}" validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.jsf']}" />
-						</f:validateBean>
-					</h:panelGroup>
-					<h:commandButton value="#{text['login.login.jsf']}"
-						action="#{credentials.login('header')}"
-						rendered="#{!login.loggedIn}" styleClass="button"/>
+				<div id="login">
+					<h:form>
+						<h:panelGroup rendered="#{!login.loggedIn}">
+							<f:validateBean>
+								<h:outputLabel for="username"
+									value="#{text['login.username.jsf']}:" />
+								<h:inputText id="username" value="#{credentials.username}"
+									validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.err.jsf']}" />
+								<h:outputLabel for="password"
+									value="#{text['login.password.jsf']}:" />
+								<h:inputSecret id="password" value="#{credentials.password}"
+									validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.err.jsf']}" />
+							</f:validateBean>
+						</h:panelGroup>
+						<h:commandButton value="#{text['login.login.jsf']}"
+							action="#{credentials.login('header')}"
+							rendered="#{!login.loggedIn}" styleClass="button" />
 
-					<h:button value="#{text['login.register.jsf']}" outcome="register"
-						rendered="#{!login.loggedIn}" styleClass="link" />
+						<h:button value="#{text['login.register.jsf']}" outcome="register"
+							rendered="#{!login.loggedIn}" styleClass="link" />
 
-					<h:outputLabel
-						value="#{text['header.bienvenue.jsf']} #{login.currentUser.login}"
-						rendered="#{login.loggedIn}" />
+						<h:outputLabel
+							value="#{text['header.bienvenue.jsf']} #{login.currentUser.login}"
+							rendered="#{login.loggedIn}" />
 
-					<h:commandButton value="#{text['login.logout.jsf']}"
-						action="#{credentials.logout}" rendered="#{login.loggedIn}" styleClass="button" />
-				</h:form>
+						<h:commandButton value="#{text['login.logout.jsf']}"
+							action="#{credentials.logout}" rendered="#{login.loggedIn}"
+							styleClass="button" />
+					</h:form>
+				</div>
 			</div>
-			</div>
-
 			<div id="nav" role="navigation" class="sixteen columns">
 				<a href="#nav" title="Show navigation">Show navigation</a> <a
 					href="#" title="Hide navigation">Hide navigation</a>
 				<ul class="clearfix">
-					<li id="menu-accueil"><h:link value="#{text['header.accueil.jsf']}"
-							outcome="/accueil" /></li>
+					<li id="menu-accueil"><h:link
+							value="#{text['header.accueil.jsf']}" outcome="/accueil" /></li>
 					<li id="menu-marche"><a href="#" aria-haspopup="true"><span>#{text['header.marche.jsf']}</span></a>
 						<ul>
 							<li id="menu-marche-echange"><h:link
 									value="#{text['header.echanger.jsf']}" outcome="/offre" /></li>
-							<li id="menu-marche-propo"><h:link value="#{text['header.proposer_offre.jsf']}"
-									outcome="/echange" /></li>
-							<li id="menu-marche-rapide"><h:link value="#{text['header.rapide_echange']}"
-									outcome="/marcher/rapide" /></li></ul>
-							</li>
-				<li id="menu-compte"><a href="#" aria-haspopup="true"><span>#{text['header.compte.jsf']}</span></a>
-					<ul>
-						<li id="menu-compte-modif"><h:link
-								value="#{text['header.modification_compte.jsf']}"
-								outcome="/compte/modifier" /></li>
-						<li id="menu-compte-historique"><h:link
-								value="#{text['header.historique.jsf']}" outcome="/compte/historique" /></li>
-						<li id="menu-compte-porteMonnaie"><h:link
-								value="#{text['header.porteMonnaie.jsf']}"
-								outcome="/compte/porteMonnaie" /></li>
-					</ul></li>
-				<li id="menu-support"><h:link value="#{text['header.support.jsf']}"
-						outcome="/support" /></li>
+							<li id="menu-marche-propo"><h:link
+									value="#{text['header.proposer_offre.jsf']}" outcome="/echange" /></li>
+							<li id="menu-marche-rapide"><h:link
+									value="#{text['header.rapide_echange']}"
+									outcome="/marcher/rapide" /></li>
+						</ul></li>
+					<li id="menu-compte"><a href="#" aria-haspopup="true"><span>#{text['header.compte.jsf']}</span></a>
+						<ul>
+							<li id="menu-compte-modif"><h:link
+									value="#{text['header.modification_compte.jsf']}"
+									outcome="/compte/modifier" /></li>
+							<li id="menu-compte-historique"><h:link
+									value="#{text['header.historique.jsf']}"
+									outcome="/compte/historique" /></li>
+							<li id="menu-compte-porteMonnaie"><h:link
+									value="#{text['header.porteMonnaie.jsf']}"
+									outcome="/compte/porteMonnaie" /></li>
+						</ul></li>
+					<li id="menu-support"><h:link
+							value="#{text['header.support.jsf']}" outcome="/support" /></li>
 				</ul>
 			</div>
 		</ui:composition>
 	</body>
-
 </ui:composition>
