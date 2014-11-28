@@ -139,6 +139,7 @@ body {
 #page {
 	color: #191919;
 	margin: 5px;
+	min-height: 600px;
 }
 
 #page .title {
@@ -222,7 +223,7 @@ p label {
 	float: left;
 }
 
-p input[type="text"] {
+p input[type="text"], p input[type="password"]  {
 	width: 215px;
 	border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
@@ -231,7 +232,7 @@ p input[type="text"] {
 	padding: 3px;
 }
 
-p input[type="text"]:focus {
+p input[type="text"]:focus, p input[type="password"]:focus {
 	border: solid 1px #01A9DC;
 	box-shadow: 0 0 5px 1px #969696;
 }
