@@ -11,60 +11,42 @@
 			<h:outputText styleClass="h1 title"
 				value="#{text['echange.message_accueil.jsf']}" />
 		</div>
-		
+
 		<f:event type="preRenderView"
 			listener="#{login.forwardToLoginIfNotLoggedIn}" />
-			
+
+		<f:metadata>
+			<f:viewParam name="idV" value="#{proposerOffreController.idV}" />
+			<f:viewParam name="idA" value="#{proposerOffreController.idA}" />
+		</f:metadata>
 
 		<div class="row">
 			<h:form id="reg"
-				rendered="#{proposerOffreController.nullMonnaieAchat}">
-				<h:outputText styleClass="h1"
-					value="#{text['echange.monnaie_souhaitee.jsf']}" />
-
-				<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
-					rendered="#{not empty monnaies}">
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
-						</f:facet>
-						<h:commandButton
-							action="#{proposerOffreController.monnaieAchat(m.id)}"
-							value="#{m.acroyme}"  />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['monnaie.acronyme.jsf']}" />
-						</f:facet>
-						<h:outputLabel value="#{m.acroyme}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['monnaie.nom.jsf']}" />
-						</f:facet>
-						<h:outputLabel value="#{m.nom}" />
-					</h:column>
-				</h:dataTable>
-				<h:message for="monnaie_voulue" errorClass="invalid" />
-			</h:form>
-
-			<h:form id="reg1"
-				rendered="#{!proposerOffreController.nullMonnaieAchat and proposerOffreController.nullMonnaieVente}">
+				rendered="#{empty proposerOffreController.idA or empty proposerOffreController.idV}">
 				<div class="one-third column">
+
 					<h:outputText styleClass="h1"
 						value="#{text['echange.monnaie_souhaitee.jsf']}" />
+
 					<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
 						rendered="#{not empty monnaies}">
 						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
+							</f:facet>
 							<h:commandButton
-								action="#{proposerOffreController.monnaieAchat(m.id)}"
-								value="#{m.acroyme}"
-								rendered="#{m==proposerOffreController.newEchangeOffre.monnaieAchat}"
-								style="font-weight:bold" />
+								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
+								value="->#{m.acroyme}"
+								rendered="#{m.id==proposerOffreController.idA}"
+								style="font-weight:bold">
+								<f:param name="idA" value="#{m.id}" />
+							</h:commandButton>
 							<h:commandButton
-								action="#{proposerOffreController.monnaieAchat(m.id)}"
+								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
 								value="#{m.acroyme}"
-								rendered="#{m!=proposerOffreController.newEchangeOffre.monnaieAchat}" />
+								rendered="#{m.id!=proposerOffreController.idA}">
+								<f:param name="idA" value="#{m.id}" />
+							</h:commandButton>
 						</h:column>
 						<h:column>
 							<f:facet name="header">
@@ -81,18 +63,27 @@
 					</h:dataTable>
 					<h:message for="monnaie_voulue" errorClass="invalid" />
 				</div>
+
+			</h:form>
+
+			<h:form id="reg1"
+				rendered="#{not empty proposerOffreController.idA and empty proposerOffreController.idV}">
 				<div class="one-third column">
+
 					<h:outputText styleClass="h1"
 						value="#{text['echange.monnaie_a_vendre.jsf']}" />
 					<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
 						rendered="#{not empty monnaies}">
 						<h:column>
 							<h:commandButton
-								action="#{proposerOffreController.monnaieVente(m.id)}"
+								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
 								value="#{m.acroyme}"
-								rendered="#{m!=proposerOffreController.newEchangeOffre.monnaieAchat}" />
+								rendered="#{m.id!=proposerOffreController.idA}">
+								<f:param name="idV" value="#{m.id}" />
+								<f:param name="idA" value="#{proposerOffreController.idA}" />
+							</h:commandButton>
 						</h:column>
-									<h:column>
+						<h:column>
 							<f:facet name="header">
 								<h:outputText value="#{text['monnaie.acronyme.jsf']}" />
 							</f:facet>
@@ -107,10 +98,11 @@
 					</h:dataTable>
 					<h:message for="monnaie_a_vendre" errorClass="invalid" />
 				</div>
+
 			</h:form>
 
 			<h:panelGroup
-				rendered="#{!proposerOffreController.nullMonnaieAchat and !proposerOffreController.nullMonnaieVente}">
+				rendered="#{not empty proposerOffreController.idA and not empty proposerOffreController.idV}">
 				<h:form id="reg2">
 					<h:outputText styleClass="h1"
 						value="#{text['echange.creation_offre.jsf']}" />

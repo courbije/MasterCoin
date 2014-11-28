@@ -26,6 +26,10 @@ public class ProposerOffreController {
 		this.login = login;
 	}
 	
+	private String idV;
+	
+	private String idA;
+	
 	@Inject
 	private EchangeOffreService echangeOffreService;
 
@@ -65,34 +69,32 @@ public class ProposerOffreController {
 		}
 	}
 	
-	public boolean isNullMonnaieAchat() {
-		return this.newEchangeOffre.getMonnaieAchat()==null;
-	}
-	
-	public String monnaieAchat(String id) {
-		if(id!=null) {
-			this.newEchangeOffre.setMonnaieAchat(this.monnaieFacade.find(Long.parseLong(id,10)));
-		}
-		return null;
-	}
-	
-	public boolean isNullMonnaieVente() {
-		return this.newEchangeOffre.getMonnaieVendre()==null;
-	}
-	
 	public List<EchangeOffre> getListeEchangeOffreAV() {
+		if (listeEchangeOffreAV == null) {
+			listeEchangeOffreAV = echangeOffreFacade.findAllWhere(newEchangeOffre.getMonnaieAchat(), newEchangeOffre.getMonnaieVendre());
+		}
 		return listeEchangeOffreAV;
 	}
 
-	public String monnaieVente(String id) {
-		if(id!=null) {
-			if(!this.newEchangeOffre.getMonnaieAchat().equals(this.monnaieFacade.find(Long.parseLong(id,10)))){
-				this.newEchangeOffre.setMonnaieVendre(this.monnaieFacade.find(Long.parseLong(id,10)));
-			}
-		}
-		listeEchangeOffreAV = echangeOffreFacade.findAllWhere(newEchangeOffre.getMonnaieAchat(), newEchangeOffre.getMonnaieVendre());
-		return null;
+	public String getIdV() {
+		return idV;
 	}
 
-	
+	public void setIdV(String idV) {
+		if(idV!=null) {
+			this.newEchangeOffre.setMonnaieVendre(this.monnaieFacade.find(Long.parseLong(idV)));
+		}
+		this.idV = idV;
+	}
+
+	public String getIdA() {
+		return idA;
+	}
+
+	public void setIdA(String idA) {
+		if(idA!=null) {
+			this.newEchangeOffre.setMonnaieAchat(this.monnaieFacade.find(Long.parseLong(idA)));
+		}
+		this.idA = idA;
+	}
 }

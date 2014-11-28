@@ -42,7 +42,7 @@ public class Login {
 	public void forwardToLoginIfNotLoggedIn(ComponentSystemEvent cse) {
 		if (!isLoggedIn()) {
 			setFromUrl(FacesContext.getCurrentInstance().getViewRoot().getViewId());
-			FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "/login?faces-redirect=true");
+			FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "/login?faces-redirect=true&includeViewParams=true");
 		}
 	}
 
