@@ -76,7 +76,7 @@ public class PorteMonnaieController {
 
 	public void registerRemove() throws Exception {
 		try {
-			porteMonnaieService.removeToPorteMonnaie(login.getCurrentUser(), monnaie, amount);
+			porteMonnaieService.removeFromPorteMonnaie(login.getCurrentUser(), monnaie, amount);
 			Util.DisplaySucces(facesContext);
 			init();
 		} catch (NotEnoughtMoneyException e) {

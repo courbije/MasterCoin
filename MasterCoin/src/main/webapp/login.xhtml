@@ -6,27 +6,45 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-			<h:outputText styleClass="h1"
-				value="#{text['message_not_log.jsf']}" rendered="#{!login.loggedIn}"/>
+		<div class="sixteen columns">
+			<h:outputText styleClass="h1 title"
+				value="#{text['login.login.jsf']}" />
+		</div>
+		<div class="sixteen columns">
+			<h:outputText styleClass="h2" value="#{text['message_not_log.jsf']}"
+				rendered="#{!login.loggedIn}" />
+		</div>
+		<div class="sixteen columns">
 			<h:form>
-				<h:panelGrid columns="3" rendered="#{!login.loggedIn}">
+				<h:panelGroup rendered="#{!login.loggedIn}">
 					<f:validateBean>
-						<h:outputLabel for="username" value="#{text['login.username.jsf']}:" />
-						<h:inputText id="username" value="#{credentials.username}" />
-						<h:message for="username" errorClass="invalid" />
-						<h:outputLabel for="password" value="#{text['login.password.jsf']}:" />
-						<h:inputSecret id="password" value="#{credentials.password}" />
-						<h:message for="username" errorClass="invalid" />
+						<p>
+							<h:outputLabel for="username"
+								value="#{text['login.username.jsf']}:" />
+							<h:inputText id="username" value="#{credentials.username}"
+								validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.err.jsf']}" />
+						</p>
+						<p>
+							<h:outputLabel for="password"
+								value="#{text['login.password.jsf']}:" />
+							<h:inputSecret id="password" value="#{credentials.password}"
+								validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.err.jsf']}" />
+						</p>
 					</f:validateBean>
-				</h:panelGrid>
-				<h:commandButton value="#{text['login.login.jsf']}"
-					action="#{credentials.login()}" rendered="#{!login.loggedIn}" />
+				</h:panelGroup>
+				<p>
+					<h:commandButton value="#{text['login.login.jsf']}"
+						action="#{credentials.login()}" rendered="#{!login.loggedIn}"
+						styleClass="button" />
 
-				<h:button value="#{text['login.register.jsf']}" outcome="register"
-					rendered="#{!login.loggedIn}" />
+					<h:button value="#{text['login.register.jsf']}" outcome="register"
+						rendered="#{!login.loggedIn}" styleClass="link" />
 
-				<h:commandButton value="#{text['login.logout.jsf']}"
-					action="#{credentials.logout}" rendered="#{login.loggedIn}" />
+					<h:commandButton value="#{text['login.logout.jsf']}"
+						action="#{credentials.logout}" rendered="#{login.loggedIn}"
+						styleClass="button" />
+				</p>
 			</h:form>
+		</div>
 	</ui:define>
 </ui:composition>

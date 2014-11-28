@@ -30,7 +30,7 @@
 			</ui:insert>
 			<div id="wrapper" class="sixteen columns">
 				<div id="page">
-					<h:messages id="error-box" />
+					<h:messages id="notify" errorClass="error" infoClass="info" />
 					<ui:insert name="content">
 					</ui:insert>
 				</div>
@@ -42,9 +42,15 @@
 		<h:outputScript>
 					$(function(){
 						$('#nav li:has(ul)').doubleTapToGo();
-						$("#error-box").css("display","none");
-						if($("#error-box li").length > 0){
-							$("#error-box").slideToggle("slow");
+						$("#notify").css("display","none");
+						if($("#notify li.info").length > 0){
+							$("#notify").addClass('infos-box');
+						}
+						if($("#notify li.error").length > 0){
+							$("#notify").addClass('errors-box');
+						}
+						if($("#notify li").length > 0){
+							$("#notify").slideToggle("slow");
 						}
 					});
 		</h:outputScript>

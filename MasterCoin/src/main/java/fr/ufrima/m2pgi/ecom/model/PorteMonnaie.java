@@ -102,7 +102,7 @@ public class PorteMonnaie implements Serializable
    {
       return montant;
    }
-
+   
    public void setMontant(Double montant)
    {
       this.montant = montant;

@@ -164,12 +164,12 @@ public class EchangeOffre implements Serializable, Comparable<EchangeOffre>
 @Override
 public int compareTo(EchangeOffre arg0) {
 	// TODO Auto-generated method stub
-	double myTaux = (double)this.getMontantAchat()/this.getMontantVendre();
-	double Tauxarg0= (double)arg0.getMontantAchat()/arg0.getMontantVendre();
-	if (myTaux<Tauxarg0){
+	double myTaux = (double)this.getMontantAchat()/(double)this.getMontantVendre();
+	double Tauxarg0= (double)arg0.getMontantAchat()/(double)arg0.getMontantVendre();
+	if (myTaux>Tauxarg0){
 		return 1;
 	}
-	else if (myTaux>Tauxarg0){
+	else if (myTaux<Tauxarg0){
 		return -1;
 	}
 	else {
