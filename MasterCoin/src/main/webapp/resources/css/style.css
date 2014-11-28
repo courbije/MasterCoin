@@ -151,10 +151,6 @@ body {
 	text-transform: uppercase;
 }
 
-#page a {
-	color: #01A9DC;
-}
-
 #copyright {
 	padding: 6em 0em;
 	font-size: 0.70em;
@@ -208,6 +204,7 @@ body {
 }
 
 .link {
+	margin: 20px;
 	color: #838383;
 	border: none;
 	background: none;
@@ -217,4 +214,40 @@ body {
 
 .link:hover {
 	color: #01A9DC;
+}
+
+p label {
+	display: block;
+	width: 165px;
+	float: left;
+}
+
+p input[type="text"] {
+	width: 215px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 3px;
+}
+
+p input[type="text"]:focus {
+	border: solid 1px #01A9DC;
+	box-shadow: 0 0 5px 1px #969696;
+}
+
+.info-box {
+	margin: 5px;
+	float: right;
+	color: #838383;
+}
+
+.required {
+	color: #838383;
+	margin: 0 -0.2em;
+}
+
+
+.required-box {
+	color: #838383;
 }

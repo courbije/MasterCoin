@@ -4,52 +4,94 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
-	
+
 	<ui:define name="content">
-		<h:form id="reg" rendered="#{!login.loggedIn}">
-			<h:outputText styleClass="h2" value="#{text['compte.creation_compte.jsf']}" />
-			<h:panelGrid columns="3" columnClasses="titleCell">
-
-				<h:outputLabel for="pseudo" value="#{text['login.username.jsf']} :" />
-				<h:inputText id="pseudo"
-					value="#{compteCreationController.newCompte.login}" />
-				<h:message for="pseudo" errorClass="invalid" />
-
-				<h:outputLabel for="password" value="#{text['login.password.jsf']} :" />
-				<h:inputText id="password"
-					value="#{compteCreationController.newCompte.password}" />
-				<h:message for="password" errorClass="invalid" />
-
-				<h:outputLabel for="nom" value="#{text['compte.nom.jsf']} :" />
-				<h:inputText id="nom"
-					value="#{compteCreationController.newCompte.nom}" />
-				<h:message for="nom" errorClass="invalid" />
-
-				<h:outputLabel for="prenom" value="#{text['compte.prenom.jsf']} :" />
-				<h:inputText id="prenom"
-					value="#{compteCreationController.newCompte.prenom}" />
-				<h:message for="prenom" errorClass="invalid" />
-
-				<h:outputLabel for="email" value="#{text['compte.email.jsf']} :" />
-				<h:inputText id="email"
-					value="#{compteCreationController.newCompte.mail}" />
-				<h:message for="email" errorClass="invalid" />
-
-				<h:outputLabel for="date" value="#{text['compte.date_de_naissance.jsf']} :" />
-				<h:inputText id="date"
-					value="#{compteCreationController.newCompte.dateNaissance}">
-					<f:convertDateTime pattern="d-M-yyyy" />
-				</h:inputText>
-				<h:message for="date" errorClass="invalid" />
-
-			</h:panelGrid>
-			<h:panelGrid columns="2">
-				<h:commandButton id="register"
-					action="#{compteCreationController.register()}"
-					value="#{text['compte.enregistrer.jsf']} :" styleClass="register" />
-				<h:messages styleClass="messages" errorClass="invalid"
-					infoClass="valid" warnClass="warning" globalOnly="true" />
-			</h:panelGrid>
-		</h:form>
+		<div class="sixteen columns">
+			<h:outputText styleClass="h1 title"
+				value="#{text['compte.creation_compte.jsf']}" />
+		</div>
+		<div class="sixteen columns">
+			<h:form id="reg" rendered="#{!login.loggedIn}">
+				<p>
+					<h:outputLabel for="pseudo">
+					#{text['login.username.jsf']} <span class="required">*</span> :
+				</h:outputLabel>
+					<h:inputText id="pseudo"
+						value="#{compteCreationController.newCompte.login}"
+						validatorMessage="#{text['login.username.jsf']}: #{msg['compte.creation_compte.pseudo.err.jsf']}" />
+					<h:outputText
+						value="#{msg['compte.creation_compte.pseudo.info.jsf']}"
+						styleClass="info-box" />
+				</p>
+				<p>
+					<h:outputLabel for="password">
+					#{text['login.password.jsf']} <span class="required">*</span> :
+				</h:outputLabel>
+					<h:inputText id="password"
+						value="#{compteCreationController.newCompte.password}"
+						validatorMessage="#{text['login.password.jsf']}: #{msg['compte.creation_compte.password.err.jsf']}" />
+					<h:outputText
+						value="#{msg['compte.creation_compte.password.info.jsf']}"
+						styleClass="info-box" />
+				</p>
+				<p>
+					<h:outputLabel for="nom">
+					#{text['compte.nom.jsf']} <span class="required">*</span> :
+				</h:outputLabel>
+					<h:inputText id="nom"
+						value="#{compteCreationController.newCompte.nom}"
+						validatorMessage="#{text['compte.nom.jsf']}: #{msg['compte.creation_compte.nom.err.jsf']}" />
+					<h:outputText value="#{msg['compte.creation_compte.nom.info.jsf']}"
+						styleClass="info-box" />
+				</p>
+				<p>
+					<h:outputLabel for="prenom">
+					#{text['compte.prenom.jsf']} <span class="required">*</span> :
+				</h:outputLabel>
+					<h:inputText id="prenom"
+						value="#{compteCreationController.newCompte.prenom}"
+						validatorMessage="#{text['compte.prenom.jsf']}: #{msg['compte.creation_compte.prenom.err.jsf']}" />
+					<h:outputText
+						value="#{msg['compte.creation_compte.prenom.info.jsf']}"
+						styleClass="info-box" />
+				</p>
+				<p>
+					<h:outputLabel for="email">
+					#{text['compte.email.jsf']} <span class="required">*</span> :
+				</h:outputLabel>
+					<h:inputText id="email"
+						value="#{compteCreationController.newCompte.mail}"
+						validatorMessage="#{text['compte.email.jsf']}: #{msg['compte.creation_compte.email.err.jsf']}" />
+					<h:outputText
+						value="#{msg['compte.creation_compte.email.info.jsf']}"
+						styleClass="info-box" />
+				</p>
+				<p>
+					<h:outputLabel for="date">
+					#{text['compte.date_de_naissance.jsf']} <span class="required">*</span> :
+				</h:outputLabel>
+					<h:inputText id="date"
+						value="#{compteCreationController.newCompte.dateNaissance}"
+						validatorMessage="#{text['compte.date_de_naissance.jsf']}: #{msg['compte.creation_compte.date.err.jsf']}">
+						<f:convertDateTime pattern="d-M-yyyy" />
+					</h:inputText>
+					<h:outputText
+						value="#{msg['compte.creation_compte.date.info.jsf']}"
+						styleClass="info-box" />
+				</p>
+				<p>
+					<h:commandButton id="register"
+						action="#{compteCreationController.register()}"
+						value="#{text['compte.enregistrer.jsf']}" styleClass="button" />
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
+					<h:link value="#{text['compte.retour_acceuil.jsf']}"
+						outcome="/accueil" styleClass="link" />
+				</p>
+			</h:form>
+			<p class="required-box">
+				<span class="required">*</span> : #{text['all.required_box.jsf']}
+			</p>
+		</div>
 	</ui:define>
 </ui:composition>
