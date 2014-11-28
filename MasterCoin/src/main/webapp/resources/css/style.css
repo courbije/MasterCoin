@@ -108,9 +108,9 @@ body {
 }
 
 /*********************************************************************************/
-/* Error box                                                                     */
+/* NOTIFY                                                                        */
 /*********************************************************************************/
-#error-box {
+#notify.errors-box {
 	border: 1px solid #f46767;
 	background-color: #ffcccc;
 	border-radius: 5px;
@@ -118,7 +118,22 @@ body {
 	font-weight: bold;
 }
 
-#error-box li {
+#notify.errors-box li {
+	list-style: none;
+	margin: 5px;
+	text-align: center;
+	text-decoration: underline;
+}
+
+#notify.infos-box {
+	border: 1px solid #67f49d;
+	background-color: #ccfffb;
+	border-radius: 5px;
+	margin-top: 10px;
+	font-weight: bold;
+}
+
+#notify.infos-box li {
 	list-style: none;
 	margin: 5px;
 	text-align: center;
