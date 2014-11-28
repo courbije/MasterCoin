@@ -2,6 +2,7 @@ package fr.ufrima.m2pgi.ecom.data;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -15,11 +16,16 @@ public class EchangeOffreData {
 
     @Inject
     private EchangeOffreFacade echangeOffreFacade;
+	private List<EchangeOffre> echangesOffres;
 
     @Produces
     @Named
     public List<EchangeOffre> getOffres() {
-    	return echangeOffreFacade.findAll();
+    	return echangesOffres;
     }
 
+    @PostConstruct
+    public void init() {
+    	echangesOffres = echangeOffreFacade.findAll();
+    }
 }

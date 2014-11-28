@@ -7,9 +7,6 @@
 
 	<ui:define name="content">
 		<f:view>
-			<ui:insert name="menuCompte">
-				<ui:include src="/WEB-INF/templates/compte.xhtml" />
-			</ui:insert>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
 			<br />
