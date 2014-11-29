@@ -51,16 +51,16 @@ public class PorteMonnaieService {
 		porteMonnaieHistoriqueFacade.create(porteMonnaieHistorique);
 	}
 
-	public void removeFromPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) throws NotEnoughtMoneyException {
+	public void removeFromPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) throws NotEnoughMoneyException {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
 		if (res == null) {
 			context.setRollbackOnly();
-			throw new NotEnoughtMoneyException();
+			throw new NotEnoughMoneyException();
 		}
 		Double i = res.getMontant() - amount;
 		if (i < 0) {
 			context.setRollbackOnly();
-			throw new NotEnoughtMoneyException();
+			throw new NotEnoughMoneyException();
 		}
 		res.setMontant(i);
 		porteMonnaieFacade.edit(res);

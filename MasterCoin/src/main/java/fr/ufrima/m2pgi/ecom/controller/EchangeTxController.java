@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
@@ -20,7 +21,7 @@ import fr.ufrima.m2pgi.ecom.service.EchangeTxService;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
 
-@RequestScoped
+@ViewScoped
 @ManagedBean
 public class EchangeTxController {
 	 @ManagedProperty(value="#{login}")

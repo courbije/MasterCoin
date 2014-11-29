@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
-import fr.ufrima.m2pgi.ecom.service.NotEnoughtMoneyException;
+import fr.ufrima.m2pgi.ecom.service.NotEnoughMoneyException;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
@@ -79,7 +79,7 @@ public class PorteMonnaieController {
 			porteMonnaieService.removeFromPorteMonnaie(login.getCurrentUser(), monnaie, amount);
 			Util.DisplaySucces(facesContext);
 			init();
-		} catch (NotEnoughtMoneyException e) {
+		} catch (NotEnoughMoneyException e) {
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Pas assez d'argent", "Registration unsuccessful");
 			facesContext.addMessage(null, m);
 		}catch (Exception e) {
