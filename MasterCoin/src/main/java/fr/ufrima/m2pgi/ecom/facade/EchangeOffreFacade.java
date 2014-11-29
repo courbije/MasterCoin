@@ -38,6 +38,16 @@ public class EchangeOffreFacade
     }
     
     @SuppressWarnings("unchecked")
+ 	public List<EchangeOffre> findAllWhere(Monnaie monnaieAchat, Monnaie monnaieVente){
+     	 List<EchangeOffre> res =em.createQuery("select object(o) from EchangeOffre as o where o.monnaieAchat=:monnaieAchat and o.monnaieVendre=:monnaieVendre")
+     			.setParameter("monnaieAchat", monnaieAchat)
+     			.setParameter("monnaieVendre",monnaieVente)
+     			.getResultList();
+     	 if (res.size()==0) return null;
+     	 else return res;
+     }
+    
+    @SuppressWarnings("unchecked")
 	public List<EchangeOffre> findAllWhere(Monnaie monnaieAchat, Monnaie monnaieVente, Compte compte){
     	 List<EchangeOffre> res =em.createQuery("select object(o) from EchangeOffre as o where o.monnaieAchat=:monnaieAchat and o.monnaieVendre=:monnaieVendre and o.compte!=:compte")
     			.setParameter("monnaieAchat", monnaieAchat)

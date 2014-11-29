@@ -81,20 +81,23 @@ public class ProposerOffreController {
 	}
 
 	public void setIdV(String idV) {
-		if(idV!=null) {
+		if(idV!=null && !idV.equals("")) {
 			this.newEchangeOffre.setMonnaieVendre(this.monnaieFacade.find(Long.parseLong(idV)));
 		}
+		listeEchangeOffreAV =null;
 		this.idV = idV;
 	}
 
 	public String getIdA() {
 		return idA;
 	}
+	
 
 	public void setIdA(String idA) {
-		if(idA!=null) {
+		if(idA!=null && !idA.equals("")) {
 			this.newEchangeOffre.setMonnaieAchat(this.monnaieFacade.find(Long.parseLong(idA)));
 		}
+		listeEchangeOffreAV =null;
 		this.idA = idA;
 	}
 }
