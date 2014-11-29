@@ -27,6 +27,11 @@ public class PorteMonnaieService {
 	private PorteMonnaieHistoriqueFacade porteMonnaieHistoriqueFacade;
 
 	
+	public void addToPorteMonnaieWithHisto(Compte compte, Monnaie monnaie, Double amount) {
+		addToPorteMonnaie(compte, monnaie, amount);
+		createNewHistorique(compte, monnaie, amount);	
+	}
+	
 	public void addToPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
 		if (res == null) {
@@ -39,7 +44,6 @@ public class PorteMonnaieService {
 			res.setMontant(res.getMontant() + amount);
 			porteMonnaieFacade.edit(res);
 		}
-		createNewHistorique(compte, monnaie, amount);
 	}
 
 	private void createNewHistorique(Compte compte, Monnaie monnaie, Double amount) {
@@ -51,6 +55,11 @@ public class PorteMonnaieService {
 		porteMonnaieHistoriqueFacade.create(porteMonnaieHistorique);
 	}
 
+	public void removeFromPorteMonnaieWithHisto(Compte compte, Monnaie monnaie, Double amount) throws NotEnoughtMoneyException {
+		removeFromPorteMonnaie(compte, monnaie, amount);
+		createNewHistorique(compte, monnaie, -amount);
+	}
+	
 	public void removeFromPorteMonnaie(Compte compte, Monnaie monnaie, Double amount) throws NotEnoughtMoneyException {
 		PorteMonnaie res = porteMonnaieFacade.find(compte, monnaie);
 		if (res == null) {
@@ -64,6 +73,5 @@ public class PorteMonnaieService {
 		}
 		res.setMontant(i);
 		porteMonnaieFacade.edit(res);
-		createNewHistorique(compte, monnaie, -amount);
 	}
 }

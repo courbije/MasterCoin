@@ -1,7 +1,5 @@
 package fr.ufrima.m2pgi.ecom.util;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Random;
@@ -16,10 +14,13 @@ import javax.inject.Inject;
 import javax.transaction.UserTransaction;
 
 import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
+import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
+import fr.ufrima.m2pgi.ecom.facade.TransactionFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
+import fr.ufrima.m2pgi.ecom.model.Transaction;
 import fr.ufrima.m2pgi.ecom.service.EchangeOffreService;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 
@@ -28,6 +29,11 @@ import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 @TransactionManagement(TransactionManagementType.BEAN)
 public class AutoRun {
 
+	private final int nbEchange = 200;
+	private final int nbTransaction = 1000;
+	private final int nbPm = 30;
+	private final int arondi = 1000;
+	
 	@Resource
 	private UserTransaction transaction;
 
@@ -43,10 +49,16 @@ public class AutoRun {
 	@Inject
 	private EchangeOffreService echangeOffreService;
 
+	@Inject
+	private TransactionFacade transactionFacade;
+
 	private Random rand = new Random();
 
 	private ArrayList<Monnaie> monnaies = new ArrayList<Monnaie>();
 	private ArrayList<Compte> comptes = new ArrayList<Compte>();
+
+	@Inject
+	private EchangeOffreFacade echangeOffreFacade;
 
 	@PostConstruct
 	public void initialiser() throws Exception {
@@ -57,15 +69,18 @@ public class AutoRun {
 		generateComptes();
 		generatePorteMonnaies();
 		generateEchange();
+		generateTransaction();
 	}
 
 	private void generateEchange() throws Exception {
-		for (int i = 0; i < 200; i++) {
-			try {
-				createEchange();
-			} catch (Exception e) {
-
-			}
+		for (int i = 0; i < nbEchange; i++) {
+			createEchange();
+		}
+	}
+	
+	private void generateTransaction() throws Exception {
+		for (int i = 0; i < nbTransaction; i++) {
+			createTransaction();
 		}
 	}
 
@@ -74,31 +89,55 @@ public class AutoRun {
 		EchangeOffre eo = new EchangeOffre();
 		Compte compte = comptes.get(rng(0, comptes.size()));
 		eo.setCompte(compte);
-		eo.setDateCreation(new Date(rng(2000, 2014), rng(0, 12), rng(0, 30)));
+		eo.setDateCreation(new Date(114, rng(0, 12), rng(0, 30)));
 		eo.setMonnaieAchat(monnaies.get(rng(0, monnaies.size())));
 		eo.setMonnaieVendre(monnaies.get(rng(0, monnaies.size())));
 		eo.setMontantAchat(Drng(1, 100));
 		eo.setMontantVendre(Drng(1, 100));
-		try {
-			echangeOffreService.addOffre(compte, eo);
-		} catch (Exception e) {
-			transaction.rollback();
+		if (!eo.getMonnaieAchat().equals(eo.getMonnaieVendre())) {
+			echangeOffreFacade.create(eo);
+		}
+		transaction.commit();
+	}
+	
+	private void createTransaction() throws Exception {
+		transaction.begin();
+		Transaction t = new Transaction();
+		t.setCompteVendeur(comptes.get(rng(0, comptes.size())));
+		t.setCompteAcheteur(comptes.get(rng(0, comptes.size())));
+		t.setDateCreation(new Date(114, rng(0, 12), rng(0, 30)));
+		t.setDateValidation(new Date(114, rng(0, 12), rng(0, 30)));
+		t.setMonnaieAchat(monnaies.get(rng(0, monnaies.size())));
+		t.setMonnaieVendre(monnaies.get(rng(0, monnaies.size())));
+		t.setMontantAchat(Drng(1, 100));
+		t.setMontantVendre(Drng(1, 100));
+		if (!t.getMonnaieAchat().equals(t.getMonnaieVendre()) && !t.getCompteAcheteur().equals(t.getCompteVendeur())) {
+			transactionFacade.create(t);
 		}
 		transaction.commit();
 	}
 
 	private void generatePorteMonnaies() throws Exception {
 		transaction.begin();
-		for (int i = 0; i < 30; i++) {
-			porteMonnaieService.addToPorteMonnaie(comptes.get(rng(0, comptes.size())), monnaies.get(rng(0, monnaies.size())), Drng(1, 2000));
+		for (int i = 0; i < nbPm; i++) {
+			porteMonnaieService.addToPorteMonnaieWithHisto(comptes.get(rng(0, comptes.size())), monnaies.get(rng(0, monnaies.size())), Drng(1, 2000));
 		}
 		transaction.commit();
+		for (int i = 0; i < nbPm; i++) {
+			try {		
+				transaction.begin();
+				porteMonnaieService.removeFromPorteMonnaieWithHisto(comptes.get(rng(0, comptes.size())), monnaies.get(rng(0, monnaies.size())), Drng(1, 200));
+				transaction.commit();
+			} catch (Exception e) {
+				transaction.rollback();
+			}
+		}
 	}
 
 	private void generateComptes() throws Exception {
 		transaction.begin();
 		Compte c = new Compte();
-		c.setDateNaissance(new Date(rng(1900, 2000), rng(0, 12), rng(0, 20)));
+		c.setDateNaissance(new Date(rng(0, 114), rng(0, 12), rng(0, 20)));
 		c.setLogin("dontedit");
 		c.setPassword("dontedit");
 		c.setMail("dontedit@fake.fake");
@@ -160,7 +199,7 @@ public class AutoRun {
 
 	private Compte createCompte(String login) {
 		Compte c = new Compte();
-		c.setDateNaissance(new Date(rng(1900, 2000), rng(0, 12), rng(0, 30)));
+		c.setDateNaissance(new Date(rng(0, 114), rng(0, 12), rng(0, 30)));
 		c.setLogin(login);
 		c.setPassword("azerty");
 		c.setMail(login + "@fake.fake");
@@ -175,8 +214,8 @@ public class AutoRun {
 	}
 
 	private double Drng(int min, int max) {
-		//Truncation in case the decimals is too long
-		return Math.floor((rand.nextDouble() * (max - min) + min)*100000)/100000;
+		// Truncation in case the decimals is too long
+		return Math.floor((rand.nextDouble() * (max - min) + min) * arondi) / arondi;
 	}
 
 }

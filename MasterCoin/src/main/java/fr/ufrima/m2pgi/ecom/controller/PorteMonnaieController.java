@@ -52,7 +52,7 @@ public class PorteMonnaieController {
 
 	public void registerAdd() throws Exception {
 		try {
-			porteMonnaieService.addToPorteMonnaie(login.getCurrentUser(), monnaie, amount);
+			porteMonnaieService.addToPorteMonnaieWithHisto(login.getCurrentUser(), monnaie, amount);
 			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
 			facesContext.addMessage(null, m);
 		} catch (Exception e) {
@@ -76,7 +76,7 @@ public class PorteMonnaieController {
 
 	public void registerRemove() throws Exception {
 		try {
-			porteMonnaieService.removeFromPorteMonnaie(login.getCurrentUser(), monnaie, amount);
+			porteMonnaieService.removeFromPorteMonnaieWithHisto(login.getCurrentUser(), monnaie, amount);
 			Util.DisplaySucces(facesContext);
 			init();
 		} catch (NotEnoughtMoneyException e) {

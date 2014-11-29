@@ -37,10 +37,6 @@ public class Transaction implements Serializable
    private Monnaie monnaieVendre;
 
    @ManyToOne
-   @JoinColumn(name = "ide", nullable = false)
-   private EchangeOffre echangeOffre;
-   
-   @ManyToOne
    @JoinColumn(name = "idmA", nullable = false)
    private Monnaie monnaieAchat;
 
@@ -117,16 +113,6 @@ public class Transaction implements Serializable
    public void setCompteAcheteur(final Compte compte)
    {
       this.compteAcheteur = compte;
-   }
-   
-   public EchangeOffre getEchangeOffre()
-   {
-      return this.echangeOffre;
-   }
-
-   public void setEchangeOffre(final EchangeOffre echangeOffre)
-   {
-      this.echangeOffre = echangeOffre;
    }
    
    public Monnaie getMonnaieVendre()
