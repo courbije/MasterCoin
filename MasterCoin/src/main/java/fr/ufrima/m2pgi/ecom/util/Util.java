@@ -3,7 +3,8 @@ package fr.ufrima.m2pgi.ecom.util;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import fr.ufrima.m2pgi.ecom.service.NotEnoughtMoneyException;
+import fr.ufrima.m2pgi.ecom.service.NotEnoughMoneyException;
+import fr.ufrima.m2pgi.ecom.service.NotEnoughMoneyInBaseException;
 import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
 
 public class Util {
@@ -37,11 +38,14 @@ public class Util {
 			return errorMessage;
 		}
 
-		if (e.getClass().equals(NotEnoughtMoneyException.class)){
-			return "pas assez d'argent";
+		if (e.getClass().equals(NotEnoughMoneyException.class)){
+			return "Vous n'avez pas assez d'argent sur votre compte";
 		}
 		if(e.getClass().equals(SameMoneyException.class)) {
-			return "monnaie souhaitée doit être différente de la monnaie à vendre";
+			return "La monnaie souhaitée doit être différente de la monnaie à vendre";
+		}
+		if(e.getClass().equals(NotEnoughMoneyInBaseException.class)){
+			return "Aucune(s) offre(s) ne correspond à votre demande";
 		}
 		// Start with the exception and recurse to find the root cause
 		Throwable t = e;
@@ -52,6 +56,10 @@ public class Util {
 		}
 		// This is the root cause message
 		return errorMessage;
+	}
+	
+	public static Double round(Double d){
+		return Math.round(d*100000)/100000.0;
 	}
 
 }

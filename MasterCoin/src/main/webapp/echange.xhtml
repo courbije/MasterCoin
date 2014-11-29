@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<f:view>
+			<f:event type="preRenderView"
+				listener="#{login.forwardToLoginIfNotLoggedIn}" />
+
+		
+		  <div class="sixteen columns">
+			<h:outputText styleClass="h1 title" value="#{text['offre.message_accueil.jsf']}"/>
+		</div>
+		<h:form id="reg">
+			<h:outputText styleClass="h1" value="#{text['offre.creation_offre.jsf']}"/>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				
+				<h:outputLabel for="monnaie_voulue" value="#{text['echange.monnaie_achat.jsf']}" />
+				<h:selectOneMenu value="#{echangeTxController.newTransaction.monnaieAchat}">
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+						itemValue="#{m}" />
+					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+				</h:selectOneMenu>
+				<h:message for="monnaie_voulue" errorClass="invalid" />
+
+				<h:outputLabel for="quantite_voulue" value="#{text['echange.quantite_a_acheter.jsf']}" />
+				<h:inputText id="quantite_voulue" value="#{echangeTxController.newTransaction.montantAchat}" />
+				<h:message for="quantite_voulue" errorClass="invalid" />
+
+				<h:outputLabel for="monnaie_a_vendre" value="#{text['offre.monnaie_a_vendre.jsf']}" />
+				<h:selectOneMenu value="#{echangeTxController.newTransaction.monnaieVendre}">
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+						itemValue="#{m}" />
+					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+				</h:selectOneMenu>
+				<h:message for="monnaie_a_vendre" errorClass="invalid" />
+
+				<h:outputLabel for="quantite_a_vendre" value="#{text['offre.quantite_propose.jsf']}" />
+				<h:outputText id="quantite_a_vendre" value="#{echangeTxController.quantitePropose}" />
+				<h:message for="quantite_a_vendre" errorClass="invalid" />
+				
+			</h:panelGrid>
+			
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="register"
+						action="#{echangeTxController.register()}" value="Register"
+						styleClass="register" />
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:panelGrid>
+			</p>
+		</h:form>
+		
+
+        <h:outputText styleClass="h2" value="#{text['transactions.jsf']}"/><br/>
+		<h:panelGroup rendered="#{empty transaction}">
+			<h:outputText styleClass="em" value="#{text['echange.aucune_transaction_enregistree.jsf']}"/>		
+		</h:panelGroup>
+		<h:dataTable var="_transaction" value="#{transaction}" rendered="#{not empty transaction}" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header"><h:outputText value="#{text['echange.monnaie_achat.jsf']}"/></f:facet>
+                <h:outputText value="#{_transaction.monnaieAchat.acroyme} #{_transaction.monnaieAchat.nom}" />
+            </h:column>
+			<h:column>
+				<f:facet name="header"><h:outputText value="#{text['echange.quantite_achat.jsf']}"/></f:facet>
+                <h:outputText value="#{_transaction.montantAchat}" />
+            </h:column>
+            <h:column>
+				<f:facet name="header"><h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}"/></f:facet>
+                <h:outputText value="#{_transaction.monnaieVendre.acroyme} #{_transaction.monnaieVendre.nom}" />
+            </h:column>
+            <h:column>
+				<f:facet name="header"><h:outputText value="#{text['echange.quantite_a_vendre.jsf']}"/></f:facet>
+                <h:outputText value="#{_transaction.montantVendre}" />
+            </h:column>
+		</h:dataTable>
+		
+		
+		
+		
+		
+		
+		
+				<h:dataTable var="_offre" value="#{offres}"
+			rendered="#{not empty offres}" styleClass="simpletablestyle">
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{text['offre.monnaie_souhaitee.jsf']}" />
+				</f:facet>
+				<h:outputText
+					value="#{_offre.monnaieAchat.acroyme}/#{_offre.monnaieAchat.nom}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{text['offre.quantite_souhaitee.jsf']}" />
+				</f:facet>
+				<h:outputText value="#{_offre.montantAchat}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{text['offre.monnaie_a_vendre.jsf']}" />
+				</f:facet>
+				<h:outputText
+					value="#{_offre.monnaieVendre.acroyme}/#{_offre.monnaieVendre.nom}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{text['offre.quantite_a_vendre.jsf']}" />
+				</f:facet>
+				<h:outputText value="#{_offre.montantVendre}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="#{text['offre.date_creation.jsf']}" />
+				</f:facet>
+				<h:outputText value="#{_offre.dateCreation}" />
+			</h:column>
+		</h:dataTable>
+		
+		
+		
+		
+		
+		
+		
+		
+	<script>
+	 $(function() {
+		 $("#menu-echanger").addClass("current_page_item");
+	});
+	</script>
+	</f:view>
+	</ui:define>
+</ui:composition>
