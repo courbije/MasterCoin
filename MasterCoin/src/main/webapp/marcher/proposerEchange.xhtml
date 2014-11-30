@@ -182,7 +182,9 @@
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.date_creation.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.dateCreation}" />
+						<h:outputText value="#{_offre.dateCreation}">
+							<f:convertDateTime dateStyle="long" type="both" />
+						</h:outputText>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
@@ -278,7 +280,9 @@
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.date_creation.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.dateCreation}" />
+						<h:outputText value="#{_offre.dateCreation}">
+							<f:convertDateTime dateStyle="long" type="both" />
+						</h:outputText>
 					</h:column>
 					<h:column>
 						<f:facet name="header">
