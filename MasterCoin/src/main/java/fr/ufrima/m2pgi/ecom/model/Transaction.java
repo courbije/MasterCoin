@@ -14,6 +14,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import fr.ufrima.m2pgi.ecom.util.GtZero;
+
 @SuppressWarnings("serial")
 @Entity
 public class Transaction implements Serializable
@@ -41,9 +43,11 @@ public class Transaction implements Serializable
    private Monnaie monnaieAchat;
 
    @Column(nullable = false)
+   @GtZero
    private Double montantVendre;
 
    @Column(nullable = false)
+   @GtZero
    private Double montantAchat;
 
    @Column(nullable = false)

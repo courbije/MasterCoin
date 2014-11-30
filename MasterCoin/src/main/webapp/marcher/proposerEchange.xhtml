@@ -36,15 +36,13 @@
 							</f:facet>
 							<h:commandButton
 								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
-								value="->#{m.acroyme}"
-								rendered="#{m.id==echangeController.idA}"
+								value="->#{m.acroyme}" rendered="#{m.id==echangeController.idA}"
 								style="font-weight:bold">
 								<f:param name="idA" value="#{m.id}" />
 							</h:commandButton>
 							<h:commandButton
 								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
-								value="#{m.acroyme}"
-								rendered="#{m.id!=echangeController.idA}">
+								value="#{m.acroyme}" rendered="#{m.id!=echangeController.idA}">
 								<f:param name="idV" value="" />
 								<f:param name="idA" value="#{m.id}" />
 							</h:commandButton>
@@ -77,8 +75,7 @@
 						<h:column>
 							<h:commandButton
 								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
-								value="#{m.acroyme}"
-								rendered="#{m.id!=echangeController.idA}">
+								value="#{m.acroyme}" rendered="#{m.id!=echangeController.idA}">
 								<f:param name="idV" value="#{m.id}" />
 								<f:param name="idA" value="#{echangeController.idA}" />
 							</h:commandButton>
@@ -95,6 +92,7 @@
 							</f:facet>
 							<h:outputLabel value="#{m.nom}" />
 						</h:column>
+
 					</h:dataTable>
 				</div>
 
@@ -186,6 +184,12 @@
 						</f:facet>
 						<h:outputText value="#{_offre.dateCreation}" />
 					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.taux.jsf']}" />
+						</f:facet>
+						<h:outputText value="#{ _offre.montantAchat/_offre.montantVendre}" />
+					</h:column>
 				</h:dataTable>
 
 				<h:form id="reg3">
@@ -275,6 +279,12 @@
 							<h:outputText value="#{text['echange.date_creation.jsf']}" />
 						</f:facet>
 						<h:outputText value="#{_offre.dateCreation}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.taux.jsf']}" />
+						</f:facet>
+						<h:outputText value="#{ _offre.montantAchat/_offre.montantVendre}" />
 					</h:column>
 				</h:dataTable>
 			</h:panelGroup>

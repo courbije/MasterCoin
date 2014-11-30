@@ -16,6 +16,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.Valid;
 
+import fr.ufrima.m2pgi.ecom.util.GtZero;
+
 @SuppressWarnings("serial")
 @Entity
 public class EchangeOffre implements Serializable, Comparable<EchangeOffre> {
@@ -39,11 +41,11 @@ public class EchangeOffre implements Serializable, Comparable<EchangeOffre> {
 	private Monnaie monnaieAchat;
 
 	@Column(nullable = false)
-	@Min(0)
+	@GtZero
 	private Double montantVendre;
 
 	@Column(nullable = false)
-	@Min(0)
+	@GtZero
 	private Double montantAchat;
 
 	@Column(nullable = false)
