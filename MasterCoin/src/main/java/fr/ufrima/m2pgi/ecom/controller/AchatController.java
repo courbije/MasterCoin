@@ -5,10 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -23,15 +21,11 @@ import fr.ufrima.m2pgi.ecom.util.Util;
 
 @ViewScoped
 @ManagedBean
-public class EchangeTxController {
+public class AchatController {
 	 @ManagedProperty(value="#{login}")
 	    private Login login;
 	    
-		public void setLogin(Login login) {
-			this.login = login;
-		}
-		
-	@Inject
+		@Inject
 	private EchangeTxService echangeTxFacade;
 
 	@Inject
@@ -42,16 +36,8 @@ public class EchangeTxController {
 	
 	private Transaction newTransaction;
 
-	public Transaction getNewTransaction() {
-		return newTransaction;
-	}
-
-	public void setNewTransaction(Transaction newTransaction) {
-		this.newTransaction = newTransaction;
-	}
-
 	@PostConstruct
-	public void initNewMember() {
+	private void initNewMember() {
 		newTransaction = new Transaction();
 	}
 
@@ -66,7 +52,19 @@ public class EchangeTxController {
 			Util.DisplayError(e,facesContext);
 		}
 	}
-	
+
+	public Transaction getNewTransaction() {
+		return newTransaction;
+	}
+
+	public void setNewTransaction(Transaction newTransaction) {
+		this.newTransaction = newTransaction;
+	}
+
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+
 	public Double getQuantitePropose() {
 
 		Monnaie monnaieAchat = newTransaction.getMonnaieAchat();

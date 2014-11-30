@@ -47,9 +47,6 @@ public class AutoRun {
 	private PorteMonnaieService porteMonnaieService;
 
 	@Inject
-	private EchangeOffreService echangeOffreService;
-
-	@Inject
 	private TransactionFacade transactionFacade;
 
 	private Random rand = new Random();
@@ -89,7 +86,7 @@ public class AutoRun {
 		EchangeOffre eo = new EchangeOffre();
 		Compte compte = comptes.get(rng(0, comptes.size()));
 		eo.setCompte(compte);
-		eo.setDateCreation(new Date(114, rng(0, 12), rng(0, 30)));
+		eo.setDateCreation(new Date(114, rng(0, 11), rng(0, 30)));
 		eo.setMonnaieAchat(monnaies.get(rng(0, monnaies.size())));
 		eo.setMonnaieVendre(monnaies.get(rng(0, monnaies.size())));
 		eo.setMontantAchat(Drng(1, 100));
@@ -105,8 +102,8 @@ public class AutoRun {
 		Transaction t = new Transaction();
 		t.setCompteVendeur(comptes.get(rng(0, comptes.size())));
 		t.setCompteAcheteur(comptes.get(rng(0, comptes.size())));
-		t.setDateCreation(new Date(114, rng(0, 12), rng(0, 30)));
-		t.setDateValidation(new Date(114, rng(0, 12), rng(0, 30)));
+		t.setDateCreation(new Date(114, rng(0, 11), rng(0, 30)));
+		t.setDateValidation(new Date(114, rng(0, 11), rng(0, 30)));
 		t.setMonnaieAchat(monnaies.get(rng(0, monnaies.size())));
 		t.setMonnaieVendre(monnaies.get(rng(0, monnaies.size())));
 		t.setMontantAchat(Drng(1, 100));

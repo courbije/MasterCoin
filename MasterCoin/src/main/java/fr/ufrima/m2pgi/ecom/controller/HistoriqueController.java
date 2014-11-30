@@ -1,6 +1,5 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;

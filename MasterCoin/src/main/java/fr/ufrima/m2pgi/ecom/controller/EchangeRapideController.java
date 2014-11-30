@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -14,16 +14,18 @@ import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.service.EchangeOffreService;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
-@ViewScoped
+@RequestScoped
 @ManagedBean
-public class EchangeOffreController {
+public class EchangeRapideController {
 	
     @ManagedProperty(value="#{login}")
     private Login login;
     
-	public void setLogin(Login login) {
-		this.login = login;
-	}
+	@ManagedProperty(value = "#{achatController}")
+	private AchatController achatController;
+
+	@ManagedProperty(value = "#{offreController}")
+	private OffreController offreController;
 	
 	@Inject
 	private EchangeOffreFacade echangeFacade;
@@ -33,34 +35,24 @@ public class EchangeOffreController {
 	
 	@Inject
 	private FacesContext facesContext;
-
-
-	private EchangeOffre newEchangeOffre;
-
+	
 	private List<EchangeOffre> echangeOffreUser;
 
-	public EchangeOffre getNewEchangeOffre() {
-		return newEchangeOffre;
-	}
-
-	public void setNewEchangeOffre(EchangeOffre newEchangeOffre) {
-		this.newEchangeOffre = newEchangeOffre;
-	}
-
+	
 	@PostConstruct
-	public void init() {
-		newEchangeOffre = new EchangeOffre();
+	private void init() {
 		echangeOffreUser = echangeFacade.findByCompte(login.getCurrentUser());
 	}
 
-	public void register() throws Exception {
-		try {
-			echangeService.addOffre(login.getCurrentUser(),newEchangeOffre);
-			Util.DisplaySucces(facesContext);
-			init();
-		} catch (Exception e) {
-			Util.DisplayError(e,facesContext);
-		}
+	public void registerOffre() throws Exception {
+		offreController.register();
+		init();
+	}
+	
+
+	public void registerAchat() throws Exception {
+		achatController.register();
+		init();
 	}
 	
 	public void removeOffre(String id) throws Exception {
@@ -73,7 +65,20 @@ public class EchangeOffreController {
 		}
 	}
 
+	public void setLogin(Login login) {
+		this.login = login;
+	}
+
 	public List<EchangeOffre> getOffres() {
 		return echangeOffreUser;
 	}
+
+	public void setAchatController(AchatController achatController) {
+		this.achatController = achatController;
+	}
+
+	public void setOffreController(OffreController offreController) {
+		this.offreController = offreController;
+	}
+	
 }

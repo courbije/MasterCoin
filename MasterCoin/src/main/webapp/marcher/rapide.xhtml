@@ -5,6 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	template="/WEB-INF/templates/default.xhtml">
 
+
 	<ui:define name="content">
 		<f:view>
 			<f:event type="preRenderView"
@@ -19,7 +20,7 @@
 					<h:outputLabel for="monnaie_voulue"
 						value="#{text['echange.monnaie_souhaitee.jsf']}" />
 					<h:selectOneMenu
-						value="#{echangeOffreController.newEchangeOffre.monnaieAchat}">
+						value="#{offreController.newEchangeOffre.monnaieAchat}">
 						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 							itemValue="#{m}" />
 						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
@@ -29,13 +30,13 @@
 					<h:outputLabel for="quantite_voulue"
 						value="#{text['echange.quantite_souhaitee.jsf']}" />
 					<h:inputText id="quantite_voulue"
-						value="#{echangeOffreController.newEchangeOffre.montantAchat}" />
+						value="#{offreController.newEchangeOffre.montantAchat}" />
 					<h:message for="quantite_voulue" errorClass="invalid" />
 
 					<h:outputLabel for="monnaie_a_vendre"
 						value="#{text['echange.monnaie_a_vendre.jsf']}" />
 					<h:selectOneMenu
-						value="#{echangeOffreController.newEchangeOffre.monnaieVendre}">
+						value="#{offreController.newEchangeOffre.monnaieVendre}">
 						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 							itemValue="#{m}" />
 						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
@@ -45,7 +46,7 @@
 					<h:outputLabel for="quantite_a_vendre"
 						value="#{text['echange.quantite_a_vendre.jsf']}" />
 					<h:inputText id="quantite_a_vendre"
-						value="#{echangeOffreController.newEchangeOffre.montantVendre}" />
+						value="#{offreController.newEchangeOffre.montantVendre}" />
 					<h:message for="quantite_a_vendre" errorClass="invalid" />
 
 				</h:panelGrid>
@@ -53,7 +54,7 @@
 				<p>
 					<h:panelGrid columns="2">
 						<h:commandButton id="register"
-							action="#{echangeOffreController.register()}" value="Register"
+							action="#{echangeRapideController.registerOffre()}" value="Register"
 							styleClass="register" />
 						<h:messages styleClass="messages" errorClass="invalid"
 							infoClass="valid" warnClass="warning" globalOnly="true" />
@@ -61,16 +62,61 @@
 				</p>
 			</h:form>
 
+
+		<h:form id="reg3">
+			<h:outputText styleClass="h1" value="#{text['echange.creation_offre.jsf']}"/>
+			<h:panelGrid columns="3" columnClasses="titleCell">
+				
+				<h:outputLabel for="monnaie_voulue" value="#{text['echange.monnaie_achat.jsf']}" />
+				<h:selectOneMenu value="#{achatController.newTransaction.monnaieAchat}">
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+						itemValue="#{m}" />
+					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+				</h:selectOneMenu>
+				<h:message for="monnaie_voulue" errorClass="invalid" />
+
+				<h:outputLabel for="quantite_voulue" value="#{text['echange.quantite_a_acheter.jsf']}" />
+				<h:inputText id="quantite_voulue" value="#{achatController.newTransaction.montantAchat}" />
+				<h:message for="quantite_voulue" errorClass="invalid" />
+
+				<h:outputLabel for="monnaie_a_vendre" value="#{text['echange.monnaie_a_vendre.jsf']}" />
+				<h:selectOneMenu value="#{achatController.newTransaction.monnaieVendre}">
+					<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+						itemValue="#{m}" />
+					<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+				</h:selectOneMenu>
+				<h:message for="monnaie_a_vendre" errorClass="invalid" />
+
+				<h:outputLabel for="quantite_a_vendre" value="#{text['echange.quantite_propose.jsf']}" />
+				<h:outputText id="quantite_a_vendre" value="#{achatController.quantitePropose}" />
+				<h:message for="quantite_a_vendre" errorClass="invalid" />
+				
+			</h:panelGrid>
+			
+			<p>
+				<h:panelGrid columns="2">
+					<h:commandButton id="register"
+						action="#{echangeRapideController.registerAchat()}" value="Register"
+						styleClass="register">
+							<f:param name="action" value="delete" />
+					</h:commandButton>
+					<h:messages styleClass="messages" errorClass="invalid"
+						infoClass="valid" warnClass="warning" globalOnly="true" />
+				</h:panelGrid>
+			</p>
+		</h:form>
+
+
 			<h:outputText styleClass="h2"
 				value="#{text['echange.offres_compte.jsf']}" />
 			<br />
-			<h:panelGroup rendered="#{empty echangeOffreController.offres}">
+			<h:panelGroup rendered="#{empty echangeRapideController.offres}">
 				<h:outputText styleClass="em"
 					value="#{text['echange.aucune_offre_enregistree.jsf']}" />
 			</h:panelGroup>
 			<h:dataTable var="_offre" id="table_id"
-				value="#{echangeOffreController.offres}"
-				rendered="#{not empty echangeOffreController.offres}"
+				value="#{echangeRapideController.offres}"
+				rendered="#{not empty echangeRapideController.offres}"
 				styleClass="display">
 				<h:column>
 					<f:facet name="header">
@@ -110,7 +156,7 @@
 					</f:facet>
 					<h:form>
 						<h:commandButton
-							action="#{echangeOffreController.removeOffre(_offre.id)}"
+							action="#{achatControllerr.removeOffre(_offre.id)}"
 							value="#{text['echange.supprimer.jsf']}">
 						</h:commandButton>
 					</h:form>
