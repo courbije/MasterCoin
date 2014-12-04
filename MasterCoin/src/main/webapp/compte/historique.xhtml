@@ -25,7 +25,7 @@
 			<h:dataTable var="_pm" id="table_id"
 				value="#{historiqueController.porteMonnaiesHistorique}"
 				rendered="#{not empty historiqueController.porteMonnaiesHistorique}"
-				styleClass="display">
+				styleClass="display dt-responsive" width="100%">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
@@ -65,7 +65,7 @@
 			<h:dataTable var="t" id="table_id2"
 				value="#{historiqueController.transactionHisto}"
 				rendered="#{not empty historiqueController.transactionHisto}"
-				styleClass="display">
+				styleClass="display dt-responsive" width="100%">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="#{text['transaction.monnaie_acheter.jsf']}" />
@@ -118,7 +118,7 @@
 				    	 language : {
 				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
 				         }});
-				    
+				   
 				} );
 				$(document).ready( function () {
 				    $('#table_id2').DataTable({bInfo : false,
