@@ -158,31 +158,41 @@
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.monnaieAchat.nom}" />
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.monnaieAchat.nom}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.montantAchat}" />
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.montantAchat}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.monnaieVendre.nom}" />
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.monnaieVendre.nom}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.montantVendre}" />
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.montantVendre}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.date_creation.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.dateCreation}">
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.dateCreation}">
 							<f:convertDateTime dateStyle="long" type="both" />
 						</h:outputText>
 					</h:column>
@@ -236,8 +246,25 @@
 							target="#{achatController.newTransaction.monnaieAchat}"
 							value="#{echangeController.monnaieA}" />
 					</h:commandButton>
-
-
+					<h:commandButton id="panier" action="#{achatController.pannier()}"
+						value="Pannier" styleClass="register">
+						<f:setPropertyActionListener
+							target="#{achatController.newTransaction.monnaieVendre}"
+							value="#{echangeController.monnaieV}" />
+						<f:setPropertyActionListener
+							target="#{achatController.newTransaction.monnaieAchat}"
+							value="#{echangeController.monnaieA}" />
+					</h:commandButton>
+					<h:commandButton id="calculer"
+						action="#{achatController.calculerQuantitePropose()}" value="caluculer"
+						styleClass="register">
+						<f:setPropertyActionListener
+							target="#{achatController.newTransaction.monnaieVendre}"
+							value="#{echangeController.monnaieV}" />
+						<f:setPropertyActionListener
+							target="#{achatController.newTransaction.monnaieAchat}"
+							value="#{echangeController.monnaieA}" />
+					</h:commandButton>
 				</h:form>
 
 
@@ -249,38 +276,49 @@
 						value="#{text['echange.aucune_offre_enregistree.jsf']}" />
 				</h:panelGroup>
 				<h:dataTable var="_offre" id="table_id2"
+					rowClasses="_offre.compte.equals(login.currentUser) ? 'rouge' : 'noir'"
 					value="#{echangeController.listeEchangeOffreVA}"
 					rendered="#{not empty echangeController.listeEchangeOffreVA}"
 					styleClass="display">
 					<h:column>
 						<f:facet name="header">
-							<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
+							<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}"/>
 						</f:facet>
-						<h:outputText value="#{_offre.monnaieVendre.nom}" />
+						<h:outputText
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.monnaieVendre.nom}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.montantVendre}" />
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.montantVendre}"  />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.monnaieAchat.nom}" />
+						<h:outputText
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"	 
+							value="#{_offre.monnaieAchat.nom}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.montantAchat}" />
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.montantAchat}" />
 					</h:column>
 					<h:column>
 						<f:facet name="header">
 							<h:outputText value="#{text['echange.date_creation.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{_offre.dateCreation}">
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{_offre.dateCreation}">
 							<f:convertDateTime dateStyle="long" type="both" />
 						</h:outputText>
 					</h:column>
@@ -288,7 +326,9 @@
 						<f:facet name="header">
 							<h:outputText value="#{text['transaction.taux.jsf']}" />
 						</f:facet>
-						<h:outputText value="#{ _offre.montantAchat/_offre.montantVendre}" />
+						<h:outputText 
+							style="color : #{_offre.compte.equals(login.currentUser) ? 'red' : 'black'}"
+							value="#{ _offre.montantAchat/_offre.montantVendre}" />
 					</h:column>
 				</h:dataTable>
 			</h:panelGroup>

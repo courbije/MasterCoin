@@ -103,15 +103,19 @@
 				</h:panelGrid>
 
 				<p>
-					<h:panelGrid columns="2">
+					<h:panelGrid columns="3">
 						<h:commandButton id="register"
 							action="#{echangeRapideController.registerAchat()}"
 							value="Register" styleClass="register">
-							<f:param name="action" value="delete" />
 						</h:commandButton>
-						<h:messages styleClass="messages" errorClass="invalid"
-							infoClass="valid" warnClass="warning" globalOnly="true" />
+						<h:commandButton id="panier" action="#{achatController.pannier()}"
+							value="Pannier" styleClass="register">
+						</h:commandButton>
+						<h:commandButton id="calculer" action="#{achatController.calculerQuantitePropose()}"
+							value="caluculer" styleClass="register">
+						</h:commandButton>
 					</h:panelGrid>
+
 				</p>
 			</h:form>
 
@@ -171,9 +175,11 @@
 						<h:outputText value="#{text['echange.supprimer.jsf']}" />
 					</f:facet>
 					<h:form>
-						<h:commandButton action="#{ech.removeOffre(_offre.id)}"
+						<h:commandButton
+							action="#{echangeRapideController.removeOffre(_offre.id)}"
 							value="#{text['echange.supprimer.jsf']}">
 						</h:commandButton>
+
 					</h:form>
 				</h:column>
 
