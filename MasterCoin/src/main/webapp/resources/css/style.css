@@ -16,6 +16,24 @@ body {
 	margin: 0;
 	padding: 0;
 	font-weight: 900;
+	display: block;
+	margin-top: 10px;
+}
+
+.em {
+	font-style: italic;
+}
+
+.block {
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.dataTables_wrapper {
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
 /*********************************************************************************/
@@ -234,12 +252,20 @@ body {
 
 p label {
 	display: block;
-	width: 165px;
 	float: left;
 }
 
-p input[type="text"], p input[type="password"]  {
-	width: 215px;
+p label.big-label {
+	width: 165px;
+}
+
+p label.small-label {
+	width: 100px;
+}
+
+p input[type="text"], p input[type="password"],
+p select  {
+	width: 180px;
 	border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
 	-webkit-boder-radius: 5px 5px 5px 5px;
@@ -247,9 +273,14 @@ p input[type="text"], p input[type="password"]  {
 	padding: 3px;
 }
 
-p input[type="text"]:focus, p input[type="password"]:focus {
+p input[type="text"]:focus, p input[type="password"]:focus,
+p select:focus {
 	border: solid 1px #01A9DC;
 	box-shadow: 0 0 5px 1px #969696;
+}
+
+p select {
+	width: 188px;
 }
 
 .info-box {
