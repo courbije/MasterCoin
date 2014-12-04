@@ -9,7 +9,10 @@
 		<f:view>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
-
+			<div class="sixteen columns">
+				<h:outputText styleClass="h1 title"
+					value="#{text['header.porteMonnaie.jsf']}" />
+			</div>
 			<div class="eight columns">
 				<h:outputText styleClass="h2"
 					value="#{text['pm.ajouter_porte_monnaie.jsf']}" />
