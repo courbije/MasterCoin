@@ -236,8 +236,25 @@
 							target="#{achatController.newTransaction.monnaieAchat}"
 							value="#{echangeController.monnaieA}" />
 					</h:commandButton>
-
-
+					<h:commandButton id="panier" action="#{achatController.pannier()}"
+						value="Pannier" styleClass="register">
+						<f:setPropertyActionListener
+							target="#{achatController.newTransaction.monnaieVendre}"
+							value="#{echangeController.monnaieV}" />
+						<f:setPropertyActionListener
+							target="#{achatController.newTransaction.monnaieAchat}"
+							value="#{echangeController.monnaieA}" />
+					</h:commandButton>
+					<h:commandButton id="calculer"
+						action="#{achatController.calculerQuantitePropose()}" value="caluculer"
+						styleClass="register">
+						<f:setPropertyActionListener
+							target="#{achatController.newTransaction.monnaieVendre}"
+							value="#{echangeController.monnaieV}" />
+						<f:setPropertyActionListener
+							target="#{achatController.newTransaction.monnaieAchat}"
+							value="#{echangeController.monnaieA}" />
+					</h:commandButton>
 				</h:form>
 
 

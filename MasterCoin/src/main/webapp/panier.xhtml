@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<f:view>
+			<h:outputText styleClass="h2" value="#{text['panier.accueil.jsf']}" />
+			<br />
+			<h:panelGroup rendered="#{empty panier.articles}">
+				<h:outputText styleClass="em"
+					value="#{text['panier.panier_vide.jsf']}" />
+			</h:panelGroup>
+			<h:dataTable var="p" id="table_id" value="#{panier.articles}"
+				binding="#{table}" rendered="#{not empty panier.articles}"
+				styleClass="display">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.monnaie_achat.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{p.monnaieAchat.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.quantite_a_acheter.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{p.montantAchat}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{p.monnaieVendre.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{panier.montantVendre(table.rowIndex)}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.supprimer.jsf']}" />
+					</f:facet>
+					<h:form>
+						<h:commandButton action="#{panier.supprimer(table.rowIndex)}"
+							value="#{table.rowIndex} #{text['echange.supprimer.jsf']}">
+						</h:commandButton>
+					</h:form>
+				</h:column>
+
+			</h:dataTable>
+			<h:panelGroup rendered="#{not empty panier.articles}">
+				<h:form>
+					<h:commandButton id="valider" action="#{panier.valider()}"
+						value="Valide" />
+					<h:commandButton id="vider" action="#{panier.clean()}"
+						value="Vider" />
+				</h:form>
+			</h:panelGroup>
+		</f:view>
+		<script>
+				$(document).ready( function () {
+					 $('#table_id').DataTable({bInfo : false,
+						 paging: false,
+						 searching: false,
+				    	 language : {
+				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+				         }});
+		    
+				} );
+			</script>
+	</ui:define>
+</ui:composition>

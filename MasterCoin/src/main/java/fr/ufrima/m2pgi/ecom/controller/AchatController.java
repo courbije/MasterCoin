@@ -1,8 +1,6 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -11,29 +9,25 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
-import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
-import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 import fr.ufrima.m2pgi.ecom.service.EchangeTxService;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
-
 @ViewScoped
 @ManagedBean
 public class AchatController {
-	 @ManagedProperty(value="#{login}")
-	    private Login login;
-	    
-		@Inject
+	@ManagedProperty(value = "#{login}")
+	private Login login;
+
+	@ManagedProperty(value = "#{panier}")
+	private Panier panier;
+
+	@Inject
 	private EchangeTxService echangeTxFacade;
 
 	@Inject
 	private FacesContext facesContext;
 
-	@Inject
-	private EchangeOffreFacade echangeOffreFacade; 
-	
 	private Transaction newTransaction;
 
 	@PostConstruct
@@ -49,10 +43,15 @@ public class AchatController {
 			Util.DisplaySucces(facesContext);
 			initNewMember();
 		} catch (Exception e) {
-			Util.DisplayError(e,facesContext);
+			Util.DisplayError(e, facesContext);
 		}
 	}
 
+	public void pannier() {
+		panier.addArticles(newTransaction);
+		Util.DisplaySucces("Article ajouté !",facesContext);
+	}
+	
 	public Transaction getNewTransaction() {
 		return newTransaction;
 	}
@@ -65,40 +64,15 @@ public class AchatController {
 		this.login = login;
 	}
 
+	public void setPanier(Panier panier) {
+		this.panier = panier;
+	}
+
 	public Double getQuantitePropose() {
-
-		Monnaie monnaieAchat = newTransaction.getMonnaieAchat();
-		Monnaie monnaieVendre = newTransaction.getMonnaieVendre();
-		Double montantVoulu = newTransaction.getMontantAchat();
-		double montantObtenu= 0;
-		List<EchangeOffre> echangeOffre=echangeOffreFacade.findAllWhere(monnaieVendre,monnaieAchat,this.login.getCurrentUser());
-		if (echangeOffre==null){
-			return 0.0;
-		}
-		Collections.sort(echangeOffre);
-		
-		double montantCourant=0; int i=0;
-		while (i<echangeOffre.size()&&montantCourant<montantVoulu){
-			montantCourant+=echangeOffre.get(i).getMontantVendre();
-			if (montantCourant>montantVoulu){
-				double ancienMontantAchat = echangeOffre.get(i).getMontantAchat();
-				double ancienMontantVendre = echangeOffre.get(i).getMontantVendre();
-				
-				echangeOffre.get(i).setMontantVendre(montantCourant-montantVoulu);
-				echangeOffre.get(i).setMontantAchat(echangeOffre.get(i).getMontantVendre()*ancienMontantAchat/ancienMontantVendre);
-				montantObtenu += ancienMontantAchat - echangeOffre.get(i).getMontantAchat();
-				montantCourant=montantVoulu;
-			}
-			else {
-				montantObtenu += echangeOffre.get(i).getMontantAchat();
-			}
-			i++;
-		}
-		if (montantCourant!=montantVoulu){
-			// Pas assez d'argent dans la base
-			return 0.0;
-		}
-		return montantObtenu;
-
+		return echangeTxFacade.calculerMontantVendre(newTransaction, login.getCurrentUser());
+	}
+	
+	public void calculerQuantitePropose() {
+		newTransaction.setMontantVendre(echangeTxFacade.calculerMontantVendre(newTransaction, login.getCurrentUser()));
 	}
 }
