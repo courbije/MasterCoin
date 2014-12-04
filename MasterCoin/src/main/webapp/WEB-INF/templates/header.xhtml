@@ -58,6 +58,8 @@
 							action="#{credentials.logout}" rendered="#{login.loggedIn}"
 							styleClass="button" />
 					</h:form>
+					<h:link id="panier"
+							value="#{text['panier.accueil.jsf']}" outcome="/panier" styleClass="link" />
 				</div>
 			</div>
 			<div id="nav" role="navigation" class="sixteen columns">
