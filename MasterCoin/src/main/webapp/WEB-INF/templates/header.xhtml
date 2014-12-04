@@ -47,7 +47,7 @@
 							action="#{credentials.login('header')}"
 							rendered="#{!login.loggedIn}" styleClass="button" />
 
-						<h:button value="#{text['login.register.jsf']}" outcome="register"
+						<h:button value="#{text['login.register.jsf']}" outcome="/register"
 							rendered="#{!login.loggedIn}" styleClass="link" />
 
 						<h:outputLabel

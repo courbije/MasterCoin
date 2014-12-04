@@ -12,6 +12,7 @@ import javax.inject.Inject;
 
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 import fr.ufrima.m2pgi.ecom.service.EchangeTxService;
+import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
 @SessionScoped
@@ -34,18 +35,22 @@ public class Panier {
 		articles = new ArrayList<Transaction>();
 	}
 
-	public void addArticles(Transaction article) {
+	public void addArticles(Transaction article) throws SameMoneyException {
+		if (article.getMonnaieAchat().equals(article.getMonnaieVendre())) {
+			throw new SameMoneyException();
+		}
 		Transaction t = article.clone();
 		this.articles.add(t);
 	}
 
 	public void valider() {
+		login.forwardToLoginIfNotLoggedIn();
 		try {
-			echangeTxFacade.validerPanniers(articles,login.getCurrentUser());
+			echangeTxFacade.validerPanniers(articles, login.getCurrentUser());
 			Util.DisplaySucces(facesContext);
 			initNewMember();
 		} catch (Exception e) {
-			Util.DisplayError(e,facesContext);
+			Util.DisplayError(e, facesContext);
 		}
 	}
 
@@ -59,11 +64,11 @@ public class Panier {
 	public double montantVendre(int i) {
 		return echangeTxFacade.calculerMontantVendre(articles.get(i), login.getCurrentUser());
 	}
-	
+
 	public void clean() {
 		articles.clear();
 	}
-	
+
 	public List<Transaction> getArticles() {
 		return articles;
 	}
