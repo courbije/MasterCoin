@@ -104,4 +104,53 @@ public class EchangeTxService {
 		return t;
 	}
 
+	public void validerPanniers(ArrayList<Transaction> articles, Compte compte) throws NotEnoughMoneyException, NotEnoughMoneyInBaseException, SameMoneyException {
+		for (Transaction t : articles) {
+			t.setCompteAcheteur(compte);
+			t.setDateValidation(new Date());
+			trouverOffres(t);
+		}
+	}
+
+	public double calculerMontantVendre(Transaction newTransaction, Compte compte) {
+		Monnaie monnaieAchat = newTransaction.getMonnaieAchat();
+		Monnaie monnaieVendre = newTransaction.getMonnaieVendre();
+		Double montantVoulu = newTransaction.getMontantAchat();
+		double montantObtenu = 0;
+		
+		List<EchangeOffre> echangeOffre;
+		if (compte != null) {
+			echangeOffre = echangeOffreFacade.findAllWhere(monnaieVendre, monnaieAchat, compte);			
+		} else {
+			echangeOffre = echangeOffreFacade.findAllWhere(monnaieVendre, monnaieAchat);			
+		}
+		if (echangeOffre == null) {
+			return 0.0;
+		}
+		Collections.sort(echangeOffre);
+
+		double montantCourant = 0;
+		int i = 0;
+		while (i < echangeOffre.size() && montantCourant < montantVoulu) {
+			montantCourant += echangeOffre.get(i).getMontantVendre();
+			if (montantCourant > montantVoulu) {
+				double ancienMontantAchat = echangeOffre.get(i).getMontantAchat();
+				double ancienMontantVendre = echangeOffre.get(i).getMontantVendre();
+				echangeOffre.get(i).setMontantVendre(montantCourant - montantVoulu);
+				echangeOffre.get(i).setMontantAchat(echangeOffre.get(i).getMontantVendre() * ancienMontantAchat / ancienMontantVendre);
+				montantObtenu += ancienMontantAchat - echangeOffre.get(i).getMontantAchat();
+				montantCourant = montantVoulu;
+			} else {
+				montantObtenu += echangeOffre.get(i).getMontantAchat();
+			}
+			i++;
+		}
+		context.setRollbackOnly();
+		if (montantCourant != montantVoulu) {
+			// Pas assez d'argent dans la base
+			return 0.0;
+		}
+		return montantObtenu;
+	}
+
 }

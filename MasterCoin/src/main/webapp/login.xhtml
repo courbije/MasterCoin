@@ -20,13 +20,13 @@
 					<f:validateBean>
 						<p>
 							<h:outputLabel for="username"
-								value="#{text['login.username.jsf']}:" />
+								value="#{text['login.username.jsf']}:" styleClass="big-label" />
 							<h:inputText id="username" value="#{credentials.username}"
 								validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.err.jsf']}" />
 						</p>
 						<p>
 							<h:outputLabel for="password"
-								value="#{text['login.password.jsf']}:" />
+								value="#{text['login.password.jsf']}:" styleClass="big-label" />
 							<h:inputSecret id="password" value="#{credentials.password}"
 								validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.err.jsf']}" />
 						</p>
