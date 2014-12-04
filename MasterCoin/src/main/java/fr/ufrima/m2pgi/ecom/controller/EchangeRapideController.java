@@ -56,6 +56,7 @@ public class EchangeRapideController {
 	}
 	
 	public void removeOffre(String id) throws Exception {
+		login.forwardToLoginIfNotLoggedIn();
 		try {
 			echangeService.removeOffre(Long.parseLong(id), login.getCurrentUser());
 			Util.DisplaySucces(facesContext);
