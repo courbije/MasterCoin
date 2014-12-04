@@ -18,11 +18,15 @@
 					value="#{text['pm.ajouter_porte_monnaie.jsf']}" />
 			<h:form id="reg2">
 				<p>
-					<h:outputLabel for="montant" styleClass="small-label" value="#{text['pm.montant.jsf']} :" />
+					<h:outputLabel for="montant" styleClass="small-label">
+					#{text['pm.montant.jsf']} <span class="required">*</span> :
+					</h:outputLabel>
 					<h:inputText id="montant" value="#{porteMonnaieController.amount}" />
 				</p>
 				<p>
-					<h:outputLabel for="monnaie" styleClass="small-label" value="#{text['monnaie.monnaie.jsf']} :" />
+					<h:outputLabel for="monnaie" styleClass="small-label">
+					 #{text['monnaie.monnaie.jsf']} <span class="required">*</span> :
+					 </h:outputLabel>
 					<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
 						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 							itemValue="#{m}" />
@@ -42,11 +46,15 @@
 					value="#{text['pm.retirer_porte_monnaie.jsf']}" />
 			<h:form id="reg1">
 				<p>
-					<h:outputLabel for="montant2" styleClass="small-label" value="#{text['pm.montant.jsf']} :" />
+					<h:outputLabel for="montant2" styleClass="small-label">
+					#{text['pm.montant.jsf']} <span class="required">*</span> :
+					 </h:outputLabel>
 					<h:inputText id="montant2" value="#{porteMonnaieController.amount}" />
 				</p>
 				<p>
-					<h:outputLabel for="monnaie2" styleClass="small-label" value="#{text['monnaie.monnaie.jsf']} :" />
+					<h:outputLabel for="monnaie2" styleClass="small-label">
+					#{text['monnaie.monnaie.jsf']} <span class="required">*</span> :
+					</h:outputLabel>
 					<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
 						<f:selectItems value="#{porteMonnaieController.notEmptyMonnaies}"
 							var="m" itemLabel="#{m.nom}" itemValue="#{m}" />
@@ -87,6 +95,12 @@
             </h:column>
 			</h:dataTable>
 			</div>
+			
+			<div class="sixteen columns">
+			<p class="required-box">
+					<span class="required">*</span> : #{text['all.required_box.jsf']}
+				</p>
+				</div>
 		</f:view>
 		<script>
 				$(document).ready( function () {
@@ -101,6 +115,11 @@
 				 $(function() {
 					 $("#menu-compte").addClass("current_page_item");
 					 $("#menu-compte-porteMonnaie").addClass("current_page_item");
+				});
+				 $(function() {
+					 $('input:text').each(function() {
+						$(this).val('');
+					 });
 				});
 			</script>
 	</ui:define>
