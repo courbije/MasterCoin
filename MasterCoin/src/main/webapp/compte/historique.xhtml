@@ -9,13 +9,17 @@
 		<f:view>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
-			<br />
-			<h:outputText styleClass="h2"
-				value="#{text['histo.historique_porte_monnaie_acutel.jsf']}" />
-			<br />
+				
+			<div class="sixteen columns">
+				<h:outputText styleClass="h1 title"
+					value="#{text['header.historique.jsf']}" />
+			</div>
+			<div class="sixteen columns">
+				<h:outputText styleClass="h2"
+					value="#{text['histo.historique_porte_monnaie_acutel.jsf']}" />
 			<h:panelGroup
 				rendered="#{empty historiqueController.porteMonnaiesHistorique}">
-				<h:outputText styleClass="em"
+				<h:outputText styleClass="em block"
 					value="#{text['histo.aucun_pm']}" />
 			</h:panelGroup>
 			<h:dataTable var="_pm" id="table_id"
@@ -46,13 +50,16 @@
 					</h:outputText>
 				</h:column>
 			</h:dataTable>
-
-			<h:outputText styleClass="h2"
-				value="#{text['histo.historique_achat.jsf']}" />
+			</div>
+			
 			<br />
+			
+			<div class="sixteen columns">
+				<h:outputText styleClass="h2"
+					value="#{text['histo.historique_achat.jsf']}" />
 			<h:panelGroup
 				rendered="#{empty historiqueController.transactionHisto}">
-				<h:outputText styleClass="em"
+				<h:outputText styleClass="em block"
 					value="#{text['histo.aucun_achat']}" />
 			</h:panelGroup>
 			<h:dataTable var="t" id="table_id2"
@@ -103,7 +110,7 @@
 
 				</h:column>
 			</h:dataTable>
-
+			</div>
 		</f:view>
 		<script>
 				$(document).ready( function () {
@@ -120,6 +127,10 @@
 				         }});
 				    
 				} );
+				 $(function() {
+					 $("#menu-compte").addClass("current_page_item");
+					 $("#menu-compte-historique").addClass("current_page_item");
+				});
 			</script>
 	</ui:define>
 </ui:composition>

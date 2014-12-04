@@ -16,6 +16,23 @@ body {
 	margin: 0;
 	padding: 0;
 	font-weight: 900;
+	display: block;
+}
+
+.em {
+	font-style: italic;
+}
+
+.block {
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.dataTables_wrapper {
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
 /*********************************************************************************/
