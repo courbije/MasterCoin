@@ -21,7 +21,8 @@
 					<h:outputLabel for="montant" styleClass="small-label">
 					#{text['pm.montant.jsf']} <span class="required">*</span> :
 					</h:outputLabel>
-					<h:inputText id="montant" value="#{porteMonnaieController.amount}" />
+					<h:inputText id="montant" value="#{porteMonnaieController.amount}"
+					validatorMessage="#{msg['pm.ajouter_argent.err.jsf']}" />
 				</p>
 				<p>
 					<h:outputLabel for="monnaie" styleClass="small-label">
@@ -49,7 +50,8 @@
 					<h:outputLabel for="montant2" styleClass="small-label">
 					#{text['pm.montant.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:inputText id="montant2" value="#{porteMonnaieController.amount}" />
+					<h:inputText id="montant2" value="#{porteMonnaieController.amount}"
+					validatorMessage="#{msg['pm.retirer_argent.err.jsf']}" />
 				</p>
 				<p>
 					<h:outputLabel for="monnaie2" styleClass="small-label">
