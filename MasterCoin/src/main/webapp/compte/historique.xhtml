@@ -123,7 +123,10 @@
 				$(document).ready( function () {
 				    $('#table_id2').DataTable({bInfo : false,
 				    	 language : {
-				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf",
+				    	        responsive: {
+				    	            details: false
+				    	        }
 				         }});
 				    
 				} );
