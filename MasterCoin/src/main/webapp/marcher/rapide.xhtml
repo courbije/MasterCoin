@@ -16,7 +16,7 @@
 				<h:outputText styleClass="h2"
 					value="#{text['echange.creation_offre.jsf']}" />
 			<h:form id="reg">
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="monnaie_voulue" styleClass="big-label">
 					#{text['echange.monnaie_souhaitee.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
@@ -27,7 +27,7 @@
 						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 					</h:selectOneMenu>
 				</p>
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="quantite_voulue" styleClass="big-label">
 					#{text['echange.quantite_souhaitee.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
@@ -35,7 +35,7 @@
 						value="#{offreController.newEchangeOffre.montantAchat}"
 						validatorMessage="#{msg['echange.ofd.quantite_in.err.jsf']}" />
 				</p>
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="monnaie_a_vendre" styleClass="big-label">
 					#{text['echange.monnaie_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
@@ -46,7 +46,7 @@
 						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 					</h:selectOneMenu>
 				</p>
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="quantite_a_vendre" styleClass="big-label">
 					#{text['echange.quantite_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
@@ -66,7 +66,7 @@
 				<h:outputText styleClass="h2"
 					value="#{text['echange.creation_offre_rapide.jsf']}" />
 			<h:form id="reg3">
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="monnaie_voulue" styleClass="big-label">
 					#{text['echange.monnaie_achat.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
@@ -77,7 +77,7 @@
 						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 					</h:selectOneMenu>
 				</p>
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="quantite_voulue" styleClass="big-label">
 					#{text['echange.quantite_a_acheter.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
@@ -85,7 +85,7 @@
 						value="#{achatController.newTransaction.montantAchat}"
 						validatorMessage="#{msg['echange.ofd.quantite_out.err.jsf']}" />
 				</p>
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="monnaie_a_vendre" styleClass="big-label">
 					#{text['echange.monnaie_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
@@ -96,7 +96,7 @@
 						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
 					</h:selectOneMenu>
 				</p>
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="quantite_a_vendre" styleClass="big-label">
 					#{text['echange.quantite_propose.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
