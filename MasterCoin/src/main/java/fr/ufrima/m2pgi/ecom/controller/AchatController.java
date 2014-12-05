@@ -34,6 +34,7 @@ public class AchatController {
 	@PostConstruct
 	private void initNewMember() {
 		newTransaction = new Transaction();
+		newTransaction.setMontantVendre(0.0);
 	}
 
 	public String register() throws Exception {
@@ -73,10 +74,6 @@ public class AchatController {
 
 	public void setPanier(Panier panier) {
 		this.panier = panier;
-	}
-
-	public Double getQuantitePropose() {
-		return echangeTxFacade.calculerMontantVendre(newTransaction, login.getCurrentUser());
 	}
 	
 	public void calculerQuantitePropose() {
