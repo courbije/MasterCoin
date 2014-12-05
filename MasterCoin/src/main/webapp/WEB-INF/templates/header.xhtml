@@ -58,9 +58,13 @@
 							action="#{credentials.logout}" rendered="#{login.loggedIn}"
 							styleClass="button" />
 					</h:form>
-					<h:link id="panier"
-							value="#{text['panier.accueil.jsf']}" outcome="/panier" styleClass="link" />
 				</div>
+			</div>
+			<div class="sixteen columns">
+			<h:link id="panier" outcome="/panier" styleClass="link">
+			<h:graphicImage library="images" name="caddie.png" width="15px"/>
+			#{text['panier.accueil.jsf']}
+			</h:link>
 			</div>
 			<div id="nav" role="navigation" class="sixteen columns">
 				<a href="#nav" title="Show navigation">Show navigation</a> <a
