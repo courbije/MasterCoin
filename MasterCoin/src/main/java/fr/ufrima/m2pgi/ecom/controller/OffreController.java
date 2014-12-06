@@ -33,6 +33,7 @@ public class OffreController {
 	}
 
 	public void register() throws Exception {
+		login.forwardToLoginIfNotLoggedIn();
 		try {
 			echangeService.addOffre(login.getCurrentUser(), newEchangeOffre);
 			Util.DisplaySucces(facesContext);

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 import fr.ufrima.m2pgi.ecom.service.EchangeTxService;
+import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
 @ViewScoped
@@ -35,7 +36,8 @@ public class AchatController {
 		newTransaction = new Transaction();
 	}
 
-	public void register() throws Exception {
+	public String register() throws Exception {
+		login.forwardToLoginIfNotLoggedIn();
 		try {
 			newTransaction.setCompteAcheteur(this.login.getCurrentUser());
 			newTransaction.setDateValidation(new Date());
@@ -45,11 +47,16 @@ public class AchatController {
 		} catch (Exception e) {
 			Util.DisplayError(e, facesContext);
 		}
+		return "";
 	}
 
 	public void pannier() {
-		panier.addArticles(newTransaction);
-		Util.DisplaySucces("Article ajouté !",facesContext);
+		try {
+			panier.addArticles(newTransaction);
+			Util.DisplaySucces("Article ajouté !",facesContext);
+		} catch (SameMoneyException e) {
+			Util.DisplayError(e, facesContext);
+		}
 	}
 	
 	public Transaction getNewTransaction() {
