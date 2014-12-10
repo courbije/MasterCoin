@@ -1,5 +1,6 @@
 package fr.ufrima.m2pgi.ecom.facade;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -53,6 +54,14 @@ public class TransactionFacade {
 	public List<Transaction> findByCompteAcheteur(Compte compte) {
 		return em.createQuery("select object(t) from Transaction as t where t.compteAcheteur = :compte")
 				.setParameter("compte", compte)
+				.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Transaction> findAllWhereDateIsBetween(Date date1,Date date2) {
+		return em.createQuery("select object(t) from Transaction as t where t.dateValidation < :date2 and t.dateValidation>:date1 order by t.monnaieAchat")
+				.setParameter("date1", date1)
+				.setParameter("date2", date2)
 				.getResultList();
 	}
 }
