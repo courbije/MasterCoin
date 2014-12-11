@@ -6,6 +6,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ComponentSystemEvent;
 import javax.inject.Inject;
 
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
@@ -49,6 +51,17 @@ public class EchangeController {
 		if (monnaieA != null && monnaieV != null) {
 			listeEchangeOffreAV = echangeOffreFacade.findAllWhere(monnaieA,monnaieV);	
 			listeEchangeOffreVA = echangeOffreFacade.findAllWhere(monnaieV,monnaieA);
+		}
+	}
+	
+	public void forwardIfNoParameter(ComponentSystemEvent cse) {
+		if (idV == null || idA == null || idV == "" || idA == "") {
+			FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "/marcher/trouverEchange?faces-redirect=true&includeViewParams=true");	
+		}
+	}
+	public void forwardIfNoParameter() {
+		if (idV == null || idA == null || idV == "" || idA == "") {
+			FacesContext.getCurrentInstance().getApplication().getNavigationHandler().handleNavigation(FacesContext.getCurrentInstance(), null, "/marcher/trouverEchange?faces-redirect=true&includeViewParams=true");	
 		}
 	}
 

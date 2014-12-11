@@ -5,14 +5,12 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
 import fr.ufrima.m2pgi.ecom.facade.MetriqueFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Metrique;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
-import fr.ufrima.m2pgi.ecom.util.Util;
 
 @ViewScoped
 @ManagedBean

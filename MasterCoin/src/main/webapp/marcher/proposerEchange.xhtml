@@ -12,8 +12,6 @@
 				value="#{text['echange.message_accueil.jsf']}" />
 		</div>
 
-		<f:event type="preRenderView"
-			listener="#{login.forwardToLoginIfNotLoggedIn}" />
 
 		<f:metadata>
 			<f:viewParam name="idV" value="#{echangeController.idV}" />
@@ -23,84 +21,10 @@
 			<f:viewParam name="idA" value="#{metriqueController.idA}" />
 		</f:metadata>
 
+		<f:event type="preRenderView"
+			listener="#{echangeController.forwardIfNoParameter()}" />
+
 		<div class="row">
-			<h:form id="reg"
-				rendered="#{empty echangeController.idA or empty echangeController.idV}">
-				<div class="one-third column">
-
-					<h:outputText styleClass="h1"
-						value="#{text['echange.monnaie_souhaitee.jsf']}" />
-
-					<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
-						rendered="#{not empty monnaies}">
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
-							</f:facet>
-							<h:commandButton
-								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
-								value="->#{m.acroyme}" rendered="#{m.id==echangeController.idA}"
-								style="font-weight:bold">
-								<f:param name="idA" value="#{m.id}" />
-							</h:commandButton>
-							<h:commandButton
-								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
-								value="#{m.acroyme}" rendered="#{m.id!=echangeController.idA}">
-								<f:param name="idV" value="" />
-								<f:param name="idA" value="#{m.id}" />
-							</h:commandButton>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="#{text['monnaie.acronyme.jsf']}" />
-							</f:facet>
-							<h:outputLabel value="#{m.acroyme}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="#{text['monnaie.nom.jsf']}" />
-							</f:facet>
-							<h:outputLabel value="#{m.nom}" />
-						</h:column>
-					</h:dataTable>
-				</div>
-
-			</h:form>
-
-			<h:form id="reg1"
-				rendered="#{not empty echangeController.idA and empty echangeController.idV}">
-				<div class="one-third column">
-
-					<h:outputText styleClass="h1"
-						value="#{text['echange.monnaie_a_vendre.jsf']}" />
-					<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
-						rendered="#{not empty monnaies}">
-						<h:column>
-							<h:commandButton
-								action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
-								value="#{m.acroyme}" rendered="#{m.id!=echangeController.idA}">
-								<f:param name="idV" value="#{m.id}" />
-								<f:param name="idA" value="#{echangeController.idA}" />
-							</h:commandButton>
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="#{text['monnaie.acronyme.jsf']}" />
-							</f:facet>
-							<h:outputLabel value="#{m.acroyme}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
-								<h:outputText value="#{text['monnaie.nom.jsf']}" />
-							</f:facet>
-							<h:outputLabel value="#{m.nom}" />
-						</h:column>
-
-					</h:dataTable>
-				</div>
-
-			</h:form>
-
 			<h:panelGroup
 				rendered="#{not empty echangeController.idA and not empty echangeController.idV}">
 
@@ -235,7 +159,7 @@
 						<h:outputLabel for="quantite_a_vendre"
 							value="#{text['echange.quantite_propose.jsf']}" />
 						<h:outputText id="quantite_a_vendre"
-							value="#{achatController.quantitePropose}" />
+							value="#{achatController.newTransaction.montantVendre}" />
 						<h:message for="quantite_a_vendre" errorClass="invalid" />
 
 					</h:panelGrid>
@@ -367,19 +291,6 @@
 				</h:dataTable>
 		</div>
 		<script>
-		$(document).ready( function () {
-			$('.tableid').DataTable({
-			    paging: false,
-			   	bInfo : false,
-			    ordering: false,
-			   	
-				"columnDefs": [{ "targets": [ 2 ],  "visible": false,"searchable": true } ,
-								{ "targets": [ 1 ],  "visible": false,"searchable": true }],
-		    	 language : {
-		    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
-		         }});
-		    
-		} );
 		$(document).ready( function () {
 			 $('#table_id').DataTable({bInfo : false,
 		    	 language : {
