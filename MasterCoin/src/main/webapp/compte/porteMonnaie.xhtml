@@ -17,13 +17,14 @@
 				<h:outputText styleClass="h2"
 					value="#{text['pm.ajouter_porte_monnaie.jsf']}" />
 			<h:form id="reg2">
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="montant" styleClass="small-label">
 					#{text['pm.montant.jsf']} <span class="required">*</span> :
 					</h:outputLabel>
-					<h:inputText id="montant" value="#{porteMonnaieController.amount}" />
+					<h:inputText id="montant" value="#{porteMonnaieController.amount}"
+					validatorMessage="#{msg['pm.ajouter_argent.err.jsf']}" />
 				</p>
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="monnaie" styleClass="small-label">
 					 #{text['monnaie.monnaie.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
@@ -45,13 +46,14 @@
 				<h:outputText styleClass="h2"
 					value="#{text['pm.retirer_porte_monnaie.jsf']}" />
 			<h:form id="reg1">
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="montant2" styleClass="small-label">
 					#{text['pm.montant.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:inputText id="montant2" value="#{porteMonnaieController.amount}" />
+					<h:inputText id="montant2" value="#{porteMonnaieController.amount}"
+					validatorMessage="#{msg['pm.retirer_argent.err.jsf']}" />
 				</p>
-				<p>
+				<p class="small-form">
 					<h:outputLabel for="monnaie2" styleClass="small-label">
 					#{text['monnaie.monnaie.jsf']} <span class="required">*</span> :
 					</h:outputLabel>

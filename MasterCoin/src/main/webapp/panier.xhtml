@@ -8,15 +8,20 @@
 
 	<ui:define name="content">
 		<f:view>
-			<h:outputText styleClass="h2" value="#{text['panier.accueil.jsf']}" />
-			<br />
+		<div class="sixteen columns">
+				<h:outputText styleClass="h1 title"
+					value="#{text['panier.accueil.jsf']}" />
+			</div>
+			<div class="sixteen columns">
+			<h:outputText styleClass="h2"
+					value="#{text['panier.votre_panier.jsf']}" />
 			<h:panelGroup rendered="#{empty panier.articles}">
-				<h:outputText styleClass="em"
+				<h:outputText styleClass="em block"
 					value="#{text['panier.panier_vide.jsf']}" />
 			</h:panelGroup>
 			<h:dataTable var="p" id="table_id" value="#{panier.articles}"
 				binding="#{table}" rendered="#{not empty panier.articles}"
-				styleClass="display">
+				styleClass="display dt-responsive" width="100%">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="#{text['echange.monnaie_achat.jsf']}" />
@@ -47,20 +52,24 @@
 					</f:facet>
 					<h:form>
 						<h:commandButton action="#{panier.supprimer(table.rowIndex)}"
-							value="#{table.rowIndex} #{text['echange.supprimer.jsf']}">
+							value="#{text['echange.supprimer.jsf']}"
+							styleClass="link">
 						</h:commandButton>
 					</h:form>
 				</h:column>
 
 			</h:dataTable>
 			<h:panelGroup rendered="#{not empty panier.articles}">
-				<h:form>
+				<h:form id="quick-offer-register">
 					<h:commandButton id="valider" action="#{panier.valider()}"
-						value="Valide" />
+						value="#{text['panier.valider.jsf']}"
+						styleClass="button" />
 					<h:commandButton id="vider" action="#{panier.clean()}"
-						value="Vider" />
+						value="#{text['panier.vider.jsf']}"
+						styleClass="button" />
 				</h:form>
 			</h:panelGroup>
+			</div>
 		</f:view>
 		<script>
 				$(document).ready( function () {

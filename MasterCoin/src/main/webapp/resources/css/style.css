@@ -36,6 +36,20 @@ body {
 	margin-bottom: 10px;
 }
 
+#panier {
+	margin-top: 0;
+	position: relative;
+	float: right;
+}
+
+#quick-offer-register {
+	margin-top: 25px;
+}
+
+#quick-offer-register .button {
+	margin-right: 10px;
+}
+
 /*********************************************************************************/
 /* HEADER                                                                        */
 /*********************************************************************************/
@@ -256,7 +270,7 @@ p label {
 }
 
 p label.big-label {
-	width: 165px;
+	width: 180px;
 }
 
 p label.small-label {
@@ -281,6 +295,15 @@ p select:focus {
 
 p select {
 	width: 188px;
+}
+
+p.small-form input[type="text"],
+p.small-form select  {
+	width: 120px;
+}
+
+p.small-form select {
+	width: 128px;
 }
 
 .info-box {

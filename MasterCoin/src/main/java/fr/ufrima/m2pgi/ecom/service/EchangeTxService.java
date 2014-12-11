@@ -38,7 +38,6 @@ public class EchangeTxService {
 	
 	
 	public List<Transaction> trouverOffres(Transaction newTransaction) throws NotEnoughMoneyException, NotEnoughMoneyInBaseException, SameMoneyException {
-
 		List<Transaction> trans = new ArrayList<Transaction>();
 		Monnaie monnaieAchat = newTransaction.getMonnaieAchat();
 		Monnaie monnaieVendre = newTransaction.getMonnaieVendre();
