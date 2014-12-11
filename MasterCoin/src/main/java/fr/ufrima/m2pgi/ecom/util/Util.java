@@ -3,9 +3,9 @@ package fr.ufrima.m2pgi.ecom.util;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
-import fr.ufrima.m2pgi.ecom.service.NotEnoughMoneyException;
-import fr.ufrima.m2pgi.ecom.service.NotEnoughMoneyInBaseException;
-import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
+import fr.ufrima.m2pgi.ecom.exception.NotEnoughMoneyException;
+import fr.ufrima.m2pgi.ecom.exception.NotEnoughMoneyInBaseException;
+import fr.ufrima.m2pgi.ecom.exception.SameMoneyException;
 
 public class Util {
 	

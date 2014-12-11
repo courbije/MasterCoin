@@ -32,19 +32,19 @@
 								<f:facet name="header">
 									<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
 								</f:facet>
-								<h:commandButton
-									action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
+								<h:link
+									action="/marcher/proposerEchange"
 									value="->#{m.acroyme}"
 									rendered="#{m.id==echangeController.idA}"
 									style="font-weight:bold">
 									<f:param name="idA" value="#{m.id}" />
-								</h:commandButton>
-								<h:commandButton
-									action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
+								</h:link>
+								<h:link
+									action="/marcher/proposerEchange"
 									value="#{m.acroyme}" rendered="#{m.id!=echangeController.idA}">
 									<f:param name="idV" value="" />
 									<f:param name="idA" value="#{m.id}" />
-								</h:commandButton>
+								</h:link>
 							</h:column>
 							<h:column>
 								<f:facet name="header">
@@ -72,12 +72,12 @@
 						<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
 							rendered="#{not empty monnaies}">
 							<h:column>
-								<h:commandButton
-									action="/marcher/proposerEchange?faces-redirect=true&amp;includeViewParams=true"
+								<h:link
+									action="/marcher/proposerEchange"
 									value="#{m.acroyme}" rendered="#{m.id!=echangeController.idA}">
 									<f:param name="idV" value="#{m.id}" />
 									<f:param name="idA" value="#{echangeController.idA}" />
-								</h:commandButton>
+								</h:link>
 							</h:column>
 							<h:column>
 								<f:facet name="header">

@@ -13,10 +13,10 @@ import javax.inject.Inject;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import fr.ufrima.m2pgi.ecom.exception.NotEnoughMoneyException;
 import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
-import fr.ufrima.m2pgi.ecom.service.NotEnoughMoneyException;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
