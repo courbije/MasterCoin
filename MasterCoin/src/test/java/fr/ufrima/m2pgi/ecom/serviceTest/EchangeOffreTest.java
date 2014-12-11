@@ -42,6 +42,7 @@ import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
+import fr.ufrima.m2pgi.ecom.model.MonnaieDTO;
 import fr.ufrima.m2pgi.ecom.util.Resources;
 
 @RunWith(Arquillian.class)
