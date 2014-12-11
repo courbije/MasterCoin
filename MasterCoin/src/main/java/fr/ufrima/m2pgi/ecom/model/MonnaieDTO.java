@@ -32,7 +32,6 @@ public class MonnaieDTO implements Serializable {
 	@NotEmpty
 	private String acroyme;
 
-	@NotNull
 	private UploadedFile image;
 	
     public UploadedFile getImage() {

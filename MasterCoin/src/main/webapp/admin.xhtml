@@ -3,7 +3,6 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:hh="http://balusc.net/jsf/html"
 	xmlns:t="http://myfaces.apache.org/tomahawk"
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
@@ -60,10 +59,13 @@
 					<h:outputText value="Image" />
 				</f:facet>
 				<p:graphicImage value="#{monnaieCreationController.image}"
-					width="25px" height="25px"
+					width="40px" height="40px"
 					rendered="#{monnaieCreationController.hasImage(_monnaie.id)}">
 					<f:param name="id" value="#{_monnaie.id}" />
 				</p:graphicImage>
+				<h:graphicImage library="images" name="default.jpg" width="40px"
+					height="40px"
+					rendered="#{not monnaieCreationController.hasImage(_monnaie.id)}" />
 			</h:column>
 			<h:column>
 				<f:facet name="header">
