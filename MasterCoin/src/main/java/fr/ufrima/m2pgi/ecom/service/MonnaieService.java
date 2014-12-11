@@ -25,7 +25,7 @@ public class MonnaieService {
 	private MonnaieFacade monnaieFacade;
 	
 	public void registerMoney(MonnaieDTO monnaieDTO) {
-		monnaieFacade.create(monnaieDTO);
+		monnaieFacade.create(MonnaieDTO2Monnaie(monnaieDTO));
 	}
 	
 	public void registerImage(MonnaieDTO monnaieDTO,String id) throws IOException {
@@ -47,4 +47,18 @@ public class MonnaieService {
 			return new DefaultStreamedContent();
 		}
 	}
+	
+    private Monnaie MonnaieDTO2Monnaie(MonnaieDTO monnaieDTO) {
+		Monnaie monnaie = new Monnaie();
+		monnaie.setNom(monnaieDTO.getNom());
+		monnaie.setAcroyme(monnaieDTO.getAcroyme());
+		monnaie.setType(monnaieDTO.getImage().getContentType());
+		try {
+			monnaie.setImage(monnaieDTO.getImage().getBytes());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return monnaie;
+	}  
 }
