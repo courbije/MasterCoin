@@ -37,6 +37,11 @@ public class TransactionFacade {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<Date> findAlldistinct() {
+		return em.createQuery("select DISTINCT(t.dateValidation) from Transaction as t order by t.dateValidation").getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<Transaction> findByCompte(Compte compte) {
 		return em.createQuery("select object(t) from Transaction as t where t.compteVendeur = :compte or t.compteAcheteur = :compte")
 				.setParameter("compte", compte)
@@ -59,7 +64,7 @@ public class TransactionFacade {
 	
 	@SuppressWarnings("unchecked")
 	public List<Transaction> findAllWhereDateIsBetween(Date date1,Date date2) {
-		return em.createQuery("select object(t) from Transaction as t where t.dateValidation < :date2 and t.dateValidation>:date1 order by t.monnaieAchat")
+		return em.createQuery("select object(t) from Transaction as t where t.dateValidation < :date2 and t.dateValidation>=:date1 order by t.monnaieAchat,t.monnaieVendre")
 				.setParameter("date1", date1)
 				.setParameter("date2", date2)
 				.getResultList();
