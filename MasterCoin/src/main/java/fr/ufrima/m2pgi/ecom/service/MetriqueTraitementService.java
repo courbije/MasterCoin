@@ -57,7 +57,6 @@ public class MetriqueTraitementService {
 			m.setMontantMonnaie1(sommeCourante1);
 			m.setMontantMonnaie2(sommeCourante2);
 			metriqueFacade.create(m);
-			i++;
 	}
 }
 }
