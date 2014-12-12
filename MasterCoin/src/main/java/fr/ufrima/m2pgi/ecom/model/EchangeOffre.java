@@ -12,8 +12,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.AssertTrue;
 import javax.validation.Valid;
 
 import fr.ufrima.m2pgi.ecom.util.GtZero;

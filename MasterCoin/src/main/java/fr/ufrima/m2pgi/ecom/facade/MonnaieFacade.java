@@ -15,10 +15,10 @@ public class MonnaieFacade
     private EntityManager em;
     
     public void create(Monnaie monnaie) {
-        em.persist(monnaie);
+    	em.persist(monnaie);
     }
-
-    public void edit(Monnaie monnaie) {
+    
+	public void edit(Monnaie monnaie) {
         em.merge(monnaie);
     }
 
@@ -33,6 +33,5 @@ public class MonnaieFacade
     @SuppressWarnings("unchecked")
 	public List<Monnaie> findAll() {
         return em.createQuery("select object(o) from Monnaie as o").getResultList();
-    }
-    
+    }  
 }

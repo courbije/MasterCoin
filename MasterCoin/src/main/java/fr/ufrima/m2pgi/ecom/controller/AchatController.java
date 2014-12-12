@@ -9,9 +9,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.exception.SameMoneyException;
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 import fr.ufrima.m2pgi.ecom.service.EchangeTxService;
-import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
 @ViewScoped
@@ -34,6 +34,7 @@ public class AchatController {
 	@PostConstruct
 	private void initNewMember() {
 		newTransaction = new Transaction();
+		newTransaction.setMontantVendre(0.0);
 	}
 
 	public String register() throws Exception {
@@ -73,10 +74,6 @@ public class AchatController {
 
 	public void setPanier(Panier panier) {
 		this.panier = panier;
-	}
-
-	public Double getQuantitePropose() {
-		return echangeTxFacade.calculerMontantVendre(newTransaction, login.getCurrentUser());
 	}
 	
 	public void calculerQuantitePropose() {

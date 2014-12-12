@@ -35,6 +35,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import fr.ufrima.m2pgi.ecom.exception.NotEnoughMoneyException;
+import fr.ufrima.m2pgi.ecom.exception.NotEnoughMoneyInBaseException;
+import fr.ufrima.m2pgi.ecom.exception.SameMoneyException;
 import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
@@ -48,15 +51,12 @@ import fr.ufrima.m2pgi.ecom.model.PorteMonnaie;
 import fr.ufrima.m2pgi.ecom.model.PorteMonnaieHistorique;
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 import fr.ufrima.m2pgi.ecom.service.EchangeTxService;
-import fr.ufrima.m2pgi.ecom.service.NotEnoughMoneyException;
-import fr.ufrima.m2pgi.ecom.service.NotEnoughMoneyInBaseException;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
-import fr.ufrima.m2pgi.ecom.service.SameMoneyException;
 import fr.ufrima.m2pgi.ecom.util.Resources;
 import fr.ufrima.m2pgi.ecom.util.Util;
 
 @RunWith(Arquillian.class)
-public class EchangeTxTest {
+public class EchangeTxServiceTest {
     @Deployment
     public static Archive<?> createTestArchive() {
         return ShrinkWrap.create(WebArchive.class, "test.war")

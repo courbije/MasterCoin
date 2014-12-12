@@ -3,6 +3,8 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
@@ -11,40 +13,26 @@
 				value="#{text['monnaie.message_accueil.jsf']}" />
 		</div>
 
-		<h:form id="reg">
-			<h:outputText styleClass="h2"
-				value="#{text['monnaie.creation_monnaie.jsf']}" />
+		<h:form id="reg" enctype="multipart/form-data">
+			<h:outputLabel for="acroyme"
+				value="#{text['monnaie.acronyme.jsf']} :" />
+			<h:inputText id="acroyme"
+				value="#{monnaieCreationController.newMonnaie.acroyme}" />
+			<h:message for="acroyme" errorClass="invalid" />
 
-			<h:panelGrid columns="3" columnClasses="titleCell">
-				<h:outputLabel for="acroyme"
-					value="#{text['monnaie.acronyme.jsf']} :" />
-				<h:inputText id="acroyme"
-					value="#{monnaieCreationController.newMonnaie.acroyme}" />
-				<h:message for="acroyme" errorClass="invalid" />
+			<h:outputLabel for="nom" value="#{text['monnaie.nom.jsf']} :" />
+			<h:inputText id="nom"
+				value="#{monnaieCreationController.newMonnaie.nom}" />
+			<h:message for="nom" errorClass="invalid" />
 
-				<h:outputLabel for="nom" value="#{text['monnaie.nom.jsf']} :" />
-				<h:inputText id="nom"
-					value="#{monnaieCreationController.newMonnaie.nom}" />
-				<h:message for="nom" errorClass="invalid" />
-
-				<h:outputLabel for="img" value="#{text['admin.image.jsf']} :" />
-				<form action="upload" method="post" enctype="multipart/form-data">
-					<input type="file" name="file"/>
-					<input type="submit"/>
-				</form>
-				
-			</h:panelGrid>
-
-			<p>
-				<h:panelGrid columns="2">
-					<h:commandButton id="register"
-						action="#{monnaieCreationController.register()}"
-						value="#{text['monnaie.enregistrer.jsf']}" styleClass="register" />
-					<h:messages styleClass="messages" errorClass="invalid"
-						infoClass="valid" warnClass="warning" globalOnly="true" />
-				</h:panelGrid>
-			</p>
+			<t:inputFileUpload id="file"
+				value="#{monnaieCreationController.newMonnaie.image}" />
+			<h:message for="file" errorClass="invalid" />
+			<h:commandButton value="submit"
+				action="#{monnaieCreationController.register}" />
 		</h:form>
+
+		<h:messages globalOnly="true" />
 
 		<h:outputText styleClass="h2" value="#{text['monnaie.monnaie.jsf']}" />
 		<br />
@@ -66,13 +54,32 @@
 				</f:facet>
                 #{_monnaie.nom}
             </h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Image" />
+				</f:facet>
+				<p:graphicImage value="#{monnaieCreationController.image}"
+					width="40px" height="40px"
+					rendered="#{monnaieCreationController.hasImage(_monnaie.id)}">
+					<f:param name="id" value="#{_monnaie.id}" />
+				</p:graphicImage>
+				<h:graphicImage library="images" name="default.jpg" width="40px"
+					height="40px"
+					rendered="#{not monnaieCreationController.hasImage(_monnaie.id)}" />
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Ajouter image" />
+				</f:facet>
+				<h:form id="reg2" enctype="multipart/form-data">
+					<t:inputFileUpload id="file"
+						value="#{monnaieCreationController.newMonnaie.image}" />
+					<h:message for="file" errorClass="invalid" />
+					<h:commandButton value="submit"
+						action="#{monnaieCreationController.registerImage(_monnaie.id)}" />
+				</h:form>
+			</h:column>
 		</h:dataTable>
-
-		<script>
-	 $(function() {
-		 $("#menu-support").addClass("current_page_item");
-	});
-	</script>
 	</ui:define>
 
 </ui:composition>

@@ -176,7 +176,7 @@ body {
 /* Page                                                                          */
 /*********************************************************************************/
 #wrapper {
-	min-width: 400px;
+	min-width: 300px;
 	margin: 0;
 	width: 100%;
 	background: #FFF;

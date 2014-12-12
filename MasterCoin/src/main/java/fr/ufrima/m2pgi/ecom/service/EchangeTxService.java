@@ -10,6 +10,9 @@ import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.exception.NotEnoughMoneyException;
+import fr.ufrima.m2pgi.ecom.exception.NotEnoughMoneyInBaseException;
+import fr.ufrima.m2pgi.ecom.exception.SameMoneyException;
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
 import fr.ufrima.m2pgi.ecom.facade.TransactionFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;

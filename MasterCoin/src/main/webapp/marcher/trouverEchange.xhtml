@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+
+		<div class="sixteen columns">
+			<h:outputText styleClass="h1 title"
+				value="#{text['echange.message_accueil.jsf']}" />
+		</div>
+
+		<f:metadata>
+			<f:viewParam name="idV" value="#{trouverEchangeController.idV}" />
+			<f:viewParam name="idA" value="#{trouverEchangeController.idA}" />
+		</f:metadata>
+
+		<div class="row">
+			<h:form id="reg"
+				rendered="#{empty trouverEchangeController.idA or empty trouverEchangeController.idV}">
+				<div class="one-third column">
+
+					<h:outputText styleClass="h1"
+						value="#{text['echange.monnaie_souhaitee.jsf']}" />
+
+					<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
+						rendered="#{not empty monnaies}">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
+							</f:facet>
+							<h:link outcome="/marcher/trouverEchange"
+								value="#{m.acroyme}">
+								<f:param name="idV" value="" />
+								<f:param name="idA" value="#{m.id}" />
+							</h:link>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['monnaie.acronyme.jsf']}" />
+							</f:facet>
+							<h:outputLabel value="#{m.acroyme}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['monnaie.nom.jsf']}" />
+							</f:facet>
+							<h:outputLabel value="#{m.nom}" />
+						</h:column>
+					</h:dataTable>
+				</div>
+
+			</h:form>
+
+			<h:form id="reg1"
+				rendered="#{not empty trouverEchangeController.idA and empty trouverEchangeController.idV}">
+				<div class="one-third column">
+					<h:outputText styleClass="h1"
+						value="#{text['echange.monnaie_a_vendre.jsf']}" />
+					<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
+						rendered="#{not empty monnaies}">
+						<h:column>
+							<h:link outcome="/marcher/proposerEchange"
+								rendered="#{m.id!=trouverEchangeController.idA}"
+								value="#{m.acroyme}">
+								<f:param name="idV" value="#{m.id}" />
+								<f:param name="idA" value="#{trouverEchangeController.idA}" />
+							</h:link>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['monnaie.acronyme.jsf']}" />
+							</f:facet>
+							<h:outputLabel value="#{m.acroyme}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['monnaie.nom.jsf']}" />
+							</f:facet>
+							<h:outputLabel value="#{m.nom}" />
+						</h:column>
+					</h:dataTable>
+				</div>
+			</h:form>
+		</div>
+		<script>
+		$(document).ready( function () {
+			$('.tableid').DataTable({
+			    paging: false,
+			   	bInfo : false,
+			    ordering: false,
+			   	
+				"columnDefs": [{ "targets": [ 2 ],  "visible": false,"searchable": true } ,
+								{ "targets": [ 1 ],  "visible": false,"searchable": true }],
+		    	 language : {
+		    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+		         }});
+		    
+		} );
+	</script>
+	</ui:define>
+</ui:composition>

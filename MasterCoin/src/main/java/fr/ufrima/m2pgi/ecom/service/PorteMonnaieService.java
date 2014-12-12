@@ -7,6 +7,7 @@ import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
+import fr.ufrima.m2pgi.ecom.exception.NotEnoughMoneyException;
 import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieFacade;
 import fr.ufrima.m2pgi.ecom.facade.PorteMonnaieHistoriqueFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
