@@ -12,7 +12,6 @@
 			content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 		<h:outputStylesheet name="css/skeleton.css" />
-		<h:outputStylesheet name="css/layout.css" />
 		<h:outputStylesheet name="css/style.css" />
 		<h:outputStylesheet name="css/menu.css" />
 		<h:outputStylesheet name="css/jquery.dataTables.css" />
@@ -20,7 +19,6 @@
 		<h:outputStylesheet name="css/morris.css" />
 		
 		<h:outputScript name="js/jquery-1.11.1.min.js" />
-		<h:outputScript name="js/jquery.js" />
 		<h:outputScript name="js/jquery.dataTables.js" />
 		<h:outputScript name="js/jquery.dataTables.responsive.js" />
 		<h:outputScript name="js/doubletaptogo.min.js" />
@@ -33,15 +31,19 @@
 			<ui:insert name="header">
 				<ui:include src="./header.xhtml" />
 			</ui:insert>
-			<div id="wrapper" class="sixteen columns">
-				<div id="page">
-					<h:messages id="notify" errorClass="error" infoClass="info" />
-					<ui:insert name="content">
-					</ui:insert>
+			<div class="row">
+				<div id="wrapper" class="twelve columns">
+					<div id="page">
+						<h:messages id="notify" errorClass="error" infoClass="info" />
+						<ui:insert name="content">
+						</ui:insert>
+					</div>
 				</div>
 			</div>
-			<div id="copyright" class="sixteen columns">
-				<p>&copy; MasterCoin. All rights reserved.</p>
+			<div class="row">
+				<div id="copyright" class="twelve columns">
+					<p>&copy; MasterCoin. All rights reserved.</p>
+				</div>
 			</div>
 		</div>
 		<h:outputScript>

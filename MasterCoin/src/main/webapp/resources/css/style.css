@@ -1,3 +1,244 @@
+body {
+	background: #E9E9E9 url(../images/bg01.png.jsf) repeat;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 11pt;
+	font-weight: 400;
+	color: #969696;
+}
+
+.h1, .h2, .h3 {
+	margin: 0;
+	padding: 0;
+	font-weight: 900;
+	display: block;
+}
+
+.em {
+	font-style: italic;
+}
+
+/*_____________________________________________________________
+
+  Panier + Changer Langue
+  -----------------------
+*/
+#header-line {
+	margin-top: -0.5em;
+	text-align: right;
+}
+
+#change-lang {
+	display: inline-block;
+	margin-left: 15px;
+}
+
+#change-lang input {
+	width: 32px;
+	height: 32px;
+	border: none;
+	cursor: pointer;
+}
+
+.lang-fr {
+	background: url("fr_32x32.png.jsf") no-repeat;
+}
+
+.lang-en {
+	background: url("uk_32x32.png.jsf") no-repeat;
+}
+
+/*_____________________________________________________________
+
+  Logo + Connection + Deconnection
+  --------------------------------
+*/
+
+
+#logo {
+	text-transform: uppercase;
+}
+
+#logo h1 {
+	font-size: 1.4em;
+	color: #292929;
+	margin-bottom: 5px;
+}
+
+#logo h1 a {
+	margin-left: 0.50em;
+	text-decoration: none;
+	font-size: 1.4em;
+	color: #292929;
+}
+
+#logo span {
+	color: #01A9DC;
+}
+
+#logo p {
+	margin: 0;
+	padding: 0 0 0 5em;
+	letter-spacing: 0.10em;
+	font-size: 0.90em;
+	color: #828282;
+	margin-bottom: 10px;
+}
+
+#login input[type="text"], #login input[type="password"] {
+	width: 160px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 3px;
+}
+
+#login input[type="text"]:focus, #login input[type="password"]:focus {
+	border: solid 1px #01A9DC;
+	box-shadow: 0 0 5px 1px #969696;
+}
+
+#login .button.logout {
+	margin-left: 15px;
+}
+
+#login >form .logout {
+	margin-top: 35px;
+}
+
+#login label.logout {
+	margin-top: 15px;
+}
+
+p label {
+	display: block;
+	float: left;
+}
+
+
+p label.big-label {
+	width: 180px;
+}
+
+p label.small-label {
+	width: 100px;
+}
+
+p label.medium-label1 {
+	width: 110px;
+}
+
+p label.medium-label2 {
+	width: 140px;
+}
+.caca {
+    background-color: red;
+}
+.coco {
+    background-color: green;
+}
+
+/*#login {
+	margin: auto;
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+#login label, #login input[type="text"], #login input[type="password"] {
+	display: block;
+	margin: 4px;
+}
+
+#login input[type="text"], #login input[type="password"] {
+	width: 190px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 3px;
+}
+
+#login input[type="text"]:focus, #login input[type="password"]:focus {
+	border: solid 1px #01A9DC;
+	box-shadow: 0 0 5px 1px #969696;
+}
+*/
+
+#wrapper {
+	min-width: 300px;
+	margin: 0;
+	width: 100%;
+	background: #FFF;
+	box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+
+#page {
+	color: #191919;
+	margin: 5px;
+	min-height: 600px;
+}
+
+.button {
+	display: inline-block;
+	background: #00A4D9;
+	border-radius: 5px;
+	line-height: 2em;
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+	text-decoration: none;
+	font-weight: 700;
+	font-size: 13px;
+	color: #fff !important;
+	cursor: pointer;
+	letter-spacing: 1px;
+}
+
+.button:hover {
+	background: #27beec;
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+}
+
+.button:active {
+	background: #0091BD;
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+}
+
+.link {
+	color: #838383;
+	border: none;
+	background: none;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.link:hover {
+	color: #01A9DC;
+}
+
+.u-no-mt {
+	margin-top: 0;
+}
+
+.u-no-mb {
+	margin-bottom: 0;
+}
+
+
+/*
+
 html, body {
 	height: 100%;
 }
@@ -50,98 +291,8 @@ body {
 	margin-right: 10px;
 }
 
-/*********************************************************************************/
-/* HEADER                                                                        */
-/*********************************************************************************/
 
-/******************************************/
-/** Logo **/
-#logo {
-	text-transform: uppercase;
-}
 
-#logo h1 {
-	font-size: 1.8em;
-	color: #292929;
-	margin-bottom: 5px;
-}
-
-#logo h1 a {
-	margin-left: 0.50em;
-	text-decoration: none;
-	font-size: 1.5em;
-	color: #292929;
-}
-
-#logo span {
-	color: #01A9DC;
-}
-
-#logo p {
-	margin: 0;
-	padding: 0 0 0 5em;
-	letter-spacing: 0.10em;
-	font-size: 0.90em;
-	color: #828282;
-	margin-bottom: 10px;
-}
-
-/******************************************/
-/** Login **/
-#login input {
-	margin: 4px;
-}
-
-#login {
-	margin: auto;
-	width: 300px;
-	margin-bottom: 10px;
-}
-
-#login label, #login input[type="text"], #login input[type="password"] {
-	display: block;
-	margin: 4px;
-}
-
-#login input[type="text"], #login input[type="password"] {
-	width: 190px;
-	border-radius: 5px 5px 5px 5px;
-	-moz-border-radius: 5px 5px 5px 5px;
-	-webkit-boder-radius: 5px 5px 5px 5px;
-	border: 1px solid #999999;
-	padding: 3px;
-}
-
-#login input[type="text"]:focus, #login input[type="password"]:focus {
-	border: solid 1px #01A9DC;
-	box-shadow: 0 0 5px 1px #969696;
-}
-
-/******************************************/
-/** Change Lang **/
-#change-lang {
-	text-align: right;
-}
-
-.lang-fr {
-	width: 32px;
-	height: 32px;
-	border: none;
-	background: url("fr_32x32.png.jsf") no-repeat;
-	cursor: pointer;
-}
-
-.lang-en {
-	width: 32px;
-	height: 32px;
-	border: none;
-	background: url("uk_32x32.png.jsf") no-repeat;
-	cursor: pointer;
-}
-
-/*********************************************************************************/
-/* NOTIFY                                                                        */
-/*********************************************************************************/
 #notify.errors-box {
 	border: 1px solid #f46767;
 	background-color: #ffcccc;
@@ -172,9 +323,6 @@ body {
 	text-decoration: underline;
 }
 
-/*********************************************************************************/
-/* Page                                                                          */
-/*********************************************************************************/
 #wrapper {
 	min-width: 300px;
 	margin: 0;
@@ -233,7 +381,6 @@ body {
 }
 
 .button:hover {
-	/** background: #18ACD9; **/
 	background: #27beec;
 	-webkit-transition: all .25s ease-in-out;
 	-moz-transition: all .25s ease-in-out;
@@ -321,3 +468,4 @@ p.small-form select {
 .required-box {
 	color: #838383;
 }
+*/

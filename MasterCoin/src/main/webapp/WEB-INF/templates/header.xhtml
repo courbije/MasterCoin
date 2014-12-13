@@ -5,67 +5,79 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 	<body>
 		<ui:composition>
-			<div id="change-lang" class="sixteen columns">
-				<h:form>
-					<h:commandButton
-						action="#{changementLangueController.setLanguage('fr')}"
-						styleClass="lang-fr">
-					</h:commandButton>
-					<h:commandButton
-						action="#{changementLangueController.setLanguage('en')}"
-						styleClass="lang-en">
-					</h:commandButton>
-				</h:form>
-			</div>
-			<div class="ten columns">
-				<div id="logo">
-					<h1>
-						<h:link outcome="/accueil">
-							<h:graphicImage library="images" name="logo.png" />
-						Master<span>Coin</span>
-						</h:link>
-					</h1>
-					<p>#{text['header.titre.jsf']}</p>
-				</div>
-			</div>
-			<div class="six columns">
-				<div id="login">
-					<h:form>
-						<h:panelGroup rendered="#{!login.loggedIn}">
-							<f:validateBean>
-								<h:outputLabel for="username"
-									value="#{text['login.username.jsf']}:" />
-								<h:inputText id="username" value="#{credentials.username}"
-									validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.err.jsf']}" />
-								<h:outputLabel for="password"
-									value="#{text['login.password.jsf']}:" />
-								<h:inputSecret id="password" value="#{credentials.password}"
-									validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.err.jsf']}" />
-							</f:validateBean>
-						</h:panelGroup>
-						<h:commandButton value="#{text['login.login.jsf']}"
-							action="#{credentials.login('header')}"
-							rendered="#{!login.loggedIn}" styleClass="button" />
-
-						<h:button value="#{text['login.register.jsf']}" outcome="/register"
-							rendered="#{!login.loggedIn}" styleClass="link" />
-
-						<h:outputLabel
-							value="#{text['header.bienvenue.jsf']} #{login.currentUser.login}"
-							rendered="#{login.loggedIn}" />
-
-						<h:commandButton value="#{text['login.logout.jsf']}"
-							action="#{credentials.logout}" rendered="#{login.loggedIn}"
-							styleClass="button" />
+			<!-- HEADER -->
+			<!-- Premiere ligne : Panier + Langues -->
+			<div class="row u-no-mb" id="header-line">
+				<div class="u-pull-right">
+					<h:link id="panier" outcome="/panier" styleClass="link">
+						<h:graphicImage library="images" name="caddie.png" width="15px" />
+						#{text['panier.accueil.jsf']}
+					</h:link>
+					<h:form id="change-lang">
+						<h:commandButton
+							action="#{changementLangueController.setLanguage('fr')}"
+							styleClass="lang-fr">
+						</h:commandButton>
+						<h:commandButton
+							action="#{changementLangueController.setLanguage('en')}"
+							styleClass="lang-en">
+						</h:commandButton>
 					</h:form>
 				</div>
 			</div>
-			<div class="sixteen columns">
-			<h:link id="panier" outcome="/panier" styleClass="link">
-			<h:graphicImage library="images" name="caddie.png" width="15px"/>
-			#{text['panier.accueil.jsf']}
-			</h:link>
+			<!-- Bloc header : Logo + Connexion -->
+			<div class="row u-no-mb" id="logo-login-line">
+				<div class="one-half column">
+					<div id="logo">
+						<h1>
+							<h:link outcome="/accueil">
+								<h:graphicImage library="images" name="logo-small.png" />
+						Master<span>Coin</span>
+							</h:link>
+						</h1>
+						<p>#{text['header.titre.jsf']}</p>
+					</div>
+				</div>
+				<div class="one-half column">
+					<div id="login" class="u-pull-right">
+						<h:form>
+							<h:panelGroup rendered="#{!login.loggedIn}">
+								<f:validateBean>
+									<p>
+										<h:outputLabel for="username"
+											value="#{text['login.username.jsf']}:"
+											styleClass="medium-label1" />
+										<h:inputText id="username" value="#{credentials.username}"
+											validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.err.jsf']}" />
+									</p>
+									<p>
+										<h:outputLabel for="password"
+											value="#{text['login.password.jsf']}:"
+											styleClass="medium-label1" />
+										<h:inputSecret id="password" value="#{credentials.password}"
+											validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.err.jsf']}" />
+									</p>
+								</f:validateBean>
+							</h:panelGroup>
+							<p class="u-no-mt u-pull-right">
+								<h:commandButton value="#{text['login.login.jsf']}"
+									action="#{credentials.login('header')}"
+									rendered="#{!login.loggedIn}" styleClass="button" />
+								<h:button value="#{text['login.register.jsf']}"
+									outcome="/register" rendered="#{!login.loggedIn}"
+									styleClass="link" />
+								<h:outputLabel
+									value="#{text['header.bienvenue.jsf']} #{login.currentUser.login}"
+									rendered="#{login.loggedIn}" styleClass="logout" />
+								<h:commandButton value="#{text['login.logout.jsf']}"
+									action="#{credentials.logout}" rendered="#{login.loggedIn}"
+									styleClass="button logout" />
+							</p>
+						</h:form>
+					</div>
+				</div>
 			</div>
+			<!-- Menu -->
 			<div id="nav" role="navigation" class="sixteen columns">
 				<a href="#nav" title="Show navigation">Show navigation</a> <a
 					href="#" title="Hide navigation">Hide navigation</a>
@@ -75,7 +87,8 @@
 					<li id="menu-marche"><a href="#" aria-haspopup="true"><span>#{text['header.marche.jsf']}</span></a>
 						<ul>
 							<li id="menu-marche-propo"><h:link
-									value="#{text['header.proposer_offre.jsf']}" outcome="/marcher/proposerEchange" /></li>
+									value="#{text['header.proposer_offre.jsf']}"
+									outcome="/marcher/proposerEchange" /></li>
 							<li id="menu-marche-rapide"><h:link
 									value="#{text['header.rapide_echange']}"
 									outcome="/marcher/rapide" /></li>
