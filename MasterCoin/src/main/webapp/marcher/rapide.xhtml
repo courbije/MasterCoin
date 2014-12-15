@@ -70,7 +70,7 @@
 					<h:outputLabel for="monnaie_voulue" styleClass="big-label">
 					#{text['echange.monnaie_achat.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:selectOneMenu
+					<h:selectOneMenu id="monnaie_voulue"
 						value="#{achatController.newTransaction.monnaieAchat}">
 						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 							itemValue="#{m}" />
@@ -89,7 +89,7 @@
 					<h:outputLabel for="monnaie_a_vendre" styleClass="big-label">
 					#{text['echange.monnaie_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:selectOneMenu
+					<h:selectOneMenu id="monnaie_demande"
 						value="#{achatController.newTransaction.monnaieVendre}">
 						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 							itemValue="#{m}" />
@@ -111,9 +111,8 @@
 						<h:commandButton id="panier" action="#{achatController.pannier()}"
 							value="#{text['echange.panier.jsf']}" styleClass="button">
 						</h:commandButton>
-						<h:commandButton id="calculer"
-							action="#{achatController.calculerQuantitePropose()}"
-							value="#{text['echange.calculette.jsf']}" styleClass="button">
+						<h:commandButton id="calculer" value="#{text['echange.calculette.jsf']}" styleClass="button">
+							<f:ajax event="click" execute="monnaie_voulue quantite_voulue monnaie_demande" render="quantite_a_vendre" listener="#{achatController.calculerQuantitePropose}"/>
 						</h:commandButton>
 				</p>
 			</h:form>

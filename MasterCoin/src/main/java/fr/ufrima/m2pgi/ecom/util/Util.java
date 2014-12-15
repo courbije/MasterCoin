@@ -59,7 +59,7 @@ public class Util {
 	}
 	
 	public static Double round(Double d){
-		return Math.round(d*100000)/100000.0;
+		return Math.round(d*10000000)/10000000.0;
 	}
 
 }
