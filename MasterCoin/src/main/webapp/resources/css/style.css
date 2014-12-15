@@ -118,6 +118,15 @@ p input.button, p input.link {
 	margin-top: 10px;
 }
 
+p.small-form input[type="text"],
+p.small-form select  {
+	width: 130px;
+}
+
+p.small-form select {
+	width: 138px;
+}
+
 /*_____________________________________________________________
 
   Button and link
@@ -352,6 +361,16 @@ p input.button, p input.link {
 .info-box {
 	margin: 20px;
 	color: #838383;
+}
+
+
+/*_____________________________________________________________
+
+  Règles Spécifiques
+  -------------------------------------------------------------
+*/
+#quick-offer-register {
+	margin-top: 25px;
 }
 
 .caca {
