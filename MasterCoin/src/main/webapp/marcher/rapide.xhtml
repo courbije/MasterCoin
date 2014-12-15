@@ -7,190 +7,205 @@
 
 
 	<ui:define name="content">
+		<!-- TITLE -->
 		<f:view>
-			<div class="sixteen columns">
+			<div class="row twelve columns">
 				<h:outputText styleClass="h1 title"
 					value="#{text['echange.message_accueil.jsf']}" />
 			</div>
-			<div class="eight columns">
-				<h:outputText styleClass="h2"
-					value="#{text['echange.creation_offre.jsf']}" />
-			<h:form id="reg">
-				<p class="small-form">
-					<h:outputLabel for="monnaie_voulue" styleClass="big-label">
+			<div class="row">
+				<!-- FORM1 -->
+				<div class="one-half column form-boxed">
+					<h:outputText styleClass="h2"
+						value="#{text['echange.creation_offre.jsf']}" />
+					<span class="required-box"> <span class="required">*</span>
+						: #{text['all.required_box.jsf']}
+					</span>
+					<h:form id="reg">
+						<p class="small-form">
+							<h:outputLabel for="monnaie_voulue" styleClass="big-label2">
 					#{text['echange.monnaie_souhaitee.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:selectOneMenu
-						value="#{offreController.newEchangeOffre.monnaieAchat}">
-						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
-							itemValue="#{m}" />
-						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
-					</h:selectOneMenu>
-				</p>
-				<p class="small-form">
-					<h:outputLabel for="quantite_voulue" styleClass="big-label">
+							<h:selectOneMenu
+								value="#{offreController.newEchangeOffre.monnaieAchat}">
+								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+									itemValue="#{m}" />
+								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+							</h:selectOneMenu>
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="quantite_voulue" styleClass="big-label2">
 					#{text['echange.quantite_souhaitee.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:inputText id="quantite_voulue"
-						value="#{offreController.newEchangeOffre.montantAchat}"
-						validatorMessage="#{msg['echange.ofd.quantite_in.err.jsf']}" />
-				</p>
-				<p class="small-form">
-					<h:outputLabel for="monnaie_a_vendre" styleClass="big-label">
+							<h:inputText id="quantite_voulue"
+								value="#{offreController.newEchangeOffre.montantAchat}"
+								validatorMessage="#{msg['echange.ofd.quantite_in.err.jsf']}" />
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="monnaie_a_vendre" styleClass="big-label2">
 					#{text['echange.monnaie_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:selectOneMenu
-						value="#{offreController.newEchangeOffre.monnaieVendre}">
-						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
-							itemValue="#{m}" />
-						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
-					</h:selectOneMenu>
-				</p>
-				<p class="small-form">
-					<h:outputLabel for="quantite_a_vendre" styleClass="big-label">
+							<h:selectOneMenu
+								value="#{offreController.newEchangeOffre.monnaieVendre}">
+								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+									itemValue="#{m}" />
+								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+							</h:selectOneMenu>
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="quantite_a_vendre" styleClass="big-label2">
 					#{text['echange.quantite_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:inputText id="quantite_a_vendre"
-						value="#{offreController.newEchangeOffre.montantVendre}"
-						validatorMessage="#{msg['echange.ofd.quantite_out.err.jsf']}" />
-				</p>
-				<p>
-						<h:commandButton id="register"
-							action="#{echangeRapideController.registerOffre()}"
-							value="#{text['echange.register.jsf']}" styleClass="button" />
-				</p>
-			</h:form>
-			</div>
-			
-			<div class="seven columns">
-				<h:outputText styleClass="h2"
-					value="#{text['echange.creation_offre_rapide.jsf']}" />
-			<h:form id="reg3">
-				<p class="small-form">
-					<h:outputLabel for="monnaie_voulue" styleClass="big-label">
+							<h:inputText id="quantite_a_vendre"
+								value="#{offreController.newEchangeOffre.montantVendre}"
+								validatorMessage="#{msg['echange.ofd.quantite_out.err.jsf']}" />
+						</p>
+						<p class="u-pull-right">
+							<h:commandButton id="register"
+								action="#{echangeRapideController.registerOffre()}"
+								value="#{text['echange.register.jsf']}" styleClass="button" />
+						</p>
+					</h:form>
+				</div>
+				<!-- FORM2 -->
+				<div class="one-half column form-boxed">
+					<h:outputText styleClass="h2"
+						value="#{text['echange.creation_offre_rapide.jsf']}" />
+					<span class="required-box"> <span class="required">*</span>
+						: #{text['all.required_box.jsf']}
+					</span>
+					<h:form id="reg3">
+						<p class="small-form">
+							<h:outputLabel for="monnaie_voulue" styleClass="big-label2">
 					#{text['echange.monnaie_achat.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:selectOneMenu id="monnaie_voulue"
-						value="#{achatController.newTransaction.monnaieAchat}">
-						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
-							itemValue="#{m}" />
-						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
-					</h:selectOneMenu>
-				</p>
-				<p class="small-form">
-					<h:outputLabel for="quantite_voulue" styleClass="big-label">
+							<h:selectOneMenu id="monnaie_voulue"
+								value="#{achatController.newTransaction.monnaieAchat}">
+								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+									itemValue="#{m}" />
+								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+							</h:selectOneMenu>
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="quantite_voulue" styleClass="big-label2">
 					#{text['echange.quantite_a_acheter.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:inputText id="quantite_voulue"
-						value="#{achatController.newTransaction.montantAchat}"
-						validatorMessage="#{msg['echange.ofd.quantite_out.err.jsf']}" />
-				</p>
-				<p class="small-form">
-					<h:outputLabel for="monnaie_a_vendre" styleClass="big-label">
+							<h:inputText id="quantite_voulue"
+								value="#{achatController.newTransaction.montantAchat}"
+								validatorMessage="#{msg['echange.ofd.quantite_out.err.jsf']}" />
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="monnaie_a_vendre" styleClass="big-label2">
 					#{text['echange.monnaie_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:selectOneMenu id="monnaie_demande"
-						value="#{achatController.newTransaction.monnaieVendre}">
-						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
-							itemValue="#{m}" />
-						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
-					</h:selectOneMenu>
-				</p>
-				<p class="small-form">
-					<h:outputLabel for="quantite_a_vendre" styleClass="big-label">
+							<h:selectOneMenu id="monnaie_demande"
+								value="#{achatController.newTransaction.monnaieVendre}">
+								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+									itemValue="#{m}" />
+								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+							</h:selectOneMenu>
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="quantite_a_vendre" styleClass="big-label2">
 					#{text['echange.quantite_propose.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:outputText id="quantite_a_vendre"
-						value="#{achatController.newTransaction.montantVendre}" />
-				</p>
-				<p id="quick-offer-register">
-						<h:commandButton id="register"
-							action="#{echangeRapideController.registerAchat()}"
-							value="#{text['echange.register.jsf']}" styleClass="button">
-						</h:commandButton>
-						<h:commandButton id="panier" action="#{achatController.pannier()}"
-							value="#{text['echange.panier.jsf']}" styleClass="button">
-						</h:commandButton>
-						<h:commandButton id="calculer" value="#{text['echange.calculette.jsf']}" styleClass="button">
-							<f:ajax event="click" execute="monnaie_voulue quantite_voulue monnaie_demande" render="quantite_a_vendre" listener="#{achatController.calculerQuantitePropose}"/>
-						</h:commandButton>
-				</p>
-			</h:form>
+							<h:outputText id="quantite_a_vendre"
+								value="#{achatController.newTransaction.montantVendre}" />
+						</p>
+						<p class="u-pull-right" id="quick-offer-register">
+							<h:commandButton id="register"
+								action="#{echangeRapideController.registerAchat()}"
+								value="#{text['echange.register.jsf']}" styleClass="button">
+							</h:commandButton>
+							<h:commandButton id="panier"
+								action="#{achatController.pannier()}"
+								value="#{text['echange.panier.jsf']}" styleClass="button">
+							</h:commandButton>
+							<h:commandButton id="calculer"
+								action="#{achatController.calculerQuantitePropose()}"
+								value="#{text['echange.calculette.jsf']}" styleClass="button">
+								<f:ajax event="click" execute="monnaie_voulue quantite_voulue monnaie_demande" render="quantite_a_vendre" listener="#{achatController.calculerQuantitePropose}"/>
+							</h:commandButton>
+						</p>
+					</h:form>
+				</div>
 			</div>
-			
-			<div class="sixteen columns">
+			<!-- TABLE -->
+			<div class="twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['echange.offres_compte.jsf']}" />
-			<h:panelGroup rendered="#{login.loggedIn}">
-				<h:panelGroup rendered="#{empty echangeRapideController.offres}">
-					<h:outputText styleClass="em"
-						value="#{text['echange.aucune_offre_enregistree.jsf']}" />
+				<h:panelGroup rendered="#{login.loggedIn}">
+					<h:panelGroup rendered="#{empty echangeRapideController.offres}">
+						<h:outputText styleClass="em"
+							value="#{text['echange.aucune_offre_enregistree.jsf']}" />
+					</h:panelGroup>
+					<h:dataTable var="_offre" id="table_id"
+						value="#{echangeRapideController.offres}"
+						rendered="#{not empty echangeRapideController.offres}"
+						styleClass="display dt-responsive" width="100%">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.monnaieAchat.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.montantAchat}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.monnaieVendre.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.montantVendre}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['transaction.taux.jsf']}" />
+							</f:facet>
+							<h:outputText
+								value="#{ _offre.montantAchat/_offre.montantVendre}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.date_creation.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.dateCreation}">
+								<f:convertDateTime dateStyle="long" type="both" />
+							</h:outputText>
+
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.supprimer.jsf']}" />
+							</f:facet>
+							<h:form>
+								<h:commandButton
+									action="#{echangeRapideController.removeOffre(_offre.id)}"
+									value="#{text['echange.supprimer.jsf']}" styleClass="link">
+								</h:commandButton>
+
+							</h:form>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.generer']}" />
+							</f:facet>
+							<h:form>
+								<h:link value="#{text['echange.qrcode']}" outcome="qrcode" styleClass="link" />
+							</h:form>
+						</h:column>
+					</h:dataTable>
 				</h:panelGroup>
-				<h:dataTable var="_offre" id="table_id"
-					value="#{echangeRapideController.offres}"
-					rendered="#{not empty echangeRapideController.offres}"
-					styleClass="display dt-responsive" width="100%">
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
-						</f:facet>
-						<h:outputText value="#{_offre.monnaieAchat.nom}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
-						</f:facet>
-						<h:outputText value="#{_offre.montantAchat}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
-						</f:facet>
-						<h:outputText value="#{_offre.monnaieVendre.nom}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
-						</f:facet>
-						<h:outputText value="#{_offre.montantVendre}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['transaction.taux.jsf']}" />
-						</f:facet>
-						<h:outputText value="#{ _offre.montantAchat/_offre.montantVendre}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.date_creation.jsf']}" />
-						</f:facet>
-						<h:outputText value="#{_offre.dateCreation}">
-							<f:convertDateTime dateStyle="long" type="both" />
-						</h:outputText>
-
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.supprimer.jsf']}" />
-						</f:facet>
-						<h:form>
-							<h:commandButton
-								action="#{echangeRapideController.removeOffre(_offre.id)}"
-								value="#{text['echange.supprimer.jsf']}"
-								styleClass="link">
-							</h:commandButton>
-
-						</h:form>
-					</h:column>
-
-				</h:dataTable>
-				</h:panelGroup>
-				</div>
-			<div class="sixteen columns">
-			<p class="required-box">
-					<span class="required">*</span> : #{text['all.required_box.jsf']}
-				</p>
-				</div>
+			</div>
 		</f:view>
 		<script>
 			$(document).ready( function () {
