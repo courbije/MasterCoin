@@ -40,36 +40,36 @@
 				</div>
 				<div class="one-half column">
 					<div id="login" class="u-pull-right">
-						<h:form>
+						<h:form id="h_reg">
 							<h:panelGroup rendered="#{!login.loggedIn}">
 								<f:validateBean>
 									<p>
 										<h:outputLabel for="username"
 											value="#{text['login.username.jsf']}:"
 											styleClass="medium-label1" />
-										<h:inputText id="username" value="#{credentials.username}"
+										<h:inputText id="h_username" value="#{credentials.username}"
 											validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.err.jsf']}" />
 									</p>
 									<p>
 										<h:outputLabel for="password"
 											value="#{text['login.password.jsf']}:"
 											styleClass="medium-label1" />
-										<h:inputSecret id="password" value="#{credentials.password}"
+										<h:inputSecret id="h_password" value="#{credentials.password}"
 											validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.err.jsf']}" />
 									</p>
 								</f:validateBean>
 							</h:panelGroup>
 							<p class="u-no-mt u-pull-right">
-								<h:commandButton value="#{text['login.login.jsf']}"
+								<h:commandButton id="h_login" value="#{text['login.login.jsf']}"
 									action="#{credentials.login('header')}"
 									rendered="#{!login.loggedIn}" styleClass="button" />
-								<h:button value="#{text['login.register.jsf']}"
+								<h:commandButton id="h_register" value="#{text['login.register.jsf']}"
 									outcome="/register" rendered="#{!login.loggedIn}"
 									styleClass="link" />
 								<h:outputLabel
 									value="#{text['header.bienvenue.jsf']} #{login.currentUser.login}"
 									rendered="#{login.loggedIn}" styleClass="logout" />
-								<h:commandButton value="#{text['login.logout.jsf']}"
+								<h:commandButton id="h_logout" value="#{text['login.logout.jsf']}"
 									action="#{credentials.logout}" rendered="#{login.loggedIn}"
 									styleClass="button logout" />
 							</p>

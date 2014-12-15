@@ -50,8 +50,8 @@
 					<f:facet name="header">
 						<h:outputText value="#{text['echange.supprimer.jsf']}" />
 					</f:facet>
-					<h:form>
-						<h:commandButton action="#{panier.supprimer(table.rowIndex)}"
+					<h:form id="reg">
+						<h:commandButton id="supprimer" action="#{panier.supprimer(table.rowIndex)}"
 							value="#{text['echange.supprimer.jsf']}"
 							styleClass="link">
 						</h:commandButton>
