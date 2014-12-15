@@ -194,6 +194,14 @@
 
 							</h:form>
 						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.generer']}" />
+							</f:facet>
+							<h:form>
+								<h:link value="#{text['echange.qrcode']}" outcome="qrcode" styleClass="link" />
+							</h:form>
+						</h:column>
 					</h:dataTable>
 				</h:panelGroup>
 			</div>
