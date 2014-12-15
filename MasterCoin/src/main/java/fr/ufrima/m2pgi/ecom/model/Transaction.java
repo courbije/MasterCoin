@@ -184,9 +184,9 @@ public class Transaction implements Serializable
    {
       String result = getClass().getSimpleName() + " ";
       if (montantVendre != null)
-         result += "montantVendre: " + montantVendre;
+         result += "monnaieAchat: " + monnaieAchat;
       if (montantAchat != null)
-         result += ", montantAchat: " + montantAchat;
+         result += ", monnaieVendre: " + monnaieVendre;
       return result;
    }
    
@@ -202,4 +202,5 @@ public class Transaction implements Serializable
 	   t.dateValidation = this.dateValidation;
 	   return t;
    }
+
 }

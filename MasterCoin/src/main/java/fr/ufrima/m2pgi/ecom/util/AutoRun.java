@@ -1,7 +1,10 @@
 package fr.ufrima.m2pgi.ecom.util;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.PostConstruct;
@@ -10,18 +13,25 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
+import javax.transaction.NotSupportedException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import fr.ufrima.m2pgi.ecom.facade.CompteFacade;
 import fr.ufrima.m2pgi.ecom.facade.EchangeOffreFacade;
+import fr.ufrima.m2pgi.ecom.facade.MetriqueFacade;
 import fr.ufrima.m2pgi.ecom.facade.MonnaieFacade;
 import fr.ufrima.m2pgi.ecom.facade.TransactionFacade;
 import fr.ufrima.m2pgi.ecom.model.Compte;
 import fr.ufrima.m2pgi.ecom.model.EchangeOffre;
+import fr.ufrima.m2pgi.ecom.model.Metrique;
 import fr.ufrima.m2pgi.ecom.model.Monnaie;
 import fr.ufrima.m2pgi.ecom.model.Transaction;
 import fr.ufrima.m2pgi.ecom.service.EchangeOffreService;
+import fr.ufrima.m2pgi.ecom.service.MetriqueFillerService;
+import fr.ufrima.m2pgi.ecom.service.MetriqueTraitementService;
 import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 
 @Singleton
@@ -48,6 +58,9 @@ public class AutoRun {
 
 	@Inject
 	private TransactionFacade transactionFacade;
+	
+	@Inject
+	private MetriqueTraitementService metriqueTraitementService;
 
 	private Random rand = new Random();
 
@@ -67,6 +80,20 @@ public class AutoRun {
 		generatePorteMonnaies();
 		generateEchange();
 		generateTransaction();
+		generateMetrique();
+	}
+
+	private void generateMetrique() throws Exception {
+		
+		List<Date> dates = transactionFacade.findAlldistinct();
+		for (Date d : dates){
+			transaction.begin();
+			Calendar cal = Calendar.getInstance();
+		    cal.setTime(d);
+		    cal.add(Calendar.DATE,1);
+			metriqueTraitementService.traitement(cal.getTime());	
+			transaction.commit();
+		}
 	}
 
 	private void generateEchange() throws Exception {

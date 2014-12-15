@@ -143,6 +143,16 @@ public class Metrique implements Serializable
          result += ", date: " + date;
       return result;
    }
+   
+   public Metrique clone(){
+	   Metrique m = new Metrique();
+	   m.monnaie1=this.monnaie1;
+	   m.monnaie2=this.monnaie2;
+	   m.montantMonnaie1=this.montantMonnaie1;
+	   m.montantMonnaie2=this.montantMonnaie2;
+	   m.date=this.date;
+	   return m;
+   }
 
 
 }
