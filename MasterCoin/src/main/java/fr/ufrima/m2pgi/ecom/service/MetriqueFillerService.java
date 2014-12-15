@@ -12,7 +12,7 @@ public class MetriqueFillerService {
 		@Inject
 		private MetriqueTraitementService metriqueTraitementService;
 		
-		@Schedule(dayOfWeek="*")		
+		@Schedule(dayOfWeek="*")
 		public void update(){
 			 metriqueTraitementService.traitement(null);	
 		}
