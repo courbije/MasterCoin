@@ -17,7 +17,7 @@
 		</div>
 		<!-- FORM -->
 		<div class="row twelve columns">
-			<h:form>
+			<h:form id="reg">
 				<h:panelGroup rendered="#{!login.loggedIn}">
 					<f:validateBean>
 						<p>
@@ -35,14 +35,14 @@
 					</f:validateBean>
 				</h:panelGroup>
 				<p>
-					<h:commandButton value="#{text['login.login.jsf']}"
+					<h:commandButton id="login" value="#{text['login.login.jsf']}"
 						action="#{credentials.login()}" rendered="#{!login.loggedIn}"
 						styleClass="button" />
 
-					<h:button value="#{text['login.register.jsf']}" outcome="register"
+					<h:commandButton id="register" value="#{text['login.register.jsf']}" outcome="register"
 						rendered="#{!login.loggedIn}" styleClass="link" />
 
-					<h:commandButton value="#{text['login.logout.jsf']}"
+					<h:commandButton id="logout" value="#{text['login.logout.jsf']}"
 						action="#{credentials.logout}" rendered="#{login.loggedIn}"
 						styleClass="button" />
 				</p>

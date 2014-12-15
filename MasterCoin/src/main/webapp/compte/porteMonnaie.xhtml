@@ -35,7 +35,7 @@
 							<h:outputLabel for="monnaie" styleClass="small-label">
 					 #{text['monnaie.monnaie.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-							<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
+							<h:selectOneMenu id="monnaie" value="#{porteMonnaieController.monnaie}">
 								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 									itemValue="#{m}" />
 								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
@@ -68,7 +68,7 @@
 							<h:outputLabel for="monnaie2" styleClass="small-label">
 					#{text['monnaie.monnaie.jsf']} <span class="required">*</span> :
 					</h:outputLabel>
-							<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
+							<h:selectOneMenu id="monnaie2" value="#{porteMonnaieController.monnaie}">
 								<f:selectItems
 									value="#{porteMonnaieController.notEmptyMonnaies}" var="m"
 									itemLabel="#{m.nom}" itemValue="#{m}" />
