@@ -1,3 +1,12 @@
+/*_____________________________________________________________
+
+  Page
+  -------------------------------------------------------------
+*/
+html {
+	min-width: 300px;
+}
+
 body {
 	background: #E9E9E9 url(../images/bg01.png.jsf) repeat;
 	font-family: 'Open Sans', sans-serif;
@@ -6,6 +15,24 @@ body {
 	color: #969696;
 }
 
+#wrapper {
+	min-width: 220px;
+	width: 100%;
+	background: #FFF;
+	box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
+}
+
+#page {
+	color: #191919;
+	margin: 10px;
+	min-height: 600px;
+}
+
+/*_____________________________________________________________
+
+  Font
+  -------------------------------------------------------------
+*/
 .h1, .h2, .h3 {
 	margin: 0;
 	padding: 0;
@@ -19,105 +46,12 @@ body {
 
 /*_____________________________________________________________
 
-  Panier + Changer Langue
-  -----------------------
+  Formulaire
+  -------------------------------------------------------------
 */
-#header-line {
-	margin-top: -0.5em;
-	text-align: right;
-}
-
-#change-lang {
-	display: inline-block;
-	margin-left: 15px;
-}
-
-#change-lang input {
-	width: 32px;
-	height: 32px;
-	border: none;
-	cursor: pointer;
-}
-
-.lang-fr {
-	background: url("fr_32x32.png.jsf") no-repeat;
-}
-
-.lang-en {
-	background: url("uk_32x32.png.jsf") no-repeat;
-}
-
-/*_____________________________________________________________
-
-  Logo + Connection + Deconnection
-  --------------------------------
-*/
-
-
-#logo {
-	text-transform: uppercase;
-}
-
-#logo h1 {
-	font-size: 1.4em;
-	color: #292929;
-	margin-bottom: 5px;
-}
-
-#logo h1 a {
-	margin-left: 0.50em;
-	text-decoration: none;
-	font-size: 1.4em;
-	color: #292929;
-}
-
-#logo span {
-	color: #01A9DC;
-}
-
-#logo p {
-	margin: 0;
-	padding: 0 0 0 5em;
-	letter-spacing: 0.10em;
-	font-size: 0.90em;
-	color: #828282;
-	margin-bottom: 10px;
-}
-
-#login input[type="text"], #login input[type="password"] {
-	width: 160px;
-	border-radius: 5px 5px 5px 5px;
-	-moz-border-radius: 5px 5px 5px 5px;
-	-webkit-boder-radius: 5px 5px 5px 5px;
-	border: 1px solid #999999;
-	padding: 3px;
-}
-
-#login input[type="text"]:focus, #login input[type="password"]:focus {
-	border: solid 1px #01A9DC;
-	box-shadow: 0 0 5px 1px #969696;
-}
-
-#login .button.logout {
-	margin-left: 15px;
-}
-
-#login >form .logout {
-	margin-top: 35px;
-}
-
-#login label.logout {
-	margin-top: 15px;
-}
-
 p label {
 	display: block;
 	float: left;
-}
-
-
-p label.big-label {
-	width: 180px;
 }
 
 p label.small-label {
@@ -131,55 +65,16 @@ p label.medium-label1 {
 p label.medium-label2 {
 	width: 140px;
 }
-.caca {
-    background-color: red;
-}
-.coco {
-    background-color: green;
+
+p label.big-label {
+	width: 180px;
 }
 
-/*#login {
-	margin: auto;
-	width: 300px;
-	margin-bottom: 10px;
-}
+/*_____________________________________________________________
 
-#login label, #login input[type="text"], #login input[type="password"] {
-	display: block;
-	margin: 4px;
-}
-
-#login input[type="text"], #login input[type="password"] {
-	width: 190px;
-	border-radius: 5px 5px 5px 5px;
-	-moz-border-radius: 5px 5px 5px 5px;
-	-webkit-boder-radius: 5px 5px 5px 5px;
-	border: 1px solid #999999;
-	padding: 3px;
-}
-
-#login input[type="text"]:focus, #login input[type="password"]:focus {
-	border: solid 1px #01A9DC;
-	box-shadow: 0 0 5px 1px #969696;
-}
+  Button and link
+  -------------------------------------------------------------
 */
-
-#wrapper {
-	min-width: 300px;
-	margin: 0;
-	width: 100%;
-	background: #FFF;
-	box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.1);
-}
-
-
-
-#page {
-	color: #191919;
-	margin: 5px;
-	min-height: 600px;
-}
-
 .button {
 	display: inline-block;
 	background: #00A4D9;
@@ -228,6 +123,11 @@ p label.medium-label2 {
 	color: #01A9DC;
 }
 
+/*_____________________________________________________________
+
+  Utilitaire
+  -------------------------------------------------------------
+*/
 .u-no-mt {
 	margin-top: 0;
 }
@@ -236,6 +136,177 @@ p label.medium-label2 {
 	margin-bottom: 0;
 }
 
+/*_____________________________________________________________
+
+  Panier + Changer Langue
+  -------------------------------------------------------------
+*/
+#header-line {
+	margin-top: -0.5em;
+	text-align: right;
+}
+
+#change-lang {
+	display: inline-block;
+	margin-left: 15px;
+}
+
+#change-lang input {
+	width: 32px;
+	height: 32px;
+	border: none;
+	cursor: pointer;
+}
+
+.lang-fr {
+	background: url("fr_32x32.png.jsf") no-repeat;
+}
+
+.lang-en {
+	background: url("uk_32x32.png.jsf") no-repeat;
+}
+
+/*_____________________________________________________________
+
+  Logo + Connection + Deconnection
+  -------------------------------------------------------------
+*/
+#logo {
+	text-transform: uppercase;
+}
+
+#logo h1 {
+	font-size: 1.4em;
+	color: #292929;
+	margin-bottom: 5px;
+}
+
+#logo h1 a {
+	margin-left: 0.50em;
+	text-decoration: none;
+	font-size: 1.4em;
+	color: #292929;
+}
+
+#logo span {
+	color: #01A9DC;
+}
+
+#logo p {
+	margin: 0;
+	padding: 0 0 0 5em;
+	letter-spacing: 0.10em;
+	font-size: 0.90em;
+	color: #828282;
+	margin-bottom: 10px;
+}
+
+#login input[type="text"], #login input[type="password"] {
+	width: 160px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 3px;
+}
+
+#login input[type="text"]:focus, #login input[type="password"]:focus {
+	border: solid 1px #01A9DC;
+	box-shadow: 0 0 5px 1px #969696;
+}
+
+#login .button.logout {
+	margin-left: 15px;
+}
+
+#login>form .logout {
+	margin-top: 35px;
+}
+
+#login label.logout {
+	margin-top: 15px;
+}
+
+/*_____________________________________________________________
+
+  Box notification
+  -------------------------------------------------------------
+*/
+#notify {
+	border-radius: 5px;
+	margin-top: 10px;
+	font-weight: bold;
+	list-style: none;
+	text-align: center;
+	text-decoration: underline;
+}
+
+#notify li {
+	margin: 5px;
+}
+
+#notify.errors-box {
+	border: 1px solid #f46767;
+	background-color: #ffcccc;
+}
+
+#notify.infos-box {
+	border: 1px solid #67f49d;
+	background-color: #ccfffb;
+}
+
+/*_____________________________________________________________
+
+  Footer
+  -------------------------------------------------------------
+*/
+#copyright {
+	padding: 6em 0em;
+	font-size: 0.70em;
+	letter-spacing: 0.20em;
+	text-align: center;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 1px #FFF;
+	color: #6A6A6A;
+}
+
+#copyright a {
+	color: #747474;
+}
+
+.caca {
+	background-color: red;
+}
+
+.coco {
+	background-color: green;
+}
+
+/*#login {
+	margin: auto;
+	width: 300px;
+	margin-bottom: 10px;
+}
+
+#login label, #login input[type="text"], #login input[type="password"] {
+	display: block;
+	margin: 4px;
+}
+
+#login input[type="text"], #login input[type="password"] {
+	width: 190px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 3px;
+}
+
+#login input[type="text"]:focus, #login input[type="password"]:focus {
+	border: solid 1px #01A9DC;
+	box-shadow: 0 0 5px 1px #969696;
+}
+*/
 
 /*
 
