@@ -39,9 +39,9 @@ import fr.ufrima.m2pgi.ecom.service.PorteMonnaieService;
 @TransactionManagement(TransactionManagementType.BEAN)
 public class AutoRun {
 
-	private final int nbEchange = 200;
+	private final int nbEchange = 400;
 	private final int nbTransaction = 1000;
-	private final int nbPm = 30;
+	private final int nbPm = 100;
 	private final int arondi = 1000;
 	
 	@Resource
@@ -216,6 +216,18 @@ public class AutoRun {
 		m = new Monnaie();
 		m.setAcroyme("PPC");
 		m.setNom("Peercoin");
+		monnaies.add(m);
+		monnaieFacade.create(m);
+		transaction.commit();
+		m = new Monnaie();
+		m.setAcroyme("eUSD");
+		m.setNom("e-Dollar");
+		monnaies.add(m);
+		monnaieFacade.create(m);
+		transaction.commit();
+		m = new Monnaie();
+		m.setAcroyme("eEUR");
+		m.setNom("e-Euro");
 		monnaies.add(m);
 		monnaieFacade.create(m);
 		transaction.commit();
