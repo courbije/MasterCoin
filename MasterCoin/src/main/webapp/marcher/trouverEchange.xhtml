@@ -6,33 +6,28 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-
-		<div class="sixteen columns">
+		<!-- TITLE -->
+		<div class="row twelve columns">
 			<h:outputText styleClass="h1 title"
 				value="#{text['echange.message_accueil.jsf']}" />
 		</div>
-
 		<f:metadata>
 			<f:viewParam name="idV" value="#{trouverEchangeController.idV}" />
 			<f:viewParam name="idA" value="#{trouverEchangeController.idA}" />
 		</f:metadata>
-
-		<div class="row">
-			<h:form id="reg"
-				rendered="#{empty trouverEchangeController.idA or empty trouverEchangeController.idV}">
-				<div class="one-third column">
-
-					<h:outputText styleClass="h1"
+		<div id="page_trouve" class="row">
+			<!-- FORM1 -->
+			<div class="one-half column">
+				<h:form id="reg"
+					rendered="#{empty trouverEchangeController.idA or empty trouverEchangeController.idV}">
+					<h:outputText styleClass="h2"
 						value="#{text['echange.monnaie_souhaitee.jsf']}" />
-
-					<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
+					<h:dataTable value="#{monnaies}" var="m"
+						styleClass="tableid display" width="100%"
 						rendered="#{not empty monnaies}">
 						<h:column>
-							<f:facet name="header">
-								<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
-							</f:facet>
-							<h:link outcome="/marcher/trouverEchange"
-								value="#{m.acroyme}">
+							<h:link outcome="/marcher/trouverEchange" value="#{m.acroyme}"
+								styleClass="button #{m.id eq trouverEchangeController.idA ? 'monnai-select' : 'monnai-no-select'}">
 								<f:param name="idV" value="" />
 								<f:param name="idA" value="#{m.id}" />
 							</h:link>
@@ -50,21 +45,21 @@
 							<h:outputLabel value="#{m.nom}" />
 						</h:column>
 					</h:dataTable>
-				</div>
-
-			</h:form>
-
-			<h:form id="reg1"
-				rendered="#{not empty trouverEchangeController.idA and empty trouverEchangeController.idV}">
-				<div class="one-third column">
-					<h:outputText styleClass="h1"
+				</h:form>
+			</div>
+			<!-- FORM2 -->
+			<div class="one-half column">
+				<h:form id="reg1"
+					rendered="#{not empty trouverEchangeController.idA and empty trouverEchangeController.idV}">
+					<h:outputText styleClass="h2"
 						value="#{text['echange.monnaie_a_vendre.jsf']}" />
-					<h:dataTable value="#{monnaies}" var="m" styleClass="tableid"
+					<h:dataTable value="#{monnaies}" var="m"
+						styleClass="tableid display" width="100%"
 						rendered="#{not empty monnaies}">
 						<h:column>
 							<h:link outcome="/marcher/proposerEchange"
 								rendered="#{m.id!=trouverEchangeController.idA}"
-								value="#{m.acroyme}">
+								value="#{m.acroyme}" styleClass="button">
 								<f:param name="idV" value="#{m.id}" />
 								<f:param name="idA" value="#{trouverEchangeController.idA}" />
 							</h:link>
@@ -82,11 +77,24 @@
 							<h:outputLabel value="#{m.nom}" />
 						</h:column>
 					</h:dataTable>
-				</div>
-			</h:form>
+				</h:form>
+			</div>
 		</div>
 		<script>
 		$(document).ready( function () {
+			var selectValue=$('#reg .monnai-select').text();
+			$('#reg1 tbody > tr').each(function() {
+				var isDel=false;
+				$(this).children().each(function() {
+					if($(this).html() == ""){
+						isDel=true;
+						}
+			    });
+			    if(isDel==true){
+			    	$(this).remove();
+			    	isDel=false;
+				    }
+			});
 			$('.tableid').DataTable({
 			    paging: false,
 			   	bInfo : false,
@@ -99,6 +107,10 @@
 		         }});
 		    
 		} );
+		 $(function() {
+			 $("#menu-marche").addClass("current_page_item");
+			 $("#menu-marche-propo").addClass("current_page_item");
+		});
 	</script>
 	</ui:define>
 </ui:composition>

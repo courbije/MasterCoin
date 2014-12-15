@@ -118,8 +118,7 @@ p input.button, p input.link {
 	margin-top: 10px;
 }
 
-p.small-form input[type="text"],
-p.small-form select  {
+p.small-form input[type="text"], p.small-form select {
 	width: 130px;
 }
 
@@ -363,7 +362,6 @@ p.small-form select {
 	color: #838383;
 }
 
-
 /*_____________________________________________________________
 
   Règles Spécifiques
@@ -371,6 +369,27 @@ p.small-form select {
 */
 #quick-offer-register {
 	margin-top: 25px;
+}
+
+.button.monnai-select {
+	background-color: green;
+}
+
+.button.monnai-select:hover {
+	background-color: green;
+}
+
+#page_trouve .tableid {
+	border-bottom: none;
+	margin-bottom: 2em;
+}
+
+#page_trouve  td {
+	text-align: center;
+}
+
+#page_trouve td .button {
+	width: 100px;
 }
 
 .caca {
