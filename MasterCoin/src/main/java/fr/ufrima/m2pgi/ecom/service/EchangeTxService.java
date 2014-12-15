@@ -152,7 +152,7 @@ public class EchangeTxService {
 			// Pas assez d'argent dans la base
 			return 0.0;
 		}
-		return montantObtenu;
+		return Util.round(montantObtenu);
 	}
 
 }

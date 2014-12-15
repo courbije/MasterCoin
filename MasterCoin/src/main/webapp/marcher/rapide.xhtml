@@ -79,7 +79,7 @@
 							<h:outputLabel for="monnaie_voulue" styleClass="big-label2">
 					#{text['echange.monnaie_achat.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-							<h:selectOneMenu
+							<h:selectOneMenu id="monnaie_voulue"
 								value="#{achatController.newTransaction.monnaieAchat}">
 								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 									itemValue="#{m}" />
@@ -98,7 +98,7 @@
 							<h:outputLabel for="monnaie_a_vendre" styleClass="big-label2">
 					#{text['echange.monnaie_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-							<h:selectOneMenu
+							<h:selectOneMenu id="monnaie_demande"
 								value="#{achatController.newTransaction.monnaieVendre}">
 								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 									itemValue="#{m}" />
@@ -124,6 +124,7 @@
 							<h:commandButton id="calculer"
 								action="#{achatController.calculerQuantitePropose()}"
 								value="#{text['echange.calculette.jsf']}" styleClass="button">
+								<f:ajax event="click" execute="monnaie_voulue quantite_voulue monnaie_demande" render="quantite_a_vendre" listener="#{achatController.calculerQuantitePropose}"/>
 							</h:commandButton>
 						</p>
 					</h:form>
@@ -202,8 +203,9 @@
 								<h:outputText value="#{text['echange.generer']}" />
 							</f:facet>
 							<h:form>
-								<h:link value="#{text['echange.qrcode']}" outcome="qrcode"
-									styleClass="link" />
+							<h:commandLink value="#{text['echange.qrcode']}" action="qrcode" styleClass="link">
+									<f:param name="id" value="#{_offre.id}" />
+								</h:commandLink>
 							</h:form>
 						</h:column>
 					</h:dataTable>
