@@ -6,110 +6,111 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
+		<!-- TITLE -->
 		<f:view>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
-				
-			<div class="sixteen columns">
+
+			<div class="row twelve columns">
 				<h:outputText styleClass="h1 title"
 					value="#{text['header.historique.jsf']}" />
 			</div>
-			<div class="sixteen columns">
+			<!-- HISTO1 -->
+			<div class="row twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['histo.historique_porte_monnaie_acutel.jsf']}" />
-			<h:panelGroup
-				rendered="#{empty historiqueController.porteMonnaiesHistorique}">
-				<h:outputText styleClass="em block"
-					value="#{text['histo.aucun_pm']}" />
-			</h:panelGroup>
-			<h:dataTable var="_pm" id="table_id"
-				value="#{historiqueController.porteMonnaiesHistorique}"
-				rendered="#{not empty historiqueController.porteMonnaiesHistorique}"
-				styleClass="display dt-responsive" width="100%">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
-					</f:facet>
-					<h:outputText value=" #{_pm.monnaie.nom}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['pm.montant.jsf']}" />
-					</f:facet>
-					<h:outputText
-						style="color : #{_pm.montant ge 0  ? 'green' : 'red'}"
-						value="#{ _pm.montant ge 0 ? _pm.montant : _pm.montant}">
-					</h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['histo.date.jsf']}" />
-					</f:facet>
-					<h:outputText value="#{_pm.date}">
-						<f:convertDateTime dateStyle="long" type="both" />
-					</h:outputText>
-				</h:column>
-			</h:dataTable>
+				<h:panelGroup
+					rendered="#{empty historiqueController.porteMonnaiesHistorique}">
+					<h:outputText styleClass="em block"
+						value="#{text['histo.aucun_pm']}" />
+				</h:panelGroup>
+				<h:dataTable var="_pm" id="table_id"
+					value="#{historiqueController.porteMonnaiesHistorique}"
+					rendered="#{not empty historiqueController.porteMonnaiesHistorique}"
+					styleClass="display dt-responsive" width="100%">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
+						</f:facet>
+						<h:outputText value=" #{_pm.monnaie.nom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['pm.montant.jsf']}" />
+						</f:facet>
+						<h:outputText
+							style="color : #{_pm.montant ge 0  ? 'green' : 'red'}"
+							value="#{ _pm.montant ge 0 ? _pm.montant : _pm.montant}">
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['histo.date.jsf']}" />
+						</f:facet>
+						<h:outputText value="#{_pm.date}">
+							<f:convertDateTime dateStyle="long" type="both" />
+						</h:outputText>
+					</h:column>
+				</h:dataTable>
 			</div>
-			
-			<br />
-			
-			<div class="sixteen columns">
+			<!-- HISTO2 -->
+			<div class="row twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['histo.historique_achat.jsf']}" />
-			<h:panelGroup
-				rendered="#{empty historiqueController.transactionHisto}">
-				<h:outputText styleClass="em block"
-					value="#{text['histo.aucun_achat']}" />
-			</h:panelGroup>
-			<h:dataTable var="t" id="table_id2"
-				value="#{historiqueController.transactionHisto}"
-				rendered="#{not empty historiqueController.transactionHisto}"
-				styleClass="display dt-responsive" width="100%">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['transaction.monnaie_acheter.jsf']}" />
-					</f:facet>
-					<h:outputText
-						value="#{ t.compteAcheteur == login.currentUser ? t.monnaieAchat.nom : t.monnaieVendre.nom}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['transaction.montant_acheter.jsf']}" />
-					</f:facet>
-					<h:outputText
-						value="#{ t.compteAcheteur == login.currentUser ? t.montantAchat : t.montantVendre}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['transaction.monnaie_vendu.jsf']}" />
-					</f:facet>
-					<h:outputText
-						value="#{ t.compteAcheteur == login.currentUser ? t.monnaieVendre.nom : t.monnaieAchat.nom}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['transaction.montant_vendu.jsf']}" />
-					</f:facet>
-					<h:outputText
-						value="#{ t.compteAcheteur == login.currentUser ? t.montantVendre : t.montantAchat}" />
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['transaction.date_validation.jsf']}" />
-					</f:facet>
-					<h:outputText value="#{t.dateValidation}" >
-						<f:convertDateTime dateStyle="long" type="both" />
-					</h:outputText>
-				</h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['transaction.taux.jsf']}" />
-					</f:facet>
-					<h:outputText 	value="#{ t.compteAcheteur == login.currentUser ? t.montantAchat/t.montantVendre : t.montantVendre/t.montantAchat}" />
+				<h:panelGroup
+					rendered="#{empty historiqueController.transactionHisto}">
+					<h:outputText styleClass="em block"
+						value="#{text['histo.aucun_achat']}" />
+				</h:panelGroup>
+				<h:dataTable var="t" id="table_id2"
+					value="#{historiqueController.transactionHisto}"
+					rendered="#{not empty historiqueController.transactionHisto}"
+					styleClass="display dt-responsive" width="100%">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.monnaie_acheter.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{ t.compteAcheteur == login.currentUser ? t.monnaieAchat.nom : t.monnaieVendre.nom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.montant_acheter.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{ t.compteAcheteur == login.currentUser ? t.montantAchat : t.montantVendre}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.monnaie_vendu.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{ t.compteAcheteur == login.currentUser ? t.monnaieVendre.nom : t.monnaieAchat.nom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.montant_vendu.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{ t.compteAcheteur == login.currentUser ? t.montantVendre : t.montantAchat}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.date_validation.jsf']}" />
+						</f:facet>
+						<h:outputText value="#{t.dateValidation}">
+							<f:convertDateTime dateStyle="long" type="both" />
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.taux.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{ t.compteAcheteur == login.currentUser ? t.montantAchat/t.montantVendre : t.montantVendre/t.montantAchat}" />
 
-				</h:column>
-			</h:dataTable>
+					</h:column>
+				</h:dataTable>
 			</div>
 		</f:view>
 		<script>

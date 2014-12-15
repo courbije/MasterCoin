@@ -7,22 +7,24 @@
 
 
 	<ui:define name="content">
+		<!-- TITLE -->
 		<f:view>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
-			<div class="sixteen columns">
+			<div class="row twelve columns">
 				<h:outputText styleClass="h1 title"
 					value="#{text['compte.modification_compte.jsf']}" />
 			</div>
-			<div class="sixteen columns">
+			<div class="row twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['compte.modification_compte_form.jsf']}" />
-			</div>
-			<div class="sixteen columns">
+				<span class="required-box">
+					<span class="required">*</span> : #{text['all.required_box.jsf']}
+				</span>
+			<!-- FORM -->
 				<h:form id="form">
-
 					<p>
-						<h:outputLabel styleClass="big-label" for="pseudo">
+						<h:outputLabel styleClass="big-label1" for="pseudo">
 					#{text['login.username.jsf']} <span class="required">*</span> :
 				</h:outputLabel>
 						<h:inputText id="pseudo"
@@ -33,7 +35,7 @@
 							styleClass="info-box" />
 					</p>
 					<p>
-						<h:outputLabel styleClass="big-label" for="password">
+						<h:outputLabel styleClass="big-label1" for="password">
 					#{text['login.password.jsf']} <span class="required">*</span> :
 				</h:outputLabel>
 						<h:inputText id="password"
@@ -44,7 +46,7 @@
 							styleClass="info-box" />
 					</p>
 					<p>
-						<h:outputLabel styleClass="big-label" for="nom">
+						<h:outputLabel styleClass="big-label1" for="nom">
 					#{text['compte.nom.jsf']} <span class="required">*</span> :
 				</h:outputLabel>
 						<h:inputText id="nom"
@@ -55,7 +57,7 @@
 							styleClass="info-box" />
 					</p>
 					<p>
-						<h:outputLabel styleClass="big-label" for="prenom">
+						<h:outputLabel styleClass="big-label1" for="prenom">
 					#{text['compte.prenom.jsf']} <span class="required">*</span> :
 				</h:outputLabel>
 						<h:inputText id="prenom"
@@ -66,7 +68,7 @@
 							styleClass="info-box" />
 					</p>
 					<p>
-						<h:outputLabel styleClass="big-label" for="email">
+						<h:outputLabel styleClass="big-label1" for="email">
 					#{text['compte.email.jsf']} <span class="required">*</span> :
 				</h:outputLabel>
 						<h:inputText id="email"
@@ -77,7 +79,7 @@
 							styleClass="info-box" />
 					</p>
 					<p>
-						<h:outputLabel styleClass="big-label" for="date">
+						<h:outputLabel styleClass="big-label1" for="date">
 					#{text['compte.date_de_naissance.jsf']} <span class="required">*</span> :
 				</h:outputLabel>
 						<h:inputText id="date"
@@ -89,16 +91,12 @@
 							value="#{msg['compte.creation_compte.date.info.jsf']}"
 							styleClass="info-box" />
 					</p>
-					<p>
-
+					<p class="u-pull-right">
 						<h:commandButton id="register"
 							action="#{compteModificationController.edit()}"
 							value="#{text['compte.enregistrer.jsf']}" styleClass="button" />
 					</p>
 				</h:form>
-				<p class="required-box">
-					<span class="required">*</span> : #{text['all.required_box.jsf']}
-				</p>
 			</div>
 			<script>
 	 $(function() {

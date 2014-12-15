@@ -109,6 +109,15 @@ p input.button, p input.link {
 	margin-right: 10px;
 }
 
+.form-boxed {
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 5px;
+	margin-top: 10px;
+}
+
 /*_____________________________________________________________
 
   Button and link
@@ -173,6 +182,10 @@ p input.button, p input.link {
 
 .u-no-mb {
 	margin-bottom: 0;
+}
+
+.u-mb {
+	margin-top: 1em;
 }
 
 /*_____________________________________________________________

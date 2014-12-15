@@ -6,103 +6,110 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
+		<!-- TITLE -->
 		<f:view>
 			<f:event type="preRenderView"
 				listener="#{login.forwardToLoginIfNotLoggedIn}" />
-			<div class="sixteen columns">
+			<div class="row twelve columns">
 				<h:outputText styleClass="h1 title"
 					value="#{text['header.porteMonnaie.jsf']}" />
 			</div>
-			<div class="eight columns">
-				<h:outputText styleClass="h2"
-					value="#{text['pm.ajouter_porte_monnaie.jsf']}" />
-			<h:form id="reg2">
-				<p class="small-form">
-					<h:outputLabel for="montant" styleClass="small-label">
+			<div class="row">
+				<!-- FORM1 -->
+				<div class="one-half column form-boxed">
+					<h:outputText styleClass="h2"
+						value="#{text['pm.ajouter_porte_monnaie.jsf']}" />
+					<span class="required-box">
+						<span class="required">*</span> : #{text['all.required_box.jsf']}
+					</span>
+					<h:form id="reg2">
+						<p class="small-form">
+							<h:outputLabel for="montant" styleClass="small-label">
 					#{text['pm.montant.jsf']} <span class="required">*</span> :
 					</h:outputLabel>
-					<h:inputText id="montant" value="#{porteMonnaieController.amount}"
-					validatorMessage="#{msg['pm.ajouter_argent.err.jsf']}" />
-				</p>
-				<p class="small-form">
-					<h:outputLabel for="monnaie" styleClass="small-label">
+							<h:inputText id="montant"
+								value="#{porteMonnaieController.amount}"
+								validatorMessage="#{msg['pm.ajouter_argent.err.jsf']}" />
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="monnaie" styleClass="small-label">
 					 #{text['monnaie.monnaie.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
-						<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
-							itemValue="#{m}" />
-						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
-					</h:selectOneMenu>
-				</p>
-				<p>
-					<h:commandButton id="register"
-						action="#{porteMonnaieController.registerAdd()}"
-						value="#{text['monnaie.enregistrer.jsf']}" styleClass="button" />
-				</p>
-			</h:form>
-			</div>
-			
-			<div class="seven columns">
-				<h:outputText styleClass="h2"
-					value="#{text['pm.retirer_porte_monnaie.jsf']}" />
-			<h:form id="reg1">
-				<p class="small-form">
-					<h:outputLabel for="montant2" styleClass="small-label">
+							<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
+								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+									itemValue="#{m}" />
+								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+							</h:selectOneMenu>
+						</p>
+						<p class="u-pull-right">
+							<h:commandButton id="register"
+								action="#{porteMonnaieController.registerAdd()}"
+								value="#{text['monnaie.enregistrer.jsf']}" styleClass="button" />
+						</p>
+					</h:form>
+				</div>
+				<!-- FORM2 -->
+				<div class="one-half column form-boxed">
+					<h:outputText styleClass="h2"
+						value="#{text['pm.retirer_porte_monnaie.jsf']}" />
+					<span class="required-box">
+						<span class="required">*</span> : #{text['all.required_box.jsf']}
+					</span>
+					<h:form id="reg1">
+						<p class="small-form">
+							<h:outputLabel for="montant2" styleClass="small-label">
 					#{text['pm.montant.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-					<h:inputText id="montant2" value="#{porteMonnaieController.amount}"
-					validatorMessage="#{msg['pm.retirer_argent.err.jsf']}" />
-				</p>
-				<p class="small-form">
-					<h:outputLabel for="monnaie2" styleClass="small-label">
+							<h:inputText id="montant2"
+								value="#{porteMonnaieController.amount}"
+								validatorMessage="#{msg['pm.retirer_argent.err.jsf']}" />
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="monnaie2" styleClass="small-label">
 					#{text['monnaie.monnaie.jsf']} <span class="required">*</span> :
 					</h:outputLabel>
-					<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
-						<f:selectItems value="#{porteMonnaieController.notEmptyMonnaies}"
-							var="m" itemLabel="#{m.nom}" itemValue="#{m}" />
-						<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
-					</h:selectOneMenu>
-				</p>
-				<p>
-					<h:commandButton id="register2"
-						action="#{porteMonnaieController.registerRemove()}"
-						value="#{text['monnaie.enregistrer.jsf']}" styleClass="button" />
-				</p>
-			</h:form>
+							<h:selectOneMenu value="#{porteMonnaieController.monnaie}">
+								<f:selectItems
+									value="#{porteMonnaieController.notEmptyMonnaies}" var="m"
+									itemLabel="#{m.nom}" itemValue="#{m}" />
+								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+							</h:selectOneMenu>
+						</p>
+						<p class="u-pull-right">
+							<h:commandButton id="register2"
+								action="#{porteMonnaieController.registerRemove()}"
+								value="#{text['monnaie.enregistrer.jsf']}" styleClass="button" />
+						</p>
+					</h:form>
+				</div>
 			</div>
-
-			<div class="sixteen columns">
+			<!-- TABLE -->
+			<div class="twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['pm.porte_monnaie_acutel.jsf']}" />
-			<h:panelGroup
-				rendered="#{empty porteMonnaieController.porteMonnaies}">
-				<h:outputText styleClass="em"
-					value="#{text['pm.aucun_porte_monnaie_enregistre.jsf']}" />
-			</h:panelGroup>
-			<h:dataTable var="_pm" id="table_id"
-				value="#{porteMonnaieController.porteMonnaies}"
-				rendered="#{not empty porteMonnaieController.porteMonnaies}"
-				styleClass="display dt-responsive" width="100%">
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
-					</f:facet>
+				<h:panelGroup
+					rendered="#{empty porteMonnaieController.porteMonnaies}">
+					<h:outputText styleClass="em"
+						value="#{text['pm.aucun_porte_monnaie_enregistre.jsf']}" />
+				</h:panelGroup>
+				<h:dataTable var="_pm" id="table_id"
+					value="#{porteMonnaieController.porteMonnaies}"
+					rendered="#{not empty porteMonnaieController.porteMonnaies}"
+					styleClass="display dt-responsive" width="100%">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['monnaie.monnaie.jsf']}" />
+						</f:facet>
                 #{_pm.monnaie.nom}
             </h:column>
-				<h:column>
-					<f:facet name="header">
-						<h:outputText value="#{text['pm.montant.jsf']}" />
-					</f:facet>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['pm.montant.jsf']}" />
+						</f:facet>
                 #{_pm.montant}
             </h:column>
-			</h:dataTable>
+				</h:dataTable>
 			</div>
-			
-			<div class="sixteen columns">
-			<p class="required-box">
-					<span class="required">*</span> : #{text['all.required_box.jsf']}
-				</p>
-				</div>
 		</f:view>
 		<script>
 				$(document).ready( function () {
