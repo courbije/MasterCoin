@@ -199,7 +199,9 @@
 								<h:outputText value="#{text['echange.generer']}" />
 							</f:facet>
 							<h:form>
-								<h:link value="#{text['echange.qrcode']}" outcome="qrcode" styleClass="link" />
+								<h:commandLink value="#{text['echange.qrcode']}" action="qrcode" styleClass="link">
+									<f:param name="id" value="#{_offre.id}" />
+								</h:commandLink>
 							</h:form>
 						</h:column>
 					</h:dataTable>
