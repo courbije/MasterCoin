@@ -6,27 +6,29 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-		<div class="sixteen columns">
+		<!-- TITLE -->
+		<div class="row twelve columns">
 			<h:outputText styleClass="h1 title"
 				value="#{text['login.login.jsf']}" />
 		</div>
-		<div class="sixteen columns">
+		<div class="row twelve columns">
 			<h:outputText styleClass="h2" value="#{text['message_not_log.jsf']}"
 				rendered="#{!login.loggedIn}" />
 		</div>
-		<div class="sixteen columns">
+		<!-- FORM -->
+		<div class="row twelve columns">
 			<h:form>
 				<h:panelGroup rendered="#{!login.loggedIn}">
 					<f:validateBean>
 						<p>
 							<h:outputLabel for="username"
-								value="#{text['login.username.jsf']}:" styleClass="big-label" />
+								value="#{text['login.username.jsf']}:" styleClass="medium-label1" />
 							<h:inputText id="username" value="#{credentials.username}"
 								validatorMessage="#{text['login.username.jsf']}: #{msg['login.username.err.jsf']}" />
 						</p>
 						<p>
 							<h:outputLabel for="password"
-								value="#{text['login.password.jsf']}:" styleClass="big-label" />
+								value="#{text['login.password.jsf']}:" styleClass="medium-label1" />
 							<h:inputSecret id="password" value="#{credentials.password}"
 								validatorMessage="#{text['login.password.jsf']}: #{msg['login.password.err.jsf']}" />
 						</p>

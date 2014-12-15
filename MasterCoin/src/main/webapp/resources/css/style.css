@@ -44,6 +44,14 @@ body {
 	font-style: italic;
 }
 
+#page .title {
+	display: block;
+	text-align: center;
+	font-size: 2em;
+	letter-spacing: 0.10em;
+	text-transform: uppercase;
+}
+
 /*_____________________________________________________________
 
   Formulaire
@@ -66,8 +74,39 @@ p label.medium-label2 {
 	width: 140px;
 }
 
-p label.big-label {
+p label.big-label1 {
+	width: 160px;
+}
+
+p label.big-label2 {
+	width: 170px;
+}
+
+p label.big-label3 {
 	width: 180px;
+}
+
+p input[type="text"], p input[type="password"], p select {
+	width: 180px;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 3px;
+}
+
+p input[type="text"]:focus, p input[type="password"]:focus, p select:focus
+	{
+	border: solid 1px #01A9DC;
+	box-shadow: 0 0 5px 1px #969696;
+}
+
+p select {
+	width: 188px;
+}
+
+p input.button, p input.link {
+	margin-right: 10px;
 }
 
 /*_____________________________________________________________
@@ -227,6 +266,14 @@ p label.big-label {
 	margin-top: 15px;
 }
 
+#login p input.button {
+	margin-right: 5px;
+}
+
+#login p input.link {
+	margin-right: 0px;
+}
+
 /*_____________________________________________________________
 
   Box notification
@@ -272,6 +319,26 @@ p label.big-label {
 
 #copyright a {
 	color: #747474;
+}
+
+/*_____________________________________________________________
+
+  Input Obligatoire + Info Box
+  -------------------------------------------------------------
+*/
+.required {
+	color: #838383;
+	margin: 0 -0.2em;
+}
+
+.required-box {
+	color: #838383;
+	margin-left: 15px;
+}
+
+.info-box {
+	margin: 20px;
+	color: #838383;
 }
 
 .caca {
