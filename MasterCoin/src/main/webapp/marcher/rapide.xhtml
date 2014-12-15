@@ -26,7 +26,7 @@
 							<h:outputLabel for="monnaie_voulue" styleClass="big-label2">
 					#{text['echange.monnaie_souhaitee.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-							<h:selectOneMenu
+							<h:selectOneMenu id="reg_monnaie"
 								value="#{offreController.newEchangeOffre.monnaieAchat}">
 								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 									itemValue="#{m}" />
@@ -45,7 +45,7 @@
 							<h:outputLabel for="monnaie_a_vendre" styleClass="big-label2">
 					#{text['echange.monnaie_a_vendre.jsf']} <span class="required">*</span> :
 					 </h:outputLabel>
-							<h:selectOneMenu
+							<h:selectOneMenu id="reg_monnaie2"
 								value="#{offreController.newEchangeOffre.monnaieVendre}">
 								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
 									itemValue="#{m}" />
