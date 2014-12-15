@@ -133,6 +133,9 @@
 			<div class="twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['echange.offres_compte.jsf']}" />
+				<h:commandButton id="slideToggle-button1"
+					value="#{text['echange.toggle.jsf']}" styleClass="button u-fmb">
+				</h:commandButton>
 				<h:panelGroup rendered="#{login.loggedIn}">
 					<h:panelGroup rendered="#{empty echangeRapideController.offres}">
 						<h:outputText styleClass="em"
@@ -199,7 +202,8 @@
 								<h:outputText value="#{text['echange.generer']}" />
 							</f:facet>
 							<h:form>
-								<h:link value="#{text['echange.qrcode']}" outcome="qrcode" styleClass="link" />
+								<h:link value="#{text['echange.qrcode']}" outcome="qrcode"
+									styleClass="link" />
 							</h:form>
 						</h:column>
 					</h:dataTable>
@@ -208,10 +212,21 @@
 		</f:view>
 		<script>
 			$(document).ready( function () {
-				 $('#table_id').DataTable({bInfo : false,
-			    	 language : {
-			    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
-			         }});
+				var is_first_open = true;
+				$('#table_id').css('display','none');
+				$("#slideToggle-button1").click(function() {
+					if(is_first_open == true){
+						is_first_open = false;
+						$('#table_id').css('display','block');
+						$('#table_id').DataTable({bInfo : false,
+					    	 language : {
+					    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+					         }});
+					}
+					else {
+						$( "#table_id_wrapper" ).slideToggle("slow");
+					}
+				});
 	    
 			} );
 			 $(function() {
