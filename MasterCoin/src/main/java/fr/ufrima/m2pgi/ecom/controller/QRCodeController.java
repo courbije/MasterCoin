@@ -46,7 +46,7 @@ public class QRCodeController {
 		try {
 			EchangeOffre echange = this.echangeOffreFacade.find(Long.parseLong(scanned_qrcode));
 			echangeTxService.validerOffre(echange ,login.getCurrentUser());
-			
+			Util.DisplaySucces(facesContext);
 		} catch (Exception e) {
 				Util.DisplayError(e,facesContext);
 		}
