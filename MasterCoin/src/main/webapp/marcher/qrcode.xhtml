@@ -6,9 +6,30 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">		  
-	<div class="sixteen columns">
-		<h:outputText value="id : #{param['id']}" />
-	</div>
+	<h:outputScript name="js/jquery.min.js"/>
+    <h:outputScript name="js/qrcode.js"/>
+    
+	<input id="text" type="hidden" value="#{param['id']}"/>
+	<div class="sixteen columns" id="qrcode"></div>
+
+    <script>
+		var qrcode = new QRCode("qrcode");
+
+	    function makeCode () {		
+	    	var elText = document.getElementById("text");
+	    	
+	    	if (!elText.value) {
+	    		alert("ID incorrect");
+	    		return;
+	    	}
+	    	
+	    	qrcode.makeCode(elText.value);
+	    }
+	
+	    makeCode();
+
+    </script>
+    
 	</ui:define>
 
 </ui:composition>

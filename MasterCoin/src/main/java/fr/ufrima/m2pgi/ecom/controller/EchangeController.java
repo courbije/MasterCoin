@@ -107,6 +107,8 @@ public class EchangeController {
 	public void setIdV(String idV) {
 		if(idV!=null && !idV.equals("")) {
 			this.monnaieV = this.monnaieFacade.find(Long.parseLong(idV));
+			if (achatController!=null&&achatController.getNewTransaction()!=null)
+				achatController.getNewTransaction().setMonnaieVendre(this.monnaieV);
 		}
 		init();
 		this.idV = idV;
@@ -124,6 +126,8 @@ public class EchangeController {
 	public void setIdA(String idA) {
 		if(idA!=null && !idA.equals("")) {
 			this.monnaieA = this.monnaieFacade.find(Long.parseLong(idA));
+			if (achatController!=null&&achatController.getNewTransaction()!=null)				
+				achatController.getNewTransaction().setMonnaieAchat(this.monnaieA);
 		}
 		init();
 		this.idA = idA;
