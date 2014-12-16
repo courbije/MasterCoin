@@ -182,9 +182,12 @@ p.small-form select {
 p.center-link {
 	text-align: center;
 	margin-top: 20px;
+	max-width: 180px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
-p.center-link > a {
+p.center-link {
 	color: #838383;
 	border: none;
 	background: none;
@@ -200,8 +203,16 @@ p.center-link > a {
 	padding-right: 20px;
 }
 
-p.center-link:hover > a{
+p.center-link:hover {
 	border: 1px solid #01A9DC;
+}
+
+p.center-link > a{
+	text-decoration: none;
+	color: #999999;
+}
+
+p.center-link:hover > a {
 	color: #01A9DC;
 }
 

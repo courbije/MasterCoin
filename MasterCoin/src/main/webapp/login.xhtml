@@ -39,7 +39,7 @@
 						action="#{credentials.login()}" rendered="#{!login.loggedIn}"
 						styleClass="button" />
 
-					<h:commandButton id="register" value="#{text['login.register.jsf']}" outcome="register"
+					<h:link id="register" value="#{text['login.register.jsf']}" outcome="register"
 						rendered="#{!login.loggedIn}" styleClass="link" />
 
 					<h:commandButton id="logout" value="#{text['login.logout.jsf']}"

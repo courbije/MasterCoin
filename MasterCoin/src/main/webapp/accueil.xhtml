@@ -41,6 +41,8 @@
 				</p>
 			</div>
 		</div>
+		<br />
+		<br />
 		<!-- MARCHE -->
 		<div class="row">
 			<!-- DIV4 -->
@@ -70,6 +72,8 @@
 				</p>
 			</div>
 		</div>
+		<br />
+		<br />
 		<!-- COMPTE -->
 		<div class="row">
 			<!-- DIV6 -->
@@ -77,8 +81,7 @@
 				<h:outputText styleClass="h2"
 					value="#{text['header.compte.jsf']} : #{text['header.modification_compte.jsf']}" />
 				<p>
-					<h:outputText
-						value="#{text['accueil.compte_modif_desc.jsf']}" />
+					<h:outputText value="#{text['accueil.compte_modif_desc.jsf']}" />
 				</p>
 				<p class="center-link">
 					<h:link value="#{text['header.modification_compte.jsf']}"
@@ -90,8 +93,7 @@
 				<h:outputText styleClass="h2"
 					value="#{text['header.compte.jsf']} : #{text['header.historique.jsf']}" />
 				<p>
-					<h:outputText
-						value="#{text['accueil.compte_histo_desc.jsf']}" />
+					<h:outputText value="#{text['accueil.compte_histo_desc.jsf']}" />
 				</p>
 				<p class="center-link">
 					<h:link value="#{text['header.historique.jsf']}"
@@ -103,8 +105,7 @@
 				<h:outputText styleClass="h2"
 					value="#{text['header.compte.jsf']} : #{text['header.porteMonnaie.jsf']}" />
 				<p>
-					<h:outputText
-						value="#{text['accueil.compte_pm_desc.jsf']}" />
+					<h:outputText value="#{text['accueil.compte_pm_desc.jsf']}" />
 				</p>
 				<p class="center-link">
 					<h:link value="#{text['header.porteMonnaie.jsf']}"
@@ -112,15 +113,32 @@
 				</p>
 			</div>
 		</div>
+		<br />
+		<br />
 		<!-- SUPPORT -->
 		<div class="row">
 			<!-- DIV9 -->
-			<div class="twelve columns">
+			<div class="one-half column">
 				<h:outputText styleClass="h2"
-					value="#{text['accueil.mastercoin_utiliser.jsf']}" />
+					value="#{text['header.support.jsf']} : #{text['header.support_faq.jsf']}" />
 				<p>
-					<h:outputText
-						value="#{text['accueil.mastercoin_utiliser_reponse.jsf']}" />
+					<h:outputText value="#{text['accueil.support_faq_desc.jsf']}" />
+				</p>
+				<p class="center-link">
+					<h:link value="#{text['header.support_faq.jsf']}"
+						outcome="/support" />
+				</p>
+			</div>
+			<!-- DIV10 -->
+			<div class="one-half column">
+				<h:outputText styleClass="h2"
+					value="#{text['header.support.jsf']} : #{text['header.support_contact.jsf']}" />
+				<p>
+					<h:outputText value="#{text['accueil.support_contact_desc.jsf']}" />
+				</p>
+				<p class="center-link">
+					<h:link value="#{text['header.support_contact.jsf']}"
+						outcome="/support" />
 				</p>
 			</div>
 		</div>
