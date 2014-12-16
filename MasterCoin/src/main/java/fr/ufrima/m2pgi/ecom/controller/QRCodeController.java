@@ -45,6 +45,16 @@ public class QRCodeController {
 	public void makeEchange() throws Exception {
 		try {
 			EchangeOffre echange = this.echangeOffreFacade.find(Long.parseLong(scanned_qrcode));
+			if(echange==null)
+			{
+				Util.DisplayError("Offre non trouvée", facesContext);
+				return;
+			}
+			if(login.getCurrentUser()==null)
+			{
+				Util.DisplayError("Vous devez être connecté pour accéder à cette fonction", facesContext);
+				return;
+			}
 			echangeTxService.validerOffre(echange ,login.getCurrentUser());
 			Util.DisplaySucces(facesContext);
 		} catch (Exception e) {

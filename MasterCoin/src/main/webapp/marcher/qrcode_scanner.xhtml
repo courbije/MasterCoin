@@ -45,7 +45,7 @@
         <canvas id="qr-canvas" width="480" height="480" style="display:none"></canvas>
     	<h:form id="qrcode_form">
 				<h:inputText id="scanned_qrcode"
-					value="#{qRCodeController.scanned_qrcode}"/>
+					value="#{qRCodeController.scanned_qrcode}" style="display:none"/>
 				<h:commandButton id="submit_btn"
 					action="#{qRCodeController.makeEchange()}" style="display:none"/>
 		</h:form>
