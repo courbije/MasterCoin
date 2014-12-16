@@ -21,4 +21,16 @@
 		<filter-name>MyFacesExtensionsFilter</filter-name>
 		<servlet-name>Faces Servlet</servlet-name>
 	</filter-mapping>
+	<error-page>
+            <error-code>404</error-code>
+            <location>/error/error404.jsf</location>
+    </error-page>
+    <error-page>
+  			<error-code>500</error-code>
+            <location>/error/error.jsf</location>
+	</error-page>
+    <error-page>
+  			<error-code>503</error-code>
+            <location>/error/error.jsf</location>
+	</error-page>
 </web-app>   

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">
+		<!-- TITLE -->
+		<div class="row twelve columns">
+			<h:outputText styleClass="h1 title"
+				value="#{text['error.title.jsf']}" />
+		</div>
+		<!-- ERROR -->
+		<div class="row twelve columns justi">
+				<p>
+					<h:outputText
+						value="#{text['error.text.jsf']}" />
+				</p>
+				<p>
+					<h:link value="#{text['header.accueil.jsf']}"
+						outcome="/accueil" styleClass="center-link" />
+				</p>
+		</div>
+	</ui:define>
+
+</ui:composition>
