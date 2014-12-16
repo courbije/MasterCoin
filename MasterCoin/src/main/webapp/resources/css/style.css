@@ -195,25 +195,24 @@ p.small-form select {
 	display: block;
 	margin: auto;
 	max-width: 180px;
-	color: #838383;
-	border: none;
-	background: none;
+	color: #FFF;
+	background: #292929;
 	text-decoration: none;
 	cursor: pointer;
 	text-align: center;
 	border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
 	-webkit-boder-radius: 5px 5px 5px 5px;
-	border: 1px solid #999999;
+	border: 1px solid #292929;
 	padding: 10px;
 	padding-left: 20px;
 	padding-right: 20px;
+	text-transform: uppercase;
 }
 
 .center-link:hover {
 	border: 1px solid #01A9DC;
-	text-decoration: none;
-	color: #01A9DC;
+	background: #01A9DC;
 }
 
 /*_____________________________________________________________
@@ -440,12 +439,4 @@ p.small-form select {
 
 #page_trouve td .button {
 	width: 100px;
-}
-
-.caca {
-	background-color: red;
-}
-
-.coco {
-	background-color: green;
 }

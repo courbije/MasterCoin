@@ -15,6 +15,7 @@
 		</div>
 		<!-- FORM -->
 		<div class="row twelve columns form-boxed">
+			<h:outputText styleClass="h2" value="#{text['monnaie.monnaie.jsf']}" />
 			<h:form id="reg" enctype="multipart/form-data">
 				<p>
 					<h:outputLabel for="acroyme"
@@ -47,7 +48,9 @@
 					value="#{text['monnaie.aucune_monnaie_enregistree.jsf']}" />
 			</h:panelGroup>
 			<h:dataTable var="_monnaie" value="#{monnaies}"
-				rendered="#{not empty monnaies}" styleClass="simpletablestyle">
+				id="table_idpic"
+				rendered="#{not empty monnaies}"
+				styleClass="display dt-responsive" width="100%">
 				<h:column>
 					<f:facet name="header">
 						<h:outputText value="#{text['monnaie.id.jsf']}" />
@@ -81,7 +84,7 @@
 						<t:inputFileUpload id="file"
 							value="#{monnaieCreationController.newMonnaie.image}" />
 						<h:message for="file" errorClass="invalid" />
-						<h:commandButton value="submit" styleClass="button"
+						<h:commandButton value="submit" styleClass="button block u-fmb"
 							action="#{monnaieCreationController.registerImage(_monnaie.id)}" />
 					</h:form>
 				</h:column>
@@ -193,16 +196,19 @@
 		</div>
 		<script>			
 	$(document).ready( function () {
-				    $('#table_id').DataTable({bInfo : false,
-				    	 language : {
-				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
-				         }});
-				} );
-	$(document).ready( function () {
-	    $('#table_id2').DataTable({bInfo : false,
-	    	 language : {
-	    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+		 $('#table_idpic').DataTable({bInfo : false,
+		    	 language : {
+		    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+		         }});
+		 $('#table_id').DataTable({bInfo : false,
+		    	 language : {
+		    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+		         }});
+		 $('#table_id2').DataTable({bInfo : false,
+	    	 	 language : {
+	    	       	    url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
 	         }});
+
 	} );
 	</script>
 	</ui:define>
