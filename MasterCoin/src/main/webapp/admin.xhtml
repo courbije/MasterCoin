@@ -80,6 +80,134 @@
 				</h:form>
 			</h:column>
 		</h:dataTable>
+		
+		<h:outputText styleClass="h2" value="#{text['admin.offre.jsf']}" />
+		<br />
+		<h:panelGroup rendered="#{empty adminController.echangeOffres}">
+			<h:outputText styleClass="em"
+				value="#{text['admin.aucune_offre.jsf']}" />
+		</h:panelGroup>		
+		<h:dataTable var="_offre" id="table_id"
+					value="#{adminController.echangeOffres}"
+					rendered="#{not empty adminController.echangeOffres}"
+					styleClass="display dt-responsive" width="100%">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_offre.monnaieAchat.nom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_offre.montantAchat}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_offre.monnaieVendre.nom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_offre.montantVendre}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['echange.date_creation.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_offre.dateCreation}">
+							<f:convertDateTime dateStyle="long" type="both" />
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.taux.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{ _offre.montantAchat/_offre.montantVendre}" />
+					</h:column>
+				</h:dataTable>
+				<br />
+				<h:outputText styleClass="h2" value="#{text['admin.transaction.jsf']}" />
+				<br />
+				
+				<h:panelGroup rendered="#{empty adminController.transactions}">
+			<h:outputText styleClass="em"
+				value="#{text['admin.aucune_transaction.jsf']}" />
+		</h:panelGroup>		
+		<h:dataTable var="_transaction" id="table_id2"
+					value="#{adminController.transactions}"
+					rendered="#{not empty adminController.transactions}"
+					styleClass="display dt-responsive" width="100%">
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['admin.monnaie_acheter.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_transaction.monnaieAchat.nom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['admin.montant_acheter.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_transaction.montantAchat}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['admin.monnaie_vendu.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_transaction.monnaieVendre.nom}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['admin.monnaie_vendu.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_transaction.montantVendre}" />
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['admin.date_validation.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{_transaction.dateCreation}">
+							<f:convertDateTime dateStyle="long" type="both" />
+						</h:outputText>
+					</h:column>
+					<h:column>
+						<f:facet name="header">
+							<h:outputText value="#{text['transaction.taux.jsf']}" />
+						</f:facet>
+						<h:outputText
+							value="#{ _transaction.montantAchat/_transaction.montantVendre}" />
+					</h:column>
+				</h:dataTable>
+				
+	<script>			
+	$(document).ready( function () {
+				    $('#table_id').DataTable({bInfo : false,
+				    	 language : {
+				    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+				         }});
+				} );
+	$(document).ready( function () {
+	    $('#table_id2').DataTable({bInfo : false,
+	    	 language : {
+	    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+	         }});
+	} );
+	</script>
 	</ui:define>
 
 </ui:composition>
