@@ -308,6 +308,32 @@
 				</h:dataTable>
 				<div id="graph"></div>
 			</div>
+			<div class="row twelve columns">
+				<h:outputText styleClass="h2"
+					value="#{text['echange.offres_compte.jsf']}" />
+				<h:dataTable var="_graphvalue" id="table_id4"
+					value="#{metriqueController.metriqueAllWhereMonnaie1Monnaie2}"
+					rendered="#{not empty echangeController.idA and not empty echangeController.idV}"
+					style="display: none">
+					<h:column>
+						<h:outputText value="#{_graphvalue.monnaie1.nom}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_graphvalue.monnaie2.nom}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_graphvalue.montantMonnaie1}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_graphvalue.montantMonnaie2}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_graphvalue.date}">
+						</h:outputText>
+					</h:column>
+				</h:dataTable>
+				<div id="graph2"></div>
+			</div>
 		</h:panelGroup>
 		<script>
 		$(document).ready( function () {
@@ -377,7 +403,31 @@
 				 return;
 			}
 			$("#graph").css("display","none");
-		} );			
+		} );
+		$(window).load( function () {
+			
+			 if (!document.getElementById("table_id3")){
+				 $("#graph").css("display","none");
+				 return;
+			}
+			 if (document.getElementById("table_id3").rows[0].cells.length===5){
+				 $("#graph").css("display","block");
+				 return;
+			}
+			$("#graph").css("display","none");
+		} );	
+		$(window).load( function () {
+			
+			 if (!document.getElementById("table_id4")){
+				 $("#graph2").css("display","none");
+				 return;
+			}
+			 if (document.getElementById("table_id4").rows[0].cells.length===5){
+				 $("#graph2").css("display","block");
+				 return;
+			}
+			$("#graph2").css("display","none");
+		} );	
 	</script>
 
 
@@ -395,7 +445,19 @@
 		 $("#menu-marche").addClass("current_page_item");
 		 $("#menu-marche-propo").addClass("current_page_item");
 	});
-		
+		Morris.Area({
+			  element: 'graph2',
+			  #{metriqueController.donneesInverse()},
+			  xkey: 'x',
+			  ykeys: ['y'],
+			  labels: ['Evolution du taux de #{metriqueController.monnaie2.nom} / #{metriqueController.monnaie1.nom}']
+			}).on('click', function(i, row){
+			  console.log(i, row);
+			});
+		 $(function() {
+			 $("#menu-marche").addClass("current_page_item");
+			 $("#menu-marche-propo").addClass("current_page_item");
+		});		
 	</script>
 	</ui:define>
 </ui:composition>

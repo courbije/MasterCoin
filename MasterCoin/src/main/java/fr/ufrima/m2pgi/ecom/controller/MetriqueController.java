@@ -34,11 +34,13 @@ public class MetriqueController {
 	
 	private List<Metrique> metriqueAllWhereMonnaie1Monnaie2;
 	
+	private List<Metrique> metriqueAllWhereMonnaie2Monnaie1;
 	
 	@PostConstruct
 	public void init() {
 		if (monnaie1 != null && monnaie2 != null) {
 			metriqueAllWhereMonnaie1Monnaie2 = metriqueFacade.findAllByMonnaie(monnaie1, monnaie2);
+			metriqueAllWhereMonnaie2Monnaie1 = metriqueFacade.findAllByMonnaie(monnaie2, monnaie1);
 		}
 	}
 	
@@ -80,6 +82,10 @@ public class MetriqueController {
 		return metriqueAllWhereMonnaie1Monnaie2;
 	}
 	
+	public List<Metrique> getMetriqueAllWhereMonnaie2Monnaie1(){
+		return metriqueAllWhereMonnaie2Monnaie1;
+	}
+	
 	public String donnees(){
 		if (metriqueAllWhereMonnaie1Monnaie2==null)
 			return "";
@@ -89,6 +95,20 @@ public class MetriqueController {
 	 	for(int i=1; i < longueur; i++) 
 	 	 { 
 	 	 	s += "},\n{x: '" + metriqueAllWhereMonnaie1Monnaie2.get(i).getDate() + "', y: " + (metriqueAllWhereMonnaie1Monnaie2.get(i).getMontantMonnaie1()/metriqueAllWhereMonnaie1Monnaie2.get(i).getMontantMonnaie2()) ;
+	 	 }
+	 	 s+= "}\n]";
+	 	return s;
+	 }
+	
+	public String donneesInverse(){
+		if (metriqueAllWhereMonnaie2Monnaie1==null)
+			return "";
+	 	int longueur = metriqueAllWhereMonnaie2Monnaie1.size();
+	 	String s = "data: [";
+	 	s +="{x: '" + metriqueAllWhereMonnaie2Monnaie1.get(0).getDate() + "', y: " + (metriqueAllWhereMonnaie2Monnaie1.get(0).getMontantMonnaie1()/metriqueAllWhereMonnaie2Monnaie1.get(0).getMontantMonnaie2()) ;
+	 	for(int i=1; i < longueur; i++) 
+	 	 { 
+	 	 	s += "},\n{x: '" + metriqueAllWhereMonnaie2Monnaie1.get(i).getDate() + "', y: " + (metriqueAllWhereMonnaie2Monnaie1.get(i).getMontantMonnaie1()/metriqueAllWhereMonnaie2Monnaie1.get(i).getMontantMonnaie2()) ;
 	 	 }
 	 	 s+= "}\n]";
 	 	return s;

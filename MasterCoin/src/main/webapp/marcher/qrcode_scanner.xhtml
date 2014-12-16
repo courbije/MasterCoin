@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="content">		  
+	<h:outputScript name="js/jquery.min.js"/>
+    <h:outputScript name="js/qrcode.js"/>
+    
+   <h:outputScript name="js/lib/jquery-1.7.2.min.js"/>
+
+       <h:outputScript name="js/lib/jsqrcode/grid.js"/>
+       <h:outputScript name="js/lib/jsqrcode/version.js"/>
+       <h:outputScript name="js/lib/jsqrcode/detector.js"/>
+       <h:outputScript name="js/lib/jsqrcode/formatinf.js"/>
+       <h:outputScript name="js/lib/jsqrcode/errorlevel.js"/>
+       <h:outputScript name="js/lib/jsqrcode/bitmat.js"/>
+       <h:outputScript name="js/lib/jsqrcode/datablock.js"/>
+       <h:outputScript name="js/lib/jsqrcode/bmparser.js"/>
+       <h:outputScript name="js/lib/jsqrcode/datamask.js"/>
+       <h:outputScript name="js/lib/jsqrcode/rsdecoder.js"/>
+       <h:outputScript name="js/lib/jsqrcode/gf256poly.js"/>
+       <h:outputScript name="js/lib/jsqrcode/gf256.js"/>
+       <h:outputScript name="js/lib/jsqrcode/decoder.js"/>
+       <h:outputScript name="js/lib/jsqrcode/QRCode.js"/>
+       <h:outputScript name="js/lib/jsqrcode/findpat.js"/>
+       <h:outputScript name="js/lib/jsqrcode/alignpat.js"/>
+       <h:outputScript name="js/lib/jsqrcode/databr.js"/>
+
+       <h:outputScript name="js/camera.js"/>
+       <h:outputScript name="js/init.js"/>
+       
+       <script>
+	       function read(a)
+	       {
+	           $("#qr-value").value=a;
+	           $("#qrcode_form").submit();
+	       }
+	       qrcode.callback = read;
+       </script>
+    
+		<video id="camsource" autoplay="true" width="480" height="480"></video>
+        <canvas id="qr-canvas" width="480" height="480" style="display:none"></canvas>
+    	<h:inputHidden id="qr-value"/>
+    	<h:form id="qrcode_form">
+				<h:inputHidden id="scanned_qrcode"
+					value="#{QRCodeController.scanned_qrcode}"/>
+				<h:commandButton id="submit"
+					action="#{QRCodeController.makeEchange()}"
+					style="display:none" />
+		</h:form>
+    	
+	</ui:define>
+
+</ui:composition>

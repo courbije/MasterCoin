@@ -218,13 +218,11 @@ public class AutoRun {
 		m.setNom("Peercoin");
 		monnaies.add(m);
 		monnaieFacade.create(m);
-		transaction.commit();
 		m = new Monnaie();
 		m.setAcroyme("eUSD");
 		m.setNom("e-Dollar");
 		monnaies.add(m);
 		monnaieFacade.create(m);
-		transaction.commit();
 		m = new Monnaie();
 		m.setAcroyme("eEUR");
 		m.setNom("e-Euro");
