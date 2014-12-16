@@ -60,6 +60,10 @@ body {
 	text-align: center;
 }
 
+.block {
+	display: block;
+}
+
 /*_____________________________________________________________
 
   Formulaire
