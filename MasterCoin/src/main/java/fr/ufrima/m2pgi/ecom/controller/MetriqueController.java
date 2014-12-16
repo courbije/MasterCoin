@@ -1,5 +1,6 @@
 package fr.ufrima.m2pgi.ecom.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -89,12 +90,13 @@ public class MetriqueController {
 	public String donnees(){
 		if (metriqueAllWhereMonnaie1Monnaie2==null)
 			return "";
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 	 	int longueur = metriqueAllWhereMonnaie1Monnaie2.size();
 	 	String s = "data: [";
-	 	s +="{x: '" + metriqueAllWhereMonnaie1Monnaie2.get(0).getDate() + "', y: " + (metriqueAllWhereMonnaie1Monnaie2.get(0).getMontantMonnaie1()/metriqueAllWhereMonnaie1Monnaie2.get(0).getMontantMonnaie2()) ;
+	 	s +="{x: '" + format1.format(metriqueAllWhereMonnaie1Monnaie2.get(0).getDate()) + "', y: " + Math.round((metriqueAllWhereMonnaie1Monnaie2.get(0).getMontantMonnaie1()/metriqueAllWhereMonnaie1Monnaie2.get(0).getMontantMonnaie2())*1000000)/1000000.0 ;
 	 	for(int i=1; i < longueur; i++) 
 	 	 { 
-	 	 	s += "},\n{x: '" + metriqueAllWhereMonnaie1Monnaie2.get(i).getDate() + "', y: " + (metriqueAllWhereMonnaie1Monnaie2.get(i).getMontantMonnaie1()/metriqueAllWhereMonnaie1Monnaie2.get(i).getMontantMonnaie2()) ;
+	 	 	s += "},\n{x: '" + format1.format(metriqueAllWhereMonnaie1Monnaie2.get(i).getDate()) + "', y: " + Math.round((metriqueAllWhereMonnaie1Monnaie2.get(i).getMontantMonnaie1()/metriqueAllWhereMonnaie1Monnaie2.get(i).getMontantMonnaie2())*1000000)/1000000.0 ;
 	 	 }
 	 	 s+= "}\n]";
 	 	return s;
@@ -103,12 +105,13 @@ public class MetriqueController {
 	public String donneesInverse(){
 		if (metriqueAllWhereMonnaie2Monnaie1==null)
 			return "";
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 	 	int longueur = metriqueAllWhereMonnaie2Monnaie1.size();
 	 	String s = "data: [";
-	 	s +="{x: '" + metriqueAllWhereMonnaie2Monnaie1.get(0).getDate() + "', y: " + (metriqueAllWhereMonnaie2Monnaie1.get(0).getMontantMonnaie1()/metriqueAllWhereMonnaie2Monnaie1.get(0).getMontantMonnaie2()) ;
+	 	s +="{x: '" + format1.format(metriqueAllWhereMonnaie2Monnaie1.get(0).getDate()) + "', y: " + Math.round((metriqueAllWhereMonnaie2Monnaie1.get(0).getMontantMonnaie1()/metriqueAllWhereMonnaie2Monnaie1.get(0).getMontantMonnaie2())*1000000)/1000000.0 ;
 	 	for(int i=1; i < longueur; i++) 
 	 	 { 
-	 	 	s += "},\n{x: '" + metriqueAllWhereMonnaie2Monnaie1.get(i).getDate() + "', y: " + (metriqueAllWhereMonnaie2Monnaie1.get(i).getMontantMonnaie1()/metriqueAllWhereMonnaie2Monnaie1.get(i).getMontantMonnaie2()) ;
+	 	 	s += "},\n{x: '" + format1.format(metriqueAllWhereMonnaie2Monnaie1.get(i).getDate()) + "', y: " + Math.round((metriqueAllWhereMonnaie2Monnaie1.get(i).getMontantMonnaie1()/metriqueAllWhereMonnaie2Monnaie1.get(i).getMontantMonnaie2())*1000000)/1000000.0 ;
 	 	 }
 	 	 s+= "}\n]";
 	 	return s;
