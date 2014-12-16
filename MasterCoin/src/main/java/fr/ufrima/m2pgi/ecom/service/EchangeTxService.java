@@ -155,4 +155,21 @@ public class EchangeTxService {
 		return Util.round(montantObtenu);
 	}
 
+	public void validerOffre(EchangeOffre echange, Compte currentUser) throws NotEnoughMoneyException {
+		Transaction ts = new Transaction();
+		ts.setCompteAcheteur(currentUser);
+		ts.setCompteVendeur(echange.getCompte());
+		ts.setMonnaieAchat(echange.getMonnaieAchat());
+		ts.setMonnaieVendre(echange.getMonnaieVendre());
+		ts.setMontantAchat(echange.getMontantAchat());
+		ts.setMontantVendre(echange.getMontantVendre());
+		ts.setDateCreation(echange.getDateCreation());
+		ts.setDateValidation(new Date());
+		porteMonnaieService.removeFromPorteMonnaie(currentUser, echange.getMonnaieVendre(), echange.getMontantVendre());
+		porteMonnaieService.addToPorteMonnaie(currentUser, echange.getMonnaieAchat(), echange.getMontantAchat());
+		porteMonnaieService.addToPorteMonnaie(echange.getCompte(), echange.getMonnaieVendre(), echange.getMontantVendre());
+		transactionFacade.create(ts);
+		echangeOffreFacade.remove(echange);
+	}
+
 }

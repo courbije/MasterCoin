@@ -29,13 +29,29 @@
        <h:outputScript name="js/lib/jsqrcode/alignpat.js"/>
        <h:outputScript name="js/lib/jsqrcode/databr.js"/>
 
-       <h:outputScript name="js/qr.js"/>
        <h:outputScript name="js/camera.js"/>
        <h:outputScript name="js/init.js"/>
+       
+       <script>
+	       function read(a)
+	       {
+	           $("#qr-value").value=a;
+	           $("#qrcode_form").submit();
+	       }
+	       qrcode.callback = read;
+       </script>
     
 		<video id="camsource" autoplay="true" width="480" height="480"></video>
         <canvas id="qr-canvas" width="480" height="480" style="display:none"></canvas>
-    	<h3 id="qr-value"></h3>
+    	<h:inputHidden id="qr-value"/>
+    	<h:form id="qrcode_form">
+				<h:inputHidden id="scanned_qrcode"
+					value="#{QRCodeController.scanned_qrcode}"/>
+				<h:commandButton id="submit"
+					action="#{QRCodeController.makeEchange()}"
+					style="display:none" />
+		</h:form>
+    	
 	</ui:define>
 
 </ui:composition>
