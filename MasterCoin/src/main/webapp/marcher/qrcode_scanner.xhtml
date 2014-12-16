@@ -35,11 +35,7 @@
        <script>
 	       function read(a)
 	       {
-		       alert(a);
 		       document.getElementById('qrcode_form:scanned_qrcode').value=a;
-		       alert(document.getElementById('qrcode_form:scanned_qrcode').value);
-		       alert($("#qrcode_form\\:scanned_qrcode").value);
-	           //$("#qrcode_form\\:scanned_qrcode").value=a;
 	           $("#qrcode_form\\:submit_btn").click();
 	       }
 	       qrcode.callback = read;
