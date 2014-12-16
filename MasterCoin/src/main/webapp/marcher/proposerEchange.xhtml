@@ -142,7 +142,7 @@
 				</div>
 			</div>
 			<!-- TABLE1 -->
-			<div class="row twelve columns">
+			<div id="div-for-table1" class="row twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['echange.offres_compte.jsf']}"
 					id="title-slideToggle-button1" />
@@ -210,8 +210,35 @@
 					</h:column>
 				</h:dataTable>
 			</div>
+			<!-- GRAPH1 -->
+			<div id="div-for-graph1" class="row twelve columns">
+				<h:outputText styleClass="h2"
+					value="#{text['echange.offres_compte.jsf']}" />
+				<h:dataTable var="_graphvalue" id="table_id3"
+					value="#{metriqueController.metriqueAllWhereMonnaie1Monnaie2}"
+					rendered="#{not empty echangeController.idA and not empty echangeController.idV}"
+					style="display: none">
+					<h:column>
+						<h:outputText value="#{_graphvalue.monnaie1.nom}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_graphvalue.monnaie2.nom}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_graphvalue.montantMonnaie1}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_graphvalue.montantMonnaie2}" />
+					</h:column>
+					<h:column>
+						<h:outputText value="#{_graphvalue.date}">
+						</h:outputText>
+					</h:column>
+				</h:dataTable>
+				<div id="graph"></div>
+			</div>
 			<!-- TABLE2 -->
-			<div class="row twelve columns">
+			<div id="div-for-table2" class="row twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['echange.offres_compte.jsf']}"
 					id="title-slideToggle-button2" />
@@ -281,34 +308,8 @@
 					</h:column>
 				</h:dataTable>
 			</div>
-			<!-- GRAPH -->
-			<div class="row twelve columns">
-				<h:outputText styleClass="h2"
-					value="#{text['echange.offres_compte.jsf']}" />
-				<h:dataTable var="_graphvalue" id="table_id3"
-					value="#{metriqueController.metriqueAllWhereMonnaie1Monnaie2}"
-					rendered="#{not empty echangeController.idA and not empty echangeController.idV}"
-					style="display: none">
-					<h:column>
-						<h:outputText value="#{_graphvalue.monnaie1.nom}" />
-					</h:column>
-					<h:column>
-						<h:outputText value="#{_graphvalue.monnaie2.nom}" />
-					</h:column>
-					<h:column>
-						<h:outputText value="#{_graphvalue.montantMonnaie1}" />
-					</h:column>
-					<h:column>
-						<h:outputText value="#{_graphvalue.montantMonnaie2}" />
-					</h:column>
-					<h:column>
-						<h:outputText value="#{_graphvalue.date}">
-						</h:outputText>
-					</h:column>
-				</h:dataTable>
-				<div id="graph"></div>
-			</div>
-			<div class="row twelve columns">
+			<!-- GRAPH2 -->
+			<div id="div-for-graph2" class="row twelve columns">
 				<h:outputText styleClass="h2"
 					value="#{text['echange.offres_compte.jsf']}" />
 				<h:dataTable var="_graphvalue" id="table_id4"
@@ -336,7 +337,7 @@
 			</div>
 		</h:panelGroup>
 		<script>
-		$(document).ready( function () {
+		/** $(document).ready( function () {
 			var is_first_open1 = true;
 			$('#title-slideToggle-button1').css('display','none');
 			$('#exp-slideToggle-button1').css('display','none');
@@ -391,9 +392,8 @@
 					$( "#table_id2_wrapper" ).slideToggle("slow");
 				}
 			});
-		} );		
+		} ); **/	
 		$(window).load( function () {
-			
 			 if (!document.getElementById("table_id3")){
 				 $("#graph").css("display","none");
 				 return;
@@ -403,61 +403,77 @@
 				 return;
 			}
 			$("#graph").css("display","none");
+	       
 		} );
 		$(window).load( function () {
-			
-			 if (!document.getElementById("table_id3")){
-				 $("#graph").css("display","none");
-				 return;
-			}
-			 if (document.getElementById("table_id3").rows[0].cells.length===5){
-				 $("#graph").css("display","block");
-				 return;
-			}
-			$("#graph").css("display","none");
-		} );	
-		$(window).load( function () {
-			
-			 if (!document.getElementById("table_id4")){
-				 $("#graph2").css("display","none");
-				 return;
-			}
-			 if (document.getElementById("table_id4").rows[0].cells.length===5){
-				 $("#graph2").css("display","block");
-				 return;
-			}
-			$("#graph2").css("display","none");
+			  if (!document.getElementById("table_id4")){
+					 $("#graph2").css("display","none");
+					 return;
+				}
+				 if (document.getElementById("table_id4").rows[0].cells.length===5){
+					 $("#graph2").css("display","block");
+					 return;
+				}
+				$("#graph2").css("display","none");
 		} );	
 	</script>
 
 
 		<script>
-	Morris.Area({
-		  element: 'graph',
-		  #{metriqueController.donnees()},
-		  xkey: 'x',
-		  ykeys: ['y'],
-		  labels: ['Evolution du taux de #{metriqueController.monnaie1.nom} / #{metriqueController.monnaie2.nom}']
-		}).on('click', function(i, row){
-		  console.log(i, row);
-		});
-	 $(function() {
-		 $("#menu-marche").addClass("current_page_item");
-		 $("#menu-marche-propo").addClass("current_page_item");
-	});
-		Morris.Area({
-			  element: 'graph2',
-			  #{metriqueController.donneesInverse()},
-			  xkey: 'x',
-			  ykeys: ['y'],
-			  labels: ['Evolution du taux de #{metriqueController.monnaie2.nom} / #{metriqueController.monnaie1.nom}']
-			}).on('click', function(i, row){
-			  console.log(i, row);
-			});
+	
 		 $(function() {
 			 $("#menu-marche").addClass("current_page_item");
 			 $("#menu-marche-propo").addClass("current_page_item");
+			
 		});		
+		 $(window).ready(
+					function(){
+						 
+					}
+				);
+		 $(document).ready(function() {
+			 $('#table_id').DataTable({bInfo : false,
+		    	 language : {
+		    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+		         }});
+			$('#table_id2').DataTable({bInfo : false,
+		    	 language : {
+		    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+		         }});
+			Morris.Area({
+				  element: 'graph',
+				  #{metriqueController.donnees()},
+				  xkey: 'x',
+				  ykeys: ['y'],
+				  labels: ['Evolution du taux de #{metriqueController.monnaie1.nom} / #{metriqueController.monnaie2.nom}']
+				}).on('click', function(i, row){
+				  console.log(i, row);
+				});
+			Morris.Area({
+				  element: 'graph2',
+				  #{metriqueController.donneesInverse()},
+				  xkey: 'x',
+				  ykeys: ['y'],
+				  labels: ['Evolution du taux de #{metriqueController.monnaie2.nom} / #{metriqueController.monnaie1.nom}']
+				   }).on('click', function(i, row){
+					  console.log(i, row);
+				  });
+			});
+			
+		 $(window).load(function() {
+			 $('#div-for-table1').css('display','none');
+			 $('#div-for-graph1').css('display','none');
+			 $('#div-for-table2').css('display','none');
+			 $('#div-for-graph2').css('display','none');
+			 $("#slideToggle-button1").click(function() {
+				 $('#div-for-table1').slideToggle("slow");
+				 $('#div-for-graph1').slideToggle("slow");
+			 });
+			 $("#slideToggle-button2").click(function() {
+				 $('#div-for-table2').slideToggle("slow");
+				 $('#div-for-graph2').slideToggle("slow");
+			 });
+			});
 	</script>
 	</ui:define>
 </ui:composition>
