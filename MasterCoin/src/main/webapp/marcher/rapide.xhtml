@@ -132,11 +132,12 @@
 			</div>
 			<!-- TABLE -->
 			<div class="twelve columns">
-				<h:outputText styleClass="h2"
-					value="#{text['echange.offres_compte.jsf']}" />
 				<h:commandButton id="slideToggle-button1"
 					value="#{text['echange.toggle.jsf']}" styleClass="button u-fmb">
 				</h:commandButton>
+				<h:outputText styleClass="h2"
+					value="#{text['echange.offres_compte.jsf']}"
+					id="title-slideToggle-button1" />
 				<h:panelGroup rendered="#{login.loggedIn}">
 					<h:panelGroup rendered="#{empty echangeRapideController.offres}">
 						<h:outputText styleClass="em"
@@ -215,10 +216,12 @@
 		<script>
 			$(document).ready( function () {
 				var is_first_open = true;
+				$('#title-slideToggle-button1').css('display','none');
 				$('#table_id').css('display','none');
 				$("#slideToggle-button1").click(function() {
 					if(is_first_open == true){
 						is_first_open = false;
+						$('#title-slideToggle-button1').css('display','block');
 						$('#table_id').css('display','block');
 						$('#table_id').DataTable({bInfo : false,
 					    	 language : {
@@ -226,6 +229,11 @@
 					         }});
 					}
 					else {
+						if($('#title-slideToggle-button1').css('display') == 'block'){
+							$('#title-slideToggle-button1').css('display','none');
+						} else {
+							$('#title-slideToggle-button1').css('display','block');
+						}
 						$( "#table_id_wrapper" ).slideToggle("slow");
 					}
 				});
