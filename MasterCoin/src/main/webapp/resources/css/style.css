@@ -52,6 +52,14 @@ body {
 	text-transform: uppercase;
 }
 
+.justi {
+	text-align: justify;
+}
+
+.h2.center {
+	text-align: center;
+}
+
 /*_____________________________________________________________
 
   Formulaire
