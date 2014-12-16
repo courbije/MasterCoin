@@ -8,193 +8,190 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="content">
-		<div class="sixteen columns">
+		<!-- TITLE -->
+		<div class="row twelve columns">
 			<h:outputText styleClass="h1 title"
-				value="#{text['monnaie.message_accueil.jsf']}" />
+				value="#{text['admin.accueil.jsf']}" />
 		</div>
-
-		<h:form id="reg" enctype="multipart/form-data">
-			<h:outputLabel for="acroyme"
-				value="#{text['monnaie.acronyme.jsf']} :" />
-			<h:inputText id="acroyme"
-				value="#{monnaieCreationController.newMonnaie.acroyme}" />
-			<h:message for="acroyme" errorClass="invalid" />
-
-			<h:outputLabel for="nom" value="#{text['monnaie.nom.jsf']} :" />
-			<h:inputText id="nom"
-				value="#{monnaieCreationController.newMonnaie.nom}" />
-			<h:message for="nom" errorClass="invalid" />
-
-			<t:inputFileUpload id="file"
-				value="#{monnaieCreationController.newMonnaie.image}" />
-			<h:message for="file" errorClass="invalid" />
-			<h:commandButton value="submit"
-				action="#{monnaieCreationController.register}" />
-		</h:form>
-
-		<h:messages globalOnly="true" />
-
-		<h:outputText styleClass="h2" value="#{text['monnaie.monnaie.jsf']}" />
-		<br />
-		<h:panelGroup rendered="#{empty monnaies}">
-			<h:outputText styleClass="em"
-				value="#{text['monnaie.aucune_monnaie_enregistree.jsf']}" />
-		</h:panelGroup>
-		<h:dataTable var="_monnaie" value="#{monnaies}"
-			rendered="#{not empty monnaies}" styleClass="simpletablestyle">
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="#{text['monnaie.id.jsf']}" />
-				</f:facet>
-                #{_monnaie.id}
-            </h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="#{text['monnaie.nom.jsf']}" />
-				</f:facet>
-                #{_monnaie.nom}
-            </h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Image" />
-				</f:facet>
-				<p:graphicImage value="#{monnaieCreationController.image}"
-					width="40px" height="40px"
-					rendered="#{monnaieCreationController.hasImage(_monnaie.id)}">
-					<f:param name="id" value="#{_monnaie.id}" />
-				</p:graphicImage>
-				<h:graphicImage library="images" name="default.jpg" width="40px"
-					height="40px"
-					rendered="#{not monnaieCreationController.hasImage(_monnaie.id)}" />
-			</h:column>
-			<h:column>
-				<f:facet name="header">
-					<h:outputText value="Ajouter image" />
-				</f:facet>
-				<h:form id="reg2" enctype="multipart/form-data">
+		<!-- FORM -->
+		<div class="row twelve columns form-boxed">
+			<h:form id="reg" enctype="multipart/form-data">
+				<p>
+					<h:outputLabel for="acroyme"
+						value="#{text['monnaie.acronyme.jsf']} :"
+						styleClass="medium-label1" />
+					<h:inputText id="acroyme"
+						value="#{monnaieCreationController.newMonnaie.acroyme}" />
+				</p>
+				<p>
+					<h:outputLabel for="nom" value="#{text['monnaie.nom.jsf']} :"
+						styleClass="medium-label1" />
+					<h:inputText id="nom"
+						value="#{monnaieCreationController.newMonnaie.nom}" />
+				</p>
+				<p>
 					<t:inputFileUpload id="file"
 						value="#{monnaieCreationController.newMonnaie.image}" />
-					<h:message for="file" errorClass="invalid" />
-					<h:commandButton value="submit"
-						action="#{monnaieCreationController.registerImage(_monnaie.id)}" />
-				</h:form>
-			</h:column>
-		</h:dataTable>
-		
-		<h:outputText styleClass="h2" value="#{text['admin.offre.jsf']}" />
-		<br />
-		<h:panelGroup rendered="#{empty adminController.echangeOffres}">
-			<h:outputText styleClass="em"
-				value="#{text['admin.aucune_offre.jsf']}" />
-		</h:panelGroup>		
-		<h:dataTable var="_offre" id="table_id"
-					value="#{adminController.echangeOffres}"
-					rendered="#{not empty adminController.echangeOffres}"
-					styleClass="display dt-responsive" width="100%">
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_offre.monnaieAchat.nom}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_offre.montantAchat}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_offre.monnaieVendre.nom}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_offre.montantVendre}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['echange.date_creation.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_offre.dateCreation}">
-							<f:convertDateTime dateStyle="long" type="both" />
-						</h:outputText>
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['transaction.taux.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{ _offre.montantAchat/_offre.montantVendre}" />
-					</h:column>
-				</h:dataTable>
-				<br />
-				<h:outputText styleClass="h2" value="#{text['admin.transaction.jsf']}" />
-				<br />
-				
-				<h:panelGroup rendered="#{empty adminController.transactions}">
-			<h:outputText styleClass="em"
-				value="#{text['admin.aucune_transaction.jsf']}" />
-		</h:panelGroup>		
-		<h:dataTable var="_transaction" id="table_id2"
-					value="#{adminController.transactions}"
-					rendered="#{not empty adminController.transactions}"
-					styleClass="display dt-responsive" width="100%">
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['admin.monnaie_acheter.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_transaction.monnaieAchat.nom}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['admin.montant_acheter.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_transaction.montantAchat}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['admin.monnaie_vendu.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_transaction.monnaieVendre.nom}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['admin.monnaie_vendu.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_transaction.montantVendre}" />
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['admin.date_validation.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{_transaction.dateCreation}">
-							<f:convertDateTime dateStyle="long" type="both" />
-						</h:outputText>
-					</h:column>
-					<h:column>
-						<f:facet name="header">
-							<h:outputText value="#{text['transaction.taux.jsf']}" />
-						</f:facet>
-						<h:outputText
-							value="#{ _transaction.montantAchat/_transaction.montantVendre}" />
-					</h:column>
-				</h:dataTable>
-				
-	<script>			
+				</p>
+				<p class="u-pull-right">
+					<h:commandButton value="submit" styleClass="button"
+						action="#{monnaieCreationController.register}" />
+				</p>
+			</h:form>
+		</div>
+		<!-- TABLE 1 -->
+		<div class="row twelve columns form-boxed">
+			<h:outputText styleClass="h2" value="#{text['monnaie.monnaie.jsf']}" />
+			<h:panelGroup rendered="#{empty monnaies}">
+				<h:outputText styleClass="em"
+					value="#{text['monnaie.aucune_monnaie_enregistree.jsf']}" />
+			</h:panelGroup>
+			<h:dataTable var="_monnaie" value="#{monnaies}"
+				rendered="#{not empty monnaies}" styleClass="simpletablestyle">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['monnaie.id.jsf']}" />
+					</f:facet>
+                #{_monnaie.id}
+            </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['monnaie.nom.jsf']}" />
+					</f:facet>
+                #{_monnaie.nom}
+            </h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Image" />
+					</f:facet>
+					<p:graphicImage value="#{monnaieCreationController.image}"
+						width="40px" height="40px"
+						rendered="#{monnaieCreationController.hasImage(_monnaie.id)}">
+						<f:param name="id" value="#{_monnaie.id}" />
+					</p:graphicImage>
+					<h:graphicImage library="images" name="default.jpg" width="40px"
+						height="40px"
+						rendered="#{not monnaieCreationController.hasImage(_monnaie.id)}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="Ajouter image" />
+					</f:facet>
+					<h:form id="reg2" enctype="multipart/form-data">
+						<t:inputFileUpload id="file"
+							value="#{monnaieCreationController.newMonnaie.image}" />
+						<h:message for="file" errorClass="invalid" />
+						<h:commandButton value="submit" styleClass="button"
+							action="#{monnaieCreationController.registerImage(_monnaie.id)}" />
+					</h:form>
+				</h:column>
+			</h:dataTable>
+		</div>
+		<!-- TABLE 2 -->
+		<div class="row twelve columns form-boxed">
+			<h:outputText styleClass="h2" value="#{text['admin.offre.jsf']}" />
+			<h:panelGroup rendered="#{empty adminController.echangeOffres}">
+				<h:outputText styleClass="em"
+					value="#{text['admin.aucune_offre.jsf']}" />
+			</h:panelGroup>
+			<h:dataTable var="_offre" id="table_id"
+				value="#{adminController.echangeOffres}"
+				rendered="#{not empty adminController.echangeOffres}"
+				styleClass="display dt-responsive" width="100%">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_offre.monnaieAchat.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_offre.montantAchat}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.monnaie_a_vendre.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_offre.monnaieVendre.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.quantite_a_vendre.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_offre.montantVendre}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['echange.date_creation.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_offre.dateCreation}">
+						<f:convertDateTime dateStyle="long" type="both" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['transaction.taux.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{ _offre.montantAchat/_offre.montantVendre}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+		<!-- TABLE 2 -->
+		<div class="row twelve columns form-boxed">
+			<h:outputText styleClass="h2"
+				value="#{text['admin.transaction.jsf']}" />
+			<h:panelGroup rendered="#{empty adminController.transactions}">
+				<h:outputText styleClass="em"
+					value="#{text['admin.aucune_transaction.jsf']}" />
+			</h:panelGroup>
+			<h:dataTable var="_transaction" id="table_id2"
+				value="#{adminController.transactions}"
+				rendered="#{not empty adminController.transactions}"
+				styleClass="display dt-responsive" width="100%">
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['admin.monnaie_acheter.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_transaction.monnaieAchat.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['admin.montant_acheter.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_transaction.montantAchat}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['admin.monnaie_vendu.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_transaction.monnaieVendre.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['admin.monnaie_vendu.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_transaction.montantVendre}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['admin.date_validation.jsf']}" />
+					</f:facet>
+					<h:outputText value="#{_transaction.dateCreation}">
+						<f:convertDateTime dateStyle="long" type="both" />
+					</h:outputText>
+				</h:column>
+				<h:column>
+					<f:facet name="header">
+						<h:outputText value="#{text['transaction.taux.jsf']}" />
+					</f:facet>
+					<h:outputText
+						value="#{ _transaction.montantAchat/_transaction.montantVendre}" />
+				</h:column>
+			</h:dataTable>
+		</div>
+		<script>			
 	$(document).ready( function () {
 				    $('#table_id').DataTable({bInfo : false,
 				    	 language : {
