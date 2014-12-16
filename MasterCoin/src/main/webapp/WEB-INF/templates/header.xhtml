@@ -92,6 +92,9 @@
 							<li id="menu-marche-rapide"><h:link
 									value="#{text['header.rapide_echange']}"
 									outcome="/marcher/rapide" /></li>
+							<li id="menu-marche-qrcode"><h:link
+									value="#{text['header.qrcode.jsf']}"
+									outcome="/marcher/qrcode_scanner" /></li>
 						</ul></li>
 					<li id="menu-compte"><a href="#" aria-haspopup="true"><span>#{text['header.compte.jsf']}</span></a>
 						<ul>
@@ -105,8 +108,15 @@
 									value="#{text['header.porteMonnaie.jsf']}"
 									outcome="/compte/porteMonnaie" /></li>
 						</ul></li>
-					<li id="menu-support"><h:link
-							value="#{text['header.support.jsf']}" outcome="/support" /></li>
+					<li id="menu-support"><a href="#" aria-haspopup="true"><span>#{text['header.support.jsf']}</span></a>
+						<ul>
+							<li id="menu-support-faq"><h:link
+									value="#{text['header.support_faq.jsf']}"
+									outcome="/support" /></li>
+							<li id="menu-support-contact"><h:link
+									value="#{text['header.support_contact.jsf']}"
+									outcome="/support" /></li>
+						</ul></li>
 				</ul>
 			</div>
 		</ui:composition>

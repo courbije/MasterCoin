@@ -179,6 +179,32 @@ p.small-form select {
 	color: #01A9DC;
 }
 
+p.center-link {
+	text-align: center;
+	margin-top: 20px;
+}
+
+p.center-link > a {
+	color: #838383;
+	border: none;
+	background: none;
+	text-decoration: none;
+	cursor: pointer;
+	text-align: center;
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-boder-radius: 5px 5px 5px 5px;
+	border: 1px solid #999999;
+	padding: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+p.center-link:hover > a{
+	border: 1px solid #01A9DC;
+	color: #01A9DC;
+}
+
 /*_____________________________________________________________
 
   Utilitaire
