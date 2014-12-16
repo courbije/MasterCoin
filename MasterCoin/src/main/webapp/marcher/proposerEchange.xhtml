@@ -405,7 +405,8 @@
 			$("#graph").css("display","none");
 		} );
 		$(window).load( function () {
-			
+			arrondir("table_id");
+			arrondir("table_id2");
 			 if (!document.getElementById("table_id3")){
 				 $("#graph").css("display","none");
 				 return;
@@ -417,16 +418,16 @@
 			$("#graph").css("display","none");
 		} );	
 		$(window).load( function () {
-			
 			 if (!document.getElementById("table_id4")){
 				 $("#graph2").css("display","none");
 				 return;
 			}
 			 if (document.getElementById("table_id4").rows[0].cells.length===5){
 				 $("#graph2").css("display","block");
-				 return;
+					return;
 			}
 			$("#graph2").css("display","none");
+			
 		} );	
 	</script>
 
