@@ -466,12 +466,26 @@
 			 $('#div-for-table2').css('display','none');
 			 $('#div-for-graph2').css('display','none');
 			 $("#slideToggle-button1").click(function() {
+				 var scroolto=false;
+				 if($('#div-for-table1').css('display') == 'none'){
+					 scroolto=true;
+				 }
 				 $('#div-for-table1').slideToggle("slow");
 				 $('#div-for-graph1').slideToggle("slow");
+				 if(scroolto){
+					 $('html, body').stop().animate({scrollTop: $('#div-for-table1').offset().top}, 1000 );
+				 }
 			 });
 			 $("#slideToggle-button2").click(function() {
+				 var scroolto2=false;
+				 if($('#div-for-table2').css('display') == 'none'){
+					 scroolto2=true;
+				 }
 				 $('#div-for-table2').slideToggle("slow");
 				 $('#div-for-graph2').slideToggle("slow");
+				 if(scroolto2){
+					 $('html, body').stop().animate({scrollTop: $('#div-for-table2').offset().top}, 1000 );
+				 }
 			 });
 			});
 	</script>
