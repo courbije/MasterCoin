@@ -98,7 +98,7 @@ p label.big-label3 {
 	width: 180px;
 }
 
-p input[type="text"], p input[type="password"], p select {
+p input[type="text"], p input[type="password"], p select, p textarea {
 	width: 180px;
 	border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
@@ -107,7 +107,7 @@ p input[type="text"], p input[type="password"], p select {
 	padding: 3px;
 }
 
-p input[type="text"]:focus, p input[type="password"]:focus, p select:focus
+p input[type="text"]:focus, p input[type="password"]:focus, p select:focus, p textarea:focus
 	{
 	border: solid 1px #01A9DC;
 	box-shadow: 0 0 5px 1px #969696;
