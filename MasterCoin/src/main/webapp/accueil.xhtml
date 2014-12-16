@@ -14,8 +14,8 @@
 		<!-- EXPLICATION -->
 		<div class="row">
 			<!-- DIV1 -->
-			<div class="one-third column">
-				<h:outputText styleClass="h2"
+			<div class="one-third column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['accueil.mastercoin_cest_quoi.jsf']}" />
 				<p>
 					<h:outputText
@@ -23,8 +23,8 @@
 				</p>
 			</div>
 			<!-- DIV2 -->
-			<div class="one-third column">
-				<h:outputText styleClass="h2"
+			<div class="one-third column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['accueil.crypto_cest_quoi.jsf']}" />
 				<p>
 					<h:outputText
@@ -32,8 +32,8 @@
 				</p>
 			</div>
 			<!-- DIV3 -->
-			<div class="one-third column">
-				<h:outputText styleClass="h2"
+			<div class="one-third column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['accueil.mastercoin_utiliser.jsf']}" />
 				<p>
 					<h:outputText
@@ -46,29 +46,29 @@
 		<!-- MARCHE -->
 		<div class="row">
 			<!-- DIV4 -->
-			<div class="one-half column">
-				<h:outputText styleClass="h2"
+			<div class="one-half column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['header.marche.jsf']} : #{text['header.proposer_offre.jsf']}" />
 				<p>
 					<h:outputText
 						value="#{text['accueil.marche_propo_offre_desc.jsf']}" />
 				</p>
-				<p class="center-link">
+				<p>
 					<h:link value="#{text['header.proposer_offre.jsf']}"
-						outcome="/marcher/proposerEchange" />
+						outcome="/marcher/proposerEchange" styleClass="center-link" />
 				</p>
 			</div>
 			<!-- DIV5 -->
-			<div class="one-half column">
-				<h:outputText styleClass="h2"
+			<div class="one-half column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['header.marche.jsf']} : #{text['header.rapide_echange']}" />
 				<p>
 					<h:outputText
 						value="#{text['accueil.marche_rapide_offre_desc.jsf']}" />
 				</p>
-				<p class="center-link">
+				<p>
 					<h:link value="#{text['header.rapide_echange']}"
-						outcome="/marcher/rapide" />
+						outcome="/marcher/rapide" styleClass="center-link" />
 				</p>
 			</div>
 		</div>
@@ -77,39 +77,39 @@
 		<!-- COMPTE -->
 		<div class="row">
 			<!-- DIV6 -->
-			<div class="one-third column">
-				<h:outputText styleClass="h2"
+			<div class="one-third column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['header.compte.jsf']} : #{text['header.modification_compte.jsf']}" />
 				<p>
 					<h:outputText value="#{text['accueil.compte_modif_desc.jsf']}" />
 				</p>
-				<p class="center-link">
+				<p>
 					<h:link value="#{text['header.modification_compte.jsf']}"
-						outcome="/compte/modifier" />
+						outcome="/compte/modifier" styleClass="center-link" />
 				</p>
 			</div>
 			<!-- DIV7 -->
-			<div class="one-third column">
-				<h:outputText styleClass="h2"
+			<div class="one-third column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['header.compte.jsf']} : #{text['header.historique.jsf']}" />
 				<p>
 					<h:outputText value="#{text['accueil.compte_histo_desc.jsf']}" />
 				</p>
-				<p class="center-link">
+				<p>
 					<h:link value="#{text['header.historique.jsf']}"
-						outcome="/compte/historique" />
+						outcome="/compte/historique" styleClass="center-link" />
 				</p>
 			</div>
 			<!-- DIV8 -->
-			<div class="one-third column">
-				<h:outputText styleClass="h2"
+			<div class="one-third column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['header.compte.jsf']} : #{text['header.porteMonnaie.jsf']}" />
 				<p>
 					<h:outputText value="#{text['accueil.compte_pm_desc.jsf']}" />
 				</p>
-				<p class="center-link">
+				<p>
 					<h:link value="#{text['header.porteMonnaie.jsf']}"
-						outcome="/compte/porteMonnaie" />
+						outcome="/compte/porteMonnaie" styleClass="center-link" />
 				</p>
 			</div>
 		</div>
@@ -118,27 +118,27 @@
 		<!-- SUPPORT -->
 		<div class="row">
 			<!-- DIV9 -->
-			<div class="one-half column">
-				<h:outputText styleClass="h2"
+			<div class="one-half column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['header.support.jsf']} : #{text['header.support_faq.jsf']}" />
 				<p>
 					<h:outputText value="#{text['accueil.support_faq_desc.jsf']}" />
 				</p>
-				<p class="center-link">
+				<p>
 					<h:link value="#{text['header.support_faq.jsf']}"
-						outcome="/support" />
+						outcome="/support" styleClass="center-link" />
 				</p>
 			</div>
 			<!-- DIV10 -->
-			<div class="one-half column">
-				<h:outputText styleClass="h2"
+			<div class="one-half column justi">
+				<h:outputText styleClass="h2 center"
 					value="#{text['header.support.jsf']} : #{text['header.support_contact.jsf']}" />
 				<p>
 					<h:outputText value="#{text['accueil.support_contact_desc.jsf']}" />
 				</p>
-				<p class="center-link">
+				<p>
 					<h:link value="#{text['header.support_contact.jsf']}"
-						outcome="/support" />
+						outcome="/support" styleClass="center-link"/>
 				</p>
 			</div>
 		</div>

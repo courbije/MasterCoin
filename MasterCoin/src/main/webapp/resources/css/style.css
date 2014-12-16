@@ -52,6 +52,18 @@ body {
 	text-transform: uppercase;
 }
 
+.justi {
+	text-align: justify;
+}
+
+.h2.center {
+	text-align: center;
+}
+
+.block {
+	display: block;
+}
+
 /*_____________________________________________________________
 
   Formulaire
@@ -179,15 +191,10 @@ p.small-form select {
 	color: #01A9DC;
 }
 
-p.center-link {
-	text-align: center;
-	margin-top: 20px;
+.center-link {
+	display: block;
+	margin: auto;
 	max-width: 180px;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-p.center-link {
 	color: #838383;
 	border: none;
 	background: none;
@@ -203,16 +210,9 @@ p.center-link {
 	padding-right: 20px;
 }
 
-p.center-link:hover {
+.center-link:hover {
 	border: 1px solid #01A9DC;
-}
-
-p.center-link > a{
 	text-decoration: none;
-	color: #999999;
-}
-
-p.center-link:hover > a {
 	color: #01A9DC;
 }
 
