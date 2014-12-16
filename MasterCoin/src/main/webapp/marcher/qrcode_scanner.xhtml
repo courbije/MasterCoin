@@ -36,7 +36,7 @@
 	       function read(a)
 	       {
 	           $("#qr-value").value=a;
-	           $("#qrcode_form").submit();
+	           $("#submit_btn").click();
 	       }
 	       qrcode.callback = read;
        </script>
@@ -47,8 +47,9 @@
     	<h:form id="qrcode_form">
 				<h:inputText id="scanned_qrcode"
 					value="#{qRCodeController.scanned_qrcode}"/>
-				<h:commandButton id="submit"
+				<h:commandButton id="submit_btn"
 					action="#{qRCodeController.makeEchange()}"
+					style="display:none"
 					 />
 		</h:form>
     	
