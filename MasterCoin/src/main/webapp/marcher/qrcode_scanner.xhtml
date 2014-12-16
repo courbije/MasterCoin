@@ -35,8 +35,7 @@
        <script>
 	       function read(a)
 	       {
-		       alert("Scanné");
-	           $("#qr-value").value=a;
+		       document.getElementById('qrcode_form:scanned_qrcode').value=a;
 	           $("#qrcode_form\\:submit_btn").click();
 	       }
 	       qrcode.callback = read;
@@ -44,13 +43,11 @@
     
 		<video id="camsource" autoplay="true" width="480" height="480"></video>
         <canvas id="qr-canvas" width="480" height="480" style="display:none"></canvas>
-    	<h:inputHidden id="qr-value"/>
     	<h:form id="qrcode_form">
-				<h:inputHidden id="scanned_qrcode"
-					value="#{qRCodeController.scanned_qrcode}"/>
+				<h:inputText id="scanned_qrcode"
+					value="#{qRCodeController.scanned_qrcode}" style="display:none"/>
 				<h:commandButton id="submit_btn"
-					action="#{qRCodeController.makeEchange()}" style="display:none"
-					 />
+					action="#{qRCodeController.makeEchange()}" style="display:none"/>
 		</h:form>
     	
 	</ui:define>
