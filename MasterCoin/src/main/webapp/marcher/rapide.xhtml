@@ -63,7 +63,7 @@
 						<p class="u-pull-right">
 							<h:commandButton id="register"
 								action="#{echangeRapideController.registerOffre()}"
-								value="#{text['echange.register.jsf']}" styleClass="button" />
+								value="#{text['echange.register_creer.jsf']}" styleClass="button" />
 						</p>
 					</h:form>
 				</div>
@@ -115,7 +115,7 @@
 						<p class="u-pull-right" id="quick-offer-register">
 							<h:commandButton id="register"
 								action="#{echangeRapideController.registerAchat()}"
-								value="#{text['echange.register.jsf']}" styleClass="button">
+								value="#{text['echange.register_acheter.jsf']}" styleClass="button">
 							</h:commandButton>
 							<h:commandButton id="panier"
 								action="#{achatController.pannier()}"
@@ -132,12 +132,14 @@
 			</div>
 			<!-- TABLE -->
 			<div class="twelve columns">
+				<h:panelGroup rendered="#{login.loggedIn}">
 				<h:commandButton id="slideToggle-button1"
 					value="#{text['echange.toggle.jsf']}" styleClass="button u-fmtb">
 				</h:commandButton>
-				<h:outputText styleClass="h2"
-					value="#{text['echange.offres_compte.jsf']}"
-					id="title-slideToggle-button1" />
+					<h:outputText styleClass="h2"
+						value="#{text['echange.offres_compte.jsf']}"
+						id="title-slideToggle-button1" />
+				</h:panelGroup>
 				<h:panelGroup rendered="#{login.loggedIn}">
 					<h:panelGroup rendered="#{empty echangeRapideController.offres}">
 						<h:outputText styleClass="em"
