@@ -9,7 +9,7 @@
 		<!-- TITLE -->
 		<div class="row twelve columns">
 			<h:outputText styleClass="h1 title"
-				value="#{text['echange.message_accueil.jsf']}" />
+				value="#{text['header.proposer_offre.jsf']}" />
 		</div>
 		<f:metadata>
 			<f:viewParam name="idV" value="#{echangeController.idV}" />
@@ -25,7 +25,7 @@
 				<!-- FORM1 -->
 				<div class="one-half column form-boxed">
 					<h:outputText styleClass="h2"
-						value="#{text['echange.creation_offre.jsf']}" />
+						value="#{text['echange.creation_offre_po.jsf']}" />
 					<span class="required-box"> <span class="required">*</span>
 						: #{text['all.required_box.jsf']}
 					</span>
@@ -52,7 +52,7 @@
 						</p>
 						<p class="u-pull-right">
 							<h:commandButton id="register"
-								action="#{echangeController.registerOffre()}" value="Register"
+								action="#{echangeController.registerOffre()}" value="#{text['echange.register_creerpo.jsf']}"
 								styleClass="button u-mb">
 								<f:setPropertyActionListener
 									target="#{offreController.newEchangeOffre.monnaieVendre}"
@@ -67,14 +67,14 @@
 					</h:form>
 					<p class="u-pull-left">
 						<h:commandButton id="slideToggle-button1"
-							value="#{text['echange.toggle.jsf']}" styleClass="button u-mb">
+							value="#{text['echange.more.jsf']}" styleClass="button u-mb">
 						</h:commandButton>
 					</p>
 				</div>
 				<!-- FORM2 -->
 				<div class="one-half column form-boxed">
 					<h:outputText styleClass="h2"
-						value="#{text['echange.creation_offre.jsf']}" />
+						value="#{text['echange.creation_offre_porapide.jsf']}" />
 					<span class="required-box"> <span class="required">*</span>
 						: #{text['all.required_box.jsf']}
 					</span>
@@ -100,7 +100,7 @@
 						</p>
 						<p id="quick-offer-register" class="u-pull-right">
 							<h:commandButton id="register"
-								action="#{echangeController.registerAchat()}" value="Register"
+								action="#{echangeController.registerAchat()}" value="#{text['echange.register_acheterpo.jsf']}"
 								styleClass="button u-mb">
 								<f:setPropertyActionListener
 									target="#{achatController.newTransaction.monnaieVendre}"
@@ -110,7 +110,7 @@
 									value="#{echangeController.monnaieA}" />
 							</h:commandButton>
 							<h:commandButton id="panier"
-								action="#{achatController.pannier()}" value="Panier"
+								action="#{achatController.pannier()}" value="#{text['echange.panierpo.jsf']}"
 								styleClass="button u-mb">
 								<f:setPropertyActionListener
 									target="#{achatController.newTransaction.monnaieVendre}"
@@ -121,7 +121,7 @@
 							</h:commandButton>
 							<h:commandButton id="calculer"
 								action="#{achatController.calculerQuantitePropose()}"
-								value="Calculer" styleClass="button u-mb">
+								value="#{text['echange.calculettepo.jsf']}" styleClass="button u-mb">
 								<f:setPropertyActionListener
 									target="#{achatController.newTransaction.monnaieVendre}"
 									value="#{echangeController.monnaieV}" />
@@ -136,7 +136,7 @@
 					</h:form>
 					<p class="u-pull-left small-mt">
 						<h:commandButton id="slideToggle-button2"
-							value="#{text['echange.toggle.jsf']}" styleClass="button u-mb">
+							value="#{text['echange.more.jsf']}" styleClass="button u-mb">
 						</h:commandButton>
 					</p>
 				</div>
@@ -144,7 +144,7 @@
 			<!-- TABLE1 -->
 			<div id="div-for-table1" class="row twelve columns">
 				<h:outputText styleClass="h2"
-					value="#{text['echange.offres_compte.jsf']}"
+					value="#{text['echange.more_table1.jsf']}"
 					id="title-slideToggle-button1" />
 				<h:outputText styleClass="em"
 					value="#{text['echange.offres_compte.exp.jsf']}" style="color: blue;"
@@ -213,7 +213,7 @@
 			<!-- GRAPH1 -->
 			<div id="div-for-graph1" class="row twelve columns">
 				<h:outputText styleClass="h2"
-					value="#{text['echange.offres_compte.jsf']}" />
+					value="#{text['echange.more_graph1.jsf']}" />
 				<h:dataTable var="_graphvalue" id="table_id3"
 					value="#{metriqueController.metriqueAllWhereMonnaie1Monnaie2}"
 					rendered="#{not empty echangeController.idA and not empty echangeController.idV}"
@@ -240,7 +240,7 @@
 			<!-- TABLE2 -->
 			<div id="div-for-table2" class="row twelve columns">
 				<h:outputText styleClass="h2"
-					value="#{text['echange.offres_compte.jsf']}"
+					value="#{text['echange.more_table2.jsf']}"
 					id="title-slideToggle-button2" />
 				<h:outputText styleClass="em"
 					value="#{text['echange.offres_compte.exp.jsf']}" style="color: blue;"
@@ -311,7 +311,7 @@
 			<!-- GRAPH2 -->
 			<div id="div-for-graph2" class="row twelve columns">
 				<h:outputText styleClass="h2"
-					value="#{text['echange.offres_compte.jsf']}" />
+					value="#{text['echange.more_graph2.jsf']}" />
 				<h:dataTable var="_graphvalue" id="table_id4"
 					value="#{metriqueController.metriqueAllWhereMonnaie1Monnaie2}"
 					rendered="#{not empty echangeController.idA and not empty echangeController.idV}"
