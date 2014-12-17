@@ -378,7 +378,7 @@ p.small-form select {
   -------------------------------------------------------------
 */
 #copyright {
-	padding: 6em 0em;
+	padding: 3em 0em;
 	font-size: 0.70em;
 	letter-spacing: 0.20em;
 	text-align: center;
@@ -389,6 +389,24 @@ p.small-form select {
 
 #copyright a {
 	color: #747474;
+}
+
+#scrool-fleche {
+	margin: 0;
+	margin-top: -1.5em;
+	text-align: center;
+}
+
+#scrool-fleche a {
+	font-size: 1.5em;
+	font-weight: bold;
+	color: #6A6A6A;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#scrool-fleche a:hover {
+	color: #01A9DC;
 }
 
 /*_____________________________________________________________
