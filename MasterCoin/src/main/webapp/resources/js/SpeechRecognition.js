@@ -77,7 +77,9 @@ function talkWithApp(event) {
 
 // Placer la réponse saisie à l'orale dans le formulaire
 function putAnswer(transcript) {
-	//CHANGER
+	console.log(transcript);
+	transcript = transcript.toLowerCase();
+	console.log(transcript);
 	split = transcript.split(" ");
 	
 	var val=-1;
@@ -109,7 +111,7 @@ function putAnswer(transcript) {
 			if(split.indexOf("achat")!=-1 || split.indexOf("acheter")!=-1 || split.indexOf("souhaitée")!=-1 || split.indexOf("voulue")!=-1 || split.indexOf("achetée")!=-1){
 				// Quantité voulue
 				$("#reg\\:quantite_voulue").val(val);
-			}else if(jQuery.inArray("vente",split)!=-1 || jQuery.inArray("vendre",split)!=-1 || jQuery.inArray("vendue")!=-1 || jQuery.inArray("donné")!=-1 || jQuery.inArray("donner")!=-1){
+			}else if(split.indexOf("vente")!=-1 || split.indexOf("vendre")!=-1 || split.indexOf("vendue")!=-1 || split.indexOf("donné")!=-1 || split.indexOf("donner")!=-1){
 				// Quantité donnée
 				$("#reg\\:quantite_vendue").val(val);	
 			}
