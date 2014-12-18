@@ -53,10 +53,9 @@ public class PorteMonnaieController {
 	public void registerAdd() throws Exception {
 		try {
 			porteMonnaieService.addToPorteMonnaieWithHisto(login.getCurrentUser(), monnaie, amount);
-			FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
-			facesContext.addMessage(null, m);
+			Util.DisplaySucces(facesContext);
 		} catch (Exception e) {
-				Util.DisplayError(e,facesContext);
+			Util.DisplayError(e,facesContext);
 		}
 		init();
 	}
