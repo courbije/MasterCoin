@@ -175,19 +175,18 @@
 						</h:column>
 						<h:column>
 							<f:facet name="header">
-								<h:outputText value="#{text['transaction.taux.jsf']}" />
-							</f:facet>
-							<h:outputText
-								value="#{ _offre.montantAchat/_offre.montantVendre}" />
-						</h:column>
-						<h:column>
-							<f:facet name="header">
 								<h:outputText value="#{text['echange.date_creation.jsf']}" />
 							</f:facet>
 							<h:outputText value="#{_offre.dateCreation}">
 								<f:convertDateTime dateStyle="long" type="both" />
 							</h:outputText>
-
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['transaction.taux.jsf']}" />
+							</f:facet>
+							<h:outputText
+								value="#{ _offre.montantAchat/_offre.montantVendre}" />
 						</h:column>
 						<h:column>
 							<f:facet name="header">
@@ -218,6 +217,7 @@
 		<script>
 			$(document).ready( function () {
 				var is_first_open = true;
+				arrondir("table_id");
 				$('#title-slideToggle-button1').css('display','none');
 				$('#table_id').css('display','none');
 				$("#slideToggle-button1").click(function() {
