@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/WEB-INF/templates/default.xhtml">
+
+
+	<ui:define name="content">
+		<!-- TITLE -->
+		<f:view>
+			<div class="row twelve columns">
+				<h:outputText styleClass="h1 title"
+					value="#{text['echange.message_accueil.jsf']}" />
+			</div>
+			<div class="row">
+				<!-- FORM1 -->
+				<div class="one-half column form-boxed">
+					<h:outputText styleClass="h2"
+						value="#{text['echange.creation_offre.jsf']}" />
+					<span class="required-box"> <span class="required">*</span>
+						: #{text['all.required_box.jsf']}
+					</span>
+					<h:form id="reg">
+						<p class="small-form">
+							<h:outputLabel for="monnaie_voulue" styleClass="big-label2">
+					#{text['echange.monnaie_souhaitee.jsf']} <span class="required">*</span> :
+					 </h:outputLabel>
+							<h:selectOneMenu id="reg_monnaie"
+								value="#{offreController.newEchangeOffre.monnaieAchat}">
+								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+									itemValue="#{m}" />
+								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+							</h:selectOneMenu>
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="quantite_voulue" styleClass="big-label2">
+					#{text['echange.quantite_souhaitee.jsf']} <span class="required">*</span> :
+					 </h:outputLabel>
+							<h:inputText id="quantite_voulue"
+								value="#{offreController.newEchangeOffre.montantAchat}"
+								validatorMessage="#{msg['echange.ofd.quantite_in.err.jsf']}" />
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="monnaie_vendue" styleClass="big-label2">
+					#{text['echange.monnaie_vendue.jsf']} <span class="required">*</span> :
+					 </h:outputLabel>
+							<h:selectOneMenu id="reg_monnaie2"
+								value="#{offreController.newEchangeOffre.monnaieVendre}">
+								<f:selectItems value="#{monnaies}" var="m" itemLabel="#{m.nom}"
+									itemValue="#{m}" />
+								<f:converter converterId="fr.ufrima.m2pgi.MonnaieConverter" />
+							</h:selectOneMenu>
+						</p>
+						<p class="small-form">
+							<h:outputLabel for="quantite_vendue" styleClass="big-label2">
+					#{text['echange.quantite_vendue.jsf']} <span class="required">*</span> :
+					 </h:outputLabel>
+							<h:inputText id="quantite_vendue"
+								value="#{offreController.newEchangeOffre.montantVendre}"
+								validatorMessage="#{msg['echange.ofd.quantite_out.err.jsf']}" />
+						</p>
+						<p class="u-pull-right">
+							<h:commandButton id="register"
+								action="#{echangeRapideController.registerOffre()}"
+								value="#{text['echange.register_creer.jsf']}" styleClass="button" />
+						</p>
+					</h:form>
+				</div>
+				<div class="one-half column form-boxed">
+					<div id="aide">Instructions:<br/>Pour utiliser la reconnaissance vocale, il faut appuyer sur le bouton "Parler" ci-dessous, et saisir vocalement la commande souhaitée.<br/>
+					Commandes possibles:<br/><br/>Monnaie souhaitée : Monnaie achat numéro X/Acheter monnaie numéro X/Monnaie souhaitée numéro X<br/><br/>
+					Quantité souhaitée : Quantité achetée X/Quantité voulue X/Achat quantité X<br/><br/>
+					Monnaie de la vente : Monnaie vente numéro X/Vendre monnaie numéro X<br/><br/>
+					Quantité vendue : Quantité donnée X/Quantité vendue X/Vente quantité X/Vendre quantité X<br/><br/></div>
+					<div>Message d'utilisation : <span id="message">Aucune utilisation pour le moment.</span></div><br/>
+					<div>Retour d'utilisation : <span id="retour">Aucun pour le moment.</span></div><br/>
+					<h:commandButton id="talk_button" styleClass="button" value="Parler"></h:commandButton>
+				</div>
+			</div>
+			<!-- TABLE -->
+			<div class="twelve columns">
+				<h:commandButton id="slideToggle-button1"
+					value="#{text['echange.toggle.jsf']}" styleClass="button u-fmb">
+				</h:commandButton>
+				<h:outputText styleClass="h2"
+					value="#{text['echange.offres_compte.jsf']}"
+					id="title-slideToggle-button1" />
+				<h:panelGroup rendered="#{login.loggedIn}">
+					<h:panelGroup rendered="#{empty echangeRapideController.offres}">
+						<h:outputText styleClass="em"
+							value="#{text['echange.aucune_offre_enregistree.jsf']}" />
+					</h:panelGroup>
+					<h:dataTable var="_offre" id="table_id"
+						value="#{echangeRapideController.offres}"
+						rendered="#{not empty echangeRapideController.offres}"
+						styleClass="display dt-responsive" width="100%">
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.monnaie_souhaitee.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.monnaieAchat.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.quantite_souhaitee.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.montantAchat}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.monnaie_vendue.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.monnaieVendre.nom}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.quantite_vendue.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.montantVendre}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['transaction.taux.jsf']}" />
+							</f:facet>
+							<h:outputText
+								value="#{ _offre.montantAchat/_offre.montantVendre}" />
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.date_creation.jsf']}" />
+							</f:facet>
+							<h:outputText value="#{_offre.dateCreation}">
+								<f:convertDateTime dateStyle="long" type="both" />
+							</h:outputText>
+
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.supprimer.jsf']}" />
+							</f:facet>
+							<h:form>
+								<h:commandButton
+									action="#{echangeRapideController.removeOffre(_offre.id)}"
+									value="#{text['echange.supprimer.jsf']}" styleClass="link">
+								</h:commandButton>
+
+							</h:form>
+						</h:column>
+						<h:column>
+							<f:facet name="header">
+								<h:outputText value="#{text['echange.generer']}" />
+							</f:facet>
+							<h:form>
+								<h:commandLink value="#{text['echange.qrcode']}" action="qrcode"
+									styleClass="link">
+									<f:param name="id" value="#{_offre.id}" />
+								</h:commandLink>
+							</h:form>
+						</h:column>
+					</h:dataTable>
+				</h:panelGroup>
+			</div>
+		</f:view>
+		<script>
+			$(document).ready( function () {
+				var is_first_open = true;
+				$('#title-slideToggle-button1').css('display','none');
+				$('#table_id').css('display','none');
+				$("#slideToggle-button1").click(function() {
+					if(is_first_open == true){
+						is_first_open = false;
+						$('#title-slideToggle-button1').css('display','block');
+						$('#table_id').css('display','block');
+						$('#table_id').DataTable({bInfo : false,
+					    	 language : {
+					    	        url: "#{facesContext.externalContext.requestContextPath}/javax.faces.resource/localisation/#{text['id_langue.jsf']}.json.jsf"
+					         }});
+					}
+					else {
+						if($('#title-slideToggle-button1').css('display') == 'block'){
+							$('#title-slideToggle-button1').css('display','none');
+						} else {
+							$('#title-slideToggle-button1').css('display','block');
+						}
+						$( "#table_id_wrapper" ).slideToggle("slow");
+					}
+				});
+	    
+			} );
+			 $(function() {
+				 $("#menu-marche").addClass("current_page_item");
+				 $("#menu-marche-rapide").addClass("current_page_item");
+			});
+		</script>
+		<!-- Fonction pour ajouter des chiffres devant la monnaie *pour saisir une offre vocalement* -->
+		<script>
+			$(document).ready( function() {
+				var putNbList = function(select) {
+					var i=1;
+					$(select).each(function() {
+						this.text=this.value+". "+this.text;
+					});
+				};
+				putNbList($("#reg\\:reg_monnaie option"));
+				putNbList($("#reg\\:reg_monnaie2 option"));
+				select=$("#reg\\:reg_monnaie option");
+				select.sort(function(a,b){
+				    a = a.value;
+				    b = b.value;
+
+				    return a-b;
+				});
+				$("#reg\\:reg_monnaie").html(select);
+				select=$("#reg\\:reg_monnaie2 option");
+				select.sort(function(a,b){
+				    a = a.value;
+				    b = b.value;
+
+				    return a-b;
+				});
+				$("#reg\\:reg_monnaie2").html(select);	
+				$("#talk_button").click(function() {talkWithApp(event);});
+			});
+		</script>
+		<h:outputScript name="js/SpeechRecognition.js"/>
+	</ui:define>
+</ui:composition>

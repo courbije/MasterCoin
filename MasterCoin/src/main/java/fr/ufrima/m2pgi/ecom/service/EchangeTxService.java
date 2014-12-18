@@ -97,11 +97,11 @@ public class EchangeTxService {
 		
 	}
 	
-	private Transaction mettreAJourTransaction(Double montantAchat, Double montantVendre, Compte compteVendeur, Date date, Transaction newTransaction){
+	private Transaction mettreAJourTransaction(Double montantV, Double montantA, Compte compteVendeur, Date date, Transaction newTransaction){
 		Transaction t = newTransaction.clone();
 		t.setDateCreation(date);
-		t.setMontantAchat(montantAchat);
-		t.setMontantVendre(montantVendre);
+		t.setMontantAchat(montantA);
+		t.setMontantVendre(montantV);
 		t.setCompteVendeur(compteVendeur);
 		return t;
 	}

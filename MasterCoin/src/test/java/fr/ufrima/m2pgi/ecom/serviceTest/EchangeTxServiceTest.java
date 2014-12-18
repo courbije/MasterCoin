@@ -222,11 +222,11 @@ public class EchangeTxServiceTest {
     	List<Transaction> trans = transactionFacade.findAll();
     	
     	for (Transaction t : trans){
-    		if (t.getMontantVendre()==3000.0){
-    			assertEquals(t.getMontantAchat(),50.0,0.);    			
+    		if (t.getMontantAchat()==3000.0){
+    			assertEquals(t.getMontantVendre(),50.0,0.);    			
     		}
-    		else if (t.getMontantVendre()==150.0){
-    			assertEquals(t.getMontantAchat(),50.0,0.); 
+    		else if (t.getMontantAchat()==150.0){
+    			assertEquals(t.getMontantVendre(),50.0,0.); 
     		}
     		else {
     			fail();
