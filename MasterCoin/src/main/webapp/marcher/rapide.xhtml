@@ -142,7 +142,7 @@
 				</h:panelGroup>
 				<h:panelGroup rendered="#{login.loggedIn}">
 					<h:panelGroup rendered="#{empty echangeRapideController.offres}">
-						<h:outputText styleClass="em"
+						<h:outputText id="aucune_offre" styleClass="em" 
 							value="#{text['echange.aucune_offre_enregistree.jsf']}" />
 					</h:panelGroup>
 					<h:dataTable var="_offre" id="table_id"
@@ -219,11 +219,17 @@
 				var is_first_open = true;
 				arrondir("table_id");
 				$('#title-slideToggle-button1').css('display','none');
+				if($('#aucune_offre')) {
+					$('#aucune_offre').css('display','none');
+				}
 				$('#table_id').css('display','none');
 				$("#slideToggle-button1").click(function() {
 					if(is_first_open == true){
 						is_first_open = false;
 						$('#title-slideToggle-button1').css('display','block');
+						if($('#aucune_offre')) {
+							$('#aucune_offre').css('display','block');
+						}
 						$('#table_id').css('display','block');
 						$('#table_id').DataTable({bInfo : false,
 					    	 language : {
@@ -231,6 +237,9 @@
 					         }});
 					}
 					else {
+						if($('#aucune_offre')) {
+							$('#aucune_offre').slideToggle("slow");
+						}
 						if($('#title-slideToggle-button1').css('display') == 'block'){
 							$('#title-slideToggle-button1').css('display','none');
 						} else {

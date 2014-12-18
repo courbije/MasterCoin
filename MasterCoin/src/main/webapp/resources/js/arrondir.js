@@ -7,7 +7,7 @@
 
 function arrondir(table_id){
 	
-	if (!document.getElementById(table_id) && document.getElementById(table_id).rows[0].cells.length!=6)
+	if (!document.getElementById(table_id) || document.getElementById(table_id).rows[0].cells.length!=6)
 		return;
 	 var arrayLignes = document.getElementById(table_id).rows; 
 	 var longueur = arrayLignes.length;
