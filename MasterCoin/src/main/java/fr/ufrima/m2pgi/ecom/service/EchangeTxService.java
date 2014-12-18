@@ -159,10 +159,10 @@ public class EchangeTxService {
 		Transaction ts = new Transaction();
 		ts.setCompteAcheteur(currentUser);
 		ts.setCompteVendeur(echange.getCompte());
-		ts.setMonnaieAchat(echange.getMonnaieAchat());
-		ts.setMonnaieVendre(echange.getMonnaieVendre());
-		ts.setMontantAchat(echange.getMontantAchat());
-		ts.setMontantVendre(echange.getMontantVendre());
+		ts.setMonnaieAchat(echange.getMonnaieVendre());
+		ts.setMonnaieVendre(echange.getMonnaieAchat());
+		ts.setMontantAchat(echange.getMontantVendre());
+		ts.setMontantVendre(echange.getMontantAchat());
 		ts.setDateCreation(echange.getDateCreation());
 		ts.setDateValidation(new Date());
 		porteMonnaieService.removeFromPorteMonnaie(currentUser, echange.getMonnaieAchat(), echange.getMontantAchat());
