@@ -21,7 +21,7 @@ public class Util {
 	}
 	
 	public static void DisplaySucces(FacesContext facesContext) {
-		FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Registered!", "Registration successful");
+		FacesMessage m = new FacesMessage(FacesMessage.SEVERITY_INFO, "Opération effectuée!", "Registration successful");
 		facesContext.addMessage(null, m);
 	}
 	
@@ -32,7 +32,7 @@ public class Util {
 	
 	private static String getRootErrorMessage(Exception e) {
 		// Default to general error message that registration failed.
-		String errorMessage = "Registration failed. See server log for more information";
+		String errorMessage = "Opération échouée.";
 		if (e == null) {
 			// This shouldn't happen, but return the default messages
 			return errorMessage;
@@ -45,7 +45,7 @@ public class Util {
 			return "La monnaie souhaitée doit être différente de la monnaie à vendre";
 		}
 		if(e.getClass().equals(NotEnoughMoneyInBaseException.class)){
-			return "Aucune(s) offre(s) ne correspond à votre demande";
+			return "Aucune(s) offre(s) ne correspond(ent) à votre demande";
 		}
 		// Start with the exception and recurse to find the root cause
 		Throwable t = e;
